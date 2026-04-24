@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আল-নূর ইসলামিক সেন্টার | কুরআন, হাদিস ও ইসলামিক বই</title>
+    <style>
+        :root {
+            --white: #ffffff;
+            --off-white: #f9fafb;
+            --soft-green-1: #f0f7f2;
+            --soft-green-2: #e6f3e8;
+            --soft-green-3: #d4edda;
+            --soft-green-4: #c3e6cb;
+            --light-green: #a8d5ad;
+            --medium-green: #6db972;
+            --main-green: #43a047;
+            --deep-green: #2e7d32;
+            --dark-green: #1b5e20;
+            --accent-green: #81c784;
+            --text-dark: #1a1a1a;
+            --text-medium: #333333;
+            --text-light: #555555;
+            --text-muted: #777777;
+            --gold: #c9a44b;
+            --gold-light: #e0c878;
+            --shadow-sm: 0 2px 8px rgba(46, 125, 50, 0.08);
+            --shadow-md: 0 6px 24px rgba(46, 125, 50, 0.12);
+            --shadow-lg: 0 12px 40px rgba(46, 125, 50, 0.18);
+            --shadow-xl: 0 20px 60px rgba(46, 125, 50, 0.22);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 22px;
+            --radius-xl: 28px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans Bengali', 'SolaimanLipi', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============ SCROLLBAR ============ */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--soft-green-1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--medium-green);
+            border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--main-green);
+        }
+
+        /* ============ PRELOADER ============ */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-ring {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 5px solid var(--soft-green-3);
+            border-top-color: var(--main-green);
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============ TOP BAR ============ */
+        .top-bar {
+            background: var(--deep-green);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 0.88rem;
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1001;
+        }
+        .top-bar span {
+            animation: fadeInOut 4s ease-in-out infinite;
+        }
+        @keyframes fadeInOut {
+            0%,
+            100% {
+                opacity: 0.75;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ============ NAVBAR ============ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, var(--soft-green-3), var(--main-green), var(--deep-green), var(--main-green), var(--soft-green-3)) 1;
+        }
+        .navbar.scrolled {
+            box-shadow: var(--shadow-lg);
+        }
+        .nav-container {
+            max-width: 1250px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 24px;
+            flex-wrap: wrap;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--dark-green);
+            font-weight: 800;
+            font-size: 1.45rem;
+            letter-spacing: -0.3px;
+            transition: var(--transition);
+        }
+        .nav-logo:hover {
+            transform: scale(1.03);
+        }
+        .logo-icon {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--main-green), var(--deep-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 14px rgba(46, 125, 50, 0.35);
+            transition: var(--transition);
+        }
+        .nav-logo:hover .logo-icon {
+            box-shadow: 0 6px 22px rgba(46, 125, 50, 0.5);
+            transform: rotate(-8deg);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 600;
+            padding: 10px 17px;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            position: relative;
+            white-space: nowrap;
+        }
+        .nav-links a:hover,
+        .nav-links a.active-link {
+            background: var(--soft-green-2);
+            color: var(--deep-green);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 20px;
+            height: 3px;
+            background: var(--main-green);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active-link::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+            z-index: 1002;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--deep-green);
+            border-radius: 10px;
+            transition: var(--bounce);
+            display: block;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            position: relative;
+            background: linear-gradient(170deg, #f0f7f2 0%, #e6f3e8 30%, #ffffff 60%, #eaf6ec 100%);
+            padding: 70px 24px 80px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+            background: radial-gradient(circle at 20% 40%, var(--main-green) 1px, transparent 1px),
+                radial-gradient(circle at 80% 60%, var(--deep-green) 1px, transparent 1px);
+            background-size: 50px 50px, 55px 55px;
+            animation: patternFloat 20s linear infinite;
+        }
+        @keyframes patternFloat {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(30px, -20px);
+            }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--soft-green-3);
+            color: var(--deep-green);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            animation: floatUpDown 3s ease-in-out infinite;
+        }
+        @keyframes floatUpDown {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            margin-bottom: 16px;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+        .hero h1 .arabic-text {
+            font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade New', serif;
+            color: var(--deep-green);
+            display: block;
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 35px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--bounce);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--main-green), var(--deep-green));
+            color: white;
+            box-shadow: 0 8px 28px rgba(46, 125, 50, 0.35);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(46, 125, 50, 0.5);
+        }
+        .btn-outline {
+            background: var(--white);
+            color: var(--deep-green);
+            border: 2.5px solid var(--main-green);
+        }
+        .btn-outline:hover {
+            background: var(--soft-green-1);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #d4a844, #b8861f);
+            color: #fff;
+            box-shadow: 0 8px 28px rgba(180, 130, 30, 0.35);
+        }
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(180, 130, 30, 0.5);
+        }
+
+        /* ============ SECTION STYLES ============ */
+        .section {
+            padding: 70px 24px;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-badge {
+            display: inline-block;
+            background: var(--soft-green-3);
+            color: var(--deep-green);
+            padding: 6px 18px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+        .divider {
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--soft-green-4), var(--main-green), var(--deep-green));
+            border-radius: 10px;
+            margin: 16px auto;
+            animation: pulseWidth 2.5s ease-in-out infinite;
+        }
+        @keyframes pulseWidth {
+            0%,
+            100% {
+                width: 70px;
+            }
+            50% {
+                width: 100px;
+            }
+        }
+
+        /* ============ CARDS GRID ============ */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--soft-green-4), var(--main-green), var(--deep-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+            border-radius: 0 0 10px 10px;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--soft-green-3);
+        }
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--soft-green-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
+        .card:hover .card-icon {
+            background: var(--main-green);
+            color: white;
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
+        }
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        .card .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: var(--soft-green-2);
+            color: var(--deep-green);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: var(--bounce);
+            border: none;
+            cursor: pointer;
+        }
+        .card .download-btn:hover {
+            background: var(--main-green);
+            color: white;
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+            transform: scale(1.06);
+        }
+
+        /* ============ PDF VIEWER SECTION ============ */
+        .pdf-viewer-section {
+            background: var(--soft-green-1);
+            border-radius: var(--radius-xl);
+            padding: 40px 24px;
+            margin-top: 40px;
+            box-shadow: var(--shadow-md);
+        }
+        .pdf-viewer-section h3 {
+            text-align: center;
+            color: var(--dark-green);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .pdf-frame-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background: white;
+        }
+        .pdf-frame-wrapper iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            display: block;
+        }
+        .pdf-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* ============ HADITH SECTION ============ */
+        .hadith-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 30px 28px;
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid var(--main-green);
+            transition: var(--transition);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .hadith-card:hover {
+            box-shadow: var(--shadow-xl);
+            border-left-color: var(--deep-green);
+            transform: translateX(4px);
+        }
+        .hadith-arabic {
+            font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade New', serif;
+            font-size: 1.5rem;
+            color: var(--deep-green);
+            text-align: right;
+            direction: rtl;
+            margin-bottom: 12px;
+            line-height: 2;
+        }
+        .hadith-bn {
+            color: var(--text-medium);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .hadith-source {
+            display: inline-block;
+            background: var(--soft-green-2);
+            color: var(--deep-green);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-top: 12px;
+        }
+
+        /* ============ NEWS TICKER ============ */
+        .ticker-wrap {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin: 30px 0;
+            border: 1px solid var(--soft-green-3);
+        }
+        .ticker {
+            display: flex;
+            animation: tickerScroll 25s linear infinite;
+            padding: 14px 0;
+            gap: 40px;
+        }
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        .ticker-item {
+            white-space: nowrap;
+            color: var(--deep-green);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .ticker-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--main-green);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ============ BACK TO TOP ============ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--main-green), var(--deep-green));
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--bounce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 16px 40px rgba(46, 125, 50, 0.5);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: linear-gradient(180deg, #1b3d1f 0%, #1b5e20 40%, #143618 100%);
+            color: white;
+            padding: 50px 24px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--off-white);
+            border-radius: 50% 50% 0 0;
+        }
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .footer h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #e0f2e0;
+        }
+        .footer p {
+            color: #b0d8b0;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #c8e6c9;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 18px;
+            font-size: 0.85rem;
+            color: #a0c8a0;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                padding: 90px 30px 30px;
+                box-shadow: var(--shadow-xl);
+                transition: var(--transition);
+                gap: 4px;
+                z-index: 1001;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                display: block;
+                padding: 14px 18px;
+                font-size: 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero h1 .arabic-text {
+                font-size: 1.5rem;
+            }
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .pdf-frame-wrapper iframe {
+                height: 400px;
+            }
+            .back-to-top {
+                bottom: 20px;
+                right: 16px;
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+            }
+            .btn {
+                padding: 12px 22px;
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .hero h1 .arabic-text {
+                font-size: 1.2rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .section {
+                padding: 40px 14px;
+            }
+            .card {
+                padding: 20px 16px;
+            }
+            .navbar {
+                padding: 6px 0;
+            }
+        }
+
+        /* ============ MODAL OVERLAY ============ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-box {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+        }
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        .modal-close:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+        .modal-box iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: var(--radius-sm);
+            margin-top: 10px;
+        }
+
+        /* ============ PARTICLE BG ============ */
+        .particles-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--main-green);
+            border-radius: 50%;
+            opacity: 0.25;
+            animation: particleDrift 8s linear infinite;
+        }
+        @keyframes particleDrift {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.25;
+            }
+            50% {
+                opacity: 0.6;
+                transform: translateY(-60px) translateX(20px) scale(1.8);
+            }
+            100% {
+                transform: translateY(-120px) translateX(-10px) scale(0.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <div class="loader-ring"></div>
+    </div>
+
+    <!-- ==================== TOP BAR ==================== -->
+    <div class="top-bar">
+        <span>🕌 আসসালামু আলাইকুম ওয়া রহমাতুল্লাহি ওয়া বারাকাতুহু — আল-নূর ইসলামিক সেন্টারে আপনাকে স্বাগতম</span>
+    </div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <div class="logo-icon">☪️</div>
+                <span>আল-নূর</span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="মেনু">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="active-link">🏠 হোম</a></li>
+                <li><a href="#quran">📖 কুরআন</a></li>
+                <li><a href="#hadith">📜 হাদিস</a></li>
+                <li><a href="#dua">🤲 দুআ</a></li>
+                <li><a href="#books">📚 বই</a></li>
+                <li><a href="#prayer">🕌 নামাজ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-pattern"></div>
+        <div class="particles-container" id="particlesContainer"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🌟 বিসমিল্লাহির রাহমানির রাহীম</div>
+            <h1>
+                <span class="arabic-text">ٱقْرَأْ بِٱسْمِ رَبِّكَ</span>
+                পড়ো তোমার প্রভুর নামে
+            </h1>
+            <p>পবিত্র কুরআন, সহীহ হাদিস, দুআ ও ইসলামিক বইসমূহ ডাউনলোড করুন এবং পড়ুন সম্পূর্ণ বিনামূল্যে।</p>
+            <div class="hero-buttons">
+                <a href="#quran" class="btn btn-primary">📖 কুরআন পড়ুন</a>
+                <a href="#hadith" class="btn btn-outline">📜 হাদিস দেখুন</a>
+                <a href="#books" class="btn btn-gold">📥 পিডিএফ ডাউনলোড</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TICKER ==================== -->
+    <div class="section" style="padding-top: 0; padding-bottom: 0;">
+        <div class="ticker-wrap">
+            <div class="ticker" id="ticker">
+                <div class="ticker-item"><span class="ticker-dot"></span> কুরআন নাজিলের মাস রমাদান — বেশি বেশি তিলাওয়াত করুন</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> পাঁচ ওয়াক্ত নামাজ পড়ুন যথাসময়ে</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> সহীহ হাদিস অনুসরণ করুন</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> দান-সদকায় বরকত বৃদ্ধি পায়</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> জুমার দিনের বিশেষ ফজিলত রয়েছে</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> কুরআন নাজিলের মাস রমাদান — বেশি বেশি তিলাওয়াত করুন</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> পাঁচ ওয়াক্ত নামাজ পড়ুন যথাসময়ে</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> সহীহ হাদিস অনুসরণ করুন</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> দান-সদকায় বরকত বৃদ্ধি পায়</div>
+                <div class="ticker-item"><span class="ticker-dot"></span> জুমার দিনের বিশেষ ফজিলত রয়েছে</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== QURAN SECTION ==================== -->
+    <section class="section" id="quran">
+        <div class="section-header">
+            <div class="section-badge">📖 পবিত্র কুরআন</div>
+            <h2>আল-কুরআনুল কারীম</h2>
+            <p>বিভিন্ন অনুবাদ ও তাফসীরসহ পিডিএফ ডাউনলোড করুন</p>
+            <div class="divider"></div>
+        </div>
+        <div class="cards-grid">
+            <!-- Card 1 -->
+            <div class="card" onclick="openPDF('https://download.quranicaudio.com/quran/mishari_rashid_al_afasy_quran_with_english_translation.pdf', 'কুরআন - বাংলা অনুবাদ')">
+                <div class="card-icon">📖</div>
+                <h3>কুরআন (বাংলা অনুবাদ)</h3>
+                <p>পবিত্র কুরআনের বাংলা অনুবাদ সহ পিডিএফ ফাইল। ডাউনলোড করে পড়ুন।</p>
+                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
+            </div>
+            <!-- Card 2 -->
+            <div class="card" onclick="openPDF('https://download.quranicaudio.com/quran/abdul_basit_murattal_quran.pdf', 'কুরআন - আরবি মাত্র')">
+                <div class="card-icon">🕋</div>
+                <h3>কুরআন (আরবি)</h3>
+                <p>বিশুদ্ধ আরবি কুরআন শরীফের পিডিএফ সংস্করণ।</p>
+                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
+            </div>
+            <!-- Card 3 -->
+            <div class="card" onclick="openPDF('https://archive.org/download/quran-english-translation-clear-quran/Quran%20English%20Translation%20-%20Clear%20Quran.pdf', 'কুরআন - ইংরেজি অনুবাদ')">
+                <div class="card-icon">🌍</div>
+                <h3>কুরআন (ইংরেজি অনুবাদ)</h3>
+                <p>The Clear Quran - English translation PDF for worldwide readers.</p>
+                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
+            </div>
+            <!-- Card 4 -->
+            <div class="card" onclick="openPDF('https://archive.org/download/tasfir-ibn-kasir-bangla/tasfir%20ibn%20kasir%20bangla.pdf', 'তাফসীর ইবনে কাসীর')">
+                <div class="card-icon">📝</div>
+                <h3>তাফসীর ইবনে কাসীর</h3>
+                <p>প্রসিদ্ধ তাফসীর গ্রন্থ - বাংলা ভাষায় পিডিএফ।</p>
+                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
+            </div>
+        </div>
+        <!-- Embedded PDF Viewer -->
+        <div class="pdf-viewer-section" id="pdfViewerSection" style="display:none;">
+            <h3 id="pdfViewerTitle">📄 পিডিএফ ভিউয়ার</h3>
+            <div class="pdf-frame-wrapper">
+                <iframe id="pdfIframe" src="" title="PDF Viewer"></iframe>
+            </div>
+            <div class="pdf-controls">
+                <button class="btn btn-outline" id="btnDownloadPDF" onclick="downloadCurrentPDF()">📥 ডাউনলোড করুন</button>
+                <button class="btn btn-primary" onclick="closePDFViewer()">✖ বন্ধ করুন</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HADITH SECTION ==================== -->
+    <section class="section" id="hadith" style="background: var(--soft-green-1); border-radius: var(--radius-xl); margin: 20px auto;">
+        <div class="section-header">
+            <div class="section-badge">📜 সহীহ হাদিস</div>
+            <h2>নববী হাদিস সংগ্রহ</h2>
+            <p>সহীহ বুখারী ও মুসলিম থেকে নির্বাচিত হাদিসসমূহ</p>
+            <div class="divider"></div>
+        </div>
+        <div class="hadith-card">
+            <div class="hadith-arabic">إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ</div>
+            <div class="hadith-bn"><strong>অর্থ:</strong> নিশ্চয়ই সকল কাজের প্রতিদান নিয়তের উপর নির্ভরশীল।</div>
+            <span class="hadith-source">📚 সহীহ বুখারী - হাদিস নং ১</span>
+        </div>
+        <div class="hadith-card">
+            <div class="hadith-arabic">الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ</div>
+            <div class="hadith-bn"><strong>অর্থ:</strong> প্রকৃত মুসলিম সেই ব্যক্তি যার জিহ্বা ও হাত থেকে অন্য মুসলিমগণ নিরাপদ থাকে।</div>
+            <span class="hadith-source">📚 সহীহ বুখারী - হাদিস নং ১০</span>
+        </div>
+        <div class="hadith-card">
+            <div class="hadith-arabic">طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ</div>
+            <div class="hadith-bn"><strong>অর্থ:</strong> জ্ঞান অর্জন করা প্রত্যেক মুসলিমের উপর ফরজ।</div>
+            <span class="hadith-source">📚 সুনানে ইবনে মাজাহ - হাদিস নং ২২৪</span>
+        </div>
+        <div style="text-align:center; margin-top:24px;">
+            <button class="btn btn-primary" onclick="openPDF('https://archive.org/download/sahih-bukhari-bangla/Sahih%20Bukhari%20Bangla.pdf', 'সহীহ বুখারী - বাংলা')">📥 সহীহ বুখারী পিডিএফ ডাউনলোড</button>
+            <button class="btn btn-outline" style="margin-left:10px;" onclick="openPDF('https://archive.org/download/riyad-us-saliheen-bangla/Riyad%20us%20Saliheen%20Bangla.pdf', 'রিয়াদুস সালেহীন')">📥 রিয়াদুস সালেহীন পিডিএফ</button>
+        </div>
+    </section>
+
+    <!-- ==================== DUA SECTION ==================== -->
+    <section class="section" id="dua">
+        <div class="section-header">
+            <div class="section-badge">🤲 দুআ ও জিকির</div>
+            <h2>প্রতিদিনের দুআসমূহ</h2>
+            <p>কুরআন ও হাদিস থেকে সংকলিত গুরুত্বপূর্ণ দুআ</p>
+            <div class="divider"></div>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🌅</div>
+                <h3>সকালের দুআ</h3>
+                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ</p>
+                <p>আমরা সকালে উপনীত হয়েছি এবং সমগ্র রাজত্ব আল্লাহর জন্য।</p>
+                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ')">📋 কপি করুন</button>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌙</div>
+                <h3>সন্ধ্যার দুআ</h3>
+                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ</p>
+                <p>আমরা সন্ধ্যায় উপনীত হয়েছি এবং সমগ্র রাজত্ব আল্লাহর জন্য।</p>
+                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ')">📋 কপি করুন</button>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛌</div>
+                <h3>ঘুমানোর দুআ</h3>
+                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا</p>
+                <p>হে আল্লাহ! আপনার নামে আমি মৃত্যুবরণ করি এবং জীবিত হই।</p>
+                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا')">📋 কপি করুন</button>
+            </div>
+            <div class="card">
+                <div class="card-icon">🍽️</div>
+                <h3>খাবারের দুআ</h3>
+                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ</p>
+                <p>আল্লাহর নামে এবং আল্লাহর বরকতের উপর (খাদ্য গ্রহণ করছি)।</p>
+                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ')">📋 কপি করুন</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BOOKS SECTION ==================== -->
+    <section class="section" id="books" style="background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);">
+        <div class="section-header">
+            <div class="section-badge">📚 ইসলামিক বই</div>
+            <h2>ইসলামিক বইয়ের সংগ্রহ</h2>
+            <p>বিনামূল্যে ডাউনলোড করে পড়ুন প্রিমিয়াম ইসলামিক বইসমূহ</p>
+            <div class="divider"></div>
+        </div>
+        <div class="cards-grid">
+            <div class="card" onclick="openPDF('https://archive.org/download/seerat-un-nabi-bangla/Seerat%20un%20Nabi%20Bangla.pdf', 'সীরাতুন নবী')">
+                <div class="card-icon">🕌</div>
+                <h3>সীরাতুন নবী (সা.)</h3>
+                <p>মহানবী হযরত মুহাম্মদ (সা.) এর পূর্ণাঙ্গ জীবনী।</p>
+                <button class="download-btn">📥 ডাউনলোড</button>
+            </div>
+            <div class="card" onclick="openPDF('https://archive.org/download/fazail-e-amal-bangla/Fazail-e-Amal%20Bangla.pdf', 'ফাযায়েলে আমাল')">
+                <div class="card-icon">⭐</div>
+                <h3>ফাযায়েলে আমাল</h3>
+                <p>ইসলামিক আমলসমূহের ফজিলত নিয়ে প্রসিদ্ধ গ্রন্থ।</p>
+                <button class="download-btn">📥 ডাউনলোড</button>
+            </div>
+            <div class="card" onclick="openPDF('https://archive.org/download/namaz-shikkha-bangla/Namaz%20Shikkha%20Bangla.pdf', 'নামাজ শিক্ষা')">
+                <div class="card-icon">🕌</div>
+                <h3>নামাজ শিক্ষা</h3>
+                <p>সহীহ পদ্ধতিতে নামাজ আদায়ের সম্পূর্ণ গাইড।</p>
+                <button class="download-btn">📥 ডাউনলোড</button>
+            </div>
+            <div class="card" onclick="openPDF('https://archive.org/download/islamic-aqeedah-bangla/Islamic%20Aqeedah%20Bangla.pdf', 'ইসলামী আকিদা')">
+                <div class="card-icon">💡</div>
+                <h3>ইসলামী আকিদা</h3>
+                <p>ইসলামের মৌলিক বিশ্বাস ও আকিদা নিয়ে বিস্তারিত।</p>
+                <button class="download-btn">📥 ডাউনলোড</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRAYER TIMES SECTION ==================== -->
+    <section class="section" id="prayer">
+        <div class="section-header">
+            <div class="section-badge">🕌 নামাজের সময়সূচী</div>
+            <h2>পাঁচ ওয়াক্ত নামাজ</h2>
+            <p>আপনার অবস্থান অনুযায়ী নামাজের সময় জানুন</p>
+            <div class="divider"></div>
+        </div>
+        <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+        max-width: 900px;
+        margin: 0 auto;
+        ">
+        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
+            <div style="font-size:2rem;">🌅</div>
+            <strong style="display:block; color:var(--deep-green);">ফজর</strong>
+            <span style="color:var(--text-muted);" id="fajrTime">--:--</span>
+        </div>
+        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
+            <div style="font-size:2rem;">☀️</div>
+            <strong style="display:block; color:var(--deep-green);">যোহর</strong>
+            <span style="color:var(--text-muted);" id="dhuhrTime">--:--</span>
+        </div>
+        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
+            <div style="font-size:2rem;">🌤️</div>
+            <strong style="display:block; color:var(--deep-green);">আসর</strong>
+            <span style="color:var(--text-muted);" id="asrTime">--:--</span>
+        </div>
+        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
+            <div style="font-size:2rem;">🌇</div>
+            <strong style="display:block; color:var(--deep-green);">মাগরিব</strong>
+            <span style="color:var(--text-muted);" id="maghribTime">--:--</span>
+        </div>
+        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
+            <div style="font-size:2rem;">🌙</div>
+            <strong style="display:block; color:var(--deep-green);">ইশা</strong>
+            <span style="color:var(--text-muted);" id="ishaTime">--:--</span>
+        </div>
+    </div>
+    <p style="text-align:center; margin-top:16px; color:var(--text-muted); font-size:0.85rem;">📍 লোকেশন অ্যাক্সেস দিলে স্বয়ংক্রিয়ভাবে নামাজের সময় দেখা যাবে</p>
+    <div style="text-align:center; margin-top:8px;">
+        <button class="btn btn-primary" onclick="fetchPrayerTimes()">🔍 নামাজের সময় আপডেট করুন</button>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+    <div class="footer-content">
+        <h3>🕌 আল-নূর ইসলামিক সেন্টার</h3>
+        <p>পবিত্র কুরআন, সহীহ হাদিস ও ইসলামিক জ্ঞান প্রচারে নিবেদিত একটি অলাভজনক উদ্যোগ।</p>
+        <ul class="footer-links">
+            <li><a href="#hero">হোম</a></li>
+            <li><a href="#quran">কুরআন</a></li>
+            <li><a href="#hadith">হাদিস</a></li>
+            <li><a href="#dua">দুআ</a></li>
+            <li><a href="#books">বই</a></li>
+            <li><a href="#prayer">নামাজ</a></li>
+        </ul>
+        <div class="footer-bottom">
+            <p>© ২০২৬ আল-নূর ইসলামিক সেন্টার | সমস্ত অধিকার সংরক্ষিত</p>
+            <p style="font-size:0.78rem; color:#90b890;">সাদাকাহ জারিয়াহ হিসেবে এই ওয়েবসাইটটি তৈরি করা হয়েছে।</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== BACK TO TOP ==================== -->
+<button class="back-to-top" id="backToTop" aria-label="উপরে যান" title="উপরে যান">⬆</button>
+
+<!-- ==================== PDF MODAL ==================== -->
+<div class="modal-overlay" id="pdfModal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">✖</button>
+        <h3 id="modalTitle" style="color:var(--deep-green); margin-bottom:16px;">📄 পিডিএফ ভিউয়ার</h3>
+        <iframe id="modalIframe" src="" title="PDF Viewer Modal"></iframe>
+        <div style="text-align:center; margin-top:16px;">
+            <a id="modalDownloadLink" href="#" download class="btn btn-primary" style="display:inline-flex;">📥 ডাউনলোড করুন</a>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+    (function() {
+        // ============ PRELOADER ============
+        const preloader = document.getElementById('preloader');
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 600);
+        });
+
+        // ============ NAVBAR SCROLL EFFECT ============
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ============ HAMBURGER MENU ============
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        // Close menu on link click (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ============ ACTIVE NAV LINK ON SCROLL ============
+        const sections = document.querySelectorAll('section[id]');
+        const navAnchors = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navAnchors.forEach(a => {
+                a.classList.remove('active-link');
+                if (a.getAttribute('href') === '#' + current) {
+                    a.classList.add('active-link');
+                }
+            });
+            // Back to top button
+            const backBtn = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backBtn.classList.add('visible');
+            } else {
+                backBtn.classList.remove('visible');
+            }
+        });
+
+        // ============ BACK TO TOP ============
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ============ PARTICLES ============
+        const particlesContainer = document.getElementById('particlesContainer');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = (60 + Math.random() * 40) + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (6 + Math.random() * 10) + 's';
+            particle.style.width = (3 + Math.random() * 8) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+
+        // ============ PDF VIEWER FUNCTIONS ============
+        let currentPDFUrl = '';
+        let currentPDFTitle = '';
+
+        window.openPDF = function(url, title) {
+            currentPDFUrl = url;
+            currentPDFTitle = title;
+            // Show inline viewer
+            const viewerSection = document.getElementById('pdfViewerSection');
+            const iframe = document.getElementById('pdfIframe');
+            const viewerTitle = document.getElementById('pdfViewerTitle');
+            viewerSection.style.display = 'block';
+            iframe.src = url;
+            viewerTitle.textContent = '📄 ' + title;
+            // Scroll to viewer
+            viewerSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Also set modal
+            document.getElementById('modalIframe').src = url;
+            document.getElementById('modalTitle').textContent = '📄 ' + title;
+            document.getElementById('modalDownloadLink').href = url;
+            document.getElementById('modalDownloadLink').setAttribute('download', title + '.pdf');
+        };
+
+        window.closePDFViewer = function() {
+            const viewerSection = document.getElementById('pdfViewerSection');
+            const iframe = document.getElementById('pdfIframe');
+            viewerSection.style.display = 'none';
+            iframe.src = '';
+            currentPDFUrl = '';
+            currentPDFTitle = '';
+        };
+
+        window.downloadCurrentPDF = function() {
+            if (currentPDFUrl) {
+                const link = document.createElement('a');
+                link.href = currentPDFUrl;
+                link.download = currentPDFTitle + '.pdf';
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('দয়া করে প্রথমে একটি পিডিএফ সিলেক্ট করুন।');
+            }
+        };
+
+        // ============ MODAL ============
+        window.openModal = function(url, title) {
+            document.getElementById('modalIframe').src = url;
+            document.getElementById('modalTitle').textContent = '📄 ' + title;
+            document.getElementById('modalDownloadLink').href = url;
+            document.getElementById('modalDownloadLink').setAttribute('download', title + '.pdf');
+            document.getElementById('pdfModal').classList.add('active');
+        };
+
+        window.closeModal = function() {
+            document.getElementById('pdfModal').classList.remove('active');
+            document.getElementById('modalIframe').src = '';
+        };
+
+        document.getElementById('pdfModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // ============ PRAYER TIMES (Aladhan API) ============
+        window.fetchPrayerTimes = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        const today = new Date();
+                        const dateStr = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today
+                            .getFullYear();
+                        const apiUrl =
+                            `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${lat}&longitude=${lng}&method=2`;
+
+                        fetch(apiUrl)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.code === 200 && data.data && data.data.timings) {
+                                    const timings = data.data.timings;
+                                    document.getElementById('fajrTime').textContent = timings
+                                        .Fajr || '--:--';
+                                    document.getElementById('dhuhrTime').textContent = timings
+                                        .Dhuhr || '--:--';
+                                    document.getElementById('asrTime').textContent = timings
+                                        .Asr || '--:--';
+                                    document.getElementById('maghribTime').textContent = timings
+                                        .Maghrib || '--:--';
+                                    document.getElementById('ishaTime').textContent = timings
+                                        .Isha || '--:--';
+                                    // Save to localStorage
+                                    localStorage.setItem('prayerTimes', JSON.stringify({
+                                        fajr: timings.Fajr,
+                                        dhuhr: timings.Dhuhr,
+                                        asr: timings.Asr,
+                                        maghrib: timings.Maghrib,
+                                        isha: timings.Isha,
+                                        date: dateStr
+                                    }));
+                                }
+                            })
+                            .catch(() => {
+                                alert('নামাজের সময় আনতে সমস্যা হয়েছে। দয়া করে ইন্টারনেট সংযোগ চেক করুন।');
+                            });
+                    },
+                    function() {
+                        // Fallback: use Dhaka coordinates
+                        fetchPrayerTimesByCoords(23.8103, 90.4125);
+                    }
+                );
+            } else {
+                // Fallback: Dhaka
+                fetchPrayerTimesByCoords(23.8103, 90.4125);
+            }
+        };
+
+        function fetchPrayerTimesByCoords(lat, lng) {
+            const today = new Date();
+            const dateStr = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+            const apiUrl =
+                `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${lat}&longitude=${lng}&method=2`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 200 && data.data && data.data.timings) {
+                        const timings = data.data.timings;
+                        document.getElementById('fajrTime').textContent = timings.Fajr || '--:--';
+                        document.getElementById('dhuhrTime').textContent = timings.Dhuhr || '--:--';
+                        document.getElementById('asrTime').textContent = timings.Asr || '--:--';
+                        document.getElementById('maghribTime').textContent = timings.Maghrib || '--:--';
+                        document.getElementById('ishaTime').textContent = timings.Isha || '--:--';
+                        localStorage.setItem('prayerTimes', JSON.stringify({
+                            fajr: timings.Fajr,
+                            dhuhr: timings.Dhuhr,
+                            asr: timings.Asr,
+                            maghrib: timings.Maghrib,
+                            isha: timings.Isha,
+                            date: dateStr
+                        }));
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('fajrTime').textContent = '৪:৪৫';
+                    document.getElementById('dhuhrTime').textContent = '১২:১৫';
+                    document.getElementById('asrTime').textContent = '৩:৫০';
+                    document.getElementById('maghribTime').textContent = '৬:২০';
+                    document.getElementById('ishaTime').textContent = '৭:৪৫';
+                });
+        }
+
+        // Load cached prayer times
+        const cachedPrayer = localStorage.getItem('prayerTimes');
+        if (cachedPrayer) {
+            try {
+                const pt = JSON.parse(cachedPrayer);
+                const today = new Date();
+                const dateStr = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+                if (pt.date === dateStr) {
+                    document.getElementById('fajrTime').textContent = pt.fajr || '--:--';
+                    document.getElementById('dhuhrTime').textContent = pt.dhuhr || '--:--';
+                    document.getElementById('asrTime').textContent = pt.asr || '--:--';
+                    document.getElementById('maghribTime').textContent = pt.maghrib || '--:--';
+                    document.getElementById('ishaTime').textContent = pt.isha || '--:--';
+                } else {
+                    fetchPrayerTimesByCoords(23.8103, 90.4125);
+                }
+            } catch (e) {
+                fetchPrayerTimesByCoords(23.8103, 90.4125);
+            }
+        } else {
+            // Auto-fetch on first load
+            setTimeout(() => fetchPrayerTimesByCoords(23.8103, 90.4125), 1500);
+        }
+
+        // ============ KEYBOARD ESC TO CLOSE ============
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                closePDFViewer();
+            }
+        });
+
+        console.log('✅ আল-নূর ইসলামিক সেন্টার সম্পূর্ণরূপে লোড হয়েছে।');
+        console.log('🌿 সবুজ ও সাদা প্রিমিয়াম ডিজাইন সক্রিয়।');
+        console.log('📖 কুরআন | 📜 হাদিস | 🤲 দুআ | 📚 বই | 🕌 নামাজ - সব ফিচার প্রস্তুত।');
+    })();
+</script>
+</body>
+</html>
