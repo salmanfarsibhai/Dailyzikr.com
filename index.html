@@ -1,1476 +1,3033 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আল-নূর ইসলামিক সেন্টার | কুরআন, হাদিস ও ইসলামিক বই</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy" content="
+default-src 'self';
+base-uri 'self';
+object-src 'none';
+frame-ancestors 'none';
+form-action 'none';
+img-src 'self' data: https:;
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+script-src 'self' 'unsafe-inline'
+https://www.youtube.com
+https://www.youtube-nocookie.com
+https://www.googletagmanager.com
+https://www.google-analytics.com;
+font-src 'self' https://fonts.gstatic.com;
+connect-src 'self' https://www.google-analytics.com;
+frame-src https://www.youtube.com https://www.youtube-nocookie.com;
+" />
+    <meta name="theme-color" content="#0083FF" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXM4QR57C8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-DXM4QR57C8');
+    </script>
+    <title>Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
+        /* ======== ALL CSS ======= */
+
+
+
+        /* 🔒 পুরো পেজ lock */
+        body.lock {
+            overflow: hidden;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* INTRO SCREEN */
+        #introScreen {
+            position: fixed;
+            inset: 0;
+            background: #0A66FF;
+            z-index: 999999999;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            transition: transform 0.8s ease;
+        }
+
+        /* TEXT */
+        .content {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .content p {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .content h1 {
+            font-size: 28px;
+        }
+
+        /* BUTTON */
+        #enterBtn {
+            position: absolute;
+            bottom: 40px;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 999px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        /* শুধু লেখা glow */
+        #enterBtn span {
+            color: #0A66FF;
+            animation: glow 1.5s infinite;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 0px #0A66FF;
+            }
+
+            50% {
+                text-shadow: 0 0 10px #0A66FF;
+            }
+
+            100% {
+                text-shadow: 0 0 0px #0A66FF;
+            }
+        }
+
+        /* smooth slide */
+        #introScreen.hide {
+            transform: translateY(-100%);
+        }
+
         :root {
-            --white: #ffffff;
-            --off-white: #f9fafb;
-            --soft-green-1: #f0f7f2;
-            --soft-green-2: #e6f3e8;
-            --soft-green-3: #d4edda;
-            --soft-green-4: #c3e6cb;
-            --light-green: #a8d5ad;
-            --medium-green: #6db972;
-            --main-green: #43a047;
-            --deep-green: #2e7d32;
-            --dark-green: #1b5e20;
-            --accent-green: #81c784;
-            --text-dark: #1a1a1a;
-            --text-medium: #333333;
-            --text-light: #555555;
-            --text-muted: #777777;
-            --gold: #c9a44b;
-            --gold-light: #e0c878;
-            --shadow-sm: 0 2px 8px rgba(46, 125, 50, 0.08);
-            --shadow-md: 0 6px 24px rgba(46, 125, 50, 0.12);
-            --shadow-lg: 0 12px 40px rgba(46, 125, 50, 0.18);
-            --shadow-xl: 0 20px 60px rgba(46, 125, 50, 0.22);
-            --radius-sm: 10px;
-            --radius-md: 16px;
-            --radius-lg: 22px;
-            --radius-xl: 28px;
-            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            --bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --primary: #0083FF;
+            --primary-2: #006fe0;
+            --soft: #eef7ff;
+            --bg: #f6f9ff;
+            --surface: #ffffff;
+            --text: #0b1b33;
+            --muted: #667792;
+            --line: rgba(0, 131, 255, .10);
+            --shadow: 0 6px 16px rgba(0, 131, 255, .08);
+            --shadow-soft: 0 4px 10px rgba(11, 27, 51, .05);
+            --radius: 24px;
+            --container: 1240px;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 80px;
         }
 
         body {
-            font-family: 'Segoe UI', 'Noto Sans Bengali', 'SolaimanLipi', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--off-white);
-            color: var(--text-dark);
-            line-height: 1.7;
+            font-family: "Hind Siliguri", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(0, 131, 255, .08), transparent 22%),
+                radial-gradient(circle at top right, rgba(0, 131, 255, .04), transparent 16%),
+                linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+            color: var(--text);
             overflow-x: hidden;
+            padding-top: 0px;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            user-select: auto;
+            -webkit-user-select: auto;
+            touch-action: manipulation;
         }
 
-        /* ============ SCROLLBAR ============ */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--soft-green-1);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--medium-green);
-            border-radius: 20px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--main-green);
+        a,
+        button,
+        img {
+            -webkit-user-drag: none;
         }
 
-        /* ============ PRELOADER ============ */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+            border: 0;
+            background: none;
+        }
+
+        *:focus,
+        *:focus-visible {
+            outline: none;
+        }
+
+        .shell {
+            width: min(var(--container), calc(100% - 20px));
+            margin: 0 auto;
+            padding: 14px 0 28px;
+        }
+
+        /* =========================
+       কভার ব্যানার
+    ========================= */
+        .banner {
+            width: 100%;
+            aspect-ratio: 1640/624;
+            overflow: hidden;
+            border-radius: 30px;
+            background: #fff;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+
+            position: relative;
+        }
+
+        .banner img {
             width: 100%;
             height: 100%;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .loader-ring {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 5px solid var(--soft-green-3);
-            border-top-color: var(--main-green);
-            animation: spin 0.9s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* ============ TOP BAR ============ */
-        .top-bar {
-            background: var(--deep-green);
-            color: white;
-            text-align: center;
-            padding: 8px 16px;
-            font-size: 0.88rem;
-            letter-spacing: 0.3px;
-            position: relative;
-            z-index: 1001;
-        }
-        .top-bar span {
-            animation: fadeInOut 4s ease-in-out infinite;
-        }
-        @keyframes fadeInOut {
-            0%,
-            100% {
-                opacity: 0.75;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* ============ NAVBAR ============ */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--white);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            border-bottom: 3px solid transparent;
-            border-image: linear-gradient(90deg, var(--soft-green-3), var(--main-green), var(--deep-green), var(--main-green), var(--soft-green-3)) 1;
-        }
-        .navbar.scrolled {
-            box-shadow: var(--shadow-lg);
-        }
-        .nav-container {
-            max-width: 1250px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 24px;
-            flex-wrap: wrap;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--dark-green);
-            font-weight: 800;
-            font-size: 1.45rem;
-            letter-spacing: -0.3px;
-            transition: var(--transition);
-        }
-        .nav-logo:hover {
-            transform: scale(1.03);
-        }
-        .logo-icon {
-            width: 46px;
-            height: 46px;
-            background: linear-gradient(135deg, var(--main-green), var(--deep-green));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 14px rgba(46, 125, 50, 0.35);
-            transition: var(--transition);
-        }
-        .nav-logo:hover .logo-icon {
-            box-shadow: 0 6px 22px rgba(46, 125, 50, 0.5);
-            transform: rotate(-8deg);
-        }
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-medium);
-            font-weight: 600;
-            padding: 10px 17px;
-            border-radius: 30px;
-            transition: var(--transition);
-            font-size: 0.95rem;
-            position: relative;
-            white-space: nowrap;
-        }
-        .nav-links a:hover,
-        .nav-links a.active-link {
-            background: var(--soft-green-2);
-            color: var(--deep-green);
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 20px;
-            height: 3px;
-            background: var(--main-green);
-            border-radius: 10px;
-            transition: var(--transition);
-        }
-        .nav-links a:hover::after,
-        .nav-links a.active-link::after {
-            transform: translateX(-50%) scaleX(1);
-        }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 8px;
-            z-index: 1002;
-        }
-        .hamburger span {
-            width: 28px;
-            height: 3px;
-            background: var(--deep-green);
-            border-radius: 10px;
-            transition: var(--bounce);
+            object-fit: cover;
             display: block;
         }
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -6px);
-        }
 
-        /* ============ HERO SECTION ============ */
-        .hero {
-            position: relative;
-            background: linear-gradient(170deg, #f0f7f2 0%, #e6f3e8 30%, #ffffff 60%, #eaf6ec 100%);
-            padding: 70px 24px 80px;
-            text-align: center;
-            overflow: hidden;
-        }
-        .hero-pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.06;
-            background: radial-gradient(circle at 20% 40%, var(--main-green) 1px, transparent 1px),
-                radial-gradient(circle at 80% 60%, var(--deep-green) 1px, transparent 1px);
-            background-size: 50px 50px, 55px 55px;
-            animation: patternFloat 20s linear infinite;
-        }
-        @keyframes patternFloat {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(30px, -20px);
-            }
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: var(--soft-green-3);
-            color: var(--deep-green);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            animation: floatUpDown 3s ease-in-out infinite;
-        }
-        @keyframes floatUpDown {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--dark-green);
-            margin-bottom: 16px;
-            line-height: 1.3;
-            letter-spacing: -0.5px;
-        }
-        .hero h1 .arabic-text {
-            font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade New', serif;
-            color: var(--deep-green);
-            display: block;
-            font-size: 2.2rem;
-            margin-bottom: 6px;
-        }
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: 35px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: var(--bounce);
-            letter-spacing: 0.2px;
-            white-space: nowrap;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--main-green), var(--deep-green));
-            color: white;
-            box-shadow: 0 8px 28px rgba(46, 125, 50, 0.35);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 36px rgba(46, 125, 50, 0.5);
-        }
-        .btn-outline {
-            background: var(--white);
-            color: var(--deep-green);
-            border: 2.5px solid var(--main-green);
-        }
-        .btn-outline:hover {
-            background: var(--soft-green-1);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        .btn-gold {
-            background: linear-gradient(135deg, #d4a844, #b8861f);
-            color: #fff;
-            box-shadow: 0 8px 28px rgba(180, 130, 30, 0.35);
-        }
-        .btn-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 36px rgba(180, 130, 30, 0.5);
-        }
-
-        /* ============ SECTION STYLES ============ */
-        .section {
-            padding: 70px 24px;
-            max-width: 1250px;
-            margin: 0 auto;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .section-badge {
-            display: inline-block;
-            background: var(--soft-green-3);
-            color: var(--deep-green);
-            padding: 6px 18px;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        .section-header h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--dark-green);
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 550px;
-            margin: 0 auto;
-        }
-        .divider {
-            width: 70px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--soft-green-4), var(--main-green), var(--deep-green));
-            border-radius: 10px;
-            margin: 16px auto;
-            animation: pulseWidth 2.5s ease-in-out infinite;
-        }
-        @keyframes pulseWidth {
-            0%,
-            100% {
-                width: 70px;
-            }
-            50% {
-                width: 100px;
-            }
-        }
-
-        /* ============ CARDS GRID ============ */
-        .cards-grid {
+        /* =========================
+       প্রোফাইল
+    ========================= */
+        .profile {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .95);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-        .card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--soft-green-4), var(--main-green), var(--deep-green));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: var(--transition);
-            border-radius: 0 0 10px 10px;
-        }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--soft-green-3);
-        }
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--soft-green-2);
-            display: flex;
+            grid-template-columns: 112px 1fr;
+            gap: 16px;
             align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 16px;
-            transition: var(--transition);
-        }
-        .card:hover .card-icon {
-            background: var(--main-green);
-            color: white;
-            transform: scale(1.1) rotate(-5deg);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
-        }
-        .card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-        }
-        .card .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            background: var(--soft-green-2);
-            color: var(--deep-green);
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: var(--bounce);
-            border: none;
-            cursor: pointer;
-        }
-        .card .download-btn:hover {
-            background: var(--main-green);
-            color: white;
-            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
-            transform: scale(1.06);
         }
 
-        /* ============ PDF VIEWER SECTION ============ */
-        .pdf-viewer-section {
-            background: var(--soft-green-1);
-            border-radius: var(--radius-xl);
-            padding: 40px 24px;
-            margin-top: 40px;
-            box-shadow: var(--shadow-md);
-        }
-        .pdf-viewer-section h3 {
-            text-align: center;
-            color: var(--dark-green);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        .pdf-frame-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            border-radius: var(--radius-md);
+        .avatar {
+            width: 112px;
+            height: 112px;
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            background: white;
+            background: linear-gradient(135deg, #eef6ff, #ffffff);
+            border: 1px solid rgba(0, 131, 255, .08);
+            box-shadow: var(--shadow-soft);
         }
-        .pdf-frame-wrapper iframe {
+
+        .avatar img {
             width: 100%;
-            height: 600px;
-            border: none;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
-        .pdf-controls {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
+
+        .profile-copy h2 {
+            font-size: 1.55rem;
+            line-height: 1.15;
+            margin-bottom: 6px;
+            font-weight: 600;
+            letter-spacing: -.02em;
         }
 
-        /* ============ HADITH SECTION ============ */
-        .hadith-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 30px 28px;
-            box-shadow: var(--shadow-md);
-            border-left: 5px solid var(--main-green);
-            transition: var(--transition);
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .hadith-card:hover {
-            box-shadow: var(--shadow-xl);
-            border-left-color: var(--deep-green);
-            transform: translateX(4px);
-        }
-        .hadith-arabic {
-            font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade New', serif;
-            font-size: 1.5rem;
-            color: var(--deep-green);
-            text-align: right;
-            direction: rtl;
-            margin-bottom: 12px;
-            line-height: 2;
-        }
-        .hadith-bn {
-            color: var(--text-medium);
+        .profile-copy p {
+            color: var(--muted);
+            line-height: 1.75;
             font-size: 1rem;
-            line-height: 1.8;
-        }
-        .hadith-source {
-            display: inline-block;
-            background: var(--soft-green-2);
-            color: var(--deep-green);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            margin-top: 12px;
+            max-width: 82ch;
+            font-weight: 400;
         }
 
-        /* ============ NEWS TICKER ============ */
-        .ticker-wrap {
-            background: var(--white);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            margin: 30px 0;
-            border: 1px solid var(--soft-green-3);
-        }
-        .ticker {
+        /* =========================
+       ক্যাটাগরি ট্যাব
+    ========================= */
+        .tabs {
+            margin-top: 16px;
             display: flex;
-            animation: tickerScroll 25s linear infinite;
-            padding: 14px 0;
-            gap: 40px;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        @keyframes tickerScroll {
-            0% {
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            flex: 0 0 auto;
+            min-height: 46px;
+            padding: 0 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 131, 255, .12);
+            background: #fff;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            white-space: nowrap;
+            transition: .22s ease;
+        }
+
+        .tab:hover {
+            transform: translateY(-1px);
+            background: var(--soft);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(0, 131, 255, .16);
+        }
+
+        /* =========================
+       টেমপ্লেট প্যানেল
+    ========================= */
+        .panel {
+            margin-top: 14px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .96);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        .panel-head {
+            padding: 14px 14px 0;
+        }
+
+        .panel-title {
+            font-size: 1.08rem;
+            font-weight: 600;
+            letter-spacing: -.01em;
+            margin-bottom: 4px;
+        }
+
+        .panel-desc {
+            color: var(--muted);
+            font-size: .92rem;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .panel-body {
+            padding: 0 14px 14px;
+            min-height: 220px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity .2s ease, transform .2s ease;
+        }
+
+        .grid.fade {
+            opacity: .35;
+            transform: translateY(8px);
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #fff;
+            border: 1px solid rgba(0, 131, 255, .08);
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            transition: transform .22s ease, box-shadow .22s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 131, 255, .10);
+        }
+
+        .thumb {
+            position: relative;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f3f8ff, #ffffff);
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 10px 10px 11px;
+            background: #fff;
+            border-top: 1px solid rgba(0, 131, 255, .06);
+        }
+
+        .card-body h4 {
+            font-size: .95rem;
+            line-height: 1.18;
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .card-body p {
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.42;
+            font-weight: 400;
+        }
+
+        /* =========================
+       এবাউট
+    ========================= */
+        .about {
+            margin-top: 14px;
+            padding: 16px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .96);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-title {
+            font-size: 1.08rem;
+            margin-bottom: 14px;
+            letter-spacing: -.01em;
+            font-weight: 600;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .about-card {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid rgba(0, 131, 255, .08);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-image {
+            aspect-ratio: 1/1;
+            background: #eef6ff;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-copy {
+            padding: 16px;
+        }
+
+        .about-copy h4 {
+            font-size: 1.08rem;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
+        .about-copy p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: .97rem;
+            font-weight: 400;
+        }
+
+        /* =========================
+       চলমান বাংলা লাইন
+    ========================= */
+        .ticker {
+            margin-top: 14px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .96);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: scrollText 18s linear infinite;
+            will-change: transform;
+        }
+
+        .ticker-piece {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            padding: 12px 18px;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: .01em;
+        }
+
+        @keyframes scrollText {
+            from {
                 transform: translateX(0);
             }
-            100% {
+
+            to {
                 transform: translateX(-50%);
             }
         }
-        .ticker-item {
-            white-space: nowrap;
-            color: var(--deep-green);
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-        .ticker-dot {
-            width: 7px;
-            height: 7px;
-            background: var(--main-green);
-            border-radius: 50%;
-            flex-shrink: 0;
+
+        /* =========================
+       কন্টাক্ট
+    ========================= */
+        .contact {
+            margin-top: 14px;
+            padding: 18px;
+            border-radius: 24px;
+
+            /* 🔵 নীল থাকবে */
+            background: linear-gradient(135deg, #0083FF, #006fe0);
+
+            color: #fff;
+
+            /* ❌ সব effect remove */
+            box-shadow: none;
+            backdrop-filter: none;
         }
 
-        /* ============ BACK TO TOP ============ */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--main-green), var(--deep-green));
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            box-shadow: var(--shadow-lg);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: var(--bounce);
+        .contact h2 {
+            font-size: 1.12rem;
+            margin-bottom: 20px;
+            letter-spacing: -.01em;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2px;
+        }
+
+        .contact-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .back-to-top:hover {
-            transform: translateY(-5px) scale(1.08);
-            box-shadow: 0 16px 40px rgba(46, 125, 50, 0.5);
+            gap: 8px;
+
+            min-height: 28px;
+            padding: 0 6px;
+            line-height: 1.2;
+            letter-spacing: 0;
+
+            border-radius: 12px;
+
+            /* clean look */
+            background: transparent;
+            border: none;
+
+            color: #fff;
+            font-weight: 400;
+
+            box-shadow: none;
+            transition: .2s ease;
         }
 
-        /* ============ FOOTER ============ */
+        .contact-links a:hover {
+            background: transparent;
+            transform: none;
+        }
+
         .footer {
-            background: linear-gradient(180deg, #1b3d1f 0%, #1b5e20 40%, #143618 100%);
-            color: white;
-            padding: 50px 24px 30px;
+            margin-top: 14px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            color: var(--muted);
+            font-size: .9rem;
+            padding: 10px 8px 0;
         }
-        .footer::before {
-            content: '';
+
+        /* =========================
+       মডাল
+    ========================= */
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 70;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity .22s ease, visibility .22s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .modal.closing {
+            opacity: 0;
+            visibility: visible;
+            pointer-events: none;
+        }
+
+        .modal-backdrop {
             position: absolute;
-            top: -40px;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: var(--off-white);
-            border-radius: 50% 50% 0 0;
+            inset: 0;
+            background: rgba(7, 15, 31, .0);
+            transition: background .35s ease;
+            backdrop-filter: blur(8px);
         }
-        .footer-content {
+
+        .modal.active .modal-backdrop {
+            background: rgba(7, 15, 31, .74);
+        }
+
+        .modal.closing .modal-backdrop {
+            background: rgba(7, 15, 31, 0);
+        }
+
+        .modal-dialog {
             position: relative;
             z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .footer h3 {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            color: #e0f2e0;
-        }
-        .footer p {
-            color: #b0d8b0;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            list-style: none;
-            margin-bottom: 20px;
-        }
-        .footer-links a {
-            color: #c8e6c9;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        .footer-links a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 18px;
-            font-size: 0.85rem;
-            color: #a0c8a0;
+            width: min(960px, calc(100vw - 16px));
+            max-height: calc(100vh - 16px);
+            overflow: hidden;
+            border-radius: 26px;
+            background: #fff;
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, .24);
+            transform: scale(.9) translateY(30px);
+            opacity: 0;
+
+            transition:
+                transform .35s cubic-bezier(.22, 1, .36, 1),
+                opacity .35s ease;
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
         }
 
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 75%;
-                max-width: 320px;
-                height: 100vh;
-                background: var(--white);
-                flex-direction: column;
-                padding: 90px 30px 30px;
-                box-shadow: var(--shadow-xl);
-                transition: var(--transition);
-                gap: 4px;
-                z-index: 1001;
-            }
-            .nav-links.active {
-                right: 0;
-            }
-            .nav-links a {
-                display: block;
-                padding: 14px 18px;
-                font-size: 1rem;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .hero h1 .arabic-text {
-                font-size: 1.5rem;
-            }
-            .section-header h2 {
-                font-size: 1.6rem;
-            }
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            .pdf-frame-wrapper iframe {
-                height: 400px;
-            }
-            .back-to-top {
-                bottom: 20px;
-                right: 16px;
-                width: 42px;
-                height: 42px;
-                font-size: 1.1rem;
-            }
-            .btn {
-                padding: 12px 22px;
-                font-size: 0.9rem;
-            }
-        }
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-            .hero h1 .arabic-text {
-                font-size: 1.2rem;
-            }
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            .section {
-                padding: 40px 14px;
-            }
-            .card {
-                padding: 20px 16px;
-            }
-            .navbar {
-                padding: 6px 0;
-            }
+        .modal.active .modal-dialog {
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
 
-        /* ============ MODAL OVERLAY ============ */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
+        .modal.closing .modal-dialog {
+            transform: scale(.92) translateY(20px);
+            opacity: 0;
+        }
+
+        .modal-media {
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            padding: 20px;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-box {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: var(--shadow-xl);
-        }
-        .modal-close {
-            position: sticky;
-            top: 0;
-            float: right;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f5f5f5;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            transition: var(--transition);
-            z-index: 10;
-        }
-        .modal-close:hover {
-            background: #e0e0e0;
-            transform: rotate(90deg);
-        }
-        .modal-box iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-            border-radius: var(--radius-sm);
-            margin-top: 10px;
+            background: #edf4ff;
+            padding: 10px;
         }
 
-        /* ============ PARTICLE BG ============ */
-        .particles-container {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
+        .modal-media img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
         }
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--main-green);
+
+        #wmCanvas {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            border-radius: 12px;
+        }
+
+        .modal-content {
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .modal-content .tag {
+            display: inline-flex;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: var(--soft);
+            color: var(--primary);
+            font-size: .74rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .modal-content h3 {
+            font-size: 1.45rem;
+            line-height: 1.12;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .modal-content p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: .97rem;
+            font-weight: 400;
+        }
+
+        .close-btn {
+            position: fixed;
+
+            top: 5px;
+            /* একেবারে উপরে */
+            right: 5px;
+            /* একেবারে ডান পাশে */
+
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            opacity: 0.25;
-            animation: particleDrift 8s linear infinite;
+            border: 0;
+
+            background: rgba(0, 131, 255, .96);
+            color: #fff;
+
+            font-size: 1.35rem;
+            line-height: 1;
+
+            box-shadow: 0 8px 16px rgba(0, 131, 255, .16);
+            cursor: pointer;
+
+            z-index: 99999;
         }
-        @keyframes particleDrift {
-            0% {
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: 0.25;
+
+        body.lock {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* =========================
+       RESPONSIVE
+    ========================= */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
             }
-            50% {
-                opacity: 0.6;
-                transform: translateY(-60px) translateX(20px) scale(1.8);
+
+            .modal-dialog {
+                grid-template-columns: 1fr;
             }
-            100% {
-                transform: translateY(-120px) translateX(-10px) scale(0.5);
+        }
+
+        @media (max-width: 760px) {
+            .shell {
+                width: min(var(--container), calc(100% - 12px));
+                padding-top: 8px;
+            }
+
+            .profile {
+                grid-template-columns: 1fr;
+                justify-items: start;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .about-copy p,
+            .profile-copy p {
+                font-size: .95rem;
+            }
+
+            .contact-links a {
+                min-height: 44px;
+            }
+
+            .modal-content {
+                padding: 16px;
+            }
+
+            .modal-content h3 {
+                font-size: 1.32rem;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .profile,
+            .about,
+            .contact {
+                padding: 14px;
+            }
+
+            .panel-head {
+                padding: 12px 12px 0;
+            }
+
+            .panel-body {
+                padding: 0 12px 12px;
+            }
+
+            .about-copy,
+            .modal-content {
+                padding: 14px;
+            }
+
+            /* ===== FIXED FULL WIDTH TOP NAV ===== */
+            .top-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+
+                display: flex;
+                justify-content: center;
+                gap: 1px;
+                /* আগের 10px থেকে কমানো */
+
+                padding: 6px 12px;
+                /* 👉 দুই পাশে চাপাবে */
+                box-sizing: border-box;
+                overflow-x: hidden;
+                background: rgba(255, 255, 255, 0.75);
+                backdrop-filter: blur(16px);
+
+                border-bottom: 1px solid rgba(0, 131, 255, 0.12);
+
+                z-index: 99999;
+                transition: all .25s ease;
+            }
+
+
+            .top-nav.hide {
                 opacity: 0;
+                pointer-events: none;
+                transform: translateY(-10px);
             }
+
+            /* slim button */
+            .nav-item {
+                padding: 6px 10px;
+                border-radius: 999px;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--primary);
+                cursor: pointer;
+                transition: .2s;
+            }
+
+            .nav-item.active {
+                background: var(--primary);
+                color: #fff;
+            }
+
+            body {
+                padding-top: 52px;
+            }
+
+        }
+
+        /* ===== DESKTOP FIX ===== */
+        @media (min-width: 768px) {
+
+            .top-nav {
+                position: fixed;
+                top: 0px;
+                left: 50%;
+                transform: translate(-50%, 0);
+                transition: all .25s ease;
+
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+
+                padding: 8px 16px;
+
+                background: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(18px);
+
+                border-radius: 0 0 22px 22px;
+
+                border: 1px solid rgba(0, 131, 255, 0.12);
+                box-shadow: 0 6px 18px rgba(0, 131, 255, 0.08);
+
+                z-index: 9999;
+            }
+
+            .top-nav.hide {
+                opacity: 0;
+                pointer-events: none;
+                transform: translate(-50%, -12px);
+            }
+
+            body {
+                padding-top: 45px;
+            }
+
+            /* ✅ SCROLL FIX (desktop only) */
+            #banner,
+            #templatesPanel,
+            #videoSection,
+            #aboutSection,
+            #contactSection {
+                scroll-margin-top: 70px;
+            }
+
+            /* 👉 এইখানে বসাবে */
+            .nav-item {
+                padding: 8px 16px;
+                border-radius: 999px;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--primary);
+                transition: all .25s ease;
+            }
+
+            .nav-item:hover {
+                background: rgba(255, 255, 255, 0.25);
+            }
+
+            .nav-item.active {
+                background: var(--primary);
+                color: #fff;
+            }
+        }
+
+        /* VIDEO SECTION */
+        .video-section {
+            margin-top: 14px;
+            padding: 16px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .96);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .video-title {
+            font-size: 1.08rem;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .video-card {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid rgba(0, 131, 255, .08);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .video-thumb {
+            position: relative;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-card h4 {
+            padding: 10px;
+            font-size: .9rem;
+        }
+
+        @media (max-width:760px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0083FF, #006fe0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #fff;
+            font-size: 28px;
+
+            box-shadow: 0 10px 30px rgba(0, 131, 255, 0.5);
+
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* =========================
+   REVIEW SECTION (SOFT BLUE UPGRADE)
+========================= */
+
+        .review-section {
+            margin-top: 16px;
+            padding: 18px;
+            border-radius: 22px;
+
+            /* 🔵 soft blue background */
+            background: linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%);
+
+            border: 1px solid rgba(0, 131, 255, 0.12);
+        }
+
+        /* header */
+        .review-header {
+            margin-bottom: 14px;
+        }
+
+        .review-sub {
+            font-size: 13px;
+            color: #0083FF;
+            font-weight: 3000;
+            letter-spacing: 0.3px;
+        }
+
+        .review-title {
+            font-size: 19px;
+            font-weight: 600;
+            color: #0b1b33;
+        }
+
+        /* grid */
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        /* mobile */
+        @media (max-width: 768px) {
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* card */
+        .review-card {
+            border-radius: 14px;
+            overflow: hidden;
+
+            background: #ffffff;
+
+            /* 🔵 soft border */
+            border: 1px solid rgba(0, 131, 255, 0.10);
+
+            /* 🔵 very light blue inner effect */
+            box-shadow: inset 0 0 0 1px rgba(0, 131, 255, 0.03);
+
+            transition: 0.25s ease;
+        }
+
+        /* image */
+        .review-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* hover (very clean) */
+        .review-card:hover {
+            border-color: rgba(0, 131, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* spacing polish */
+        .review-section * {
+            box-sizing: border-box;
+        }
+
+        /* =========================
+   SURAH LIST DESIGN
+========================= */
+
+        .surah-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 14px 16px;
+        }
+
+        .surah-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .surah-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 131, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .surah-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            border-radius: 14px;
+            background: #fff;
+            border: 1px solid rgba(0, 131, 255, 0.08);
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .surah-item:hover {
+            background: #f3f8ff;
+            transform: translateY(-2px);
+        }
+
+        .surah-number {
+            min-width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0083FF;
+            background: rgba(0, 131, 255, 0.1);
+        }
+
+        .surah-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0b1b33;
+        }
+
+        .surah-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .surah-meta {
+            font-size: 12px;
+            color: #667792;
+            margin-top: 2px;
+        }
+
+        /* 🔍 SEARCH BOX */
+        .search-box {
+            padding: 10px 14px;
+            background: #fff;
+            position: sticky;
+            top: 60px;
+            z-index: 100;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            outline: none;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- ==================== PRELOADER ==================== -->
-    <div id="preloader">
-        <div class="loader-ring"></div>
+    <!-- ========= INTRO SCREEN =========== -->
+
+    <div id="introScreen">
+
+        <div class="content">
+            <p>আমাদের নিজস্ব ওয়েবসাইটে</p>
+            <h1>স্বাগতম</h1>
+        </div>
+
+        <button id="enterBtn">
+            <span>প্রবেশ করুন</span>
+        </button>
+
     </div>
+    <!-- ========= INTRO SCREEN END =========== -->
 
-    <!-- ==================== TOP BAR ==================== -->
-    <div class="top-bar">
-        <span>🕌 আসসালামু আলাইকুম ওয়া রহমাতুল্লাহি ওয়া বারাকাতুহু — আল-নূর ইসলামিক সেন্টারে আপনাকে স্বাগতম</span>
-    </div>
 
-    <!-- ==================== NAVBAR ==================== -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo">
-                <div class="logo-icon">☪️</div>
-                <span>আল-নূর</span>
-            </a>
-            <button class="hamburger" id="hamburger" aria-label="মেনু">
-                <span></span><span></span><span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#hero" class="active-link">🏠 হোম</a></li>
-                <li><a href="#quran">📖 কুরআন</a></li>
-                <li><a href="#hadith">📜 হাদিস</a></li>
-                <li><a href="#dua">🤲 দুআ</a></li>
-                <li><a href="#books">📚 বই</a></li>
-                <li><a href="#prayer">🕌 নামাজ</a></li>
-            </ul>
+
+
+
+
+    <div id="appScroll">
+        <div class="shell">
+
+            <!-- =========================
+       এখানে ব্যানার ইমেজের লিংক বসাবেন
+    ========================= -->
+            <section class="banner" id="banner">
+
+                <!-- 🔥 NAV এখন banner এর ভিতরে -->
+                <nav class="top-nav" id="topNav">
+                    <button class="nav-item active" data-target="banner">হোম</button>
+                    <button class="nav-item" data-target="templatesPanel">কুরআন</button>
+                    <button class="nav-item" data-target="videoSection">তিলাওয়াত</button>
+                    <button class="nav-item" data-target="aboutSection">হাদিস</button>
+                    <button class="nav-item" data-target="contactSection">যোগাযোগ</button>
+                </nav>
+
+                <img id="bannerImage" alt="Cover banner" />
+            </section>
+
+            <!-- =========================
+       এখানে প্রোফাইল পিকচারের লিংক বসাবেন
+    ========================= -->
+            <section class="profile">
+                <div class="avatar">
+                    <img id="profileImage" alt="Profile picture" />
+                </div>
+                <div class="profile-copy">
+                    <h2 id="profileName">Daily Zikr</h2>
+                    <p id="profileText">আপনার ব্র্যান্ডকে মানুষের কাছে আরও আকর্ষণীয় ও গ্রহণযোগ্য করে তুলতে 'ডিজাইন
+                        প্লাস'
+                        দিচ্ছে সব ধরনের প্রিমিয়াম গ্রাফিক ডিজাইন সলিউশন।</p>
+                </div>
+            </section>
+
+            <!-- =========================
+       ক্যাটাগরি ট্যাব
+       লোগো / কভার / পোস্টার / কাস্টম
+    ========================= -->
+            <nav class="tabs" id="tabs" aria-label="Books"></nav>
+
+            <!-- =========================
+       টেমপ্লেট প্যানেল
+    ========================= -->
+            <section class="panel" id="templatesPanel">
+
+                <div class="panel-head">
+                    <div class="panel-title">পবিত্র কুরআন শরীফ</div>
+                    <div class="panel-desc">
+                        নিচের তালিকা থেকে যেকোনো সূরাতে ক্লিক করলে সম্পূর্ণ সূরা (আরবি, বাংলা অর্থ ও শানে নুযুল) দেখতে
+                        পারবেন।
+                    </div>
+
+                    <!-- 🔍 সার্চ বক্স -->
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="সূরা খুঁজুন..." oninput="searchSurah()"
+                            autocomplete="off" />
+                    </div>
+
+                    <div class="surah-list">
+
+
+                        <!-- 🔰 এখানে সূরার লিংক বসাতে হবে -->
+                        <!-- 👉 নতুন সূরা যোগ করতে নিচের <a> block copy করে paste করো -->
+
+                        <a href="001-fatiha.html" class="surah-item" data-key="fatiha fatihah fateha ফাতিহা ফাতেহা">
+                            <span class="surah-number">১</span>
+                            <div class="surah-info">
+                                <span class="surah-name">সূরা আল-ফাতিহা</span>
+                                <span class="surah-meta">মাক্কী • ৭ আয়াত</span>
+                            </div>
+                        </a>
+
+                        <a href="002-baqara.html" class="surah-item" data-key="baqara baqarah bakara বাকারা বাকারাহ">
+                            <span class="surah-number">২</span>
+                            <div class="surah-info">
+                                <span class="surah-name">সূরা আল-বাকারা</span>
+                                <span class="surah-meta">মাদানী • ২৮৬ আয়াত</span>
+                            </div>
+                        </a>
+
+                        <a href="003-imran.html" class="surah-item" data-key="imran imraan عمران ইমরান">
+                            <span class="surah-number">৩</span>
+                            <div class="surah-info">
+                                <span class="surah-name">সূরা আলে ইমরান</span>
+                                <span class="surah-meta">মাদানী • ২০০ আয়াত</span>
+                            </div>
+                        </a>
+
+                        <a href="004-an-nisa.html" class="surah-item" data-key="nisa nisaa an nisa নিসা আন নিসা">
+                            <span class="surah-number">৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নিসা</span><span
+                                    class="surah-meta">মাদানী • ১৭৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="005-al-maidah.html" class="surah-item" data-key="maidah maida maidahh মায়িদা মায়েদা">
+                            <span class="surah-number">৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মায়িদাহ</span><span
+                                    class="surah-meta">মাদানী • ১২০ আয়াত</span></div>
+                        </a>
+
+                        <a href="006-al-anam.html" class="surah-item"><span class="surah-number">৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আনআম</span><span
+                                    class="surah-meta">মাক্কী • ১৬৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="007-al-araf.html" class="surah-item"><span class="surah-number">৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আরাফ</span><span
+                                    class="surah-meta">মাক্কী • ২০৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="008-al-anfal.html" class="surah-item"><span class="surah-number">৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আনফাল</span><span
+                                    class="surah-meta">মাদানী • ৭৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="009-at-tawbah.html" class="surah-item"><span class="surah-number">৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তাওবা</span><span
+                                    class="surah-meta">মাদানী • ১২৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="010-yunus.html" class="surah-item"><span class="surah-number">১০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ইউনুস</span><span
+                                    class="surah-meta">মাক্কী • ১০৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="011-hud.html" class="surah-item"><span class="surah-number">১১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা হুদ</span><span
+                                    class="surah-meta">মাক্কী
+                                    • ১২৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="012-yusuf.html" class="surah-item"><span class="surah-number">১২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ইউসুফ</span><span
+                                    class="surah-meta">মাক্কী • ১১১ আয়াত</span></div>
+                        </a>
+
+                        <a href="013-ar-rad.html" class="surah-item"><span class="surah-number">১৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আর-রাদ</span><span
+                                    class="surah-meta">মাদানী • ৪৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="014-ibrahim.html" class="surah-item"><span class="surah-number">১৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ইবরাহিম</span><span
+                                    class="surah-meta">মাক্কী • ৫২ আয়াত</span></div>
+                        </a>
+
+                        <a href="015-al-hijr.html" class="surah-item"><span class="surah-number">১৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-হিজর</span><span
+                                    class="surah-meta">মাক্কী • ৯৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="016-an-nahl.html" class="surah-item"><span class="surah-number">১৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নাহল</span><span
+                                    class="surah-meta">মাক্কী • ১২৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="017-al-isra.html" class="surah-item"><span class="surah-number">১৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ইসরা</span><span
+                                    class="surah-meta">মাক্কী • ১১১ আয়াত</span></div>
+                        </a>
+
+                        <a href="018-al-kahf.html" class="surah-item"><span class="surah-number">১৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কাহফ</span><span
+                                    class="surah-meta">মাক্কী • ১১০ আয়াত</span></div>
+                        </a>
+
+                        <a href="019-maryam.html" class="surah-item"><span class="surah-number">১৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা মারইয়াম</span><span
+                                    class="surah-meta">মাক্কী • ৯৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="020-ta-ha.html" class="surah-item"><span class="surah-number">২০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ত্বা-হা</span><span
+                                    class="surah-meta">মাক্কী • ১৩৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="021-al-anbiya.html" class="surah-item"><span class="surah-number">২১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আম্বিয়া</span><span
+                                    class="surah-meta">মাক্কী • ১১২ আয়াত</span></div>
+                        </a>
+
+                        <a href="022-al-hajj.html" class="surah-item"><span class="surah-number">২২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-হাজ্জ</span><span
+                                    class="surah-meta">মাদানী • ৭৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="023-al-muminun.html" class="surah-item"><span class="surah-number">২৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুমিনুন</span><span
+                                    class="surah-meta">মাক্কী • ১১৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="024-an-nur.html" class="surah-item"><span class="surah-number">২৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নূর</span><span
+                                    class="surah-meta">মাদানী • ৬৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="025-al-furqan.html" class="surah-item"><span class="surah-number">২৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ফুরকান</span><span
+                                    class="surah-meta">মাক্কী • ৭৭ আয়াত</span></div>
+                        </a>
+
+                        <a href="026-ash-shuara.html" class="surah-item"><span class="surah-number">২৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আশ-শু'আরা</span><span
+                                    class="surah-meta">মাক্কী • ২২৭ আয়াত</span></div>
+                        </a>
+
+                        <a href="027-an-naml.html" class="surah-item"><span class="surah-number">২৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নামল</span><span
+                                    class="surah-meta">মাক্কী • ৯৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="028-al-qasas.html" class="surah-item"><span class="surah-number">২৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কাসাস</span><span
+                                    class="surah-meta">মাক্কী • ৮৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="029-al-ankabut.html" class="surah-item"><span class="surah-number">২৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আনকাবুত</span><span
+                                    class="surah-meta">মাক্কী • ৬৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="030-ar-rum.html" class="surah-item"><span class="surah-number">৩০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আর-রূম</span><span
+                                    class="surah-meta">মাক্কী • ৬০ আয়াত</span></div>
+                        </a>
+
+                        <a href="031-luqman.html" class="surah-item"><span class="surah-number">৩১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা লুকমান</span><span
+                                    class="surah-meta">মাক্কী • ৩৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="032-as-sajdah.html" class="surah-item"><span class="surah-number">৩২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আস-সাজদাহ</span><span
+                                    class="surah-meta">মাক্কী • ৩০ আয়াত</span></div>
+                        </a>
+
+                        <a href="033-al-ahzab.html" class="surah-item"><span class="surah-number">৩৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আহযাব</span><span
+                                    class="surah-meta">মাদানী • ৭৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="034-saba.html" class="surah-item"><span class="surah-number">৩৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা সাবা</span><span
+                                    class="surah-meta">মাক্কী
+                                    • ৫৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="035-fatir.html" class="surah-item"><span class="surah-number">৩৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ফাতির</span><span
+                                    class="surah-meta">মাক্কী • ৪৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="036-ya-sin.html" class="surah-item"><span class="surah-number">৩৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ইয়াসিন</span><span
+                                    class="surah-meta">মাক্কী • ৮৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="037-as-saffat.html" class="surah-item"><span class="surah-number">৩৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আস-সাফফাত</span><span
+                                    class="surah-meta">মাক্কী • ১৮২ আয়াত</span></div>
+                        </a>
+
+                        <a href="038-sad.html" class="surah-item"><span class="surah-number">৩৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা সাদ</span><span
+                                    class="surah-meta">মাক্কী
+                                    • ৮৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="039-az-zumar.html" class="surah-item"><span class="surah-number">৩৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আয-যুমার</span><span
+                                    class="surah-meta">মাক্কী • ৭৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="040-ghafir.html" class="surah-item"><span class="surah-number">৪০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা গাফির</span><span
+                                    class="surah-meta">মাক্কী • ৮৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="041-fussilat.html" class="surah-item"><span class="surah-number">৪১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ফুসসিলাত</span><span
+                                    class="surah-meta">মাক্কী • ৫৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="042-ash-shura.html" class="surah-item"><span class="surah-number">৪২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আশ-শূরা</span><span
+                                    class="surah-meta">মাক্কী • ৫৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="043-az-zukhruf.html" class="surah-item"><span class="surah-number">৪৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আয-যুখরুফ</span><span
+                                    class="surah-meta">মাক্কী • ৮৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="044-ad-dukhan.html" class="surah-item"><span class="surah-number">৪৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আদ-দুখান</span><span
+                                    class="surah-meta">মাক্কী • ৫৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="045-al-jathiyah.html" class="surah-item"><span class="surah-number">৪৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-জাসিয়া</span><span
+                                    class="surah-meta">মাক্কী • ৩৭ আয়াত</span></div>
+                        </a>
+
+                        <a href="046-al-ahqaf.html" class="surah-item"><span class="surah-number">৪৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আহকাফ</span><span
+                                    class="surah-meta">মাক্কী • ৩৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="047-muhammad.html" class="surah-item"><span class="surah-number">৪৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা মুহাম্মদ</span><span
+                                    class="surah-meta">মাদানী • ৩৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="048-al-fath.html" class="surah-item"><span class="surah-number">৪৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ফাতহ</span><span
+                                    class="surah-meta">মাদানী • ২৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="049-al-hujurat.html" class="surah-item"><span class="surah-number">৪৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-হুজুরাত</span><span
+                                    class="surah-meta">মাদানী • ১৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="050-qaf.html" class="surah-item"><span class="surah-number">৫০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা ক্বাফ</span><span
+                                    class="surah-meta">মাক্কী • ৪৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="051-adh-dhariyat.html" class="surah-item"><span class="surah-number">৫১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আয-যারিয়াত</span><span
+                                    class="surah-meta">মাক্কী • ৬০ আয়াত</span></div>
+                        </a>
+
+                        <a href="052-at-tur.html" class="surah-item"><span class="surah-number">৫২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তূর</span><span
+                                    class="surah-meta">মাক্কী • ৪৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="053-an-najm.html" class="surah-item"><span class="surah-number">৫৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নাজম</span><span
+                                    class="surah-meta">মাক্কী • ৬২ আয়াত</span></div>
+                        </a>
+
+                        <a href="054-al-qamar.html" class="surah-item"><span class="surah-number">৫৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কামার</span><span
+                                    class="surah-meta">মাক্কী • ৫৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="055-ar-rahman.html" class="surah-item"><span class="surah-number">৫৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আর-রাহমান</span><span
+                                    class="surah-meta">মাদানী • ৭৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="056-al-waqiah.html" class="surah-item"><span class="surah-number">৫৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ওয়াকিয়া</span><span
+                                    class="surah-meta">মাক্কী • ৯৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="057-al-hadid.html" class="surah-item"><span class="surah-number">৫৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-হাদীদ</span><span
+                                    class="surah-meta">মাদানী • ২৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="058-al-mujadila.html" class="surah-item"><span class="surah-number">৫৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুজাদিলা</span><span
+                                    class="surah-meta">মাদানী • ২২ আয়াত</span></div>
+                        </a>
+
+                        <a href="059-al-hashr.html" class="surah-item"><span class="surah-number">৫৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-হাশর</span><span
+                                    class="surah-meta">মাদানী • ২৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="060-al-mumtahanah.html" class="surah-item"><span class="surah-number">৬০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুমতাহিনা</span><span
+                                    class="surah-meta">মাদানী • ১৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="061-as-saff.html" class="surah-item"><span class="surah-number">৬১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আস-সাফ</span><span
+                                    class="surah-meta">মাদানী • ১৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="062-al-jumuah.html" class="surah-item"><span class="surah-number">৬২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-জুমু'আ</span><span
+                                    class="surah-meta">মাদানী • ১১ আয়াত</span></div>
+                        </a>
+
+                        <a href="063-al-munafiqun.html" class="surah-item"><span class="surah-number">৬৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুনাফিকুন</span><span
+                                    class="surah-meta">মাদানী • ১১ আয়াত</span></div>
+                        </a>
+
+                        <a href="064-at-taghabun.html" class="surah-item"><span class="surah-number">৬৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তাগাবুন</span><span
+                                    class="surah-meta">মাদানী • ১৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="065-at-talaq.html" class="surah-item"><span class="surah-number">৬৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তালাক</span><span
+                                    class="surah-meta">মাদানী • ১২ আয়াত</span></div>
+                        </a>
+
+                        <a href="066-at-tahrim.html" class="surah-item"><span class="surah-number">৬৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তাহরীম</span><span
+                                    class="surah-meta">মাদানী • ১২ আয়াত</span></div>
+                        </a>
+
+                        <a href="067-al-mulk.html" class="surah-item"><span class="surah-number">৬৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুলক</span><span
+                                    class="surah-meta">মাক্কী • ৩০ আয়াত</span></div>
+                        </a>
+
+                        <a href="068-al-qalam.html" class="surah-item"><span class="surah-number">৬৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কলম</span><span
+                                    class="surah-meta">মাক্কী • ৫২ আয়াত</span></div>
+                        </a>
+
+                        <a href="069-al-haqqah.html" class="surah-item"><span class="surah-number">৬৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-হাক্কাহ</span><span
+                                    class="surah-meta">মাক্কী • ৫২ আয়াত</span></div>
+                        </a>
+
+                        <a href="070-al-maarij.html" class="surah-item"><span class="surah-number">৭০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মা'আরিজ</span><span
+                                    class="surah-meta">মাক্কী • ৪৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="071-nuh.html" class="surah-item"><span class="surah-number">৭১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা নূহ</span><span
+                                    class="surah-meta">মাক্কী
+                                    • ২৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="072-al-jinn.html" class="surah-item"><span class="surah-number">৭২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-জ্বিন</span><span
+                                    class="surah-meta">মাক্কী • ২৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="073-al-muzzammil.html" class="surah-item"><span class="surah-number">৭৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুযাম্মিল</span><span
+                                    class="surah-meta">মাক্কী • ২০ আয়াত</span></div>
+                        </a>
+
+                        <a href="074-al-muddaththir.html" class="surah-item"><span class="surah-number">৭৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুদ্দাসসির</span><span
+                                    class="surah-meta">মাক্কী • ৫৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="075-al-qiyamah.html" class="surah-item"><span class="surah-number">৭৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কিয়ামাহ</span><span
+                                    class="surah-meta">মাক্কী • ৪০ আয়াত</span></div>
+                        </a>
+
+                        <a href="076-al-insan.html" class="surah-item"><span class="surah-number">৭৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ইনসান</span><span
+                                    class="surah-meta">মাদানী • ৩১ আয়াত</span></div>
+                        </a>
+
+                        <a href="077-al-mursalat.html" class="surah-item"><span class="surah-number">৭৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুরসালাত</span><span
+                                    class="surah-meta">মাক্কী • ৫০ আয়াত</span></div>
+                        </a>
+
+                        <a href="078-an-naba.html" class="surah-item"><span class="surah-number">৭৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নাবা</span><span
+                                    class="surah-meta">মাক্কী • ৪০ আয়াত</span></div>
+                        </a>
+
+                        <a href="079-an-naziat.html" class="surah-item"><span class="surah-number">৭৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নাযিয়াত</span><span
+                                    class="surah-meta">মাক্কী • ৪৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="080-abasa.html" class="surah-item"><span class="surah-number">৮০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আবাসা</span><span
+                                    class="surah-meta">মাক্কী • ৪২ আয়াত</span></div>
+                        </a>
+
+                        <a href="081-at-takwir.html" class="surah-item"><span class="surah-number">৮১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তাকভীর</span><span
+                                    class="surah-meta">মাক্কী • ২৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="082-al-infitar.html" class="surah-item"><span class="surah-number">৮২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ইনফিতার</span><span
+                                    class="surah-meta">মাক্কী • ১৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="083-al-mutaffifin.html" class="surah-item"><span class="surah-number">৮৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মুতাফফিফীন</span><span
+                                    class="surah-meta">মাক্কী • ৩৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="084-al-inshiqaq.html" class="surah-item"><span class="surah-number">৮৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ইনশিকাক</span><span
+                                    class="surah-meta">মাক্কী • ২৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="085-al-buruj.html" class="surah-item"><span class="surah-number">৮৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-বুরুজ</span><span
+                                    class="surah-meta">মাক্কী • ২২ আয়াত</span></div>
+                        </a>
+
+                        <a href="086-at-tariq.html" class="surah-item"><span class="surah-number">৮৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তারিক</span><span
+                                    class="surah-meta">মাক্কী • ১৭ আয়াত</span></div>
+                        </a>
+
+                        <a href="087-al-ala.html" class="surah-item"><span class="surah-number">৮৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আ'লা</span><span
+                                    class="surah-meta">মাক্কী • ১৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="088-al-ghashiyah.html" class="surah-item"><span class="surah-number">৮৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-গাশিয়াহ</span><span
+                                    class="surah-meta">মাক্কী • ২৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="089-al-fajr.html" class="surah-item"><span class="surah-number">৮৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ফাজর</span><span
+                                    class="surah-meta">মাক্কী • ৩০ আয়াত</span></div>
+                        </a>
+
+                        <a href="090-al-balad.html" class="surah-item"><span class="surah-number">৯০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-বালাদ</span><span
+                                    class="surah-meta">মাক্কী • ২০ আয়াত</span></div>
+                        </a>
+
+                        <a href="091-ash-shams.html" class="surah-item"><span class="surah-number">৯১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আশ-শামস</span><span
+                                    class="surah-meta">মাক্কী • ১৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="092-al-layl.html" class="surah-item"><span class="surah-number">৯২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-লাইল</span><span
+                                    class="surah-meta">মাক্কী • ২১ আয়াত</span></div>
+                        </a>
+
+                        <a href="093-ad-duha.html" class="surah-item"><span class="surah-number">৯৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আদ-দুহা</span><span
+                                    class="surah-meta">মাক্কী • ১১ আয়াত</span></div>
+                        </a>
+
+                        <a href="094-ash-sharh.html" class="surah-item"><span class="surah-number">৯৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আশ-শারহ</span><span
+                                    class="surah-meta">মাক্কী • ৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="095-at-tin.html" class="surah-item"><span class="surah-number">৯৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তীন</span><span
+                                    class="surah-meta">মাক্কী • ৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="096-al-alaq.html" class="surah-item"><span class="surah-number">৯৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আলাক</span><span
+                                    class="surah-meta">মাক্কী • ১৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="097-al-qadr.html" class="surah-item"><span class="surah-number">৯৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কদর</span><span
+                                    class="surah-meta">মাক্কী • ৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="098-al-bayyinah.html" class="surah-item"><span class="surah-number">৯৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-বাইয়্যিনাহ</span><span
+                                    class="surah-meta">মাদানী • ৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="099-az-zalzalah.html" class="surah-item"><span class="surah-number">৯৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আয-যালযালাহ</span><span
+                                    class="surah-meta">মাদানী • ৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="100-al-adiyat.html" class="surah-item"><span class="surah-number">১০০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আদিয়াত</span><span
+                                    class="surah-meta">মাক্কী • ১১ আয়াত</span></div>
+                        </a>
+
+                        <a href="101-al-qariah.html" class="surah-item"><span class="surah-number">১০১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কারিয়া</span><span
+                                    class="surah-meta">মাক্কী • ১১ আয়াত</span></div>
+                        </a>
+
+                        <a href="102-at-takathur.html" class="surah-item"><span class="surah-number">১০২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আত-তাকাসুর</span><span
+                                    class="surah-meta">মাক্কী • ৮ আয়াত</span></div>
+                        </a>
+
+                        <a href="103-al-asr.html" class="surah-item"><span class="surah-number">১০৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-আসর</span><span
+                                    class="surah-meta">মাক্কী • ৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="104-al-humazah.html" class="surah-item"><span class="surah-number">১০৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-হুমাযাহ</span><span
+                                    class="surah-meta">মাক্কী • ৯ আয়াত</span></div>
+                        </a>
+
+                        <a href="105-al-fil.html" class="surah-item"><span class="surah-number">১০৫</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ফীল</span><span
+                                    class="surah-meta">মাক্কী • ৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="106-quraysh.html" class="surah-item"><span class="surah-number">১০৬</span>
+                            <div class="surah-info"><span class="surah-name">সূরা কুরাইশ</span><span
+                                    class="surah-meta">মাক্কী • ৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="107-al-maun.html" class="surah-item"><span class="surah-number">১০৭</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মাউন</span><span
+                                    class="surah-meta">মাক্কী • ৭ আয়াত</span></div>
+                        </a>
+
+                        <a href="108-al-kawthar.html" class="surah-item"><span class="surah-number">১০৮</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কাউসার</span><span
+                                    class="surah-meta">মাক্কী • ৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="109-al-kafirun.html" class="surah-item"><span class="surah-number">১০৯</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-কাফিরুন</span><span
+                                    class="surah-meta">মাক্কী • ৬ আয়াত</span></div>
+                        </a>
+
+                        <a href="110-an-nasr.html" class="surah-item"><span class="surah-number">১১০</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নাসর</span><span
+                                    class="surah-meta">মাদানী • ৩ আয়াত</span></div>
+                        </a>
+
+                        <a href="111-al-masad.html" class="surah-item"><span class="surah-number">১১১</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-মাসাদ</span><span
+                                    class="surah-meta">মাক্কী • ৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="112-al-ikhlas.html" class="surah-item"><span class="surah-number">১১২</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ইখলাস</span><span
+                                    class="surah-meta">মাক্কী • ৪ আয়াত</span></div>
+                        </a>
+
+                        <a href="113-al-falaq.html" class="surah-item"><span class="surah-number">১১৩</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আল-ফালাক</span><span
+                                    class="surah-meta">মাক্কী • ৫ আয়াত</span></div>
+                        </a>
+
+                        <a href="114-an-nas.html" class="surah-item"><span class="surah-number">১১৪</span>
+                            <div class="surah-info"><span class="surah-name">সূরা আন-নাস</span><span
+                                    class="surah-meta">মাক্কী • ৬ আয়াত</span></div>
+                        </a>
+
+                    </div>
+
+            </section>
+
+
+            <!-- 🔵 এই সেকশনটি হলো ওয়েবসাইটের চলমান টেক্সট (Scrolling Text)
+এখানে আপনি নিচে দুইটা আলাদা লাইনে যে বাংলা লেখাগুলো দেখছেন, সেগুলোই ওয়েবসাইটে চলমানভাবে দেখানো হয়।
+বর্তমানে যে লেখা আছে: "আকর্ষণীয় প্রিমিয়াম ভিজুয়ালের মাধ্যমে আপনার ব্র্যান্ডের ভ্যালু বহুগুণ বৃদ্ধি করুন"
+এই দুইটি লাইনের লেখাই আপনি সহজেই নিজের মতো করে পরিবর্তন করতে পারবেন।
+আপনি এখানে যেকোনো লেখা বসালে ঠিক সেটাই ওয়েবসাইটে চলমানভাবে দেখাবে।
+ভালো রেজাল্টের জন্য চেষ্টা করবেন দুইটা লাইনের লেখা একই রাখার (বাংলা বা ইংলিশ যেকোনো ভাষায় হতে পারে)।
+⚠️ শুধু লেখাগুলো পরিবর্তন করবেন, অন্য কোনো কোড পরিবর্তন করবেন না। -->
+
+            <section class="ticker" aria-label="Scrolling announcement">
+                <div class="ticker-track">
+                    <div class="ticker-piece">আকর্ষণীয় প্রিমিয়াম ভিজ্যুয়ালের মাধ্যমে আপনার ব্র্যান্ডের ভ্যালু বহুগুণ
+                        বৃদ্ধি করুন,</div>
+                    <div class="ticker-piece">আকর্ষণীয় প্রিমিয়াম ভিজ্যুয়ালের মাধ্যমে আপনার ব্র্যান্ডের ভ্যালু বহুগুণ
+                        বৃদ্ধি করুন,</div>
+                </div>
+            </section>
+
+            <!-- ========================= উপরের অংশটি ছিল চলমান টেক্সট সেকশন — এখানে শেষ ========================= -->
+
+
+
+
+            <!-- 🔵 এই সেকশনটি হলো: কন্টাক্ট ইনফো (Contact Section)
+
+❓ এই সেকশনটি কি?
+এটি ওয়েবসাইটের সেই অংশ যেখানে আপনার সকল যোগাযোগের মাধ্যম ( WhatsApp, Facebook, YouTube, Instagram, TikTok, Threads, Call, Email) এক জায়গায় সুন্দরভাবে দেখানো হয়।
+
+❓ এটি কোন ধরনের কোড?
+এটি HTML অংশ (Structure), যা আপনার কন্টাক্ট অপশনগুলোকে সাজিয়ে দেখানোর কাজ করে।
+
+❓ এই সেকশন কেন গুরুত্বপূর্ণ?
+কারণ একজন ভিজিটর এখানে এসে খুব সহজেই আপনার সাথে যোগাযোগ করতে পারে — এটি আপনার ওয়েবসাইটের সবচেয়ে গুরুত্বপূর্ণ অংশগুলোর একটি।
+
+❓ এখানে কি কিছু পরিবর্তন করার দরকার আছে?
+না, এই সেকশনটি ইতিমধ্যেই সুন্দরভাবে সেট করা আছে — আপাতত কোনো কিছু পরিবর্তন করার দরকার নেই।
+
+❓ ভবিষ্যতে কি করা যেতে পারে?
+আপনি চাইলে ভবিষ্যতে আরও অ্যাডভান্স করতে পারেন, যেমন:
+✔️ আইকন/লোগো কাস্টমাইজ করা ( WhatsApp, Facebook, YouTube, Instagram, TikTok, Threads, Call, Email)
+✔️ ডিজাইন আরও প্রিমিয়াম করা
+
+❗ গুরুত্বপূর্ণ নির্দেশনা:
+এই সেকশনটি এখন যেমন আছে তেমনই রাখাই সবচেয়ে ভালো।
+অপ্রয়োজনীয় পরিবর্তন করলে ডিজাইন বা ফাংশন নষ্ট হতে পারে।
+ভবিষ্যতে যখন কোডিং ভালোভাবে বুঝবেন, তখন ধীরে ধীরে পরিবর্তন করবেন।
+
+👉 সংক্ষেপে:
+এই সেকশন = আপনার সাথে যোগাযোগ করার প্রধান দরজা (Main Contact Gateway)
+
+========================= -->
+            <section class="contact" id="contactSection">
+                <h2>Contact Info</h2>
+                <div class="contact-links">
+                    <a id="whatsLink" href="https://wa.me/8801832382521" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M20.52 3.48A11.86 11.86 0 0 0 12.04 0C5.4 0 .02 5.38.02 12.02c0 2.12.55 4.19 1.6 6.02L0 24l6.14-1.6a11.94 11.94 0 0 0 5.9 1.5h.01c6.64 0 12.02-5.38 12.02-12.02 0-3.2-1.25-6.2-3.55-8.4z" />
+                        </svg>
+                        WhatsApp
+                    </a>
+                    <a id="fbLink" href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2.5v-3h2.5v-2.3c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5V12h2.8l-.4 3h-2.4v7A10 10 0 0 0 22 12" />
+                        </svg>
+                        Facebook Page
+                    </a>
+                    <a id="fbProfileLink" href="https://facebook.com/salmanfarsi.coom" target="_blank"
+                        rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                        </svg>
+                        Facebook Profile
+                    </a>
+                    <a id="ytLink" href="https://youtube.com/@yourchannel" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M23.5 6.2s-.2-1.7-.9-2.5c-.9-1-1.9-1-2.4-1.1C16.7 2.2 12 2.2 12 2.2h0s-4.7 0-8.2.4c-.5.1-1.5.1-2.4 1.1-.7.8-.9 2.5-.9 2.5S0 8.2 0 10.1v1.8c0 1.9.2 3.9.2 3.9s.2 1.7.9 2.5c.9 1 2.1 1 2.6 1.1 1.9.2 8.3.4 8.3.4s4.7 0 8.2-.4c.5-.1 1.5-.1 2.4-1.1.7-.8.9-2.5.9-2.5s.2-2 .2-3.9v-1.8c0-1.9-.2-3.9-.2-3.9zM9.5 14.6V7.8l6.5 3.4-6.5 3.4z" />
+                        </svg>
+                        YouTube
+                    </a>
+                    <a id="igLink" href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm6.5-.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z" />
+                        </svg>
+                        Instagram
+                    </a>
+                    <a id="ttLink" href="https://tiktok.com/@yourusername" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12 2v14.5a3.5 3.5 0 1 1-3.5-3.5c.3 0 .6 0 .9.1V9.3a7 7 0 1 0 7 7V7.5c1.1.8 2.4 1.3 3.7 1.3V5.4c-1.5 0-2.9-.6-3.9-1.6C15.2 2.7 14.2 2 12.9 2H12z" />
+                        </svg>
+                        TikTok
+                    </a>
+                    <a id="thLink" href="https://threads.net/@yourusername" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12 2C7 2 4 5 4 9c0 3 2 5 5 5h1v-2h-1c-2 0-3-1-3-3 0-3 2-5 6-5s6 2 6 5c0 2-1 3-3 3h-1v2h1c3 0 5-2 5-5 0-4-3-7-8-7z" />
+                        </svg>
+                        Threads
+                    </a>
+                    <a id="callLink" href="tel:+8801000000000" target="_blank">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C11.3 22 2 12.7 2 2c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1l-2.2 2.2z" />
+                        </svg>
+                        Call
+                    </a>
+                    <a id="mailLink" href="mailto:designplusservice99@gmail.com">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        Email
+                    </a>
+
+                </div>
+            </section>
+
+            <div class="footer">​© 2026 Design Plus. Designed by Salman Farsi. All Rights Reserved.</div>
         </div>
-    </nav>
 
-    <!-- ==================== HERO SECTION ==================== -->
-    <section class="hero" id="hero">
-        <div class="hero-pattern"></div>
-        <div class="particles-container" id="particlesContainer"></div>
-        <div class="hero-content">
-            <div class="hero-badge">🌟 বিসমিল্লাহির রাহমানির রাহীম</div>
-            <h1>
-                <span class="arabic-text">ٱقْرَأْ بِٱسْمِ رَبِّكَ</span>
-                পড়ো তোমার প্রভুর নামে
-            </h1>
-            <p>পবিত্র কুরআন, সহীহ হাদিস, দুআ ও ইসলামিক বইসমূহ ডাউনলোড করুন এবং পড়ুন সম্পূর্ণ বিনামূল্যে।</p>
-            <div class="hero-buttons">
-                <a href="#quran" class="btn btn-primary">📖 কুরআন পড়ুন</a>
-                <a href="#hadith" class="btn btn-outline">📜 হাদিস দেখুন</a>
-                <a href="#books" class="btn btn-gold">📥 পিডিএফ ডাউনলোড</a>
+        <!-- ========================= উপরের অংশটি ছিল কন্টাক্ট ইনফো সেকশন — এখানে শেষ ========================= -->
+
+        <!-- =========================
+   প্রিভিউ মডাল
+========================= -->
+        <div class="modal" id="modal" aria-hidden="true">
+
+            <!-- 🔴 CLOSE BUTTON (এখন সঠিক জায়গায়) -->
+            <button class="close-btn" id="closeModal" type="button" aria-label="Close">×</button>
+
+            <div class="modal-backdrop" data-close="1"></div>
+
+            <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+                <div class="modal-media">
+                    <canvas id="wmCanvas"></canvas>
+                </div>
+
+                <div class="modal-content">
+                    <div class="tag" id="modalTag">Preview</div>
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDesc"></p>
+                </div>
+
             </div>
         </div>
-    </section>
 
-    <!-- ==================== TICKER ==================== -->
-    <div class="section" style="padding-top: 0; padding-bottom: 0;">
-        <div class="ticker-wrap">
-            <div class="ticker" id="ticker">
-                <div class="ticker-item"><span class="ticker-dot"></span> কুরআন নাজিলের মাস রমাদান — বেশি বেশি তিলাওয়াত করুন</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> পাঁচ ওয়াক্ত নামাজ পড়ুন যথাসময়ে</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> সহীহ হাদিস অনুসরণ করুন</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> দান-সদকায় বরকত বৃদ্ধি পায়</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> জুমার দিনের বিশেষ ফজিলত রয়েছে</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> কুরআন নাজিলের মাস রমাদান — বেশি বেশি তিলাওয়াত করুন</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> পাঁচ ওয়াক্ত নামাজ পড়ুন যথাসময়ে</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> সহীহ হাদিস অনুসরণ করুন</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> দান-সদকায় বরকত বৃদ্ধি পায়</div>
-                <div class="ticker-item"><span class="ticker-dot"></span> জুমার দিনের বিশেষ ফজিলত রয়েছে</div>
-            </div>
-        </div>
-    </div>
+        <script>
 
-    <!-- ==================== QURAN SECTION ==================== -->
-    <section class="section" id="quran">
-        <div class="section-header">
-            <div class="section-badge">📖 পবিত্র কুরআন</div>
-            <h2>আল-কুরআনুল কারীম</h2>
-            <p>বিভিন্ন অনুবাদ ও তাফসীরসহ পিডিএফ ডাউনলোড করুন</p>
-            <div class="divider"></div>
-        </div>
-        <div class="cards-grid">
-            <!-- Card 1 -->
-            <div class="card" onclick="openPDF('https://download.quranicaudio.com/quran/mishari_rashid_al_afasy_quran_with_english_translation.pdf', 'কুরআন - বাংলা অনুবাদ')">
-                <div class="card-icon">📖</div>
-                <h3>কুরআন (বাংলা অনুবাদ)</h3>
-                <p>পবিত্র কুরআনের বাংলা অনুবাদ সহ পিডিএফ ফাইল। ডাউনলোড করে পড়ুন।</p>
-                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
-            </div>
-            <!-- Card 2 -->
-            <div class="card" onclick="openPDF('https://download.quranicaudio.com/quran/abdul_basit_murattal_quran.pdf', 'কুরআন - আরবি মাত্র')">
-                <div class="card-icon">🕋</div>
-                <h3>কুরআন (আরবি)</h3>
-                <p>বিশুদ্ধ আরবি কুরআন শরীফের পিডিএফ সংস্করণ।</p>
-                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
-            </div>
-            <!-- Card 3 -->
-            <div class="card" onclick="openPDF('https://archive.org/download/quran-english-translation-clear-quran/Quran%20English%20Translation%20-%20Clear%20Quran.pdf', 'কুরআন - ইংরেজি অনুবাদ')">
-                <div class="card-icon">🌍</div>
-                <h3>কুরআন (ইংরেজি অনুবাদ)</h3>
-                <p>The Clear Quran - English translation PDF for worldwide readers.</p>
-                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
-            </div>
-            <!-- Card 4 -->
-            <div class="card" onclick="openPDF('https://archive.org/download/tasfir-ibn-kasir-bangla/tasfir%20ibn%20kasir%20bangla.pdf', 'তাফসীর ইবনে কাসীর')">
-                <div class="card-icon">📝</div>
-                <h3>তাফসীর ইবনে কাসীর</h3>
-                <p>প্রসিদ্ধ তাফসীর গ্রন্থ - বাংলা ভাষায় পিডিএফ।</p>
-                <button class="download-btn">📥 ডাউনলোড / পড়ুন</button>
-            </div>
-        </div>
-        <!-- Embedded PDF Viewer -->
-        <div class="pdf-viewer-section" id="pdfViewerSection" style="display:none;">
-            <h3 id="pdfViewerTitle">📄 পিডিএফ ভিউয়ার</h3>
-            <div class="pdf-frame-wrapper">
-                <iframe id="pdfIframe" src="" title="PDF Viewer"></iframe>
-            </div>
-            <div class="pdf-controls">
-                <button class="btn btn-outline" id="btnDownloadPDF" onclick="downloadCurrentPDF()">📥 ডাউনলোড করুন</button>
-                <button class="btn btn-primary" onclick="closePDFViewer()">✖ বন্ধ করুন</button>
-            </div>
-        </div>
-    </section>
+            /* ================= ALL JAVA SCRIPT ================= */
 
-    <!-- ==================== HADITH SECTION ==================== -->
-    <section class="section" id="hadith" style="background: var(--soft-green-1); border-radius: var(--radius-xl); margin: 20px auto;">
-        <div class="section-header">
-            <div class="section-badge">📜 সহীহ হাদিস</div>
-            <h2>নববী হাদিস সংগ্রহ</h2>
-            <p>সহীহ বুখারী ও মুসলিম থেকে নির্বাচিত হাদিসসমূহ</p>
-            <div class="divider"></div>
-        </div>
-        <div class="hadith-card">
-            <div class="hadith-arabic">إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ</div>
-            <div class="hadith-bn"><strong>অর্থ:</strong> নিশ্চয়ই সকল কাজের প্রতিদান নিয়তের উপর নির্ভরশীল।</div>
-            <span class="hadith-source">📚 সহীহ বুখারী - হাদিস নং ১</span>
-        </div>
-        <div class="hadith-card">
-            <div class="hadith-arabic">الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ</div>
-            <div class="hadith-bn"><strong>অর্থ:</strong> প্রকৃত মুসলিম সেই ব্যক্তি যার জিহ্বা ও হাত থেকে অন্য মুসলিমগণ নিরাপদ থাকে।</div>
-            <span class="hadith-source">📚 সহীহ বুখারী - হাদিস নং ১০</span>
-        </div>
-        <div class="hadith-card">
-            <div class="hadith-arabic">طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ</div>
-            <div class="hadith-bn"><strong>অর্থ:</strong> জ্ঞান অর্জন করা প্রত্যেক মুসলিমের উপর ফরজ।</div>
-            <span class="hadith-source">📚 সুনানে ইবনে মাজাহ - হাদিস নং ২২৪</span>
-        </div>
-        <div style="text-align:center; margin-top:24px;">
-            <button class="btn btn-primary" onclick="openPDF('https://archive.org/download/sahih-bukhari-bangla/Sahih%20Bukhari%20Bangla.pdf', 'সহীহ বুখারী - বাংলা')">📥 সহীহ বুখারী পিডিএফ ডাউনলোড</button>
-            <button class="btn btn-outline" style="margin-left:10px;" onclick="openPDF('https://archive.org/download/riyad-us-saliheen-bangla/Riyad%20us%20Saliheen%20Bangla.pdf', 'রিয়াদুস সালেহীন')">📥 রিয়াদুস সালেহীন পিডিএফ</button>
-        </div>
-    </section>
 
-    <!-- ==================== DUA SECTION ==================== -->
-    <section class="section" id="dua">
-        <div class="section-header">
-            <div class="section-badge">🤲 দুআ ও জিকির</div>
-            <h2>প্রতিদিনের দুআসমূহ</h2>
-            <p>কুরআন ও হাদিস থেকে সংকলিত গুরুত্বপূর্ণ দুআ</p>
-            <div class="divider"></div>
-        </div>
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon">🌅</div>
-                <h3>সকালের দুআ</h3>
-                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ</p>
-                <p>আমরা সকালে উপনীত হয়েছি এবং সমগ্র রাজত্ব আল্লাহর জন্য।</p>
-                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ')">📋 কপি করুন</button>
-            </div>
-            <div class="card">
-                <div class="card-icon">🌙</div>
-                <h3>সন্ধ্যার দুআ</h3>
-                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ</p>
-                <p>আমরা সন্ধ্যায় উপনীত হয়েছি এবং সমগ্র রাজত্ব আল্লাহর জন্য।</p>
-                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ')">📋 কপি করুন</button>
-            </div>
-            <div class="card">
-                <div class="card-icon">🛌</div>
-                <h3>ঘুমানোর দুআ</h3>
-                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا</p>
-                <p>হে আল্লাহ! আপনার নামে আমি মৃত্যুবরণ করি এবং জীবিত হই।</p>
-                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا')">📋 কপি করুন</button>
-            </div>
-            <div class="card">
-                <div class="card-icon">🍽️</div>
-                <h3>খাবারের দুআ</h3>
-                <p style="direction:rtl; font-family:'Traditional Arabic','Amiri',serif; font-size:1.2rem; color:var(--deep-green);">بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ</p>
-                <p>আল্লাহর নামে এবং আল্লাহর বরকতের উপর (খাদ্য গ্রহণ করছি)।</p>
-                <button class="download-btn" onclick="alert('দুআটি কপি করা হয়েছে: بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ')">📋 কপি করুন</button>
-            </div>
-        </div>
-    </section>
+            /* ==========================================================================================================================================================================================================
 
-    <!-- ==================== BOOKS SECTION ==================== -->
-    <section class="section" id="books" style="background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);">
-        <div class="section-header">
-            <div class="section-badge">📚 ইসলামিক বই</div>
-            <h2>ইসলামিক বইয়ের সংগ্রহ</h2>
-            <p>বিনামূল্যে ডাউনলোড করে পড়ুন প্রিমিয়াম ইসলামিক বইসমূহ</p>
-            <div class="divider"></div>
-        </div>
-        <div class="cards-grid">
-            <div class="card" onclick="openPDF('https://archive.org/download/seerat-un-nabi-bangla/Seerat%20un%20Nabi%20Bangla.pdf', 'সীরাতুন নবী')">
-                <div class="card-icon">🕌</div>
-                <h3>সীরাতুন নবী (সা.)</h3>
-                <p>মহানবী হযরত মুহাম্মদ (সা.) এর পূর্ণাঙ্গ জীবনী।</p>
-                <button class="download-btn">📥 ডাউনলোড</button>
-            </div>
-            <div class="card" onclick="openPDF('https://archive.org/download/fazail-e-amal-bangla/Fazail-e-Amal%20Bangla.pdf', 'ফাযায়েলে আমাল')">
-                <div class="card-icon">⭐</div>
-                <h3>ফাযায়েলে আমাল</h3>
-                <p>ইসলামিক আমলসমূহের ফজিলত নিয়ে প্রসিদ্ধ গ্রন্থ।</p>
-                <button class="download-btn">📥 ডাউনলোড</button>
-            </div>
-            <div class="card" onclick="openPDF('https://archive.org/download/namaz-shikkha-bangla/Namaz%20Shikkha%20Bangla.pdf', 'নামাজ শিক্ষা')">
-                <div class="card-icon">🕌</div>
-                <h3>নামাজ শিক্ষা</h3>
-                <p>সহীহ পদ্ধতিতে নামাজ আদায়ের সম্পূর্ণ গাইড।</p>
-                <button class="download-btn">📥 ডাউনলোড</button>
-            </div>
-            <div class="card" onclick="openPDF('https://archive.org/download/islamic-aqeedah-bangla/Islamic%20Aqeedah%20Bangla.pdf', 'ইসলামী আকিদা')">
-                <div class="card-icon">💡</div>
-                <h3>ইসলামী আকিদা</h3>
-                <p>ইসলামের মৌলিক বিশ্বাস ও আকিদা নিয়ে বিস্তারিত।</p>
-                <button class="download-btn">📥 ডাউনলোড</button>
-            </div>
-        </div>
-    </section>
+📌 SETTINGS SECTION — সম্পূর্ণ কন্ট্রোল প্যানেল (VERY IMPORTANT)
 
-    <!-- ==================== PRAYER TIMES SECTION ==================== -->
-    <section class="section" id="prayer">
-        <div class="section-header">
-            <div class="section-badge">🕌 নামাজের সময়সূচী</div>
-            <h2>পাঁচ ওয়াক্ত নামাজ</h2>
-            <p>আপনার অবস্থান অনুযায়ী নামাজের সময় জানুন</p>
-            <div class="divider"></div>
-        </div>
-        <div style="
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 16px;
-        max-width: 900px;
-        margin: 0 auto;
-        ">
-        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
-            <div style="font-size:2rem;">🌅</div>
-            <strong style="display:block; color:var(--deep-green);">ফজর</strong>
-            <span style="color:var(--text-muted);" id="fajrTime">--:--</span>
-        </div>
-        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
-            <div style="font-size:2rem;">☀️</div>
-            <strong style="display:block; color:var(--deep-green);">যোহর</strong>
-            <span style="color:var(--text-muted);" id="dhuhrTime">--:--</span>
-        </div>
-        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
-            <div style="font-size:2rem;">🌤️</div>
-            <strong style="display:block; color:var(--deep-green);">আসর</strong>
-            <span style="color:var(--text-muted);" id="asrTime">--:--</span>
-        </div>
-        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
-            <div style="font-size:2rem;">🌇</div>
-            <strong style="display:block; color:var(--deep-green);">মাগরিব</strong>
-            <span style="color:var(--text-muted);" id="maghribTime">--:--</span>
-        </div>
-        <div style="background:var(--white); padding:22px 16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border-top:4px solid var(--main-green); transition:var(--transition);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='var(--shadow-sm)'">
-            <div style="font-size:2rem;">🌙</div>
-            <strong style="display:block; color:var(--deep-green);">ইশা</strong>
-            <span style="color:var(--text-muted);" id="ishaTime">--:--</span>
-        </div>
-    </div>
-    <p style="text-align:center; margin-top:16px; color:var(--text-muted); font-size:0.85rem;">📍 লোকেশন অ্যাক্সেস দিলে স্বয়ংক্রিয়ভাবে নামাজের সময় দেখা যাবে</p>
-    <div style="text-align:center; margin-top:8px;">
-        <button class="btn btn-primary" onclick="fetchPrayerTimes()">🔍 নামাজের সময় আপডেট করুন</button>
-    </div>
-</section>
+👉 এই সেকশনটি আপনার ওয়েবসাইটের সবচেয়ে গুরুত্বপূর্ণ অংশগুলোর একটি।
+এখান থেকে আপনি পুরো ওয়েবসাইটের প্রধান তথ্য, ছবি, টেক্সট এবং লিংক নিয়ন্ত্রণ করতে পারবেন।
+────────────────────────────────────────
+🔷 এখানে আপনি কী কী পরিবর্তন করতে পারবেন?
 
-<!-- ==================== FOOTER ==================== -->
-<footer class="footer">
-    <div class="footer-content">
-        <h3>🕌 আল-নূর ইসলামিক সেন্টার</h3>
-        <p>পবিত্র কুরআন, সহীহ হাদিস ও ইসলামিক জ্ঞান প্রচারে নিবেদিত একটি অলাভজনক উদ্যোগ।</p>
-        <ul class="footer-links">
-            <li><a href="#hero">হোম</a></li>
-            <li><a href="#quran">কুরআন</a></li>
-            <li><a href="#hadith">হাদিস</a></li>
-            <li><a href="#dua">দুআ</a></li>
-            <li><a href="#books">বই</a></li>
-            <li><a href="#prayer">নামাজ</a></li>
-        </ul>
-        <div class="footer-bottom">
-            <p>© ২০২৬ আল-নূর ইসলামিক সেন্টার | সমস্ত অধিকার সংরক্ষিত</p>
-            <p style="font-size:0.78rem; color:#90b890;">সাদাকাহ জারিয়াহ হিসেবে এই ওয়েবসাইটটি তৈরি করা হয়েছে।</p>
-        </div>
-    </div>
-</footer>
+1️⃣ ব্যানার (Banner Image)
+👉 bannerImage:
+এখানে আপনার ওয়েবসাইটের উপরের বড় কভার ছবির লিংক বসাবেন।
+✔️ এই ছবিটাই ভিজিটর প্রথমে দেখবে
+────────────────────────────────────────
+2️⃣ প্রোফাইল ছবি (Profile Image)
+👉 profileImage:
+এখানে আপনার নিজের ছবি বা ব্র্যান্ড লোগো বসাবেন
+───────────────────────────────────────
+3️⃣ About Section Image
+👉 aboutImageMe:
+👉 aboutImageService:
 
-<!-- ==================== BACK TO TOP ==================== -->
-<button class="back-to-top" id="backToTop" aria-label="উপরে যান" title="উপরে যান">⬆</button>
+✔️ aboutImageMe = নিজের ছবি / পার্সোনাল সেকশন
+✔️ aboutImageService = সার্ভিস সম্পর্কিত ছবি
+────────────────────────────────────────
+4️⃣ নাম ও বায়ো (Text Control)
 
-<!-- ==================== PDF MODAL ==================== -->
-<div class="modal-overlay" id="pdfModal">
-    <div class="modal-box">
-        <button class="modal-close" onclick="closeModal()">✖</button>
-        <h3 id="modalTitle" style="color:var(--deep-green); margin-bottom:16px;">📄 পিডিএফ ভিউয়ার</h3>
-        <iframe id="modalIframe" src="" title="PDF Viewer Modal"></iframe>
-        <div style="text-align:center; margin-top:16px;">
-            <a id="modalDownloadLink" href="#" download class="btn btn-primary" style="display:inline-flex;">📥 ডাউনলোড করুন</a>
-        </div>
-    </div>
-</div>
+👉 profileName:
+👉 profileText:
 
-<!-- ==================== SCRIPTS ==================== -->
-<script>
-    (function() {
-        // ============ PRELOADER ============
-        const preloader = document.getElementById('preloader');
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                preloader.classList.add('hidden');
-            }, 600);
-        });
+✔️ profileName = আপনার ব্র্যান্ড / নাম
+✔️ profileText = ছোট পরিচিতি / স্লোগান
+────────────────────────────────────────
+5️⃣ About Text (বিস্তারিত লেখা)
 
-        // ============ NAVBAR SCROLL EFFECT ============
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 30) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+👉 aboutMeText:
+👉 aboutServiceText:
 
-        // ============ HAMBURGER MENU ============
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-        // Close menu on link click (mobile)
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
+✔️ aboutMeText = নিজের সম্পর্কে বিস্তারিত
+✔️ aboutServiceText = সার্ভিস সম্পর্কে বিস্তারিত
+────────────────────────────────────────
+6️⃣ Contact Links (সবচেয়ে গুরুত্বপূর্ণ)
 
-        // ============ ACTIVE NAV LINK ON SCROLL ============
-        const sections = document.querySelectorAll('section[id]');
-        const navAnchors = document.querySelectorAll('.nav-links a');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 120;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navAnchors.forEach(a => {
-                a.classList.remove('active-link');
-                if (a.getAttribute('href') === '#' + current) {
-                    a.classList.add('active-link');
-                }
-            });
-            // Back to top button
-            const backBtn = document.getElementById('backToTop');
-            if (window.scrollY > 500) {
-                backBtn.classList.add('visible');
-            } else {
-                backBtn.classList.remove('visible');
-            }
-        });
+(whatsapp, facebook, facebookProfile, youtube, instagram, tiktok, threads, phone, email)
 
-        // ============ BACK TO TOP ============
-        document.getElementById('backToTop').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+✔️ এখানে আপনি আপনার সব সোশ্যাল লিংক বসাবেন
+✔️ এই লিংকগুলো সরাসরি Contact Section-এ দেখাবে
+────────────────────────────────────────
+⚠️ গুরুত্বপূর্ণ নির্দেশনা (VERY IMPORTANT)
 
-        // ============ PARTICLES ============
-        const particlesContainer = document.getElementById('particlesContainer');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = (60 + Math.random() * 40) + '%';
-            particle.style.animationDelay = Math.random() * 8 + 's';
-            particle.style.animationDuration = (6 + Math.random() * 10) + 's';
-            particle.style.width = (3 + Math.random() * 8) + 'px';
-            particle.style.height = particle.style.width;
-            particlesContainer.appendChild(particle);
-        }
+❌ কোডের structure পরিবর্তন করবেন না
+❌ quotation (" ") বা comma (,) মুছবেন না
+❌ key নাম (bannerImage, profileImage) পরিবর্তন করবেন না
 
-        // ============ PDF VIEWER FUNCTIONS ============
-        let currentPDFUrl = '';
-        let currentPDFTitle = '';
+✔️ শুধুমাত্র লিংক ও টেক্সট পরিবর্তন করবেন
+✔️ সব লিংক সঠিক ফরম্যাটে দিতে হবে (https://)
+────────────────────────────────────────
+📌 Google Drive Image ব্যবহার করলে:
 
-        window.openPDF = function(url, title) {
-            currentPDFUrl = url;
-            currentPDFTitle = title;
-            // Show inline viewer
-            const viewerSection = document.getElementById('pdfViewerSection');
-            const iframe = document.getElementById('pdfIframe');
-            const viewerTitle = document.getElementById('pdfViewerTitle');
-            viewerSection.style.display = 'block';
-            iframe.src = url;
-            viewerTitle.textContent = '📄 ' + title;
-            // Scroll to viewer
-            viewerSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Also set modal
-            document.getElementById('modalIframe').src = url;
-            document.getElementById('modalTitle').textContent = '📄 ' + title;
-            document.getElementById('modalDownloadLink').href = url;
-            document.getElementById('modalDownloadLink').setAttribute('download', title + '.pdf');
-        };
+✔️ অবশ্যই thumbnail link ব্যবহার করবেন:
+https://drive.google.com/thumbnail?id=YOUR_ID&sz=w1400
 
-        window.closePDFViewer = function() {
-            const viewerSection = document.getElementById('pdfViewerSection');
-            const iframe = document.getElementById('pdfIframe');
-            viewerSection.style.display = 'none';
-            iframe.src = '';
-            currentPDFUrl = '';
-            currentPDFTitle = '';
-        };
+❌ normal drive link দিলে ছবি load নাও হতে পারে
+────────────────────────────────────────
+🎯 সংক্ষেপে:
 
-        window.downloadCurrentPDF = function() {
-            if (currentPDFUrl) {
-                const link = document.createElement('a');
-                link.href = currentPDFUrl;
-                link.download = currentPDFTitle + '.pdf';
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                alert('দয়া করে প্রথমে একটি পিডিএফ সিলেক্ট করুন।');
-            }
-        };
+এই SETTINGS সেকশন = আপনার ওয়েবসাইটের Control Panel
 
-        // ============ MODAL ============
-        window.openModal = function(url, title) {
-            document.getElementById('modalIframe').src = url;
-            document.getElementById('modalTitle').textContent = '📄 ' + title;
-            document.getElementById('modalDownloadLink').href = url;
-            document.getElementById('modalDownloadLink').setAttribute('download', title + '.pdf');
-            document.getElementById('pdfModal').classList.add('active');
-        };
+আপনি এখানে যা পরিবর্তন করবেন →
+ওয়েবসাইটে সেটাই সরাসরি দেখাবে
+===================================================================================================================================================================================================================== */
+            let scrollPosition = 0;
+            const SETTINGS = {
+                bannerImage: "",         // কভার ব্যানার লিংক
+                profileImage: "",        // প্রোফাইল পিকচার লিংক
+                aboutImageMe: "",        // আমার সম্পর্কে ছবির লিংক
+                aboutImageService: "",   // সার্ভিস সম্পর্কে ছবির লিংক
 
-        window.closeModal = function() {
-            document.getElementById('pdfModal').classList.remove('active');
-            document.getElementById('modalIframe').src = '';
-        };
+                profileName: "Daily Zikr",
+                profileText: "পবিত্র কুরআন, হাদিস এবং ইসলামিক জ্ঞান এক জায়গায় সহজভাবে শিখুন",
 
-        document.getElementById('pdfModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
+                aboutMeText: "এই ওয়েবসাইটটি তৈরি করা হয়েছে ইসলামের সঠিক জ্ঞান ছড়িয়ে দেওয়ার জন্য। এখানে কুরআন, হাদিস, দোয়া ও ইসলামিক বিষয়গুলো সহজভাবে উপস্থাপন করা হয়েছে।",
+                aboutServiceText: "এই প্ল্যাটফর্মে আপনি পাবেন সম্পূর্ণ কুরআন শরীফ, সহীহ হাদিস, ইসলামিক দোয়া এবং গুরুত্বপূর্ণ ইসলামিক শিক্ষা। সবকিছু অফলাইনে ব্যবহারযোগ্যভাবে সাজানো।",
 
-        // ============ PRAYER TIMES (Aladhan API) ============
-        window.fetchPrayerTimes = function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        const lat = position.coords.latitude;
-                        const lng = position.coords.longitude;
-                        const today = new Date();
-                        const dateStr = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today
-                            .getFullYear();
-                        const apiUrl =
-                            `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${lat}&longitude=${lng}&method=2`;
+                whatsapp: "https://wa.me/8801832382521",
+                facebook: "https://www.facebook.com/designplus.coom",
+                facebookProfile: "https://www.facebook.com/salmanfarsi.coom",
+                youtube: "https://www.youtube.com/@iamdesignplus",
+                instagram: "https://www.instagram.com/salmanfarsicreator",
+                tiktok: "https://www.tiktok.com/@designplusofficial_",
+                threads: "https://www.threads.com/@salmanfarsicreator",
+                phone: "+8801832382521",
+                email: "designplusservice99@gmail.com"
+            };
+            /* ===================== সেটিং সেকশন এখানে শেষ ======================================================================================================================================================== */
 
-                        fetch(apiUrl)
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.code === 200 && data.data && data.data.timings) {
-                                    const timings = data.data.timings;
-                                    document.getElementById('fajrTime').textContent = timings
-                                        .Fajr || '--:--';
-                                    document.getElementById('dhuhrTime').textContent = timings
-                                        .Dhuhr || '--:--';
-                                    document.getElementById('asrTime').textContent = timings
-                                        .Asr || '--:--';
-                                    document.getElementById('maghribTime').textContent = timings
-                                        .Maghrib || '--:--';
-                                    document.getElementById('ishaTime').textContent = timings
-                                        .Isha || '--:--';
-                                    // Save to localStorage
-                                    localStorage.setItem('prayerTimes', JSON.stringify({
-                                        fajr: timings.Fajr,
-                                        dhuhr: timings.Dhuhr,
-                                        asr: timings.Asr,
-                                        maghrib: timings.Maghrib,
-                                        isha: timings.Isha,
-                                        date: dateStr
-                                    }));
-                                }
-                            })
-                            .catch(() => {
-                                alert('নামাজের সময় আনতে সমস্যা হয়েছে। দয়া করে ইন্টারনেট সংযোগ চেক করুন।');
-                            });
+
+
+            /* =====================================================================================================================================================================================================
+📌 TEMPLATE DATA SECTION — টেমপ্লেট কন্ট্রোল (VERY IMPORTANT)
+
+👉 এই সেকশনটি আপনার ওয়েবসাইটের সমস্ত ডিজাইন টেমপ্লেট নিয়ন্ত্রণ করে।
+এখান থেকে আপনি লোগো, কভার, পোস্টার, কাস্টম ডিজাইন সহ সব ক্যাটাগরির
+আইটেম যোগ, পরিবর্তন বা ডিলিট করতে পারবেন।
+────────────────────────────────────────
+🔷 এখানে কীভাবে কাজ করবেন?
+
+প্রতিটি ক্যাটাগরি আলাদা আলাদা নামে সাজানো আছে:
+
+✔️ logo       → লোগো ডিজাইন
+✔️ cover      → কভার ফটো (Facebook Cover)
+✔️ poster     → সোশ্যাল মিডিয়া পোস্ট
+✔️ custom     → কাস্টম ডিজাইন
+✔️ thumbnail  → থাম্বনেইল
+✔️ leaflet    → লিফলেট
+✔️ print      → প্রিন্ট ডিজাইন
+✔️ ads        → বিজ্ঞাপন ডিজাইন
+✔️ branding   → ব্র্যান্ডিং
+
+👉 প্রতিটি ক্যাটাগরির ভিতরে অনেকগুলো item থাকে
+────────────────────────────────────────
+🔷 প্রতিটি item এর ভিতরে কী কী থাকে?
+
+{
+  title: "Logo 1",
+  desc: "Modern clean logo",
+  accent: "L",
+  c1: "#0083FF",
+  c2: "#68B8FF",
+  image: ""
+}
+
+এখন একে একে বুঝো👇
+────────────────────────────────────────
+1️⃣ title (টাইটেল)
+
+👉 এখানে আপনি টেমপ্লেটের নাম লিখবেন
+✔️ যেমন: "My Logo Design", "Business Poster"
+
+👉 এই নামটাই কার্ডে দেখা যাবে
+────────────────────────────────────────
+2️⃣ desc (ডেসক্রিপশন)
+
+👉 এখানে ছোট বর্ণনা লিখবেন
+✔️ যেমন: "Professional logo design"
+
+👉 এটা টাইটেলের নিচে দেখা যাবে
+────────────────────────────────────────
+3️⃣ accent (অক্ষর / লোগো সিম্বল)
+
+👉 এটা একটি single letter (A / B / L ইত্যাদি)
+✔️ placeholder ডিজাইনে দেখানোর জন্য
+
+👉 আপনি চাইলে এটা পরিবর্তন করতে পারেন
+✔️ অথবা না করলেও সমস্যা নেই
+────────────────────────────────────────
+4️⃣ c1 & c2 (কালার)
+
+👉 এটা দুইটা color code
+✔️ gradient background বানানোর জন্য ব্যবহার হয়
+
+✔️ উদাহরণ:
+c1 = "#0083FF"
+c2 = "#68B8FF"
+
+👉 আপনি চাইলে নিজের মতো color দিতে পারেন
+────────────────────────────────────────
+5️⃣ image (সবচেয়ে গুরুত্বপূর্ণ)
+
+👉 এখানে আসল ছবির লিংক বসাবেন
+
+✔️ যদি image = "" (খালি থাকে)
+👉 তাহলে placeholder design দেখাবে
+
+✔️ যদি আপনি link দেন:
+👉 তাহলে আপনার আসল ডিজাইন দেখাবে
+────────────────────────────────────────
+📌 Google Drive Image ব্যবহার করলে:
+
+✔️ এই ফরম্যাটে দিতে হবে:
+https://drive.google.com/thumbnail?id=YOUR_ID&sz=w1400
+
+❌ ভুল লিংক দিলে ছবি আসবে না
+
+────────────────────────────────────────
+🔷 নতুন item যোগ করতে চাইলে:
+
+👉 একই structure copy করে নিচে paste করুন
+{
+  title: "New Design",
+  desc: "Your description",
+  accent: "N",
+  c1: "#0083FF",
+  c2: "#68B8FF",
+  image: "IMAGE_LINK"
+},
+⚠️ শেষ item ছাড়া সবগুলোর শেষে কমা (,) দিতে হবে
+
+────────────────────────────────────────
+⚠️ গুরুত্বপূর্ণ নির্দেশনা
+
+❌ key নাম পরিবর্তন করবেন না (title, desc, image)
+❌ structure ভাঙবেন না
+❌ bracket { } বা comma ভুল করবেন না
+
+✔️ শুধু ভেতরের লেখা পরিবর্তন করবেন
+────────────────────────────────────────
+🎯 সংক্ষেপে:
+
+এই DATA section = আপনার সব ডিজাইনের গ্যালারি
+
+আপনি এখানে যা বসাবেন →
+ওয়েবসাইটে সেই ডিজাইনগুলোই দেখাবে
+============================================================================================================================================================================================================================================================================== */
+            const DATA = {
+                quran: [
+                    {
+                        title: "সূরা ফাতিহা",
+                        desc: "পূর্ণ সূরা পড়ুন",
+                        file: "quran/fatiha.pdf"
                     },
-                    function() {
-                        // Fallback: use Dhaka coordinates
-                        fetchPrayerTimesByCoords(23.8103, 90.4125);
+                    {
+                        title: "সূরা ইখলাস",
+                        desc: "তাওহীদের সূরা",
+                        file: "quran/ikhlas.pdf"
                     }
-                );
-            } else {
-                // Fallback: Dhaka
-                fetchPrayerTimesByCoords(23.8103, 90.4125);
+                ],
+
+                hadith: [
+                    {
+                        title: "সহীহ বুখারী",
+                        desc: "হাদিস সংগ্রহ",
+                        file: "books/bukhari.pdf"
+                    }
+                ],
+
+                books: [
+                    {
+                        title: "নামাজ শিক্ষা",
+                        desc: "সম্পূর্ণ গাইড",
+                        file: "books/namaz.pdf"
+                    }
+                ]
+            };
+            /* ===================== TEMPLATE DATA SECTION END =================================================================================================================================================================================================================== */
+
+            const state = {
+                active: "logo",
+                index: 0
+            };
+
+            const el = {
+                bannerImage: document.getElementById("bannerImage"),
+                profileImage: document.getElementById("profileImage"),
+                profileName: document.getElementById("profileName"),
+                profileText: document.getElementById("profileText"),
+                aboutImageMe: document.getElementById("aboutImageMe"),
+                aboutImageService: document.getElementById("aboutImageService"),
+                aboutMeText: document.getElementById("aboutMeText"),
+                aboutServiceText: document.getElementById("aboutServiceText"),
+
+                tabs: document.getElementById("tabs"),
+                panelTitle: document.getElementById("panelTitle"),
+                panelDesc: document.getElementById("panelDesc"),
+                templateGrid: document.getElementById("templateGrid"),
+
+                whatsLink: document.getElementById("whatsLink"),
+                fbLink: document.getElementById("fbLink"),
+                ytLink: document.getElementById("ytLink"),
+                igLink: document.getElementById("igLink"),
+                ttLink: document.getElementById("ttLink"),
+                thLink: document.getElementById("thLink"),
+                callLink: document.getElementById("callLink"),
+                mailLink: document.getElementById("mailLink"),
+
+                modal: document.getElementById("modal"),
+                modalTitle: document.getElementById("modalTitle"),
+                modalDesc: document.getElementById("modalDesc"),
+                modalTag: document.getElementById("modalTag"),
+                closeModal: document.getElementById("closeModal")
+            };
+
+            function safeText(v, fallback = "") {
+                return typeof v === "string" ? v.trim() : fallback;
             }
-        };
 
-        function fetchPrayerTimesByCoords(lat, lng) {
-            const today = new Date();
-            const dateStr = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-            const apiUrl =
-                `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${lat}&longitude=${lng}&method=2`;
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.code === 200 && data.data && data.data.timings) {
-                        const timings = data.data.timings;
-                        document.getElementById('fajrTime').textContent = timings.Fajr || '--:--';
-                        document.getElementById('dhuhrTime').textContent = timings.Dhuhr || '--:--';
-                        document.getElementById('asrTime').textContent = timings.Asr || '--:--';
-                        document.getElementById('maghribTime').textContent = timings.Maghrib || '--:--';
-                        document.getElementById('ishaTime').textContent = timings.Isha || '--:--';
-                        localStorage.setItem('prayerTimes', JSON.stringify({
-                            fajr: timings.Fajr,
-                            dhuhr: timings.Dhuhr,
-                            asr: timings.Asr,
-                            maghrib: timings.Maghrib,
-                            isha: timings.Isha,
-                            date: dateStr
-                        }));
-                    }
-                })
-                .catch(() => {
-                    document.getElementById('fajrTime').textContent = '৪:৪৫';
-                    document.getElementById('dhuhrTime').textContent = '১২:১৫';
-                    document.getElementById('asrTime').textContent = '৩:৫০';
-                    document.getElementById('maghribTime').textContent = '৬:২০';
-                    document.getElementById('ishaTime').textContent = '৭:৪৫';
-                });
-        }
+            function driveToThumb(input) {
+                const text = safeText(input);
+                if (!text) return "";
+                if (/^data:image\//i.test(text) || /^blob:/i.test(text)) return text;
 
-        // Load cached prayer times
-        const cachedPrayer = localStorage.getItem('prayerTimes');
-        if (cachedPrayer) {
-            try {
-                const pt = JSON.parse(cachedPrayer);
-                const today = new Date();
-                const dateStr = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-                if (pt.date === dateStr) {
-                    document.getElementById('fajrTime').textContent = pt.fajr || '--:--';
-                    document.getElementById('dhuhrTime').textContent = pt.dhuhr || '--:--';
-                    document.getElementById('asrTime').textContent = pt.asr || '--:--';
-                    document.getElementById('maghribTime').textContent = pt.maghrib || '--:--';
-                    document.getElementById('ishaTime').textContent = pt.isha || '--:--';
-                } else {
-                    fetchPrayerTimesByCoords(23.8103, 90.4125);
+                try {
+                    const url = new URL(text);
+                    if (!url.hostname.includes("drive.google.com")) return text;
+
+                    const id =
+                        text.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1] ||
+                        text.match(/[?&]id=([a-zA-Z0-9_-]+)/)?.[1] ||
+                        text.match(/\/uc\?export=view&id=([a-zA-Z0-9_-]+)/)?.[1];
+
+                    if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w1400`;
+                    return text;
+                } catch {
+                    return text;
                 }
-            } catch (e) {
-                fetchPrayerTimesByCoords(23.8103, 90.4125);
             }
-        } else {
-            // Auto-fetch on first load
-            setTimeout(() => fetchPrayerTimesByCoords(23.8103, 90.4125), 1500);
-        }
 
-        // ============ KEYBOARD ESC TO CLOSE ============
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-                closePDFViewer();
+            function placeholderSvg({ title, desc, accent, c1, c2, section }) {
+                const safeTitle = String(title).replace(/[<>&]/g, "");
+                const safeDesc = String(desc).replace(/[<>&]/g, "");
+                const safeAccent = String(accent).replace(/[<>&]/g, "");
+                const safeSection = String(section).replace(/[<>&]/g, "");
+
+                const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="${c1}" />
+              <stop offset="100%" stop-color="${c2}" />
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="1200" rx="80" fill="url(#g)"/>
+          <circle cx="980" cy="180" r="220" fill="rgba(255,255,255,.14)"/>
+          <circle cx="180" cy="1020" r="260" fill="rgba(255,255,255,.10)"/>
+          <rect x="70" y="70" width="200" height="54" rx="27" fill="rgba(255,255,255,.18)"/>
+          <text x="170" y="106" text-anchor="middle" fill="#fff" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">${safeSection}</text>
+          <rect x="110" y="170" width="980" height="740" rx="54" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.26)"/>
+          <circle cx="600" cy="425" r="170" fill="rgba(255,255,255,.22)"/>
+          <text x="600" y="475" text-anchor="middle" fill="#fff" font-size="120" font-family="Arial, Helvetica, sans-serif" font-weight="600">${safeAccent}</text>
+          <text x="600" y="710" text-anchor="middle" fill="#fff" font-size="62" font-family="Arial, Helvetica, sans-serif" font-weight="600">${safeTitle}</text>
+          <text x="600" y="785" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="30" font-family="Arial, Helvetica, sans-serif">${safeDesc}</text>
+        </svg>
+      `;
+                return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
             }
-        });
 
-        console.log('✅ আল-নূর ইসলামিক সেন্টার সম্পূর্ণরূপে লোড হয়েছে।');
-        console.log('🌿 সবুজ ও সাদা প্রিমিয়াম ডিজাইন সক্রিয়।');
-        console.log('📖 কুরআন | 📜 হাদিস | 🤲 দুআ | 📚 বই | 🕌 নামাজ - সব ফিচার প্রস্তুত।');
-    })();
-</script>
+            function imageSource(item, sectionLabel) {
+                const real = driveToThumb(item.image);
+                if (real) return real;
+                return placeholderSvg({ ...item, section: sectionLabel });
+            }
+
+            function labelFor(key) {
+                return {
+                    quran: "কুরআন শরীফ",
+                    hadith: "হাদিস",
+                    dua: "দোয়া"
+
+                }[key] || key;
+            }
+
+            function sectionKeys() {
+                return ["quran", "hadith", "books"];
+            }
+
+            function renderTabs() {
+                el.tabs.textContent = "";
+                sectionKeys().forEach((key) => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "tab" + (key === state.active ? " active" : "");
+                    btn.dataset.key = key;
+                    btn.textContent = labelFor(key);
+                    btn.addEventListener("click", () => setActive(key));
+                    el.tabs.appendChild(btn);
+                });
+            }
+
+            let visibleCount = 0;
+            const LOAD_STEP = 100;
+
+            function renderGrid(reset = true) {
+                const items = DATA[state.active] || [];
+                const sectionLabel = labelFor(state.active);
+
+                if (reset) {
+                    el.templateGrid.textContent = "";
+                    visibleCount = 0;
+                }
+
+                const frag = document.createDocumentFragment();
+
+                const slice = items.slice(visibleCount, visibleCount + LOAD_STEP);
+
+                slice.forEach((item, index) => {
+
+                    const card = document.createElement("article");
+                    card.className = "card";
+
+                    const thumb = document.createElement("div");
+                    thumb.className = "thumb";
+
+                    const img = document.createElement("img");
+                    img.alt = item.title;
+                    img.loading = "lazy";
+                    img.src = "https://i.ibb.co/6y0GZJt/book-placeholder.png";
+
+                    thumb.appendChild(img);
+
+                    const body = document.createElement("div");
+                    body.className = "card-body";
+
+                    const h4 = document.createElement("h4");
+                    h4.textContent = item.title;
+
+                    body.append(h4);
+                    card.append(thumb, body);
+
+                    card.addEventListener("click", () => {
+                        openBook(item.file);
+                    });
+
+                    frag.appendChild(card);
+                });
+
+                el.templateGrid.appendChild(frag);
+                visibleCount += LOAD_STEP;
+            }
+
+            function setActive(key, shouldScroll = true) {
+                state.active = key;
+                el.panelTitle.textContent = labelFor(key);
+                el.panelDesc.textContent = "একটি ক্যাটাগরি সিলেক্ট করলে শুধু ওই ক্যাটাগরির টেমপ্লেটগুলো দেখা যাবে।";
+                renderTabs();
+                renderGrid();
+                toggleSections(key);
+
+                if (shouldScroll) {
+                    document.getElementById("templatesPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            }
+
+            function renderWatermarkedImage(src) {
+                const canvas = document.getElementById("wmCanvas");
+                const ctx = canvas.getContext("2d");
+
+                const img = new Image();
+
+                img.onload = () => {
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+
+                    // main image draw
+                    ctx.drawImage(img, 0, 0);
+
+                    // watermark setup
+                    ctx.save();
+                    ctx.globalAlpha = 0.12;
+                    ctx.globalCompositeOperation = "overlay";
+                    ctx.font = "900 30px Arial";
+                    ctx.fillStyle = "#000";
+
+                    // rotate
+                    ctx.translate(canvas.width / 2, canvas.height / 2);
+                    ctx.rotate(-45 * Math.PI / 180);
+
+                    // repeat pattern
+                    for (let x = -canvas.width; x < canvas.width; x += 140) {
+                        for (let y = -canvas.height; y < canvas.height; y += 140) {
+                            ctx.fillText("DESIGN PLUS", x, y);
+                        }
+                    }
+
+                    ctx.restore();
+                };
+
+                img.src = src;
+            }
+
+            function openModal(categoryKey, index) {
+                scrollPosition = window.scrollY;
+                state.active = categoryKey;
+                state.index = index;
+
+                const item = (DATA[categoryKey] || [])[index];
+                if (!item) return;
+
+                const sectionLabel = labelFor(categoryKey);
+
+                renderWatermarkedImage(imageSource(item, sectionLabel));
+                el.modalTitle.textContent = item.title;
+                el.modalDesc.textContent = item.desc;
+                el.modalTag.textContent = sectionLabel;
+
+                el.modal.classList.remove("closing");
+                el.modal.classList.add("active");
+                document.querySelector(".top-nav").classList.add("hide");
+                el.modal.setAttribute("aria-hidden", "false");
+                document.body.classList.add("lock");
+                history.replaceState({ modal: true }, "");
+            }
+
+            function closeModal(fromPop = false) {
+                if (!el.modal.classList.contains("active")) return;
+
+                el.modal.classList.add("closing");
+
+                setTimeout(() => {
+                    el.modal.classList.remove("active", "closing");
+                    el.modal.setAttribute("aria-hidden", "true");
+                    document.body.classList.remove("lock");
+
+                    // ✅ navbar instantly show (smooth)
+                    document.querySelector(".top-nav").classList.remove("hide");
+
+                    window.scrollTo(0, scrollPosition);
+
+                }, 220);
+
+                // 👇 এইটা নতুন
+                if (!fromPop) {
+                    history.back();
+                }
+            }
+
+            function applySettings() {
+                el.bannerImage.src = driveToThumb(SETTINGS.bannerImage) || placeholderSvg({
+                    title: "Banner",
+                    desc: "Cover banner",
+                    accent: "B",
+                    c1: "#0083FF",
+                    c2: "#006fe0",
+                    section: "Banner"
+                });
+
+                el.profileImage.src = driveToThumb(SETTINGS.profileImage) || placeholderSvg({
+                    title: "Profile",
+                    desc: "Profile picture",
+                    accent: "SF",
+                    c1: "#0083FF",
+                    c2: "#006fe0",
+                    section: "Profile"
+                });
+
+                el.aboutImageMe.src = driveToThumb(SETTINGS.aboutImageMe) || placeholderSvg({
+                    title: "About Me",
+                    desc: "Personal section",
+                    accent: "A",
+                    c1: "#0083FF",
+                    c2: "#66B8FF",
+                    section: "About"
+                });
+
+                el.aboutImageService.src = driveToThumb(SETTINGS.aboutImageService) || placeholderSvg({
+                    title: "Service",
+                    desc: "Service section",
+                    accent: "S",
+                    c1: "#0C72E6",
+                    c2: "#D5EBFF",
+                    section: "Service"
+                });
+
+                el.profileName.textContent = SETTINGS.profileName || "Salman Farsi";
+                el.profileText.textContent = SETTINGS.profileText || "";
+                el.aboutMeText.textContent = SETTINGS.aboutMeText || "";
+                el.aboutServiceText.textContent = SETTINGS.aboutServiceText || "";
+
+                el.whatsLink.href = SETTINGS.whatsapp || "#";
+                el.fbLink.href = SETTINGS.facebook || "#";
+                el.fbProfileLink = document.getElementById("fbProfileLink");
+                el.fbProfileLink.href = SETTINGS.facebookProfile || "#";
+                el.ytLink.href = SETTINGS.youtube || "#";
+                el.igLink.href = SETTINGS.instagram || "#";
+                el.ttLink.href = SETTINGS.tiktok || "#";
+                el.thLink.href = SETTINGS.threads || "#";
+                el.callLink.href = `tel:${SETTINGS.phone || "+8801000000000"}`;
+                el.mailLink.href = `mailto:${SETTINGS.email || "your@email.com"}`;
+            }
+
+            async function initFirebase() {
+                const isConfigured = Object.values(FIREBASE_CONFIG).every(Boolean);
+                if (!isConfigured) return false;
+
+                try {
+                    firebaseApi = await import("https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js");
+                    firestoreApi = await import("https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js");
+
+                    const app = firebaseApi.initializeApp(FIREBASE_CONFIG);
+                    db = firestoreApi.getFirestore(app);
+                    firebaseOn = true;
+
+                    const ref = firestoreApi.doc(db, FIREBASE_DOC.collection, FIREBASE_DOC.docId);
+                    const snap = await firestoreApi.getDoc(ref);
+
+                    if (snap.exists()) {
+                        const data = snap.data();
+                        if (data && typeof data === "object") {
+                            if (data.settings && typeof data.settings === "object") {
+                                Object.assign(SETTINGS, data.settings);
+                            }
+                            if (data.data && typeof data.data === "object") {
+                                Object.keys(DATA).forEach((k) => {
+                                    if (Array.isArray(data.data[k])) DATA[k] = data.data[k];
+                                });
+                            }
+                        }
+                        applySettings();
+                        renderTabs();
+                        renderGrid();
+                    }
+
+                    firestoreApi.onSnapshot(ref, (docSnap) => {
+                        if (!docSnap.exists()) return;
+                        const data = docSnap.data();
+                        if (data && typeof data === "object") {
+                            if (data.settings && typeof data.settings === "object") {
+                                Object.assign(SETTINGS, data.settings);
+                            }
+                            if (data.data && typeof data.data === "object") {
+                                Object.keys(DATA).forEach((k) => {
+                                    if (Array.isArray(data.data[k])) DATA[k] = data.data[k];
+                                });
+                            }
+                            applySettings();
+                            renderTabs();
+                            renderGrid();
+                        }
+                    });
+
+                    return true;
+                } catch {
+                    firebaseOn = false;
+                    db = null;
+                    firebaseApi = null;
+                    firestoreApi = null;
+                    return false;
+                }
+            }
+
+            function toggleSections(key) {
+
+                const video = document.getElementById("videoSection");
+                const about = document.getElementById("aboutSection");
+
+                // 👉 Quran selected হলে শুধু Quran show
+                if (key === "quran") {
+                    video.style.display = "none";
+                    about.style.display = "none";
+                }
+
+                // 👉 Hadith selected হলে About show
+                else if (key === "hadith") {
+                    video.style.display = "none";
+                    about.style.display = "block";
+                }
+
+                // 👉 Dua selected হলে Video show
+                else if (key === "dua") {
+                    video.style.display = "block";
+                    about.style.display = "none";
+                }
+            }
+
+            function bindEvents() {
+                el.closeModal.addEventListener("click", closeModal);
+
+                el.modal.addEventListener("click", (e) => {
+                    if (e.target && e.target.dataset && e.target.dataset.close) closeModal();
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape" && el.modal.classList.contains("active")) {
+                        closeModal();
+                    }
+                });
+
+                window.addEventListener("popstate", (e) => {
+                    if (e.state && e.state.modal) {
+                        closeModal(true);
+                    }
+                });
+
+                document.addEventListener("contextmenu", (e) => e.preventDefault());
+                document.addEventListener("copy", (e) => e.preventDefault());
+                document.addEventListener("selectstart", (e) => {
+                    if (e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+                        return; // block না করে allow করে দিচ্ছি
+                    }
+                });
+
+
+                window.addEventListener("touchmove", (e) => {
+                    if (document.body.classList.contains("lock")) e.preventDefault();
+                }, { passive: false });
+
+                // ===== TOP NAV SCROLL =====
+                const navItems = document.querySelectorAll(".nav-item");
+
+                navItems.forEach(btn => {
+                    btn.addEventListener("click", () => {
+
+                        const id = btn.dataset.target;
+                        const section = document.getElementById(id);
+
+                        if (section) {
+                            const nav = document.querySelector(".top-nav");
+                            const navHeight = nav.offsetHeight;
+
+                            const y = section.getBoundingClientRect().top + window.pageYOffset - navHeight - 10;
+
+                            window.scrollTo({
+                                top: y,
+                                behavior: "smooth"
+                            });
+                        }
+
+                        navItems.forEach(b => b.classList.remove("active"));
+                        btn.classList.add("active");
+                    });
+                });
+
+                // ===== LOAD MORE (keep this) =====
+                window.addEventListener("scroll", () => {
+                    const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+                    if (bottom) {
+                        renderGrid(false);
+                    }
+                });
+
+
+                // ===== SMART NAV ACTIVE SYSTEM (FINAL) =====
+                function updateActiveNav() {
+
+                    if (document.body.classList.contains("lock")) return;
+
+                    const navItems = document.querySelectorAll(".nav-item");
+
+                    const sections = Array.from(navItems).map(btn => ({
+                        id: btn.dataset.target,
+                        el: document.getElementById(btn.dataset.target)
+                    })).filter(s => s.el);
+
+                    const scrollY = window.pageYOffset;
+                    const nav = document.querySelector(".top-nav");
+                    const navHeight = nav ? nav.offsetHeight : 0;
+
+                    let currentIndex = 0;
+
+                    sections.forEach((sec, i) => {
+                        const top = sec.el.offsetTop - navHeight - 20;
+
+                        if (scrollY >= top) {
+                            currentIndex = i;
+                        }
+                    });
+
+                    // 🔥 CRITICAL FIX (contact always works)
+                    if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 5) {
+                        currentIndex = sections.length - 1;
+                    }
+
+                    navItems.forEach(btn => btn.classList.remove("active"));
+                    if (navItems[currentIndex]) {
+                        navItems[currentIndex].classList.add("active");
+                    }
+                }
+
+                // scroll event
+                window.addEventListener("scroll", updateActiveNav);
+
+                // init call
+                updateActiveNav();
+            }
+
+
+            async function init() {
+
+                history.replaceState({}, "");
+
+                applySettings();
+                renderTabs();
+                setActive("quran", false);
+                bindEvents();
+                renderVideos();
+            }
+
+            /* ===================================================================================================================== VIDEO SECTION =================================================================================================================================
+
+👉 এখানে YouTube ভিডিও যোগ/পরিবর্তন করা হয়
+
+🔹 title = ভিডিওর নাম (যেটা নিচে দেখাবে)
+🔹 youtubeId = ভিডিওর ID (পুরা লিংক না ❌)
+
+📌 YouTube link example:
+https://www.youtube.com/watch?v=ABC123XYZ
+
+👉 এখানে বসাতে হবে শুধু:
+youtubeId: "ABC123XYZ"
+
+⚠️ ভুল:
+❌ youtubeId: পুরো link
+
+✔️ সঠিক:
+✔️ youtubeId: শুধু ID
+
+👉 নতুন ভিডিও যোগ করতে একই format copy করে নিচে বসান
+
+================================================================================================================================================================================================================================================================================== */
+            const VIDEOS = [
+                {
+                    title: "Video-1",
+                    youtubeId: ""
+                },
+                {
+                    title: "Video-2",
+                    youtubeId: ""
+                }
+            ];
+            /* =================================================================================================================== VIDEO SECTION END ============================================================================================================================= */
+
+            function getThumbnail(id) {
+                return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+            }
+
+            function renderVideos() {
+                const container = document.getElementById("videoContainer");
+                if (!container) return;
+
+                container.innerHTML = "";
+
+                VIDEOS.forEach(video => {
+
+                    const div = document.createElement("div");
+                    div.className = "video-card";
+
+                    div.innerHTML = `
+            <div class="video-thumb" data-id="${video.youtubeId}">
+                <img src="${getThumbnail(video.youtubeId)}">
+                <div class="play-btn">▶</div>
+            </div>
+            <h4>${video.title}</h4>
+        `;
+
+                    container.appendChild(div);
+                });
+            }
+
+            /* CLICK PLAY */
+            document.addEventListener("click", (e) => {
+                const thumb = e.target.closest(".video-thumb");
+                if (!thumb) return;
+
+                const id = thumb.dataset.id;
+
+                thumb.innerHTML = `
+        <iframe
+width="100%"
+height="100%"
+src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1"
+frameborder="0"
+allow="autoplay; encrypted-media"
+allowfullscreen
+referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
+    `;
+            });
+
+            /* =========================
+   INTRO LOGIC
+========================= */
+
+            const intro = document.getElementById("introScreen");
+            const btn = document.getElementById("enterBtn");
+
+            /* 🔒 প্রথমেই lock */
+            document.body.classList.add("lock");
+
+            /* 🔒 mouse wheel block */
+            window.addEventListener("wheel", function (e) {
+                if (document.body.classList.contains("lock")) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            /* 🔒 touch scroll block */
+            window.addEventListener("touchmove", function (e) {
+                if (document.body.classList.contains("lock")) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            /* 🔒 keyboard scroll block */
+            window.addEventListener("keydown", function (e) {
+                if (document.body.classList.contains("lock")) {
+                    if (["ArrowUp", "ArrowDown", "Space", "PageUp", "PageDown"].includes(e.code)) {
+                        e.preventDefault();
+                    }
+                }
+            });
+
+            /* 🔒 zoom block */
+            document.addEventListener("gesturestart", function (e) {
+                e.preventDefault();
+            });
+
+            /* 👉 চাইলে একবার দেখানোর জন্য */
+            if (localStorage.getItem("visited")) {
+                intro.style.display = "none";
+                document.body.classList.remove("lock");
+            }
+
+            btn.addEventListener("click", function () {
+
+                intro.classList.add("hide");
+
+                setTimeout(function () {
+                    intro.style.display = "none";
+
+                    /* 🔓 unlock */
+                    document.body.classList.remove("lock");
+
+                }, 800);
+
+            });
+
+
+            init();
+
+            function normalize(text) {
+                return text.toLowerCase()
+                    .replace(/সূরা|surah|sura|al|আল/g, "")
+                    .replace(/[^a-z0-9\u0980-\u09FF\s]/g, "")
+                    .trim();
+            }
+
+            // 👉 auto keyword generator (magic part 🔥)
+            function expandKeywords(base) {
+
+                let words = base.split(" ");
+                let expanded = new Set();
+
+                words.forEach(w => {
+                    if (!w) return;
+
+                    expanded.add(w);
+
+                    // prefix
+                    expanded.add("surah " + w);
+                    expanded.add("সূরা " + w);
+
+                    // remove vowels (typo support)
+                    expanded.add(w.replace(/[aeiou]/g, ""));
+
+                    // partial
+                    expanded.add(w.slice(0, 3));
+                    expanded.add(w.slice(0, 4));
+
+                    // double char tolerance
+                    expanded.add(w.replace(/(.)\1+/g, "$1"));
+
+                    // Bengali shortcut
+                    expanded.add(w.replace(/া|ি|ী|ু|ূ|ে|ৈ|ো|ৌ/g, ""));
+
+                });
+
+                return Array.from(expanded).join(" ");
+            }
+
+            // 👉 fuzzy match
+            function match(text, keyword) {
+                if (text.includes(keyword)) return true;
+
+                let miss = 0;
+                let i = 0, j = 0;
+
+                while (i < text.length && j < keyword.length) {
+                    if (text[i] === keyword[j]) {
+                        i++; j++;
+                    } else {
+                        miss++;
+                        i++;
+                        if (miss > 2) return false;
+                    }
+                }
+                return true;
+            }
+
+            // 👉 MAIN SEARCH
+            function searchSurah() {
+
+                const input = document.getElementById("searchInput").value;
+                const keyword = normalize(input);
+
+                const items = document.querySelectorAll(".surah-item");
+
+                items.forEach(item => {
+
+                    const name = item.querySelector(".surah-name").innerText;
+                    const base = item.dataset.key || "";
+
+                    // 🔥 auto expanded keywords
+                    const fullText = normalize(
+                        name + " " + expandKeywords(base)
+                    );
+
+                    if (keyword === "") {
+                        item.style.display = "flex";
+                        return;
+                    }
+
+                    if (match(fullText, keyword)) {
+                        item.style.display = "flex";
+                    } else {
+                        item.style.display = "none";
+                    }
+
+                });
+            }
+        </script>
 </body>
+
 </html>
