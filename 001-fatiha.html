@@ -23,6 +23,17 @@ RESET
             justify-content: center;
         }
 
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
         /* =========================
 A4 PAGE (PERFECT FIXED LAYOUT)
 ========================= */
@@ -54,7 +65,7 @@ TOP BAR (FIXED + STABLE)
             width: 794px;
             /* A4 অনুযায়ী */
             height: 60px;
-            background: #1f6f64;
+            background: #2B9E75;
             color: #fff;
             display: flex;
             align-items: center;
