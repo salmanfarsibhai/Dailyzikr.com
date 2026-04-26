@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy" content="
+default-src 'self';
+script-src 'self';
+style-src 'self';
+img-src 'self' data:;
+font-src 'self';
+object-src 'none';
+base-uri 'self';
+form-action 'self';
+frame-ancestors 'none';
+">
+
+    <title>Daily Zikr</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">Daily Zikr</div>
+
+        <div class="menu-btn" id="menuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="navMenu">
+            <ul>
+                <li data-index="0" class="active">Home</li>
+                <li data-index="1">Quran</li>
+                <li data-index="2">Hadith</li>
+                <li data-index="3">Dua</li>
+                <li data-index="4">About</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="slider">
+
+        <section class="slide home">
+            <div class="hero">
+                <h1>Daily Zikr</h1>
+                <p>Minimal • Clean • Peaceful</p>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>Al-Quran</h2>
+
+            <input class="search" id="quranSearch" placeholder="Search Surah...">
+
+            <div class="list" id="quranList">
+
+                <a href="quran/001-surah-fatiha.html" class="item">001. Al-Fatiha</a>
+                <a href="quran/002-surah-baqara.html" class="item">002. Al-Baqara</a>
+                <a href="quran/003-surah-imran.html" class="item">003. Al-Imran</a>
+                <a href="quran/004-surah-nisa.html" class="item">004. An-Nisa</a>
+                <a href="quran/005-surah-maidah.html" class="item">005. Al-Ma'idah</a>
+                <a href="quran/006-surah-anam.html" class="item">006. Al-An'am</a>
+                <a href="quran/007-surah-araf.html" class="item">007. Al-A'raf</a>
+                <a href="quran/008-surah-anfal.html" class="item">008. Al-Anfal</a>
+                <a href="quran/009-surah-tawbah.html" class="item">009. At-Tawbah</a>
+                <a href="quran/010-surah-yunus.html" class="item">010. Yunus</a>
+                <a href="quran/011-surah-hud.html" class="item">011. Hud</a>
+                <a href="quran/012-surah-yusuf.html" class="item">012. Yusuf</a>
+                <a href="quran/013-surah-rad.html" class="item">013. Ar-Ra'd</a>
+                <a href="quran/014-surah-ibrahim.html" class="item">014. Ibrahim</a>
+                <a href="quran/015-surah-hijr.html" class="item">015. Al-Hijr</a>
+                <a href="quran/016-surah-nahl.html" class="item">016. An-Nahl</a>
+                <a href="quran/017-surah-isra.html" class="item">017. Al-Isra</a>
+                <a href="quran/018-surah-kahf.html" class="item">018. Al-Kahf</a>
+                <a href="quran/019-surah-maryam.html" class="item">019. Maryam</a>
+                <a href="quran/020-surah-ta-ha.html" class="item">020. Ta-Ha</a>
+                <a href="quran/021-surah-anbiya.html" class="item">021. Al-Anbiya</a>
+                <a href="quran/022-surah-hajj.html" class="item">022. Al-Hajj</a>
+                <a href="quran/023-surah-muminun.html" class="item">023. Al-Mu'minun</a>
+                <a href="quran/024-surah-nur.html" class="item">024. An-Nur</a>
+                <a href="quran/025-surah-furqan.html" class="item">025. Al-Furqan</a>
+                <a href="quran/026-surah-shuara.html" class="item">026. Ash-Shu'ara</a>
+                <a href="quran/027-surah-naml.html" class="item">027. An-Naml</a>
+                <a href="quran/028-surah-qasas.html" class="item">028. Al-Qasas</a>
+                <a href="quran/029-surah-ankabut.html" class="item">029. Al-Ankabut</a>
+                <a href="quran/030-surah-rum.html" class="item">030. Ar-Rum</a>
+                <a href="quran/031-surah-luqman.html" class="item">031. Luqman</a>
+                <a href="quran/032-surah-sajdah.html" class="item">032. As-Sajdah</a>
+                <a href="quran/033-surah-ahzab.html" class="item">033. Al-Ahzab</a>
+                <a href="quran/034-surah-saba.html" class="item">034. Saba</a>
+                <a href="quran/035-surah-fatir.html" class="item">035. Fatir</a>
+                <a href="quran/036-surah-yasin.html" class="item">036. Ya-Sin</a>
+                <a href="quran/037-surah-saffat.html" class="item">037. As-Saffat</a>
+                <a href="quran/038-surah-sad.html" class="item">038. Sad</a>
+                <a href="quran/039-surah-zumar.html" class="item">039. Az-Zumar</a>
+                <a href="quran/040-surah-ghafir.html" class="item">040. Ghafir</a>
+                <a href="quran/041-surah-fussilat.html" class="item">041. Fussilat</a>
+                <a href="quran/042-surah-shura.html" class="item">042. Ash-Shura</a>
+                <a href="quran/043-surah-zukhruf.html" class="item">043. Az-Zukhruf</a>
+                <a href="quran/044-surah-dukhan.html" class="item">044. Ad-Dukhan</a>
+                <a href="quran/045-surah-jathiyah.html" class="item">045. Al-Jathiyah</a>
+                <a href="quran/046-surah-ahqaf.html" class="item">046. Al-Ahqaf</a>
+                <a href="quran/047-surah-muhammad.html" class="item">047. Muhammad</a>
+                <a href="quran/048-surah-fath.html" class="item">048. Al-Fath</a>
+                <a href="quran/049-surah-hujurat.html" class="item">049. Al-Hujurat</a>
+                <a href="quran/050-surah-qaf.html" class="item">050. Qaf</a>
+                <a href="quran/051-surah-dhariyat.html" class="item">051. Adh-Dhariyat</a>
+                <a href="quran/052-surah-tur.html" class="item">052. At-Tur</a>
+                <a href="quran/053-surah-najm.html" class="item">053. An-Najm</a>
+                <a href="quran/054-surah-qamar.html" class="item">054. Al-Qamar</a>
+                <a href="quran/055-surah-rahman.html" class="item">055. Ar-Rahman</a>
+                <a href="quran/056-surah-waqiah.html" class="item">056. Al-Waqi'ah</a>
+                <a href="quran/057-surah-hadid.html" class="item">057. Al-Hadid</a>
+                <a href="quran/058-surah-mujadila.html" class="item">058. Al-Mujadila</a>
+                <a href="quran/059-surah-hashr.html" class="item">059. Al-Hashr</a>
+                <a href="quran/060-surah-mumtahanah.html" class="item">060. Al-Mumtahanah</a>
+                <a href="quran/061-surah-saff.html" class="item">061. As-Saff</a>
+                <a href="quran/062-surah-jumuah.html" class="item">062. Al-Jumu'ah</a>
+                <a href="quran/063-surah-munafiqun.html" class="item">063. Al-Munafiqun</a>
+                <a href="quran/064-surah-taghabun.html" class="item">064. At-Taghabun</a>
+                <a href="quran/065-surah-talaq.html" class="item">065. At-Talaq</a>
+                <a href="quran/066-surah-tahrim.html" class="item">066. At-Tahrim</a>
+                <a href="quran/067-surah-mulk.html" class="item">067. Al-Mulk</a>
+                <a href="quran/068-surah-qalam.html" class="item">068. Al-Qalam</a>
+                <a href="quran/069-surah-haqqah.html" class="item">069. Al-Haqqah</a>
+                <a href="quran/070-surah-maarij.html" class="item">070. Al-Ma'arij</a>
+                <a href="quran/071-surah-nuh.html" class="item">071. Nuh</a>
+                <a href="quran/072-surah-jinn.html" class="item">072. Al-Jinn</a>
+                <a href="quran/073-surah-muzzammil.html" class="item">073. Al-Muzzammil</a>
+                <a href="quran/074-surah-muddathir.html" class="item">074. Al-Muddathir</a>
+                <a href="quran/075-surah-qiyamah.html" class="item">075. Al-Qiyamah</a>
+                <a href="quran/076-surah-insan.html" class="item">076. Al-Insan</a>
+                <a href="quran/077-surah-mursalat.html" class="item">077. Al-Mursalat</a>
+                <a href="quran/078-surah-naba.html" class="item">078. An-Naba</a>
+                <a href="quran/079-surah-naziat.html" class="item">079. An-Nazi'at</a>
+                <a href="quran/080-surah-abasa.html" class="item">080. Abasa</a>
+                <a href="quran/081-surah-takwir.html" class="item">081. At-Takwir</a>
+                <a href="quran/082-surah-infitar.html" class="item">082. Al-Infitar</a>
+                <a href="quran/083-surah-mutaffifin.html" class="item">083. Al-Mutaffifin</a>
+                <a href="quran/084-surah-inshiqaq.html" class="item">084. Al-Inshiqaq</a>
+                <a href="quran/085-surah-buruj.html" class="item">085. Al-Buruj</a>
+                <a href="quran/086-surah-tariq.html" class="item">086. At-Tariq</a>
+                <a href="quran/087-surah-ala.html" class="item">087. Al-A'la</a>
+                <a href="quran/088-surah-ghashiyah.html" class="item">088. Al-Ghashiyah</a>
+                <a href="quran/089-surah-fajr.html" class="item">089. Al-Fajr</a>
+                <a href="quran/090-surah-balad.html" class="item">090. Al-Balad</a>
+                <a href="quran/091-surah-shams.html" class="item">091. Ash-Shams</a>
+                <a href="quran/092-surah-layl.html" class="item">092. Al-Layl</a>
+                <a href="quran/093-surah-duha.html" class="item">093. Ad-Duha</a>
+                <a href="quran/094-surah-sharh.html" class="item">094. Ash-Sharh</a>
+                <a href="quran/095-surah-tin.html" class="item">095. At-Tin</a>
+                <a href="quran/096-surah-alaq.html" class="item">096. Al-Alaq</a>
+                <a href="quran/097-surah-qadr.html" class="item">097. Al-Qadr</a>
+                <a href="quran/098-surah-bayyinah.html" class="item">098. Al-Bayyinah</a>
+                <a href="quran/099-surah-zalzalah.html" class="item">099. Az-Zalzalah</a>
+                <a href="quran/100-surah-adiyat.html" class="item">100. Al-Adiyat</a>
+                <a href="quran/101-surah-qariah.html" class="item">101. Al-Qari'ah</a>
+                <a href="quran/102-surah-takathur.html" class="item">102. At-Takathur</a>
+                <a href="quran/103-surah-asr.html" class="item">103. Al-Asr</a>
+                <a href="quran/104-surah-humazah.html" class="item">104. Al-Humazah</a>
+                <a href="quran/105-surah-fil.html" class="item">105. Al-Fil</a>
+                <a href="quran/106-surah-quraysh.html" class="item">106. Quraysh</a>
+                <a href="quran/107-surah-maun.html" class="item">107. Al-Ma'un</a>
+                <a href="quran/108-surah-kawthar.html" class="item">108. Al-Kawthar</a>
+                <a href="quran/109-surah-kafirun.html" class="item">109. Al-Kafirun</a>
+                <a href="quran/110-surah-nasr.html" class="item">110. An-Nasr</a>
+                <a href="quran/111-surah-masad.html" class="item">111. Al-Masad</a>
+                <a href="quran/112-surah-ikhlas.html" class="item">112. Al-Ikhlas</a>
+                <a href="quran/113-surah-falaq.html" class="item">113. Al-Falaq</a>
+                <a href="quran/114-surah-nas.html" class="item">114. An-Nas</a>
+
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>Hadith</h2>
+
+            <input class="search" id="hadithSearch" placeholder="Search Hadith...">
+
+            <div class="list" id="hadithList">
+
+                <a href="hadith/bukhari.html" class="item">Bukhari</a>
+                <a href="hadith/muslim.html" class="item">Muslim</a>
+                <a href="hadith/tirmidhi.html" class="item">Tirmidhi</a>
+                <a href="hadith/abu-dawood.html" class="item">Abu Dawood</a>
+                <a href="hadith/nasai.html" class="item">Nasai</a>
+                <a href="hadith/ibn-majah.html" class="item">Ibn Majah</a>
+
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>Dua</h2>
+
+            <input class="search" id="duaSearch" placeholder="Search Dua...">
+
+            <div class="list" id="duaList">
+                <a href="dua/dua.html" class="item">Daily Dua</a>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>About</h2>
+            <p>Daily Zikr is built for calm, focus, and spiritual connection.</p>
+        </section>
+
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
