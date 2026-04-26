@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Dua</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page {
+            width: 794px;
+            background: #fff;
+        }
+
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+            }
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            width: 794px;
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        .content {
+            padding-top: 70px;
+        }
+
+        .card {
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .arabic {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .bangla {
+            color: #2B9E75;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="topbar">
+            <span onclick="goBack()">←</span>
+            Daily Dua
+        </div>
+
+        <div class="content">
+
+            <div class="card">
+                <div class="arabic">رَبِّ زِدْنِي عِلْمًا</div>
+                <div class="bangla">হে আল্লাহ, আমার জ্ঞান বৃদ্ধি করুন</div>
+            </div>
+
+            <div class="card">
+                <div class="arabic">اللهم اغفر لي</div>
+                <div class="bangla">হে আল্লাহ, আমাকে ক্ষমা করুন</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = "../index.html";
+        }
+    </script>
+
+</body>
+
+</html>
