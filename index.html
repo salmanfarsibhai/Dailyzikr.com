@@ -40,7 +40,8 @@
             background: var(--white);
             color: var(--green);
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             opacity: 0;
             transition: opacity 0.35s ease;
         }
@@ -1042,20 +1043,6 @@
             });
         })();
 
-
-        // 🔥 FORCE LINK NAVIGATION FIX (MOBILE BUG FIX)
-        // 🔥 FORCE LINK NAVIGATION FIX (FINAL)
-        document.querySelectorAll('.item').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault(); // 🔥 MUST
-                e.stopPropagation();
-
-                const url = this.getAttribute('href');
-                if (url) {
-                    window.location.href = url;
-                }
-            });
-        });
 
     </script>
 </body>
