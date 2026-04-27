@@ -406,10 +406,142 @@
 
             <!-- ===== SLIDE 0: HOME ===== -->
             <section class="slide slide-home" data-slide="home">
-                <div class="hero">
-                    <h1>Daily Zikr</h1>
-                    <p>Minimal &bull; Clean &bull; Peaceful</p>
+                <div class="hero" style="
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        height:100%;
+        animation:fadeUp 1s ease forwards;
+    ">
+
+                    <!-- TITLE (slightly top aligned feel) -->
+                    <h1 style="
+            font-size:clamp(2.6rem,8vw,3.8rem);
+            font-weight:800;
+            letter-spacing:-0.6px;
+            margin-top:-40px;
+            animation:fadeUp 1s ease forwards;
+        ">
+                        Daily Zikr
+                    </h1>
+
+                    <!-- SUB TITLE (clean separator instead of dots) -->
+                    <p style="
+            margin-top:14px;
+            font-size:1.05rem;
+            opacity:.9;
+            letter-spacing:.6px;
+            animation:fadeUp 1.2s ease forwards;
+        ">
+                        কুরআন&nbsp;&nbsp;|&nbsp;&nbsp;হাদিস&nbsp;&nbsp;|&nbsp;&nbsp;দোয়া
+                    </p>
+
+                    <!-- DESCRIPTION -->
+                    <p style="
+            margin-top:18px;
+            font-size:.95rem;
+            opacity:.75;
+            line-height:1.8;
+            max-width:420px;
+            animation:fadeUp 1.4s ease forwards;
+        ">
+                        একটি সহজ, দ্রুত এবং মনোযোগ ধরে রাখার মতো প্ল্যাটফর্ম যেখানে আপনি
+                        কুরআনের সূরা, সহীহ হাদিস এবং দৈনন্দিন দোয়া পড়তে, বুঝতে ও শিখতে পারবেন —
+                        যেকোনো সময়, যেকোনো জায়গা থেকে।
+                    </p>
+
+                    <!-- BUTTONS (center focus area) -->
+                    <div style="
+            margin-top:34px;
+            display:flex;
+            gap:14px;
+            justify-content:center;
+            flex-wrap:wrap;
+            animation:fadeUp 1.6s ease forwards;
+        ">
+
+                        <button onclick="goToSlide(1,true)" style="
+                width:135px;
+                padding:13px 0;
+                border-radius:12px;
+                border:none;
+                background:#ffffff;
+                color:#2B9E75;
+                font-weight:700;
+                font-size:.95rem;
+                cursor:pointer;
+                box-shadow:0 6px 18px rgba(0,0,0,0.12);
+                transition:all .25s ease;
+            " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 22px rgba(0,0,0,0.18)'"
+                            onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 18px rgba(0,0,0,0.12)'">
+                            Quran
+                        </button>
+
+                        <button onclick="goToSlide(2,true)" style="
+                width:135px;
+                padding:13px 0;
+                border-radius:12px;
+                border:none;
+                background:#ffffff;
+                color:#2B9E75;
+                font-weight:700;
+                font-size:.95rem;
+                cursor:pointer;
+                box-shadow:0 6px 18px rgba(0,0,0,0.12);
+                transition:all .25s ease;
+            " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 22px rgba(0,0,0,0.18)'"
+                            onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 18px rgba(0,0,0,0.12)'">
+                            Hadith
+                        </button>
+
+                        <button onclick="goToSlide(3,true)" style="
+                width:135px;
+                padding:13px 0;
+                border-radius:12px;
+                border:none;
+                background:#ffffff;
+                color:#2B9E75;
+                font-weight:700;
+                font-size:.95rem;
+                cursor:pointer;
+                box-shadow:0 6px 18px rgba(0,0,0,0.12);
+                transition:all .25s ease;
+            " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 22px rgba(0,0,0,0.18)'"
+                            onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 18px rgba(0,0,0,0.12)'">
+                            Dua
+                        </button>
+
+                    </div>
+
+                    <!-- GOAL (slightly lower but not bottom) -->
+                    <p style="
+            margin-top:100px;
+            font-size:.8rem;
+            opacity:.6;
+            letter-spacing:.4px;
+            animation:fadeUp 1.8s ease forwards;
+        ">
+                        লক্ষ্য: প্রতিদিন অন্তত ১০ মিনিট আল্লাহর স্মরণে থাকুন
+                    </p>
+
                 </div>
+
+                <!-- ANIMATION -->
+                <style>
+                    @keyframes fadeUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(25px);
+                        }
+
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                </style>
             </section>
 
             <!-- ===== SLIDE 1: QURAN ===== -->
@@ -832,7 +964,7 @@
             // 🔥 Keyword map — add more here freely
             const keywords = {
                 "Al-Fatiha": ["fatiha", "ফাতিহা"],
-                "Al-Baqara": ["baqara", "বাকারা"],
+                "Al-Baqara": ["baqara", "বাকারা",],
                 "Al-Imran": ["imran", "ইমরান"],
                 "An-Nisa": ["nisa", "নিসা"],
                 "Al-Maidah": ["maidah", "মায়িদা"],
