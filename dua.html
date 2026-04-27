@@ -1,0 +1,808 @@
+<!-- dua.html -->
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>দোয়া</title>
+
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    style-src 'self' 'unsafe-inline';
+    script-src 'self' 'unsafe-inline';
+    img-src 'self' data:;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+  ">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #2B9E75;
+            --primary-dark: #22815f;
+            --bg: #e9ecef;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --line: rgba(43, 158, 117, 0.14);
+            --soft: rgba(43, 158, 117, 0.08);
+            --shadow: 0 10px 28px rgba(0, 0, 0, .06);
+            --radius: 16px;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            animation: fadeIn .45s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            background: linear-gradient(135deg, var(--primary), #1f8a68);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+        }
+
+        .topbar .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .back-btn {
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, .14);
+            color: #fff;
+            cursor: pointer;
+            transition: .25s ease;
+            flex: 0 0 auto;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            background: rgba(255, 255, 255, .22);
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .topbar-title {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: .2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .topbar-tag {
+            font-size: 12px;
+            opacity: .92;
+            background: rgba(255, 255, 255, .14);
+            padding: 7px 10px;
+            border-radius: 999px;
+            flex: 0 0 auto;
+        }
+
+        .app {
+            padding-top: 60px;
+            height: 100vh;
+        }
+
+        .reader-wrap {
+            height: calc(100vh - 60px);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: var(--bg);
+        }
+
+        .page {
+            width: 794px;
+            min-height: calc(100vh - 60px);
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, .06);
+            box-shadow: none;
+        }
+
+        @media (max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: calc(100vh - 60px);
+                border-left: 0;
+                border-right: 0;
+            }
+        }
+
+        .page-scroll {
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .reader-head {
+            padding: 20px 18px 16px;
+            background: #f7f1e8;
+            border-bottom: 1px solid rgba(0, 0, 0, .05);
+        }
+
+        .reader-kicker {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .15px;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .reader-title {
+            font-size: 22px;
+            line-height: 1.35;
+            font-weight: 900;
+            color: #0f3d2e;
+            margin-bottom: 6px;
+        }
+
+        .reader-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 100%;
+        }
+
+        .reader-actions {
+            margin-top: 14px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .all-copy-btn {
+            border: 0;
+            border-radius: 12px;
+            background: rgba(43, 158, 117, .10);
+            color: var(--primary-dark);
+            padding: 10px 11px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .22s ease;
+            flex: 0 0 auto;
+        }
+
+        .all-copy-btn:hover {
+            background: rgba(43, 158, 117, .16);
+            transform: translateY(-2px);
+        }
+
+        .all-copy-btn.copied {
+            transform: scale(.96);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .all-copy-btn svg,
+        .icon-btn svg {
+            width: 15px;
+            height: 15px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex: 0 0 auto;
+        }
+
+        .dua-body {
+            padding: 16px 16px 22px;
+        }
+
+        .field {
+            border-radius: 14px;
+            border: 1px solid rgba(0, 0, 0, .06);
+            background: #fcfcfc;
+            padding: 12px 12px 11px;
+            margin-bottom: 10px;
+            transition: .2s ease;
+        }
+
+        .field:hover {
+            border-color: rgba(43, 158, 117, .14);
+            background: #fff;
+        }
+
+        .field-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .field-label {
+            font-size: 12px;
+            letter-spacing: .2px;
+            color: var(--primary-dark);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .icon-btn {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 10px;
+            background: rgba(43, 158, 117, .08);
+            color: var(--primary-dark);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .2s ease;
+            flex: 0 0 auto;
+        }
+
+        .icon-btn:hover {
+            background: rgba(43, 158, 117, .16);
+            transform: translateY(-1px);
+        }
+
+        .icon-btn.copied {
+            transform: scale(.92);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .field-text {
+            line-height: 1.95;
+            font-size: 15px;
+            color: var(--text);
+            word-break: break-word;
+            user-select: text;
+        }
+
+        .field-text.arabic {
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            line-height: 2.15;
+            font-family: "Times New Roman", serif;
+        }
+
+        .field-text.pronounce {
+            color: #2d7c6f;
+            font-size: 15px;
+        }
+
+        .field-text.meaning {
+            color: #374151;
+            font-size: 15px;
+        }
+
+        .field-text.reference {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+            background: #f7faf9;
+            padding: 10px 12px;
+            border-radius: 12px;
+        }
+
+        .mini-note {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .reader-item {
+            opacity: 0;
+            transform: translateY(22px);
+        }
+
+        .reader-item.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: .55s ease;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            transform: translateX(-50%) translateY(18px);
+            background: rgba(43, 158, 117, .98);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 999px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+            font-size: 13px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: .25s ease;
+            z-index: 99999;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast::before {
+            content: "✓";
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, .16);
+            font-size: 12px;
+        }
+
+        @media (max-width: 420px) {
+            .reader-head {
+                padding-inline: 14px;
+            }
+
+            .dua-body {
+                padding-inline: 14px;
+            }
+
+            .reader-title {
+                font-size: 20px;
+            }
+
+            .field-text.arabic {
+                font-size: 22px;
+            }
+        }
+
+        .page-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .page-scroll::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, .10);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="left">
+            <button class="back-btn" id="backBtn" type="button" aria-label="Back">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+            </button>
+            <div class="topbar-title" id="topbarTitle">দোয়া</div>
+        </div>
+        <div class="topbar-tag" id="topbarTag">পৃষ্ঠা</div>
+    </header>
+
+    <main class="app">
+        <section class="reader-wrap">
+            <div class="page">
+                <div class="page-scroll">
+                    <div class="reader-head">
+                        <div class="reader-kicker">দোয়া পৃষ্ঠা</div>
+                        <div class="reader-title" id="readerTitle">দোয়া</div>
+                        <div class="reader-subtitle" id="readerSubtitle">একটি দোয়া • A4 স্টাইল পৃষ্ঠা</div>
+
+                        <div class="reader-actions">
+                            <button class="all-copy-btn" id="copyAllBtn" type="button" aria-label="সব কপি">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 7h10"></path>
+                                    <path d="M4 12h16"></path>
+                                    <path d="M4 17h12"></path>
+                                </svg>
+                                <span>সব কপি</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dua-body" id="duaBody"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast">Copied</div>
+
+    <script>
+        'use strict';
+
+        /*
+          নতুন দোয়া বাড়াতে:
+          1) index.html এ নতুন title link যোগ করুন: dua.html?dua=your-id
+          2) নিচের duaData object-এ same id দিয়ে নতুন entry বসান
+        */
+
+        const duaData = {
+            'sokal-sondha': {
+                title: 'সকাল-সন্ধ্যার দোয়া',
+                subtitle: 'দিন শুরু ও শেষ করার মাসনুন দোয়া',
+                arabic: 'اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا',
+                pronounce: 'আল্লাহুম্মা বিকা আসবাহনা ওয়া বিকা আমসাইনা',
+                meaning: 'হে আল্লাহ, আপনার দয়ায় আমরা সকাল করলাম এবং আপনার দয়ায় আমরা সন্ধ্যা করলাম।',
+                reference: 'রেফারেন্স: আযকার সংকলন / সকাল-সন্ধ্যার আমল',
+                note: 'এই পৃষ্ঠাটি পরে খুব সহজেই বড় করা যাবে।'
+            },
+            'khabar-age': {
+                title: 'খাবারের আগে দোয়া',
+                subtitle: 'খাওয়া শুরু করার আগে পড়ার দোয়া',
+                arabic: 'بِسْمِ اللَّهِ',
+                pronounce: 'বিসমিল্লাহ',
+                meaning: 'আল্লাহর নামে শুরু করছি।',
+                reference: 'রেফারেন্স: খাদ্য ও আদবের আমল',
+                note: 'খাওয়ার আগে বলা হয়।'
+            },
+            'khabar-pore': {
+                title: 'খাবারের পরে দোয়া',
+                subtitle: 'খাওয়ার পর কৃতজ্ঞতার দোয়া',
+                arabic: 'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',
+                pronounce: 'আলহামদুলিল্লাহিল্লাজি আতআমানা ওয়া সাকানা ওয়া জাআলানা মুসলিমীন',
+                meaning: 'সব প্রশংসা আল্লাহর জন্য, যিনি আমাদের খাইয়েছেন, পান করিয়েছেন এবং মুসলিম করেছেন।',
+                reference: 'রেফারেন্স: যিকর ও শোকর আদায়',
+                note: 'কৃতজ্ঞতার সুন্দর আমল।'
+            },
+            'ghum-age': {
+                title: 'ঘুমানোর আগে দোয়া',
+                subtitle: 'ঘুমে যাওয়ার পূর্বের মাসনুন দোয়া',
+                arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',
+                pronounce: 'বিসমিকা আল্লাহুম্মা আমূতু ওয়া আহইয়া',
+                meaning: 'হে আল্লাহ, আপনার নামেই আমি ঘুমাই এবং আপনার ইচ্ছায় আমি জেগে উঠি।',
+                reference: 'রেফারেন্স: ঘুমের দোয়া / আদব',
+                note: 'রাতে ঘুমানোর আগে পড়ার জন্য।'
+            },
+            'ghum-uthe': {
+                title: 'ঘুম থেকে ওঠার দোয়া',
+                subtitle: 'ঘুম থেকে জেগে উঠলে পড়ার দোয়া',
+                arabic: 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا',
+                pronounce: 'আলহামদুলিল্লাহিল্লাজি আহইয়ানা বা’দা মা আমাতানা',
+                meaning: 'সব প্রশংসা আল্লাহর জন্য, যিনি আমাদের মৃত্যুর পরে জীবন দান করেছেন।',
+                reference: 'রেফারেন্স: যিকর / জাগরণ',
+                note: 'জেগে উঠেই পড়া উত্তম।'
+            },
+            'mosjid-probesh': {
+                title: 'মসজিদে প্রবেশের দোয়া',
+                subtitle: 'মসজিদে ঢোকার সময়ের দোয়া',
+                arabic: 'اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ',
+                pronounce: 'আল্লাহুম্মাফতাহ লি আবওয়াবা রহমাতিক',
+                meaning: 'হে আল্লাহ, আমার জন্য আপনার রহমতের দরজাগুলো খুলে দিন।',
+                reference: 'রেফারেন্স: মসজিদ প্রবেশের আদব',
+                note: 'মসজিদে প্রবেশের সময় পড়া হয়।'
+            },
+            'mosjid-bahir': {
+                title: 'মসজিদ থেকে বের হওয়ার দোয়া',
+                subtitle: 'মসজিদ থেকে বের হওয়ার সময়ের দোয়া',
+                arabic: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ',
+                pronounce: 'আল্লাহুম্মা ইন্নি আসআলুকা মিন ফাদলিক',
+                meaning: 'হে আল্লাহ, আমি আপনার অনুগ্রহ চাই।',
+                reference: 'রেফারেন্স: মসজিদ থেকে বের হওয়ার আমল',
+                note: 'মসজিদ থেকে বের হওয়ার আগে/পরে পড়া হয়।'
+            },
+            'ghor-probesh': {
+                title: 'ঘরে প্রবেশের দোয়া',
+                subtitle: 'বাড়িতে ঢোকার সময়ের দোয়া',
+                arabic: 'بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا',
+                pronounce: 'বিসমিল্লাহি ওয়ালাজনা ওয়া বিসমিল্লাহি খারাজনা',
+                meaning: 'আল্লাহর নামে আমরা প্রবেশ করলাম, আল্লাহর নামে আমরা বের হলাম।',
+                reference: 'রেফারেন্স: ঘর ও আদব',
+                note: 'বাড়িতে ঢোকার সময় বলা যায়।'
+            },
+            'ghor-bahir': {
+                title: 'ঘর থেকে বের হওয়ার দোয়া',
+                subtitle: 'বাসা থেকে বের হওয়ার সময়ের দোয়া',
+                arabic: 'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ',
+                pronounce: 'বিসমিল্লাহি তাওয়াক্কালতু আলাল্লাহ',
+                meaning: 'আল্লাহর নামে, আমি আল্লাহর উপর ভরসা করলাম।',
+                reference: 'রেফারেন্স: বের হওয়ার আমল',
+                note: 'দৈনন্দিন বের হওয়ার সময়।'
+            },
+            'wudu': {
+                title: 'ওযুর দোয়া',
+                subtitle: 'পবিত্রতা শুরু করার দোয়া',
+                arabic: 'بِسْمِ اللَّهِ',
+                pronounce: 'বিসমিল্লাহ',
+                meaning: 'আল্লাহর নামে শুরু করছি।',
+                reference: 'রেফারেন্স: তাহারাত / ওযু',
+                note: 'ওযু শুরু করার আগে।'
+            },
+            'istighfar': {
+                title: 'ইস্তিগফার',
+                subtitle: 'ক্ষমা চাওয়ার সংক্ষিপ্ত দোয়া',
+                arabic: 'أَسْتَغْفِرُ اللَّهَ',
+                pronounce: 'আস্তাগফিরুল্লাহ',
+                meaning: 'আমি আল্লাহর কাছে ক্ষমা চাই।',
+                reference: 'রেফারেন্স: যিকর ও তওবা',
+                note: 'দিনে বহুবার পড়া যায়।'
+            },
+            'tauba': {
+                title: 'তওবার দোয়া',
+                subtitle: 'তওবা ও অনুতাপের আমল',
+                arabic: 'رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ',
+                pronounce: 'রাব্বিগফিরলি ওয়া তুব আলাইয়া',
+                meaning: 'হে আমার রব, আমাকে ক্ষমা করুন এবং আমার তওবা কবুল করুন।',
+                reference: 'রেফারেন্স: তওবা ও ইস্তিগফার',
+                note: 'দিল নরম করতে সাহায্য করে।'
+            },
+            'rizik': {
+                title: 'রিজিকের দোয়া',
+                subtitle: 'হালাল রিজিক ও বরকতের দোয়া',
+                arabic: 'اللَّهُمَّ ارْزُقْنَا رِزْقًا طَيِّبًا',
+                pronounce: 'আল্লাহুম্মারজুকনা রিজকান তাইয়্যিবা',
+                meaning: 'হে আল্লাহ, আমাদের পবিত্র রিজিক দিন।',
+                reference: 'রেফারেন্স: রিজিক ও হালাল জীবিকা',
+                note: 'রিজিকের বরকতের জন্য পড়া যায়।'
+            },
+            'kaj-shuru': {
+                title: 'কাজ শুরু করার দোয়া',
+                subtitle: 'কাজ, পড়াশোনা বা উদ্যোগ শুরু করার দোয়া',
+                arabic: 'اللَّهُمَّ بَارِكْ لِي فِيمَا رَزَقْتَنِي',
+                pronounce: 'আল্লাহুম্মা বারিক লি ফিমা রাজাকতানি',
+                meaning: 'হে আল্লাহ, আপনি আমার রিজিকে বরকত দান করুন।',
+                reference: 'রেফারেন্স: রিজিক ও বরকতের আমল',
+                note: 'যেকোনো কাজ শুরুর আগে পড়া যেতে পারে।'
+            },
+            'safar': {
+                title: 'ভ্রমণের দোয়া',
+                subtitle: 'যাত্রা শুরু করার সময়ের দোয়া',
+                arabic: 'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا',
+                pronounce: 'সুবহানাল্লাজি সাখ্খারা লানা হাজা',
+                meaning: 'পবিত্র তিনি, যিনি এটিকে আমাদের জন্য অনুগত করেছেন।',
+                reference: 'রেফারেন্স: কুরআন 43:13',
+                note: 'ভ্রমণের সময় বাহন/যানবাহনে উঠলে পড়া হয়।'
+            },
+            'shifa': {
+                title: 'রোগমুক্তির দোয়া',
+                subtitle: 'সুস্থতা ও আরোগ্যের জন্য দোয়া',
+                arabic: 'اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ',
+                pronounce: 'আল্লাহুম্মা রাব্বান নাস, আজহিবিল বাস',
+                meaning: 'হে মানুষের রব, কষ্ট দূর করুন এবং আরোগ্য দিন।',
+                reference: 'রেফারেন্স: রোগ-ব্যাধির আমল',
+                note: 'অসুস্থতার সময় পড়া হয়।'
+            },
+            'hifazat': {
+                title: 'হেফাজতের দোয়া',
+                subtitle: 'রক্ষা, আশ্রয় ও নিরাপত্তার দোয়া',
+                arabic: 'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ',
+                pronounce: 'আউযু বিকালিমাতিল্লাহিত তাম্মাতি',
+                meaning: 'আমি আল্লাহর পরিপূর্ণ বাণীর মাধ্যমে আশ্রয় চাই।',
+                reference: 'রেফারেন্স: আশ্রয় ও নিরাপত্তা',
+                note: 'নিরাপত্তার জন্য পড়া হয়।'
+            },
+            'zikir': {
+                title: 'যিকিরের দোয়া',
+                subtitle: 'স্মরণ, তাসবীহ ও তাহমীদের আমল',
+                arabic: 'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ',
+                pronounce: 'সুবহানাল্লাহি ওয়ালহামদুলিল্লাহ',
+                meaning: 'আল্লাহ পবিত্র; সকল প্রশংসা আল্লাহর জন্য।',
+                reference: 'রেফারেন্স: যিকির ও তাসবীহ',
+                note: 'দৈনন্দিন যিকিরে ব্যবহার করুন।'
+            },
+            'ilm': {
+                title: 'ইলম বৃদ্ধির দোয়া',
+                subtitle: 'জ্ঞান ও বোঝাপড়া বাড়ানোর দোয়া',
+                arabic: 'رَبِّ زِدْنِي عِلْمًا',
+                pronounce: 'রাব্বি জিদনি ইলমা',
+                meaning: 'হে আমার রব, আমার জ্ঞান বৃদ্ধি করুন।',
+                reference: 'রেফারেন্স: কুরআন 20:114',
+                note: 'পড়াশোনার আগে পড়া উত্তম।'
+            }
+        };
+
+        const params = new URLSearchParams(location.search);
+        const duaId = params.get('dua');
+
+        const backBtn = document.getElementById('backBtn');
+        const topbarTitle = document.getElementById('topbarTitle');
+        const topbarTag = document.getElementById('topbarTag');
+        const readerTitle = document.getElementById('readerTitle');
+        const readerSubtitle = document.getElementById('readerSubtitle');
+        const duaBody = document.getElementById('duaBody');
+        const copyAllBtn = document.getElementById('copyAllBtn');
+        const toast = document.getElementById('toast');
+
+        const ICON_COPY = `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="9" y="9" width="10" height="10" rx="2"></rect>
+        <path d="M5 15V7a2 2 0 0 1 2-2h8"></path>
+      </svg>
+    `;
+
+        function showToast(message = 'Copied') {
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(showToast._timer);
+            showToast._timer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 1200);
+        }
+
+        async function copyToClipboard(text, btn = null, message = 'Copied') {
+            try {
+                await navigator.clipboard.writeText(text);
+            } catch (err) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+
+            if (btn) {
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 230);
+            }
+
+            showToast(message);
+        }
+
+        function goBack() {
+            location.href = 'index.html#dua';
+        }
+
+        function makeIconButton(title, handler) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'icon-btn';
+            btn.innerHTML = ICON_COPY;
+            btn.title = title;
+            btn.setAttribute('aria-label', title);
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                handler(btn);
+            });
+            return btn;
+        }
+
+        function createField(label, value, extraClass = '') {
+            const field = document.createElement('div');
+            field.className = 'field reader-item';
+
+            const head = document.createElement('div');
+            head.className = 'field-head';
+
+            const lbl = document.createElement('div');
+            lbl.className = 'field-label';
+            lbl.textContent = label;
+
+            const copyBtn = makeIconButton(`${label} কপি`, async (btn) => {
+                await copyToClipboard(value, btn, 'Copied');
+            });
+
+            head.appendChild(lbl);
+            head.appendChild(copyBtn);
+
+            const body = document.createElement('div');
+            body.className = `field-text ${extraClass}`;
+            body.textContent = value;
+
+            field.appendChild(head);
+            field.appendChild(body);
+            return field;
+        }
+
+        function renderPage(item) {
+            topbarTitle.textContent = item.title;
+            topbarTag.textContent = 'পৃষ্ঠা';
+            readerTitle.textContent = item.title;
+            readerSubtitle.textContent = item.subtitle;
+
+            duaBody.innerHTML = '';
+
+            duaBody.appendChild(createField('আরবি', item.arabic, 'arabic'));
+            duaBody.appendChild(createField('উচ্চারণ', item.pronounce, 'pronounce'));
+            duaBody.appendChild(createField('অর্থ', item.meaning, 'meaning'));
+            duaBody.appendChild(createField('রেফারেন্স', item.reference, 'reference'));
+
+            const note = document.createElement('div');
+            note.className = 'mini-note reader-item';
+            note.textContent = item.note || '';
+            duaBody.appendChild(note);
+
+            copyAllBtn.onclick = async () => {
+                const all = [
+                    `দোয়া: ${item.title}`,
+                    `আরবি: ${item.arabic}`,
+                    `উচ্চারণ: ${item.pronounce}`,
+                    `অর্থ: ${item.meaning}`,
+                    `রেফারেন্স: ${item.reference}`
+                ].join('\n\n');
+
+                await copyToClipboard(all, copyAllBtn, 'Copied');
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) entry.target.classList.add('show');
+                });
+            }, { threshold: 0.14 });
+
+            document.querySelectorAll('.reader-item').forEach((el) => observer.observe(el));
+        }
+
+        backBtn.addEventListener('click', goBack);
+
+        const current = duaData[duaId];
+
+        if (!current) {
+            location.href = 'index.html#dua';
+        } else {
+            renderPage(current);
+        }
+    </script>
+</body>
+
+</html>
