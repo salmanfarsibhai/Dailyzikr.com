@@ -264,6 +264,7 @@
             font-weight: 800;
             color: var(--green);
             margin-bottom: 14px;
+            text-align: center;
         }
 
         /* ===== SEARCH INPUT ===== */
@@ -443,6 +444,109 @@
             to {
                 transform: translateY(-10px);
                 opacity: 1;
+            }
+        }
+
+        /* =========================
+🔥 ABOUT BOX DESIGN
+========================= */
+
+        .about-box {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 16px;
+
+            background: #f9f9f9;
+            border: 1px solid rgba(43, 158, 117, 0.1);
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+        }
+
+        .about-text {
+            font-size: 15.5px;
+            line-height: 1.9;
+            color: #444;
+            text-align: justify;
+        }
+
+        /* =========================
+🔥 CONNECT BOX
+========================= */
+
+        .connect-box {
+            max-width: 720px;
+            margin: 70px auto 40px;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+
+            background: #ffffff;
+            border: 1px solid rgba(43, 158, 117, 0.1);
+
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .connect-box h3 {
+            color: #2B9E75;
+            margin-bottom: 10px;
+        }
+
+        .connect-box p {
+            font-size: 14.5px;
+            color: #555;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+🔥 BUTTON DESIGN (SITE COLOR)
+========================= */
+
+        .connect-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .connect-links a {
+            padding: 11px 18px;
+            border-radius: 10px;
+
+            background: #2B9E75;
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+
+            transition: 0.25s;
+        }
+
+        /* hover */
+        .connect-links a:hover {
+            background: #1f7a5d;
+            transform: translateY(-2px);
+        }
+
+        /* click */
+        .connect-links a:active {
+            transform: scale(0.96);
+        }
+
+        /* =========================
+🔥 MOBILE
+========================= */
+
+        @media(max-width:600px) {
+            .about-box {
+                margin: 20px 10px;
+                padding: 18px;
+            }
+
+            .connect-box {
+                margin: 40px 10px;
             }
         }
     </style>
@@ -782,37 +886,44 @@
             </section>
 
             <!-- ===== SLIDE 4: ABOUT ===== -->
+            <!-- ===== SLIDE 4: ABOUT ===== -->
             <section class="slide slide-content" data-slide="about">
+
                 <h2>About Daily Zikr</h2>
 
-                <!--
-          ✔ এখানে About এর লেখা পরিবর্তন করতে পারবেন
-          ✔ শুধু <p> এর ভিতরের টেক্সট এডিট করুন
-          ✔ HTML structure পরিবর্তন করবেন না
-        -->
-                <p class="about-text">
-                    Daily Zikr এমন একটি ওয়েবসাইট, যা মানুষের দৈনন্দিন জীবনে আল্লাহর স্মরণকে সহজ, সুন্দর এবং নিয়মিত
-                    করার
-                    উদ্দেশ্যে তৈরি করা হয়েছে। বর্তমান ব্যস্ত জীবনে আমরা অনেক সময় গুরুত্বপূর্ণ দোয়া, যিকির ও ইসলামিক
-                    জ্ঞান
-                    থেকে দূরে সরে যাই। এই প্ল্যাটফর্ম সেই দূরত্ব কমানোর একটি ছোট প্রচেষ্টা।
-                    <br><br>
-                    এখানে আপনি খুব সহজভাবে কুরআনের সূরা, হাদিস এবং দৈনন্দিন জীবনে প্রয়োজনীয় দোয়াগুলো খুঁজে পাবেন।
-                    প্রতিটি
-                    দোয়া এমনভাবে সাজানো হয়েছে যেন তা পড়তে, বুঝতে এবং মনে রাখতে সুবিধা হয়।
-                    <br><br>
-                    Daily Zikr তৈরি করার মূল লক্ষ্য হলো— মানুষ যেন যেকোনো সময়, যেকোনো জায়গা থেকে সহজে দোয়া ও যিকির
-                    করতে
-                    পারে, এবং আল্লাহর সাথে তার সম্পর্ককে আরও মজবুত করতে পারে।
-                    <br><br>
-                    এই ওয়েবসাইটটি সম্পূর্ণভাবে মিনিমাল, পরিষ্কার ও distraction-free ডিজাইনে তৈরি, যাতে ব্যবহারকারী কোনো
-                    ঝামেলা ছাড়াই শুধুমাত্র প্রয়োজনীয় বিষয়গুলোতে মনোযোগ দিতে পারেন।
-                    <br><br>
-                    আমরা বিশ্বাস করি— ছোট ছোট আমলই একটি মানুষের জীবন পরিবর্তন করতে পারে।
-                    <br><br>
-                    আপনিও আজ থেকেই আপনার দৈনন্দিন জীবনে যিকির ও দোয়া যুক্ত করুন, এবং একটি শান্ত, বরকতময় জীবন গড়ে
-                    তুলুন।
-                </p>
+                <!-- 🔷 ABOUT BOX -->
+                <div class="about-box">
+                    <p class="about-text">
+                        Daily Zikr এমন একটি ওয়েবসাইট, যা মানুষের দৈনন্দিন জীবনে আল্লাহর স্মরণকে সহজ, সুন্দর এবং নিয়মিত
+                        করার উদ্দেশ্যে তৈরি করা হয়েছে। এখানে আপনি খুব সহজভাবে কুরআনের সূরা, হাদিস এবং দৈনন্দিন জীবনে
+                        প্রয়োজনীয় দোয়াগুলো খুঁজে পাবেন। Daily Zikr তৈরি করার মূল লক্ষ্য হলো— মানুষ যেন যেকোনো সময়,
+                        যেকোনো জায়গা থেকে সহজে দোয়া ও
+                        যিকির করতে পারে। এই প্ল্যাটফর্মটি সম্পূর্ণভাবে মিনিমাল ও distraction-free ডিজাইনে তৈরি, যাতে
+                        আপনি শুধুমাত্র
+                        প্রয়োজনীয় বিষয়গুলোতে মনোযোগ দিতে পারেন। আমরা বিশ্বাস করি— ছোট ছোট আমলই একটি মানুষের জীবন
+                        পরিবর্তন করতে পারে।আপনিও আজ থেকেই আপনার দৈনন্দিন জীবনে যিকির ও দোয়া যুক্ত করুন, এবং একটি শান্ত,
+                        বরকতময় জীবন গড়ে তুলুন।
+                    </p>
+                </div>
+
+                <!-- 🔷 CONNECT BOX -->
+                <div class="connect-box">
+
+                    <h3>আমাদের সাথে যুক্ত থাকুন</h3>
+
+                    <p>
+                        আমাদের YouTube চ্যানেল এবং Facebook পেজে নিয়মিত ইসলামিক কনটেন্ট শেয়ার করা হয়।
+                        <br>
+                        সেখানে ভিজিট করে সাবস্ক্রাইব/ফলো করে আমাদের সাথে যুক্ত থাকতে পারেন।
+                    </p>
+
+                    <div class="connect-links">
+                        <a href="https://youtube.com/YOUR_CHANNEL" target="_blank">YouTube Channel</a>
+                        <a href="https://facebook.com/YOUR_PAGE" target="_blank">Facebook Page</a>
+                    </div>
+
+                </div>
+
             </section>
 
         </div><!-- /slider -->
