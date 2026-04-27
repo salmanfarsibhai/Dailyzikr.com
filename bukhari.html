@@ -292,15 +292,11 @@ PDF VIEWER
         const viewerTitle = document.getElementById("viewerTitle");
 
         function openPDF(title, link) {
-
             viewer.classList.add("active");
             loader.style.display = "flex";
             frame.style.display = "none";
-
             viewerTitle.innerText = title;
-
             frame.src = link;
-
             frame.onload = () => {
                 loader.style.display = "none";
                 frame.style.display = "block";
