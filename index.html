@@ -371,6 +371,65 @@
                 max-width: 640px;
             }
         }
+
+
+
+        /* ===== LOADER ===== */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        #loader.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* DOTS */
+        .dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #2B9E75;
+            border-radius: 50%;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            to {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -671,12 +730,12 @@
                 <h2>Hadith</h2>
                 <input class="search" id="hadithSearch" placeholder="Search Hadith..." autocomplete="off" />
                 <div class="list" id="hadithList">
-                    <a href="bukhari.html?from=hadith" class="item">01. Sahih Bukhari</a>
-                    <a href="muslim.html?from=hadith" class="item">02. Sahih Muslim</a>
-                    <a href="tirmidhi.html?from=hadith" class="item">03. Jami at-Tirmidhi</a>
-                    <a href="abu-dawood.html?from=hadith" class="item">04. Sunan Abu Dawood</a>
-                    <a href="nasai.html?from=hadith" class="item">05. Sunan an-Nasa'i</a>
-                    <a href="ibn-majah.html?from=hadith" class="item">06. Sunan Ibn Majah</a>
+                    <a href="bukhari.html?from=hadith" class="item load-link">01. Sahih Bukhari</a>
+                    <a href="muslim.html?from=hadith" class="item load-link">02. Sahih Muslim</a>
+                    <a href="tirmidhi.html?from=hadith" class="item load-link">03. Jami at-Tirmidhi</a>
+                    <a href="abu-dawood.html?from=hadith" class="item load-link">04. Sunan Abu Dawood</a>
+                    <a href="nasai.html?from=hadith" class="item load-link">05. Sunan an-Nasa'i</a>
+                    <a href="ibn-majah.html?from=hadith" class="item load-link">06. Sunan Ibn Majah</a>
                 </div>
             </section>
 
@@ -1175,8 +1234,29 @@
             });
         })();
 
+        // LOADER SHOW ON CLICK
+        document.querySelectorAll('.load-link').forEach(link => {
+            link.addEventListener('click', function () {
+                document.getElementById('loader').classList.add('show');
+            });
+        });
+
+        // PAGE LOAD হলে loader auto remove
+        window.addEventListener('pageshow', () => {
+            document.getElementById('loader').classList.remove('show');
+        });
+
 
     </script>
+
+    <div id="loader">
+        <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
 </body>
 
 </html>
