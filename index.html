@@ -3,115 +3,134 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daily Zikr</title>
-
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+Bengali:wght@400;600;700&display=swap"
         rel="stylesheet">
 
-    <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    style-src 'self' 'unsafe-inline';
-    script-src 'self' 'unsafe-inline';
-    img-src 'self' data:;
-    font-src 'self';
-    object-src 'none';
-    base-uri 'self';
-    form-action 'self';
-    frame-ancestors 'none';
-  ">
-
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        * {
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
 
-        html,
-        body {
-            width: 100%;
+        :root {
+            --green: #2B9E75;
+            --green-dark: #0f3d2e;
+            --green-light: rgba(43, 158, 117, 0.12);
+            --green-glow: rgba(43, 158, 117, 0.08);
+            --white: #ffffff;
+            --bg: #f9f9f9;
+            --nav-h: 60px;
+        }
+
+        html {
+            scroll-behavior: smooth;
             height: 100%;
         }
 
         body {
             font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
-            background: #ffffff;
-            color: #2B9E75;
+            background: var(--white);
+            color: var(--green);
+            height: 100%;
             overflow: hidden;
-            transition: 0.4s ease;
+            opacity: 0;
+            transition: opacity 0.35s ease;
         }
 
+        body.ready {
+            opacity: 1;
+        }
+
+        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px;
-
+            height: var(--nav-h);
+            padding: 0 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            padding: 0 15px;
-
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-
-            border-bottom: 1px solid rgba(43, 158, 117, 0.15);
-
-            z-index: 9999;
-            /* 🔥 IMPORTANT */
-
-            transform: translateZ(0);
-            /* 🔥 mobile fix */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.88);
+            border-bottom: 1px solid var(--green-light);
+            z-index: 1000;
         }
 
         .logo {
-            font-weight: 700;
-            letter-spacing: 0.2px;
-            color: #2B9E75;
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 0.3px;
+            color: var(--green);
             user-select: none;
         }
 
+        /* ===== HAMBURGER ===== */
         .menu-btn {
-            width: 26px;
+            width: 28px;
+            height: 22px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            justify-content: space-between;
             cursor: pointer;
             user-select: none;
+            padding: 0;
+            background: none;
+            border: none;
+            outline: none;
         }
 
         .menu-btn span {
+            display: block;
             height: 3px;
             width: 100%;
-            background: #2B9E75;
+            background: var(--green);
             border-radius: 999px;
-            transition: 0.25s ease;
+            transition: transform 0.28s ease, opacity 0.28s ease;
+            transform-origin: center;
         }
 
+        .menu-btn.open span:nth-child(1) {
+            transform: translateY(9.5px) rotate(45deg);
+        }
+
+        .menu-btn.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-btn.open span:nth-child(3) {
+            transform: translateY(-9.5px) rotate(-45deg);
+        }
+
+        /* ===== DROPDOWN NAV (mobile) ===== */
         nav {
-            position: absolute;
-            top: 60px;
+            position: fixed;
+            top: var(--nav-h);
             right: 0;
             width: 220px;
-            background: rgba(255, 255, 255, 0.96);
-            border-left: 1px solid rgba(43, 158, 117, 0.12);
-            border-bottom: 1px solid rgba(43, 158, 117, 0.12);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.97);
+            border-left: 1px solid var(--green-light);
+            border-bottom: 1px solid var(--green-light);
+            transform: translateX(105%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -4px 10px 30px rgba(0, 0, 0, 0.09);
+            z-index: 999;
+            border-radius: 0 0 0 14px;
             overflow: hidden;
         }
 
-        nav.active {
+        nav.open {
             transform: translateX(0);
         }
 
@@ -120,49 +139,88 @@
         }
 
         nav li {
-            padding: 13px 14px;
+            padding: 14px 16px;
             cursor: pointer;
-            transition: 0.25s ease;
+            transition: background 0.22s ease, color 0.22s ease;
             user-select: none;
-            color: #2B9E75;
+            color: var(--green);
             font-weight: 600;
-            border-bottom: 1px solid rgba(43, 158, 117, 0.08);
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(43, 158, 117, 0.07);
+        }
+
+        nav li:last-child {
+            border-bottom: none;
         }
 
         nav li:hover,
         nav li.active {
-            background: #2B9E75;
-            color: #fff;
+            background: var(--green);
+            color: var(--white);
+        }
+
+        /* ===== OVERLAY (mobile menu backdrop) ===== */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 998;
+            background: transparent;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* ===== SLIDER WRAPPER ===== */
+        .slider-track {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100%;
+            overflow: hidden;
         }
 
         .slider {
             display: flex;
-            width: 500%;
-            height: 100vh;
-            transition: transform 0.5s ease;
+            width: 500vw;
+            height: 100%;
+            transform: translateX(0);
+            transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: transform;
-            overflow: hidden;
         }
 
+        /* ===== EACH SLIDE ===== */
         .slide {
             width: 100vw;
-            height: 100vh;
-            padding: 80px 20px 22px;
+            height: 100%;
+            padding: calc(var(--nav-h) + 20px) 20px 30px;
             overflow-y: auto;
             overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            flex-shrink: 0;
         }
 
-        .home {
-            background: linear-gradient(135deg, #2B9E75, #0f3d2e);
+        /* scrollbar */
+        .slide::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: var(--green-light);
+            border-radius: 4px;
+        }
+
+        /* ===== HOME SLIDE ===== */
+        .slide-home {
+            background: linear-gradient(145deg, #2B9E75 0%, #0f3d2e 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-
-            overflow: hidden;
-            /* 🔥 add */
-            height: 100vh;
-            /* 🔥 add */
+            padding: 0 20px;
         }
 
         .hero {
@@ -171,130 +229,163 @@
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 8px;
+            font-size: clamp(2.2rem, 8vw, 3.5rem);
             font-weight: 800;
-            letter-spacing: 0.2px;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            line-height: 1.15;
         }
 
         .hero p {
             font-size: 1rem;
-            opacity: 0.92;
+            opacity: 0.88;
+            letter-spacing: 1px;
         }
 
-        .slide h2 {
+        /* ===== SLIDE CONTENT ===== */
+        .slide-content h2 {
             font-size: 1.35rem;
-            margin-bottom: 14px;
-            color: #2B9E75;
             font-weight: 800;
+            color: var(--green);
+            margin-bottom: 14px;
         }
 
+        /* ===== SEARCH INPUT ===== */
         .search {
             width: 100%;
             padding: 12px 14px;
-            border: 1px solid rgba(43, 158, 117, 0.28);
+            border: 1.5px solid var(--green-light);
             border-radius: 12px;
-            margin: 12px 0 15px;
+            margin: 4px 0 16px;
             outline: none;
-            color: #2B9E75;
-            background: #fff;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+            color: var(--green);
+            background: var(--white);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .search::placeholder {
-            color: rgba(43, 158, 117, 0.82);
+            color: rgba(43, 158, 117, 0.55);
         }
 
         .search:focus {
-            border-color: #2B9E75;
-            box-shadow: 0 0 0 4px rgba(43, 158, 117, 0.08);
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px var(--green-glow);
         }
 
+        /* ===== LIST & ITEMS ===== */
         .list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding-bottom: 20px;
+            gap: 9px;
+            padding-bottom: 30px;
         }
 
         .item {
             display: block;
-            padding: 14px 15px;
+            padding: 13px 16px;
             border-radius: 12px;
-            background: #f9f9f9;
-            color: #2B9E75;
+            background: var(--bg);
+            color: var(--green);
             text-decoration: none;
-            transition: transform 0.28s ease, background 0.28s ease, color 0.28s ease, opacity 0.6s ease;
-            border: 1px solid rgba(43, 158, 117, 0.06);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(43, 158, 117, 0.07);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            font-weight: 600;
+            font-size: 0.93rem;
+            /* Animation: start hidden */
             opacity: 0;
-            transform: translateY(26px);
+            transform: translateY(18px);
+            transition:
+                background 0.25s ease,
+                color 0.25s ease,
+                transform 0.25s ease,
+                opacity 0.4s ease,
+                box-shadow 0.25s ease;
         }
 
-        .item.show {
+        .item.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         .item:hover {
-            background: #2B9E75;
-            color: #fff;
-            transform: translateX(5px);
+            background: var(--green);
+            color: var(--white);
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(43, 158, 117, 0.22);
         }
 
-        .item.hidden {
-            display: none;
+        /* ===== ABOUT TEXT ===== */
+        .about-text {
+            color: #444;
+            line-height: 1.8;
+            font-size: 0.95rem;
         }
 
+        .about-text br+br {
+            display: block;
+            content: '';
+            margin-top: 10px;
+        }
+
+        /* ===== DESKTOP NAV ===== */
         @media (min-width: 768px) {
-            nav {
-                position: static;
-                transform: none;
-                width: auto;
-                border: 0;
-                box-shadow: none;
-                background: transparent;
-            }
-
-            nav ul {
-                display: flex;
-                gap: 10px;
-            }
-
-            nav li {
-                border-bottom: 0;
-                border-radius: 999px;
-                padding: 10px 14px;
-            }
-
             .menu-btn {
                 display: none;
             }
 
-            .slide {
-                padding: 90px 30px 24px;
+            .overlay {
+                display: none !important;
             }
-        }
 
-        html,
-        body {
-            touch-action: pan-y;
+            nav {
+                position: static;
+                transform: none !important;
+                width: auto;
+                border: none;
+                box-shadow: none;
+                background: transparent;
+                border-radius: 0;
+            }
+
+            nav ul {
+                display: flex;
+                gap: 6px;
+            }
+
+            nav li {
+                border-bottom: none;
+                border-radius: 999px;
+                padding: 8px 14px;
+                font-size: 0.9rem;
+            }
+
+            .slide {
+                padding: calc(var(--nav-h) + 28px) 36px 36px;
+            }
+
+            .list {
+                max-width: 640px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- ===== NAVBAR ===== -->
     <header class="navbar">
         <div class="logo">Daily Zikr</div>
 
-        <div class="menu-btn" id="menuBtn" aria-label="Menu" role="button" tabindex="0">
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
 
-        <nav id="navMenu">
+        <nav id="navMenu" aria-label="Main navigation">
             <ul>
                 <li data-index="0" class="active">Home</li>
                 <li data-index="1">Quran</li>
@@ -305,343 +396,445 @@
         </nav>
     </header>
 
-    <main class="slider" id="slider">
+    <!-- Overlay to close mobile menu -->
+    <div class="overlay" id="overlay"></div>
 
-        <section class="slide home">
-            <div class="hero">
-                <h1>Daily Zikr</h1>
-                <p>Minimal • Clean • Peaceful</p>
-            </div>
-        </section>
+    <!-- ===== SLIDER ===== -->
+    <div class="slider-track">
+        <div class="slider" id="slider">
 
-        <section class="slide" id="quran">
-            <h2>Al-Quran</h2>
-            <input class="search" id="quranSearch" placeholder="Search Surah..." />
+            <!-- ===== SLIDE 0: HOME ===== -->
+            <section class="slide slide-home" data-slide="home">
+                <div class="hero">
+                    <h1>Daily Zikr</h1>
+                    <p>Minimal &bull; Clean &bull; Peaceful</p>
+                </div>
+            </section>
 
-            <div class="list" id="quranList">
+            <!-- ===== SLIDE 1: QURAN ===== -->
+            <section class="slide slide-content" data-slide="quran">
+                <h2>Al-Quran</h2>
+                <input class="search" id="quranSearch" placeholder="Search Surah..." autocomplete="off" />
+                <div class="list" id="quranList">
+                    <a href="001-al-fatiha.html?from=quran" class="item">001. Al-Fatiha</a>
+                    <a href="002-al-baqara.html?from=quran" class="item">002. Al-Baqara</a>
+                    <a href="003-al-imran.html?from=quran" class="item">003. Al-Imran</a>
+                    <a href="004-an-nisa.html?from=quran" class="item">004. An-Nisa</a>
+                    <a href="005-al-maidah.html?from=quran" class="item">005. Al-Ma'idah</a>
+                    <a href="006-al-anam.html?from=quran" class="item">006. Al-An'am</a>
+                    <a href="007-al-araf.html?from=quran" class="item">007. Al-A'raf</a>
+                    <a href="008-al-anfal.html?from=quran" class="item">008. Al-Anfal</a>
+                    <a href="009-at-tawbah.html?from=quran" class="item">009. At-Tawbah</a>
+                    <a href="010-yunus.html?from=quran" class="item">010. Yunus</a>
+                    <a href="011-hud.html?from=quran" class="item">011. Hud</a>
+                    <a href="012-yusuf.html?from=quran" class="item">012. Yusuf</a>
+                    <a href="013-ar-rad.html?from=quran" class="item">013. Ar-Ra'd</a>
+                    <a href="014-ibrahim.html?from=quran" class="item">014. Ibrahim</a>
+                    <a href="015-al-hijr.html?from=quran" class="item">015. Al-Hijr</a>
+                    <a href="016-an-nahl.html?from=quran" class="item">016. An-Nahl</a>
+                    <a href="017-al-isra.html?from=quran" class="item">017. Al-Isra</a>
+                    <a href="018-al-kahf.html?from=quran" class="item">018. Al-Kahf</a>
+                    <a href="019-maryam.html?from=quran" class="item">019. Maryam</a>
+                    <a href="020-ta-ha.html?from=quran" class="item">020. Ta-Ha</a>
+                    <a href="021-al-anbiya.html?from=quran" class="item">021. Al-Anbiya</a>
+                    <a href="022-al-hajj.html?from=quran" class="item">022. Al-Hajj</a>
+                    <a href="023-al-muminun.html?from=quran" class="item">023. Al-Mu'minun</a>
+                    <a href="024-an-nur.html?from=quran" class="item">024. An-Nur</a>
+                    <a href="025-al-furqan.html?from=quran" class="item">025. Al-Furqan</a>
+                    <a href="026-ash-shuara.html?from=quran" class="item">026. Ash-Shu'ara</a>
+                    <a href="027-an-naml.html?from=quran" class="item">027. An-Naml</a>
+                    <a href="028-al-qasas.html?from=quran" class="item">028. Al-Qasas</a>
+                    <a href="029-al-ankabut.html?from=quran" class="item">029. Al-Ankabut</a>
+                    <a href="030-ar-rum.html?from=quran" class="item">030. Ar-Rum</a>
+                    <a href="031-luqman.html?from=quran" class="item">031. Luqman</a>
+                    <a href="032-as-sajdah.html?from=quran" class="item">032. As-Sajdah</a>
+                    <a href="033-al-ahzab.html?from=quran" class="item">033. Al-Ahzab</a>
+                    <a href="034-saba.html?from=quran" class="item">034. Saba</a>
+                    <a href="035-fatir.html?from=quran" class="item">035. Fatir</a>
+                    <a href="036-ya-sin.html?from=quran" class="item">036. Ya-Sin</a>
+                    <a href="037-as-saffat.html?from=quran" class="item">037. As-Saffat</a>
+                    <a href="038-sad.html?from=quran" class="item">038. Sad</a>
+                    <a href="039-az-zumar.html?from=quran" class="item">039. Az-Zumar</a>
+                    <a href="040-ghafir.html?from=quran" class="item">040. Ghafir</a>
+                    <a href="041-fussilat.html?from=quran" class="item">041. Fussilat</a>
+                    <a href="042-ash-shura.html?from=quran" class="item">042. Ash-Shura</a>
+                    <a href="043-az-zukhruf.html?from=quran" class="item">043. Az-Zukhruf</a>
+                    <a href="044-ad-dukhan.html?from=quran" class="item">044. Ad-Dukhan</a>
+                    <a href="045-al-jathiyah.html?from=quran" class="item">045. Al-Jathiyah</a>
+                    <a href="046-al-ahqaf.html?from=quran" class="item">046. Al-Ahqaf</a>
+                    <a href="047-muhammad.html?from=quran" class="item">047. Muhammad</a>
+                    <a href="048-al-fath.html?from=quran" class="item">048. Al-Fath</a>
+                    <a href="049-al-hujurat.html?from=quran" class="item">049. Al-Hujurat</a>
+                    <a href="050-qaf.html?from=quran" class="item">050. Qaf</a>
+                    <a href="051-adh-dhariyat.html?from=quran" class="item">051. Adh-Dhariyat</a>
+                    <a href="052-at-tur.html?from=quran" class="item">052. At-Tur</a>
+                    <a href="053-an-najm.html?from=quran" class="item">053. An-Najm</a>
+                    <a href="054-al-qamar.html?from=quran" class="item">054. Al-Qamar</a>
+                    <a href="055-ar-rahman.html?from=quran" class="item">055. Ar-Rahman</a>
+                    <a href="056-al-waqiah.html?from=quran" class="item">056. Al-Waqi'ah</a>
+                    <a href="057-al-hadid.html?from=quran" class="item">057. Al-Hadid</a>
+                    <a href="058-al-mujadila.html?from=quran" class="item">058. Al-Mujadila</a>
+                    <a href="059-al-hashr.html?from=quran" class="item">059. Al-Hashr</a>
+                    <a href="060-al-mumtahanah.html?from=quran" class="item">060. Al-Mumtahanah</a>
+                    <a href="061-as-saff.html?from=quran" class="item">061. As-Saff</a>
+                    <a href="062-al-jumuah.html?from=quran" class="item">062. Al-Jumu'ah</a>
+                    <a href="063-al-munafiqun.html?from=quran" class="item">063. Al-Munafiqun</a>
+                    <a href="064-at-taghabun.html?from=quran" class="item">064. At-Taghabun</a>
+                    <a href="065-at-talaq.html?from=quran" class="item">065. At-Talaq</a>
+                    <a href="066-at-tahrim.html?from=quran" class="item">066. At-Tahrim</a>
+                    <a href="067-al-mulk.html?from=quran" class="item">067. Al-Mulk</a>
+                    <a href="068-al-qalam.html?from=quran" class="item">068. Al-Qalam</a>
+                    <a href="069-al-haqqah.html?from=quran" class="item">069. Al-Haqqah</a>
+                    <a href="070-al-maarij.html?from=quran" class="item">070. Al-Ma'arij</a>
+                    <a href="071-nuh.html?from=quran" class="item">071. Nuh</a>
+                    <a href="072-al-jinn.html?from=quran" class="item">072. Al-Jinn</a>
+                    <a href="073-al-muzzammil.html?from=quran" class="item">073. Al-Muzzammil</a>
+                    <a href="074-al-muddathir.html?from=quran" class="item">074. Al-Muddathir</a>
+                    <a href="075-al-qiyamah.html?from=quran" class="item">075. Al-Qiyamah</a>
+                    <a href="076-al-insan.html?from=quran" class="item">076. Al-Insan</a>
+                    <a href="077-al-mursalat.html?from=quran" class="item">077. Al-Mursalat</a>
+                    <a href="078-an-naba.html?from=quran" class="item">078. An-Naba</a>
+                    <a href="079-an-naziat.html?from=quran" class="item">079. An-Nazi'at</a>
+                    <a href="080-abasa.html?from=quran" class="item">080. Abasa</a>
+                    <a href="081-at-takwir.html?from=quran" class="item">081. At-Takwir</a>
+                    <a href="082-al-infitar.html?from=quran" class="item">082. Al-Infitar</a>
+                    <a href="083-al-mutaffifin.html?from=quran" class="item">083. Al-Mutaffifin</a>
+                    <a href="084-al-inshiqaq.html?from=quran" class="item">084. Al-Inshiqaq</a>
+                    <a href="085-al-buruj.html?from=quran" class="item">085. Al-Buruj</a>
+                    <a href="086-at-tariq.html?from=quran" class="item">086. At-Tariq</a>
+                    <a href="087-al-ala.html?from=quran" class="item">087. Al-A'la</a>
+                    <a href="088-al-ghashiyah.html?from=quran" class="item">088. Al-Ghashiyah</a>
+                    <a href="089-al-fajr.html?from=quran" class="item">089. Al-Fajr</a>
+                    <a href="090-al-balad.html?from=quran" class="item">090. Al-Balad</a>
+                    <a href="091-ash-shams.html?from=quran" class="item">091. Ash-Shams</a>
+                    <a href="092-al-layl.html?from=quran" class="item">092. Al-Layl</a>
+                    <a href="093-ad-duha.html?from=quran" class="item">093. Ad-Duha</a>
+                    <a href="094-ash-sharh.html?from=quran" class="item">094. Ash-Sharh</a>
+                    <a href="095-at-tin.html?from=quran" class="item">095. At-Tin</a>
+                    <a href="096-al-alaq.html?from=quran" class="item">096. Al-Alaq</a>
+                    <a href="097-al-qadr.html?from=quran" class="item">097. Al-Qadr</a>
+                    <a href="098-al-bayyinah.html?from=quran" class="item">098. Al-Bayyinah</a>
+                    <a href="099-az-zalzalah.html?from=quran" class="item">099. Az-Zalzalah</a>
+                    <a href="100-al-adiyat.html?from=quran" class="item">100. Al-Adiyat</a>
+                    <a href="101-al-qariah.html?from=quran" class="item">101. Al-Qari'ah</a>
+                    <a href="102-at-takathur.html?from=quran" class="item">102. At-Takathur</a>
+                    <a href="103-al-asr.html?from=quran" class="item">103. Al-Asr</a>
+                    <a href="104-al-humazah.html?from=quran" class="item">104. Al-Humazah</a>
+                    <a href="105-al-fil.html?from=quran" class="item">105. Al-Fil</a>
+                    <a href="106-quraysh.html?from=quran" class="item">106. Quraysh</a>
+                    <a href="107-al-maun.html?from=quran" class="item">107. Al-Ma'un</a>
+                    <a href="108-al-kawthar.html?from=quran" class="item">108. Al-Kawthar</a>
+                    <a href="109-al-kafirun.html?from=quran" class="item">109. Al-Kafirun</a>
+                    <a href="110-an-nasr.html?from=quran" class="item">110. An-Nasr</a>
+                    <a href="111-al-masad.html?from=quran" class="item">111. Al-Masad</a>
+                    <a href="112-al-ikhlas.html?from=quran" class="item">112. Al-Ikhlas</a>
+                    <a href="113-al-falaq.html?from=quran" class="item">113. Al-Falaq</a>
+                    <a href="114-an-nas.html?from=quran" class="item">114. An-Nas</a>
+                </div>
+            </section>
 
-                <a href="001-al-fatiha.html?from=quran" class="item">001. Al-Fatiha</a>
-                <a href="002-al-baqara.html?from=quran" class="item">002. Al-Baqara</a>
-                <a href="003-al-imran.html?from=quran" class="item">003. Al-Imran</a>
-                <a href="004-an-nisa.html?from=quran" class="item">004. An-Nisa</a>
-                <a href="005-al-maidah.html?from=quran" class="item">005. Al-Ma'idah</a>
-                <a href="006-al-anam.html?from=quran" class="item">006. Al-An'am</a>
-                <a href="007-al-araf.html?from=quran" class="item">007. Al-A'raf</a>
-                <a href="008-al-anfal.html?from=quran" class="item">008. Al-Anfal</a>
-                <a href="009-at-tawbah.html?from=quran" class="item">009. At-Tawbah</a>
-                <a href="010-yunus.html?from=quran" class="item">010. Yunus</a>
+            <!-- ===== SLIDE 2: HADITH ===== -->
+            <section class="slide slide-content" data-slide="hadith">
+                <h2>Hadith</h2>
+                <input class="search" id="hadithSearch" placeholder="Search Hadith..." autocomplete="off" />
+                <div class="list" id="hadithList">
+                    <a href="bukhari.html?from=hadith" class="item">01. Sahih Bukhari</a>
+                    <a href="muslim.html?from=hadith" class="item">02. Sahih Muslim</a>
+                    <a href="tirmidhi.html?from=hadith" class="item">03. Jami at-Tirmidhi</a>
+                    <a href="abu-dawood.html?from=hadith" class="item">04. Sunan Abu Dawood</a>
+                    <a href="nasai.html?from=hadith" class="item">05. Sunan an-Nasa'i</a>
+                    <a href="ibn-majah.html?from=hadith" class="item">06. Sunan Ibn Majah</a>
+                </div>
+            </section>
 
-                <a href="011-hud.html?from=quran" class="item">011. Hud</a>
-                <a href="012-yusuf.html?from=quran" class="item">012. Yusuf</a>
-                <a href="013-ar-rad.html?from=quran" class="item">013. Ar-Ra'd</a>
-                <a href="014-ibrahim.html?from=quran" class="item">014. Ibrahim</a>
-                <a href="015-al-hijr.html?from=quran" class="item">015. Al-Hijr</a>
-                <a href="016-an-nahl.html?from=quran" class="item">016. An-Nahl</a>
-                <a href="017-al-isra.html?from=quran" class="item">017. Al-Isra</a>
-                <a href="018-al-kahf.html?from=quran" class="item">018. Al-Kahf</a>
-                <a href="019-maryam.html?from=quran" class="item">019. Maryam</a>
-                <a href="020-ta-ha.html?from=quran" class="item">020. Ta-Ha</a>
+            <!-- ===== SLIDE 3: DUA ===== -->
+            <section class="slide slide-content" data-slide="dua">
+                <h2>দোয়া</h2>
+                <input class="search" id="duaSearch" placeholder="দোয়া, বাংলিশ বা বাংলা লিখুন..." autocomplete="off" />
+                <div class="list" id="duaList">
+                    <a href="dua.html?dua=sokal-sondha" class="item">সকাল-সন্ধ্যার দোয়া</a>
+                    <a href="dua.html?dua=khabar-age" class="item">খাবারের আগে দোয়া</a>
+                    <a href="dua.html?dua=khabar-pore" class="item">খাবারের পরে দোয়া</a>
+                    <a href="dua.html?dua=ghum-age" class="item">ঘুমানোর আগে দোয়া</a>
+                    <a href="dua.html?dua=ghum-uthe" class="item">ঘুম থেকে ওঠার দোয়া</a>
+                    <a href="dua.html?dua=mosjid-probesh" class="item">মসজিদে প্রবেশের দোয়া</a>
+                    <a href="dua.html?dua=mosjid-bahir" class="item">মসজিদ থেকে বের হওয়ার দোয়া</a>
+                    <a href="dua.html?dua=ghor-probesh" class="item">ঘরে প্রবেশের দোয়া</a>
+                    <a href="dua.html?dua=ghor-bahir" class="item">ঘর থেকে বের হওয়ার দোয়া</a>
+                    <a href="dua.html?dua=wudu" class="item">ওযুর দোয়া</a>
+                    <a href="dua.html?dua=istighfar" class="item">ইস্তিগফার</a>
+                    <a href="dua.html?dua=tauba" class="item">তওবার দোয়া</a>
+                    <a href="dua.html?dua=rizik" class="item">রিজিকের দোয়া</a>
+                    <a href="dua.html?dua=kaj-shuru" class="item">কাজ শুরু করার দোয়া</a>
+                    <a href="dua.html?dua=safar" class="item">ভ্রমণের দোয়া</a>
+                    <a href="dua.html?dua=shifa" class="item">রোগমুক্তির দোয়া</a>
+                    <a href="dua.html?dua=hifazat" class="item">হেফাজতের দোয়া</a>
+                    <a href="dua.html?dua=zikir" class="item">যিকিরের দোয়া</a>
+                    <a href="dua.html?dua=ilm" class="item">ইলম বৃদ্ধির দোয়া</a>
+                </div>
+            </section>
 
-                <a href="021-al-anbiya.html?from=quran" class="item">021. Al-Anbiya</a>
-                <a href="022-al-hajj.html?from=quran" class="item">022. Al-Hajj</a>
-                <a href="023-al-muminun.html?from=quran" class="item">023. Al-Mu'minun</a>
-                <a href="024-an-nur.html?from=quran" class="item">024. An-Nur</a>
-                <a href="025-al-furqan.html?from=quran" class="item">025. Al-Furqan</a>
-                <a href="026-ash-shuara.html?from=quran" class="item">026. Ash-Shu'ara</a>
-                <a href="027-an-naml.html?from=quran" class="item">027. An-Naml</a>
-                <a href="028-al-qasas.html?from=quran" class="item">028. Al-Qasas</a>
-                <a href="029-al-ankabut.html?from=quran" class="item">029. Al-Ankabut</a>
-                <a href="030-ar-rum.html?from=quran" class="item">030. Ar-Rum</a>
+            <!-- ===== SLIDE 4: ABOUT ===== -->
+            <section class="slide slide-content" data-slide="about">
+                <h2>About Daily Zikr</h2>
 
-                <a href="031-luqman.html?from=quran" class="item">031. Luqman</a>
-                <a href="032-as-sajdah.html?from=quran" class="item">032. As-Sajdah</a>
-                <a href="033-al-ahzab.html?from=quran" class="item">033. Al-Ahzab</a>
-                <a href="034-saba.html?from=quran" class="item">034. Saba</a>
-                <a href="035-fatir.html?from=quran" class="item">035. Fatir</a>
-                <a href="036-ya-sin.html?from=quran" class="item">036. Ya-Sin</a>
-                <a href="037-as-saffat.html?from=quran" class="item">037. As-Saffat</a>
-                <a href="038-sad.html?from=quran" class="item">038. Sad</a>
-                <a href="039-az-zumar.html?from=quran" class="item">039. Az-Zumar</a>
-                <a href="040-ghafir.html?from=quran" class="item">040. Ghafir</a>
+                <!--
+          ✔ এখানে About এর লেখা পরিবর্তন করতে পারবেন
+          ✔ শুধু <p> এর ভিতরের টেক্সট এডিট করুন
+          ✔ HTML structure পরিবর্তন করবেন না
+        -->
+                <p class="about-text">
+                    Daily Zikr এমন একটি ওয়েবসাইট, যা মানুষের দৈনন্দিন জীবনে আল্লাহর স্মরণকে সহজ, সুন্দর এবং নিয়মিত
+                    করার
+                    উদ্দেশ্যে তৈরি করা হয়েছে। বর্তমান ব্যস্ত জীবনে আমরা অনেক সময় গুরুত্বপূর্ণ দোয়া, যিকির ও ইসলামিক
+                    জ্ঞান
+                    থেকে দূরে সরে যাই। এই প্ল্যাটফর্ম সেই দূরত্ব কমানোর একটি ছোট প্রচেষ্টা।
+                    <br><br>
+                    এখানে আপনি খুব সহজভাবে কুরআনের সূরা, হাদিস এবং দৈনন্দিন জীবনে প্রয়োজনীয় দোয়াগুলো খুঁজে পাবেন।
+                    প্রতিটি
+                    দোয়া এমনভাবে সাজানো হয়েছে যেন তা পড়তে, বুঝতে এবং মনে রাখতে সুবিধা হয়।
+                    <br><br>
+                    Daily Zikr তৈরি করার মূল লক্ষ্য হলো— মানুষ যেন যেকোনো সময়, যেকোনো জায়গা থেকে সহজে দোয়া ও যিকির
+                    করতে
+                    পারে, এবং আল্লাহর সাথে তার সম্পর্ককে আরও মজবুত করতে পারে।
+                    <br><br>
+                    এই ওয়েবসাইটটি সম্পূর্ণভাবে মিনিমাল, পরিষ্কার ও distraction-free ডিজাইনে তৈরি, যাতে ব্যবহারকারী কোনো
+                    ঝামেলা ছাড়াই শুধুমাত্র প্রয়োজনীয় বিষয়গুলোতে মনোযোগ দিতে পারেন।
+                    <br><br>
+                    আমরা বিশ্বাস করি— ছোট ছোট আমলই একটি মানুষের জীবন পরিবর্তন করতে পারে।
+                    <br><br>
+                    আপনিও আজ থেকেই আপনার দৈনন্দিন জীবনে যিকির ও দোয়া যুক্ত করুন, এবং একটি শান্ত, বরকতময় জীবন গড়ে
+                    তুলুন।
+                </p>
+            </section>
 
-                <a href="041-fussilat.html?from=quran" class="item">041. Fussilat</a>
-                <a href="042-ash-shura.html?from=quran" class="item">042. Ash-Shura</a>
-                <a href="043-az-zukhruf.html?from=quran" class="item">043. Az-Zukhruf</a>
-                <a href="044-ad-dukhan.html?from=quran" class="item">044. Ad-Dukhan</a>
-                <a href="045-al-jathiyah.html?from=quran" class="item">045. Al-Jathiyah</a>
-                <a href="046-al-ahqaf.html?from=quran" class="item">046. Al-Ahqaf</a>
-                <a href="047-muhammad.html?from=quran" class="item">047. Muhammad</a>
-                <a href="048-al-fath.html?from=quran" class="item">048. Al-Fath</a>
-                <a href="049-al-hujurat.html?from=quran" class="item">049. Al-Hujurat</a>
-                <a href="050-qaf.html?from=quran" class="item">050. Qaf</a>
+        </div><!-- /slider -->
+    </div><!-- /slider-track -->
 
-                <a href="051-adh-dhariyat.html?from=quran" class="item">051. Adh-Dhariyat</a>
-                <a href="052-at-tur.html?from=quran" class="item">052. At-Tur</a>
-                <a href="053-an-najm.html?from=quran" class="item">053. An-Najm</a>
-                <a href="054-al-qamar.html?from=quran" class="item">054. Al-Qamar</a>
-                <a href="055-ar-rahman.html?from=quran" class="item">055. Ar-Rahman</a>
-                <a href="056-al-waqiah.html?from=quran" class="item">056. Al-Waqi'ah</a>
-                <a href="057-al-hadid.html?from=quran" class="item">057. Al-Hadid</a>
-                <a href="058-al-mujadila.html?from=quran" class="item">058. Al-Mujadila</a>
-                <a href="059-al-hashr.html?from=quran" class="item">059. Al-Hashr</a>
-                <a href="060-al-mumtahanah.html?from=quran" class="item">060. Al-Mumtahanah</a>
-
-                <a href="061-as-saff.html?from=quran" class="item">061. As-Saff</a>
-                <a href="062-al-jumuah.html?from=quran" class="item">062. Al-Jumu'ah</a>
-                <a href="063-al-munafiqun.html?from=quran" class="item">063. Al-Munafiqun</a>
-                <a href="064-at-taghabun.html?from=quran" class="item">064. At-Taghabun</a>
-                <a href="065-at-talaq.html?from=quran" class="item">065. At-Talaq</a>
-                <a href="066-at-tahrim.html?from=quran" class="item">066. At-Tahrim</a>
-                <a href="067-al-mulk.html?from=quran" class="item">067. Al-Mulk</a>
-                <a href="068-al-qalam.html?from=quran" class="item">068. Al-Qalam</a>
-                <a href="069-al-haqqah.html?from=quran" class="item">069. Al-Haqqah</a>
-                <a href="070-al-maarij.html?from=quran" class="item">070. Al-Ma'arij</a>
-
-                <a href="071-nuh.html?from=quran" class="item">071. Nuh</a>
-                <a href="072-al-jinn.html?from=quran" class="item">072. Al-Jinn</a>
-                <a href="073-al-muzzammil.html?from=quran" class="item">073. Al-Muzzammil</a>
-                <a href="074-al-muddathir.html?from=quran" class="item">074. Al-Muddathir</a>
-                <a href="075-al-qiyamah.html?from=quran" class="item">075. Al-Qiyamah</a>
-                <a href="076-al-insan.html?from=quran" class="item">076. Al-Insan</a>
-                <a href="077-al-mursalat.html?from=quran" class="item">077. Al-Mursalat</a>
-                <a href="078-an-naba.html?from=quran" class="item">078. An-Naba</a>
-                <a href="079-an-naziat.html?from=quran" class="item">079. An-Nazi'at</a>
-                <a href="080-abasa.html?from=quran" class="item">080. Abasa</a>
-
-                <a href="081-at-takwir.html?from=quran" class="item">081. At-Takwir</a>
-                <a href="082-al-infitar.html?from=quran" class="item">082. Al-Infitar</a>
-                <a href="083-al-mutaffifin.html?from=quran" class="item">083. Al-Mutaffifin</a>
-                <a href="084-al-inshiqaq.html?from=quran" class="item">084. Al-Inshiqaq</a>
-                <a href="085-al-buruj.html?from=quran" class="item">085. Al-Buruj</a>
-                <a href="086-at-tariq.html?from=quran" class="item">086. At-Tariq</a>
-                <a href="087-al-ala.html?from=quran" class="item">087. Al-A'la</a>
-                <a href="088-al-ghashiyah.html?from=quran" class="item">088. Al-Ghashiyah</a>
-                <a href="089-al-fajr.html?from=quran" class="item">089. Al-Fajr</a>
-                <a href="090-al-balad.html?from=quran" class="item">090. Al-Balad</a>
-
-                <a href="091-ash-shams.html?from=quran" class="item">091. Ash-Shams</a>
-                <a href="092-al-layl.html?from=quran" class="item">092. Al-Layl</a>
-                <a href="093-ad-duha.html?from=quran" class="item">093. Ad-Duha</a>
-                <a href="094-ash-sharh.html?from=quran" class="item">094. Ash-Sharh</a>
-                <a href="095-at-tin.html?from=quran" class="item">095. At-Tin</a>
-                <a href="096-al-alaq.html?from=quran" class="item">096. Al-Alaq</a>
-                <a href="097-al-qadr.html?from=quran" class="item">097. Al-Qadr</a>
-                <a href="098-al-bayyinah.html?from=quran" class="item">098. Al-Bayyinah</a>
-                <a href="099-az-zalzalah.html?from=quran" class="item">099. Az-Zalzalah</a>
-                <a href="100-al-adiyat.html?from=quran" class="item">100. Al-Adiyat</a>
-
-                <a href="101-al-qariah.html?from=quran" class="item">101. Al-Qari'ah</a>
-                <a href="102-at-takathur.html?from=quran" class="item">102. At-Takathur</a>
-                <a href="103-al-asr.html?from=quran" class="item">103. Al-Asr</a>
-                <a href="104-al-humazah.html?from=quran" class="item">104. Al-Humazah</a>
-                <a href="105-al-fil.html?from=quran" class="item">105. Al-Fil</a>
-                <a href="106-quraysh.html?from=quran" class="item">106. Quraysh</a>
-                <a href="107-al-maun.html?from=quran" class="item">107. Al-Ma'un</a>
-                <a href="108-al-kawthar.html?from=quran" class="item">108. Al-Kawthar</a>
-                <a href="109-al-kafirun.html?from=quran" class="item">109. Al-Kafirun</a>
-                <a href="110-an-nasr.html?from=quran" class="item">110. An-Nasr</a>
-
-                <a href="111-al-masad.html?from=quran" class="item">111. Al-Masad</a>
-                <a href="112-al-ikhlas.html?from=quran" class="item">112. Al-Ikhlas</a>
-                <a href="113-al-falaq.html?from=quran" class="item">113. Al-Falaq</a>
-                <a href="114-an-nas.html?from=quran" class="item">114. An-Nas</a>
-
-            </div>
-        </section>
-
-        <section class="slide" id="hadith">
-            <h2>Hadith</h2>
-            <input class="search" id="hadithSearch" placeholder="Search Hadith..." />
-
-            <div class="list" id="hadithList">
-
-                <a href="bukhari.html?from=hadith" class="item">01. Sahih Bukhari</a>
-                <a href="muslim.html?from=hadith" class="item">02. Sahih Muslim</a>
-                <a href="tirmidhi.html?from=hadith" class="item">03. Jami at-Tirmidhi</a>
-                <a href="abu-dawood.html?from=hadith" class="item">04. Sunan Abu Dawood</a>
-                <a href="nasai.html?from=hadith" class="item">05. Sunan an-Nasa'i</a>
-                <a href="ibn-majah.html?from=hadith" class="item">06. Sunan Ibn Majah</a>
-
-            </div>
-        </section>
-
-        <section class="slide" id="dua">
-            <h2>দোয়া</h2>
-
-            <!-- 🔍 সার্চ -->
-            <input class="search" id="duaSearch" placeholder="দোয়া, বাংলিশ বা বাংলা লিখুন..." />
-
-            <!-- 📜 দোয়ার লিস্ট (নিচে নিচে থাকবে) -->
-            <div class="list" id="duaList">
-
-                <a href="dua.html?dua=sokal-sondha" class="item">সকাল-সন্ধ্যার দোয়া</a>
-
-                <a href="dua.html?dua=khabar-age" class="item">খাবারের আগে দোয়া</a>
-
-                <a href="dua.html?dua=khabar-pore" class="item">খাবারের পরে দোয়া</a>
-
-                <a href="dua.html?dua=ghum-age" class="item">ঘুমানোর আগে দোয়া</a>
-
-                <a href="dua.html?dua=ghum-uthe" class="item">ঘুম থেকে ওঠার দোয়া</a>
-
-                <a href="dua.html?dua=mosjid-probesh" class="item">মসজিদে প্রবেশের দোয়া</a>
-
-                <a href="dua.html?dua=mosjid-bahir" class="item">মসজিদ থেকে বের হওয়ার দোয়া</a>
-
-                <a href="dua.html?dua=ghor-probesh" class="item">ঘরে প্রবেশের দোয়া</a>
-
-                <a href="dua.html?dua=ghor-bahir" class="item">ঘর থেকে বের হওয়ার দোয়া</a>
-
-                <a href="dua.html?dua=wudu" class="item">ওযুর দোয়া</a>
-
-                <a href="dua.html?dua=istighfar" class="item">ইস্তিগফার</a>
-
-                <a href="dua.html?dua=tauba" class="item">তওবার দোয়া</a>
-
-                <a href="dua.html?dua=rizik" class="item">রিজিকের দোয়া</a>
-
-                <a href="dua.html?dua=kaj-shuru" class="item">কাজ শুরু করার দোয়া</a>
-
-                <a href="dua.html?dua=safar" class="item">ভ্রমণের দোয়া</a>
-
-                <a href="dua.html?dua=shifa" class="item">রোগমুক্তির দোয়া</a>
-
-                <a href="dua.html?dua=hifazat" class="item">হেফাজতের দোয়া</a>
-
-                <a href="dua.html?dua=zikir" class="item">যিকিরের দোয়া</a>
-
-                <a href="dua.html?dua=ilm" class="item">ইলম বৃদ্ধির দোয়া</a>
-
-            </div>
-        </section>
-
-        <!-- ===== ABOUT SECTION START =====
-✔ এখানে About এর লেখা পরিবর্তন করতে পারবেন
-✔ শুধু <p> এর ভিতরের টেক্সট এডিট করুন
-✔ <br> ব্যবহার করে নতুন লাইন দিন
-✔ HTML structure (section / h2) পরিবর্তন করবেন না
-================================== -->
-
-        <section class="slide">
-            <h2>About Daily Zikr</h2>
-
-            <p>
-                Daily Zikr এমন একটি ওয়েবসাইট, যা মানুষের দৈনন্দিন জীবনে আল্লাহর স্মরণকে সহজ, সুন্দর এবং নিয়মিত করার
-                উদ্দেশ্যে তৈরি করা হয়েছে। বর্তমান ব্যস্ত জীবনে আমরা অনেক সময় গুরুত্বপূর্ণ দোয়া, যিকির ও ইসলামিক জ্ঞান
-                থেকে দূরে সরে যাই। এই প্ল্যাটফর্ম সেই দূরত্ব কমানোর একটি ছোট প্রচেষ্টা।
-                <br><br>
-                এখানে আপনি খুব সহজভাবে কুরআনের সূরা, হাদিস এবং দৈনন্দিন জীবনে প্রয়োজনীয় দোয়াগুলো খুঁজে পাবেন। প্রতিটি
-                দোয়া এমনভাবে সাজানো হয়েছে যেন তা পড়তে, বুঝতে এবং মনে রাখতে সুবিধা হয়।
-                <br><br>
-                Daily Zikr তৈরি করার মূল লক্ষ্য হলো— মানুষ যেন যেকোনো সময়, যেকোনো জায়গা থেকে সহজে দোয়া ও যিকির করতে
-                পারে, এবং আল্লাহর সাথে তার সম্পর্ককে আরও মজবুত করতে পারে।
-                <br><br>
-                এই ওয়েবসাইটটি সম্পূর্ণভাবে মিনিমাল, পরিষ্কার ও distraction-free ডিজাইনে তৈরি, যাতে ব্যবহারকারী কোনো
-                ঝামেলা ছাড়াই শুধুমাত্র প্রয়োজনীয় বিষয়গুলোতে মনোযোগ দিতে পারেন।
-                <br><br>
-                আমরা বিশ্বাস করি— ছোট ছোট আমলই একটি মানুষের জীবন পরিবর্তন করতে পারে।
-                <br><br>
-                আপনিও আজ থেকেই আপনার দৈনন্দিন জীবনে যিকির ও দোয়া যুক্ত করুন, এবং একটি শান্ত, বরকতময় জীবন গড়ে তুলুন।
-            </p>
-
-        </section>
-        <!-- ===== ABOUT SECTION END =====
-✔ নতুন কিছু যোগ করতে চাইলে <p> এর ভিতরেই লিখুন
-✔ ভুল হলে শুধু টেক্সট পরিবর্তন করুন, ট্যাগ না
-✔ পরিষ্কার ও সংক্ষিপ্ত রাখলে ভালো দেখাবে
-================================ -->
-
-    </main>
 
     <script>
         'use strict';
 
-        document.addEventListener("DOMContentLoaded", () => {
-            if (location.hash === "#quran") {
-                slider.style.transform = "translateX(-100vw)";
-                setActiveNav(1);
-            }
-            if (location.hash === "#hadith") {
-                slider.style.transform = "translateX(-200vw)";
-                setActiveNav(2);
-            }
-            if (location.hash === "#dua") {
-                slider.style.transform = "translateX(-300vw)";
-                setActiveNav(3);
-            }
-        });
+        /* =====================================================
+           DAILY ZIKR — NAVIGATION ENGINE
+           ✅ history.pushState → browser back/forward কাজ করবে
+           ✅ popstate listener → mobile back button fix
+           ✅ একটিই DOMContentLoaded
+           ✅ slide animation properly triggered per-slide
+        ===================================================== */
 
-        const slider = document.querySelector('.slider');
+        // ── Slide definitions ──────────────────────────────
+        const SLIDE_NAMES = ['home', 'quran', 'hadith', 'dua', 'about'];
+
+        // ── DOM refs ───────────────────────────────────────
+        const slider = document.getElementById('slider');
         const navItems = document.querySelectorAll('nav li');
         const menuBtn = document.getElementById('menuBtn');
         const navMenu = document.getElementById('navMenu');
+        const overlay = document.getElementById('overlay');
 
-        function setActiveNav(index) {
-            navItems.forEach((item) => item.classList.remove('active'));
+        // ── State ──────────────────────────────────────────
+        let currentIndex = 0;
+        let animatedSlides = new Set(); // tracks which slides have already animated
+
+        // ══════════════════════════════════════════════════
+        //  CORE: go to a specific slide index
+        // ══════════════════════════════════════════════════
+        function goToSlide(index, addToHistory) {
+            index = Math.max(0, Math.min(index, SLIDE_NAMES.length - 1));
+
+            currentIndex = index;
+            slider.style.transform = `translateX(calc(-${index} * 100vw))`;
+
+            // update active nav
+            navItems.forEach(li => li.classList.remove('active'));
             if (navItems[index]) navItems[index].classList.add('active');
+
+            // close mobile menu
+            closeMenu();
+
+            // push browser history (so back button works)
+            if (addToHistory) {
+                const hash = index === 0 ? location.pathname + location.search : '#' + SLIDE_NAMES[index];
+                history.pushState({ slideIndex: index }, '', hash);
+            }
+
+            // animate items in this slide (only once each)
+            animateSlideItems(index);
         }
 
-        navItems.forEach((item, i) => {
+        // ══════════════════════════════════════════════════
+        //  ITEM ANIMATION — triggered when slide becomes active
+        // ══════════════════════════════════════════════════
+        function animateSlideItems(index) {
+            if (animatedSlides.has(index)) return;
+            animatedSlides.add(index);
+
+            const slideName = SLIDE_NAMES[index];
+            const slide = document.querySelector(`[data-slide="${slideName}"]`);
+            if (!slide) return;
+
+            const items = slide.querySelectorAll('.item');
+            items.forEach((item, i) => {
+                // stagger: each item appears 40ms after the previous
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, 60 + i * 30); // 30ms stagger, starts after 60ms delay
+            });
+        }
+
+        // ══════════════════════════════════════════════════
+        //  PARSE HASH → slide index
+        // ══════════════════════════════════════════════════
+        function indexFromHash() {
+            const hash = location.hash.replace('#', '').toLowerCase().trim();
+            const idx = SLIDE_NAMES.indexOf(hash);
+            return idx >= 0 ? idx : 0;
+        }
+
+        // ══════════════════════════════════════════════════
+        //  MOBILE MENU open/close
+        // ══════════════════════════════════════════════════
+        function openMenu() {
+            navMenu.classList.add('open');
+            menuBtn.classList.add('open');
+            overlay.classList.add('show');
+            menuBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeMenu() {
+            navMenu.classList.remove('open');
+            menuBtn.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleMenu() {
+            navMenu.classList.contains('open') ? closeMenu() : openMenu();
+        }
+
+        // ══════════════════════════════════════════════════
+        //  EVENT LISTENERS
+        // ══════════════════════════════════════════════════
+
+        // Nav item clicks
+        navItems.forEach((item) => {
             item.addEventListener('click', () => {
-                slider.style.transform = `translateX(-${i * 100}vw)`;
-                setActiveNav(i);
-                navMenu.classList.remove('active');
+                const idx = parseInt(item.dataset.index, 10);
+                goToSlide(idx, true);
             });
         });
 
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
+        // Hamburger button
+        menuBtn.addEventListener('click', toggleMenu);
         menuBtn.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                navMenu.classList.toggle('active');
-            }
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
         });
 
-        function smartSearch(inputId, listId) {
+        // Overlay click → close menu
+        overlay.addEventListener('click', closeMenu);
+
+        // ── CRITICAL FIX: browser back/forward ────────────
+        window.addEventListener('popstate', (e) => {
+            // e.state contains { slideIndex } if we pushed it
+            const idx = (e.state && typeof e.state.slideIndex === 'number')
+                ? e.state.slideIndex
+                : indexFromHash();
+            goToSlide(idx, false); // false = don't push again
+        });
+
+        // ══════════════════════════════════════════════════
+        //  INIT (single DOMContentLoaded)
+        // ══════════════════════════════════════════════════
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1) Determine starting slide from URL hash
+            const startIndex = indexFromHash();
+
+            // 2) Replace current history state with slide info
+            //    (so back button works from the very first slide too)
+            history.replaceState({ slideIndex: startIndex }, '', location.href);
+
+            // 3) Jump slider instantly (no transition) to correct slide
+            slider.style.transition = 'none';
+            slider.style.transform = `translateX(calc(-${startIndex} * 100vw))`;
+            navItems.forEach(li => li.classList.remove('active'));
+            if (navItems[startIndex]) navItems[startIndex].classList.add('active');
+
+            // 4) Re-enable transition after paint
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    slider.style.transition = '';
+                });
+            });
+
+            // 5) Animate items in the starting slide
+            animateSlideItems(startIndex);
+
+            // 6) Fade in body
+            document.body.classList.add('ready');
+
+        });
+
+
+        /* =====================================================
+           SEARCH SYSTEMS
+        ===================================================== */
+
+        // ── Utility: normalize text for search ────────────
+        function normalize(text) {
+            return (text || '').toLowerCase()
+                .replace(/[\u200C\u200D]/g, '')
+                .replace(/[^a-z0-9\u0980-\u09FF\s]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        // ── Generic simple search (hadith) ────────────────
+        function simpleSearch(inputId, listId) {
             const input = document.getElementById(inputId);
             const list = document.getElementById(listId);
-            const original = Array.from(list.children);
+            if (!input || !list) return;
+
+            const originals = Array.from(list.children);
 
             input.addEventListener('input', () => {
-                const value = input.value.trim().toLowerCase();
-
-                if (value === '') {
-                    list.replaceChildren(...original);
+                const q = normalize(input.value);
+                if (!q) {
+                    list.replaceChildren(...originals);
+                    // re-animate
+                    originals.forEach(el => el.classList.add('visible'));
                     return;
                 }
-
-                const items = Array.from(list.children);
-
-                items.sort((a, b) => {
-                    const aMatch = a.textContent.toLowerCase().includes(value);
-                    const bMatch = b.textContent.toLowerCase().includes(value);
-                    return Number(bMatch) - Number(aMatch);
+                const sorted = [...originals].sort((a, b) => {
+                    const ta = normalize(a.textContent);
+                    const tb = normalize(b.textContent);
+                    const am = ta.includes(q) ? 1 : 0;
+                    const bm = tb.includes(q) ? 1 : 0;
+                    return bm - am;
                 });
-
-                list.replaceChildren(...items);
+                list.replaceChildren(...sorted);
+                sorted.forEach(el => el.classList.add('visible'));
             });
         }
 
-        // ===== SUPER POWER QURAN SEARCH =====
-        (function () {
+        simpleSearch('hadithSearch', 'hadithList');
 
+        // ── QURAN SUPER SEARCH ────────────────────────────
+        (function () {
             const input = document.getElementById('quranSearch');
             const list = document.getElementById('quranList');
-            const items = Array.from(list.children);
-
             if (!input || !list) return;
 
-            // 🔥 এখানে আপনি নিজের মতো keyword add করতে পারবেন
-            const keywords = {
+            const originals = Array.from(list.children);
 
+            // 🔥 Keyword map — add more here freely
+            const keywords = {
                 "Al-Fatiha": ["fatiha", "ফাতিহা"],
                 "Al-Baqara": ["baqara", "বাকারা"],
-                "Aal-Imran": ["imran", "ইমরান"],
+                "Al-Imran": ["imran", "ইমরান"],
                 "An-Nisa": ["nisa", "নিসা"],
-                "Al-Maidah": ["maidah", "মায়িদা"],
+                "Al-Maidah": ["maidah", "মায়িদা"],
                 "Al-Anam": ["anam", "আনআম"],
                 "Al-Araf": ["araf", "আরাফ"],
                 "Al-Anfal": ["anfal", "আনফাল"],
@@ -655,10 +848,9 @@
                 "An-Nahl": ["nahl", "নাহল"],
                 "Al-Isra": ["isra", "ইসরা"],
                 "Al-Kahf": ["kahf", "কাহফ"],
-                "Maryam": ["maryam", "মারইয়াম"],
+                "Maryam": ["maryam", "মারইয়াম"],
                 "Ta-Ha": ["taha", "ত্বা-হা"],
-
-                "Al-Anbiya": ["anbiya", "আম্বিয়া"],
+                "Al-Anbiya": ["anbiya", "আম্বিয়া"],
                 "Al-Hajj": ["hajj", "হাজ্জ"],
                 "Al-Muminun": ["muminun", "মুমিনুন"],
                 "An-Nur": ["nur", "নূর"],
@@ -673,35 +865,33 @@
                 "Al-Ahzab": ["ahzab", "আহযাব"],
                 "Saba": ["saba", "সাবা"],
                 "Fatir": ["fatir", "ফাতির"],
-                "Ya-Sin": ["yasin", "ইয়াসিন"],
+                "Ya-Sin": ["yasin", "ইয়াসিন"],
                 "As-Saffat": ["saffat", "সাফফাত"],
                 "Sad": ["sad", "সাদ"],
                 "Az-Zumar": ["zumar", "যুমার"],
                 "Ghafir": ["ghafir", "গাফির"],
-
                 "Fussilat": ["fussilat", "ফুসসিলাত"],
                 "Ash-Shura": ["shura", "শূরা"],
                 "Az-Zukhruf": ["zukhruf", "যুখরুফ"],
                 "Ad-Dukhan": ["dukhan", "দুখান"],
-                "Al-Jathiyah": ["jathiyah", "জাসিয়া"],
+                "Al-Jathiyah": ["jathiyah", "জাসিয়া"],
                 "Al-Ahqaf": ["ahqaf", "আহকাফ"],
                 "Muhammad": ["muhammad", "মুহাম্মদ"],
                 "Al-Fath": ["fath", "ফাতহ"],
                 "Al-Hujurat": ["hujurat", "হুজুরাত"],
                 "Qaf": ["qaf", "ক্বাফ"],
-                "Adh-Dhariyat": ["dhariyat", "ধারিয়াত"],
+                "Adh-Dhariyat": ["dhariyat", "ধারিয়াত"],
                 "At-Tur": ["tur", "তুর"],
                 "An-Najm": ["najm", "নাজম"],
                 "Al-Qamar": ["qamar", "কামার"],
                 "Ar-Rahman": ["rahman", "রহমান"],
-                "Al-Waqiah": ["waqiah", "ওয়াকিয়া"],
+                "Al-Waqiah": ["waqiah", "ওয়াকিয়া"],
                 "Al-Hadid": ["hadid", "হাদিদ"],
                 "Al-Mujadila": ["mujadila", "মুজাদিলা"],
                 "Al-Hashr": ["hashr", "হাশর"],
                 "Al-Mumtahanah": ["mumtahanah", "মুমতাহিনা"],
-
                 "As-Saff": ["saff", "সাফ"],
-                "Al-Jumuah": ["jumuah", "জুমুয়া"],
+                "Al-Jumuah": ["jumuah", "জুমুয়া"],
                 "Al-Munafiqun": ["munafiqun", "মুনাফিকুন"],
                 "At-Taghabun": ["taghabun", "তাগাবুন"],
                 "At-Talaq": ["talaq", "তালাক"],
@@ -714,13 +904,12 @@
                 "Al-Jinn": ["jinn", "জিন"],
                 "Al-Muzzammil": ["muzzammil", "মুজাম্মিল"],
                 "Al-Muddathir": ["muddathir", "মুদ্দাসসির"],
-                "Al-Qiyamah": ["qiyamah", "কিয়ামাহ"],
+                "Al-Qiyamah": ["qiyamah", "কিয়ামাহ"],
                 "Al-Insan": ["insan", "ইনসান"],
                 "Al-Mursalat": ["mursalat", "মুরসালাত"],
                 "An-Naba": ["naba", "নাবা"],
-                "An-Naziat": ["naziat", "নাজিয়াত"],
+                "An-Naziat": ["naziat", "নাজিয়াত"],
                 "Abasa": ["abasa", "আবাসা"],
-
                 "At-Takwir": ["takwir", "তাকভির"],
                 "Al-Infitar": ["infitar", "ইনফিতার"],
                 "Al-Mutaffifin": ["mutaffifin", "মুতাফফিফিন"],
@@ -728,7 +917,7 @@
                 "Al-Buruj": ["buruj", "বুরুজ"],
                 "At-Tariq": ["tariq", "তারিক"],
                 "Al-Ala": ["ala", "আলা"],
-                "Al-Ghashiyah": ["ghashiyah", "গাশিয়াহ"],
+                "Al-Ghashiyah": ["ghashiyah", "গাশিয়াহ"],
                 "Al-Fajr": ["fajr", "ফজর"],
                 "Al-Balad": ["balad", "বালাদ"],
                 "Ash-Shams": ["shams", "শামস"],
@@ -738,11 +927,10 @@
                 "At-Tin": ["tin", "তিন"],
                 "Al-Alaq": ["alaq", "আলাক"],
                 "Al-Qadr": ["qadr", "কদর"],
-                "Al-Bayyinah": ["bayyinah", "বাইয়্যিনাহ"],
+                "Al-Bayyinah": ["bayyinah", "বাইয়্যিনাহ"],
                 "Az-Zalzalah": ["zalzalah", "যালযালাহ"],
-                "Al-Adiyat": ["adiyat", "আদিয়াত"],
-
-                "Al-Qariah": ["qariah", "কারিয়া"],
+                "Al-Adiyat": ["adiyat", "আদিয়াত"],
+                "Al-Qariah": ["qariah", "কারিয়া"],
                 "At-Takathur": ["takathur", "তাকাসুর"],
                 "Al-Asr": ["asr", "আসর"],
                 "Al-Humazah": ["humazah", "হুমাযাহ"],
@@ -756,263 +944,104 @@
                 "Al-Ikhlas": ["ikhlas", "ইখলাস"],
                 "Al-Falaq": ["falaq", "ফালাক"],
                 "An-Nas": ["nas", "নাস"]
-
             };
 
-            function normalize(text) {
-                return text.toLowerCase()
-                    .normalize("NFKD")
-                    .replace(/[\u200C\u200D]/g, '')
-                    .replace(/[^a-z0-9\u0980-\u09FF\s]/g, '')
-                    .trim();
-            }
-
-            function getKeywords(text) {
-                for (let key in keywords) {
-                    if (text.includes(key)) return keywords[key].join(' ');
+            function getKeywords(itemText) {
+                for (const [key, kws] of Object.entries(keywords)) {
+                    if (itemText.includes(key)) return kws;
                 }
-                return '';
+                return [];
             }
 
-            function score(query, text) {
+            function scoreItem(query, itemText) {
                 const q = normalize(query);
-                const t = normalize(text);
-                const extra = normalize(getKeywords(text));
-
+                const t = normalize(itemText);
                 let s = 0;
-
                 if (t === q) s += 1000;
                 if (t.startsWith(q)) s += 700;
                 if (t.includes(q)) s += 500;
-                if (extra.includes(q)) s += 900; // 🔥 keyword match হলে বেশি priority
-
+                const kws = getKeywords(itemText);
+                kws.forEach(k => {
+                    if (normalize(k).includes(q) || q.includes(normalize(k))) s += 900;
+                });
                 return s;
             }
 
             input.addEventListener('input', () => {
-
-                const value = input.value;
-
-                if (value.trim() === '') {
-                    list.replaceChildren(...items);
+                const val = input.value;
+                if (!val.trim()) {
+                    list.replaceChildren(...originals);
+                    originals.forEach(el => el.classList.add('visible'));
                     return;
                 }
-
-                const sorted = [...items].sort((a, b) => {
-                    return score(value, b.textContent) - score(value, a.textContent);
-                });
-
+                const sorted = [...originals].sort((a, b) =>
+                    scoreItem(val, b.textContent) - scoreItem(val, a.textContent)
+                );
                 list.replaceChildren(...sorted);
+                sorted.forEach(el => el.classList.add('visible'));
             });
-
         })();
 
-        smartSearch('hadithSearch', 'hadithList');
-
-        /* ============================================================
-   🔍 DUA SEARCH SYSTEM (PRO LEVEL CONFIGURATION)
-   ============================================================
-
-   📌 এই সেকশন কি করে?
-   --------------------------------
-   → Dua list এর জন্য advanced search system
-   → Bangla + English + Banglish detect করে
-   → Keyword boost ব্যবহার করে smart ranking করে
-   → exact match → top
-   → partial match → নিচে
-
-   ============================================================
-   ⚙️ কীভাবে উন্নত করবেন (IMPORTANT)
-   ============================================================
-
-   1️⃣ KEYWORDS ADD করা (সবচেয়ে গুরুত্বপূর্ণ)
-   --------------------------------
-   → নিচের "keywords" object এ নতুন শব্দ যোগ করুন
-
-   Example:
-   "ঘরে প্রবেশের দোয়া": ["ghor", "bari", "home"]
-
-   ✔ আপনি যত বেশি keyword দিবেন
-   ✔ search তত powerful হবে
-
-   👉 Bangla + English + Banglish সব add করুন
-
-   ============================================================
-
-   2️⃣ নতুন দোয়া যোগ করলে কি করবেন?
-   --------------------------------
-   ✔ index.html এ নতুন <a> item add করুন
-   ✔ এখানে keywords object এ entry add করুন
-
-   Example:
-   "নতুন দোয়া": ["keyword1", "keyword2"]
-
-   ============================================================
-
-   3️⃣ Ranking control (Advanced)
-   --------------------------------
-   score() function এর ভিতরে value change করে
-   search priority control করা যাবে
-
-   Example:
-   +900 → keyword boost
-   +700 → startsWith
-   +300 → includes
-
-   👉 বেশি দিলে উপরে আসবে
-
-   ============================================================
-
-   4️⃣ Banglish Support (Optional Upgrade)
-   --------------------------------
-   চাইলে future এ phonetic mapping add করতে পারবেন
-
-   Example:
-   ghor → ঘর
-   namaj → নামাজ
-
-   ============================================================
-
-   5️⃣ Performance Note
-   --------------------------------
-   ✔ ছোট list → fast
-   ✔ বড় list হলে debounce add করা ভালো
-
-   ============================================================
-
-   ⚠️ IMPORTANT RULE
-   --------------------------------
-   ❌ এই সেকশনের HTML ID change করবেন না:
-      - duaSearch
-      - duaList
-
-   ❌ structure change করলে search কাজ নাও করতে পারে
-
-   ============================================================
-
-   👨‍💻 Developer Note
-   --------------------------------
-   এই সেকশন modify করলে:
-   ✔ console error check করবেন
-   ✔ live test করবেন
-   ============================================================ */
-        /* ===== PRO DUA SEARCH (KEYWORD + BANGLISH + BOOST) ===== */
-
+        // ── DUA SUPER SEARCH ──────────────────────────────
         (function () {
-
             const input = document.getElementById('duaSearch');
             const list = document.getElementById('duaList');
-            const original = Array.from(list.children);
-
             if (!input || !list) return;
 
-            /* =========================
-               🔥 CUSTOM KEYWORDS SYSTEM
-               👉 এখানে আপনি unlimited keyword add করতে পারবেন
-            ========================== */
+            const originals = Array.from(list.children);
 
+            // 🔥 Dua keywords — add more freely
             const keywords = {
-                "ঘরে প্রবেশের দোয়া": ["ghor", "bari", "home", "house", "enter"],
-                "ঘর থেকে বের হওয়ার দোয়া": ["ghor", "bari", "exit", "ber", "out"],
-                "মসজিদে প্রবেশের দোয়া": ["mosjid", "masjid", "enter"],
-                "মসজিদ থেকে বের হওয়ার দোয়া": ["mosjid", "exit", "ber"],
-                "ঘুমানোর আগে দোয়া": ["ghum", "sleep", "night"],
-                "ঘুম থেকে ওঠার দোয়া": ["ghum", "wake", "morning"],
-                "খাবারের আগে দোয়া": ["food", "eat", "khabar"],
-                "খাবারের পরে দোয়া": ["food", "after", "khabar"],
-                "রিজিকের দোয়া": ["rizik", "income", "money"],
-                "তওবার দোয়া": ["tauba", "forgive"],
-                "ইস্তিগফার": ["astagfir", "forgive", "istegfar"],
-                "ওযুর দোয়া": ["wudu", "ozu", "oju"],
-                "ভ্রমণের দোয়া": ["travel", "safar"],
-                "রোগমুক্তির দোয়া": ["shifa", "sick", "rogmuktitr"],
-                "হেফাজতের দোয়া": ["safe", "protection"],
-                "যিকিরের দোয়া": ["zikir", "zikr"],
-                "ইলম বৃদ্ধির দোয়া": ["ilm", "knowledge"]
+                "সকাল-সন্ধ্যার দোয়া": ["morning", "sokal", "sondha", "evening", "subah", "maga"],
+                "খাবারের আগে দোয়া": ["food", "eat", "khabar", "age", "before", "bismillah"],
+                "খাবারের পরে দোয়া": ["food", "after", "khabar", "pore", "alhamdulillah"],
+                "ঘুমানোর আগে দোয়া": ["ghum", "sleep", "night", "age", "before", "bed"],
+                "ঘুম থেকে ওঠার দোয়া": ["ghum", "wake", "morning", "uthe", "subah"],
+                "মসজিদে প্রবেশের দোয়া": ["mosjid", "masjid", "enter", "probesh"],
+                "মসজিদ থেকে বের হওয়ার দোয়া": ["mosjid", "masjid", "exit", "ber", "out"],
+                "ঘরে প্রবেশের দোয়া": ["ghor", "bari", "home", "house", "enter", "probesh"],
+                "ঘর থেকে বের হওয়ার দোয়া": ["ghor", "bari", "exit", "ber", "out"],
+                "ওযুর দোয়া": ["wudu", "ozu", "oju", "ablution"],
+                "ইস্তিগফার": ["astagfir", "forgive", "istighfar", "maaf"],
+                "তওবার দোয়া": ["tauba", "toba", "forgive", "repent"],
+                "রিজিকের দোয়া": ["rizik", "income", "money", "job", "roji"],
+                "কাজ শুরু করার দোয়া": ["kaj", "work", "start", "bismillah", "shuru"],
+                "ভ্রমণের দোয়া": ["travel", "safar", "journey", "trip"],
+                "রোগমুক্তির দোয়া": ["shifa", "sick", "rog", "ill", "disease", "rogmukti"],
+                "হেফাজতের দোয়া": ["safe", "protection", "hifazat", "nirapod"],
+                "যিকিরের দোয়া": ["zikir", "zikr", "dhikr", "remember"],
+                "ইলম বৃদ্ধির দোয়া": ["ilm", "knowledge", "learn", "study", "education"]
             };
 
-            /* ========================= */
-
-            function normalize(text = '') {
-                return text.toLowerCase()
-                    .replace(/[\u200C\u200D]/g, '')
-                    .replace(/[^a-z0-9\u0980-\u09FF\s]/g, ' ')
-                    .replace(/\s+/g, ' ')
-                    .trim();
-            }
-
-            function getKeywords(title) {
-                return keywords[title] || [];
-            }
-
-            function score(query, itemText) {
-
+            function scoreItem(query, itemText) {
                 const q = normalize(query);
                 const t = normalize(itemText);
-
                 let s = 0;
-
-                // 🔥 direct match
                 if (t.includes(q)) s += 300;
-
-                // 🔥 starts match (very strong)
                 if (t.startsWith(q)) s += 700;
-
-                // 🔥 keyword match (MOST IMPORTANT)
-                const extra = getKeywords(itemText);
-
-                extra.forEach(k => {
-                    if (normalize(k).includes(q) || q.includes(normalize(k))) {
-                        s += 900; // 🔥 BOOST
-                    }
+                const kws = keywords[itemText.trim()] || [];
+                kws.forEach(k => {
+                    if (normalize(k).includes(q) || q.includes(normalize(k))) s += 900;
                 });
-
                 return s;
             }
 
             input.addEventListener('input', () => {
-
-                const value = input.value.trim();
-
-                if (!value) {
-                    list.replaceChildren(...original);
+                const val = input.value.trim();
+                if (!val) {
+                    list.replaceChildren(...originals);
+                    originals.forEach(el => el.classList.add('visible'));
                     return;
                 }
-
-                const items = original.map(el => {
-                    return {
-                        el,
-                        score: score(value, el.textContent)
-                    };
-                });
-
-                items.sort((a, b) => b.score - a.score);
-
-                list.replaceChildren(...items.map(i => i.el));
+                const sorted = [...originals]
+                    .map(el => ({ el, s: scoreItem(val, el.textContent.trim()) }))
+                    .sort((a, b) => b.s - a.s)
+                    .map(x => x.el);
+                list.replaceChildren(...sorted);
+                sorted.forEach(el => el.classList.add('visible'));
             });
-
         })();
 
-        /* =============🔚 END OF CONFIG BLOCK ============ */
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.item').forEach((el) => observer.observe(el));
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transform = 'translateY(16px)';
-            requestAnimationFrame(() => {
-                document.body.style.opacity = '1';
-                document.body.style.transform = 'translateY(0)';
-            });
-        });
     </script>
 </body>
 
