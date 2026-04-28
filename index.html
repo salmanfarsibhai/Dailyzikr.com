@@ -549,6 +549,105 @@
                 margin: 40px 10px;
             }
         }
+
+        /* 🔥 MOBILE TEXT FIX */
+        .hero p {
+            letter-spacing: 0;
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+🔥 CENTER FIX (Quran / Hadith / Dua)
+========================= */
+
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* সব কনটেন্ট center + A4 style */
+        .slide-content>* {
+            width: 100%;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 🔍 search bar full same width */
+        .slide-content input {
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto 15px auto;
+            display: block;
+        }
+
+        /* 📦 list container center */
+        .list {
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* =========================
+🔥 FINAL FIX (CENTER + STICKY + NO SCROLLBAR + NO CUT)
+========================= */
+
+        /* 🔹 SECTION HEADER (search + title sticky) */
+        .section-header {
+            position: sticky;
+            top: var(--nav-h);
+            background: #fff;
+            z-index: 50;
+            padding-bottom: 10px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 10px;
+        }
+
+        /* 🔹 SLIDE CONTENT FIX */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* 🔹 LIST CONTAINER */
+        .list {
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto;
+
+            overflow-y: auto;
+            padding-right: 6px;
+            /* 🔥 cut fix */
+
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE */
+        }
+
+        /* 🔹 HIDE SCROLLBAR (Chrome, Edge, Safari) */
+        .list::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        /* 🔹 ITEM FULL WIDTH FIX */
+        .item {
+            width: 100%;
+            display: block;
+        }
+
+        /* 🔹 EXTRA EDGE FIX */
+        .slide {
+            padding-right: 10px;
+        }
     </style>
 </head>
 
@@ -570,7 +669,8 @@
                 <li data-index="1">Quran</li>
                 <li data-index="2">Hadith</li>
                 <li data-index="3">Dua</li>
-                <li data-index="4">About</li>
+                <li data-index="4">Jiboni</li>
+                <li data-index="5">About</li>
             </ul>
         </nav>
     </header>
@@ -689,6 +789,23 @@
             " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 22px rgba(0,0,0,0.18)'"
                             onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 18px rgba(0,0,0,0.12)'">
                             Dua
+                        </button>
+
+                        <button onclick="goToSlide(4,true)" style="
+                width:135px;
+                padding:13px 0;
+                border-radius:12px;
+                border:none;
+                background:#ffffff;
+                color:#2B9E75;
+                font-weight:700;
+                font-size:.95rem;
+                cursor:pointer;
+                box-shadow:0 6px 18px rgba(0,0,0,0.12);
+                transition:all .25s ease;
+            " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 22px rgba(0,0,0,0.18)'"
+                            onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 18px rgba(0,0,0,0.12)'">
+                            Jiboni
                         </button>
 
                     </div>
@@ -885,6 +1002,29 @@
                 </div>
             </section>
 
+            <!-- ===== SLIDE 4: JIBONI ===== -->
+
+            <section class="slide slide-content" data-slide="jiboni">
+                <h2>Jiboni</h2>
+                <input class="search" id="jiboniSearch" placeholder="জীবনী খুঁজুন..." autocomplete="off" />
+
+                <div class="list" id="jiboniList">
+
+                    <a href="jiboni.html?type=nobi" class="item">নবীদের জীবনী</a>
+
+                    <a href="jiboni.html?type=sahabi" class="item">সাহাবীদের জীবনী</a>
+
+                    <a href="jiboni.html?type=tabei" class="item">তাবেঈদের জীবনী</a>
+
+                    <a href="jiboni.html?type=tabetabei" class="item">তাবে তাবেঈদের জীবনী</a>
+
+                    <a href="jiboni.html?type=alem" class="item">আলেমদের জীবনী</a>
+
+                    <a href="jiboni.html?type=others" class="item">অন্যান্য জীবনী</a>
+
+                </div>
+            </section>
+
             <!-- ===== SLIDE 4: ABOUT ===== -->
             <!-- ===== SLIDE 4: ABOUT ===== -->
             <section class="slide slide-content" data-slide="about">
@@ -944,7 +1084,7 @@
         ===================================================== */
 
         // ── Slide definitions ──────────────────────────────
-        const SLIDE_NAMES = ['home', 'quran', 'hadith', 'dua', 'about'];
+        const SLIDE_NAMES = ['home', 'quran', 'hadith', 'dua', 'jiboni', 'about'];
 
         // ── DOM refs ───────────────────────────────────────
         const slider = document.getElementById('slider');
@@ -1139,6 +1279,7 @@
         }
 
         simpleSearch('hadithSearch', 'hadithList');
+        simpleSearch('jiboniSearch', 'jiboniList');
 
         // ── QURAN SUPER SEARCH ────────────────────────────
         (function () {
