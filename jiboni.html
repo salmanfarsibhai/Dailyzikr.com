@@ -449,6 +449,7 @@ frame-ancestors 'none';
 
         function openPDF(title, link) {
             viewer.classList.add("active");
+            document.body.style.overflow = "hidden";
             loader.style.display = "flex";
             frame.style.display = "none";
             viewerTitle.innerText = title;
@@ -463,6 +464,7 @@ frame-ancestors 'none';
 
         function closeViewer() {
             viewer.classList.remove("active");
+            document.body.style.overflow = "auto";
             frame.src = "";
         }
 
