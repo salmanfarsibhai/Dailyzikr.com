@@ -448,6 +448,13 @@ frame-ancestors 'none';
         const viewerTitle = document.getElementById("viewerTitle");
 
         function openPDF(title, link) {
+
+            // 🔥 PDF না থাকলে stop
+            if (!link || link === "link" || !link.includes("drive.google.com")) {
+                alert("এই PDF এখনো যোগ করা হয়নি");
+                return;
+            }
+
             viewer.classList.add("active");
             document.body.style.overflow = "hidden";
             loader.style.display = "flex";
