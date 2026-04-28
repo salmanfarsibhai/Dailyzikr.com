@@ -1542,31 +1542,26 @@
 
 
     </script>
-    <script>
-        /* 🔥 PERFECT SCROLL ANIMATION (DOWN ONLY, NO BREAK) */
+    document.addEventListener("DOMContentLoaded", () => {
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting && !entry.target.classList.contains("show")) {
-                    // 👉 শুধু প্রথমবার নিচে আসলে animation হবে
-                    entry.target.classList.add("show");
-                }
-
-            });
-        }, {
-            threshold: 0.2
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            } else {
+                entry.target.classList.remove("show"); // 🔥 repeat animation
+            }
         });
+    }, {
+        threshold: 0.2
+    });
 
-        document.querySelectorAll('#quranList .item').forEach(el => {
-            observer.observe(el);
-        });
+    // 🔥 ALL LISTS (Quran + Dua + future safe)
+    document.querySelectorAll('.list .item').forEach(el => {
+        observer.observe(el);
+    });
 
-        // 🔥 DUA ANIMATION ADD
-        document.querySelectorAll('#duaList .item').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+});
     <div id="loader">
         <div class="dots">
             <span class="dot"></span>
