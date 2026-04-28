@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Jiboni</title>
+
+    <!-- =========================
+🔒 SECURITY (safe but usable)
+========================= -->
+    <meta http-equiv="Content-Security-Policy" content="
+default-src 'self';
+img-src 'self' data:;
+style-src 'self' 'unsafe-inline';
+script-src 'self' 'unsafe-inline';
+frame-src 'self' https://drive.google.com;
+object-src 'none';
+base-uri 'self';
+form-action 'self';
+frame-ancestors 'none';
+">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #eef2f5;
+            display: flex;
+            justify-content: center
+        }
+
+        .page {
+            width: 794px;
+            min-height: 100vh;
+            background: #fff;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                box-shadow: none
+            }
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            width: 794px;
+            height: 60px;
+            background: #2b9e75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%
+            }
+        }
+
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px)
+        }
+
+        .content {
+            padding-top: 70px
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: #f7f1e8;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .card {
+            margin: 12px 15px;
+            padding: 16px;
+            border-radius: 14px;
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: .3s;
+            opacity: 0;
+            transform: translateY(40px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            background: #2b9e75;
+            color: #fff;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: .6s ease;
+        }
+
+        .viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+        }
+
+        .viewer.active {
+            display: flex
+        }
+
+        .viewer-header {
+            height: 60px;
+            background: #2b9e75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .viewer iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #2b9e75;
+            border-radius: 50%;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            to {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div id="bookName">জীবনী</div>
+        </div>
+
+        <div class="content">
+
+            <div class="header">
+                <div class="title" id="headerTitle">জীবনী</div>
+                <div>ব্যক্তিত্ব তালিকা</div>
+            </div>
+
+            <div id="list"></div>
+
+        </div>
+    </div>
+
+    <div class="viewer" id="viewer">
+        <div class="viewer-header">
+            <div class="back-btn" onclick="closeViewer()">←</div>
+            <div id="viewerTitle">PDF</div>
+        </div>
+
+        <div id="loader" class="loader">
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <iframe id="frame"></iframe>
+    </div>
+
+    <script>
+
+        'use strict';
+
+        /* =========================
+        ⚙️ CONFIG (এখানেই সব add করবে)
+        ========================= */
+
+        const CONFIG = {
+            name: "ইসলামিক জীবনী",
+
+            sections: {
+
+                nobi: {
+                    name: "নবীদের জীবনী",
+                    books: [
+                        { title: "নবী মুহাম্মদ (সা.)", pdf: "https://drive.google.com/file/d/1xzPX43MzG53K2YlNEPPUte8K5Onq0k3u/preview" },
+                        { title: "নবী আদম (আ.)", pdf: "link" },
+                        { title: "নবী নূহ (আ.)", pdf: "link" },
+                        { title: "নবী হুদ (আ.)", pdf: "link" },
+                        { title: "নবী সালেহ (আ.)", pdf: "link" },
+                        { title: "নবী ইবরাহীম (আ.)", pdf: "link" },
+                        { title: "নবী লূত (আ.)", pdf: "link" },
+                        { title: "নবী ইসমাইল (আ.)", pdf: "link" },
+                        { title: "নবী ইসহাক (আ.)", pdf: "link" },
+                        { title: "নবী ইয়াকুব (আ.)", pdf: "link" },
+                        { title: "নবী ইউসুফ (আ.)", pdf: "link" },
+                        { title: "নবী আইয়ুব (আ.)", pdf: "link" },
+                        { title: "নবী শুয়াইব (আ.)", pdf: "link" },
+                        { title: "নবী মূসা (আ.)", pdf: "link" },
+                        { title: "নবী হারুন (আ.)", pdf: "link" },
+                        { title: "নবী দাউদ (আ.)", pdf: "link" },
+                        { title: "নবী সুলাইমান (আ.)", pdf: "link" },
+                        { title: "নবী ইউনুস (আ.)", pdf: "link" },
+                        { title: "নবী জাকারিয়া (আ.)", pdf: "link" },
+                        { title: "নবী ইয়াহইয়া (আ.)", pdf: "link" },
+                        { title: "নবী ঈসা (আ.)", pdf: "link" }
+                    ]
+                },
+
+                sahabi: {
+                    name: "সাহাবীদের জীবনী",
+                    books: [
+                        { title: "হযরত আবু বকর (রা.)", pdf: "link" },
+                        { title: "হযরত উমর (রা.)", pdf: "link" },
+                        { title: "হযরত উসমান (রা.)", pdf: "link" },
+                        { title: "হযরত আলী (রা.)", pdf: "link" },
+                        { title: "হযরত বিলাল (রা.)", pdf: "link" },
+                        { title: "হযরত আবু হুরায়রা (রা.)", pdf: "link" },
+                        { title: "হযরত সালমান ফারসি (রা.)", pdf: "link" },
+                        { title: "হযরত আবদুর রহমান ইবনে আউফ (রা.)", pdf: "link" },
+                        { title: "হযরত তালহা (রা.)", pdf: "link" },
+                        { title: "হযরত যুবাইর ইবনে আওয়াম (রা.)", pdf: "link" },
+                        { title: "হযরত সাদ ইবনে আবি ওয়াক্কাস (রা.)", pdf: "link" },
+                        { title: "হযরত সাঈদ ইবনে যায়েদ (রা.)", pdf: "link" },
+                        { title: "হযরত মুয়াজ ইবনে জাবাল (রা.)", pdf: "link" },
+                        { title: "হযরত আবু উবাইদা ইবনে জাররাহ (রা.)", pdf: "link" },
+                        { title: "হযরত খালিদ ইবনে ওয়ালিদ (রা.)", pdf: "link" },
+                        { title: "হযরত আমর ইবনে আস (রা.)", pdf: "link" },
+                        { title: "হযরত আবু মুসা আশআরী (রা.)", pdf: "link" },
+                        { title: "হযরত আবদুল্লাহ ইবনে মাসউদ (রা.)", pdf: "link" },
+                        { title: "হযরত আবদুল্লাহ ইবনে আব্বাস (রা.)", pdf: "link" },
+                        { title: "হযরত আনাস ইবনে মালিক (রা.)", pdf: "link" }
+                    ]
+                },
+
+                tabei: {
+                    name: "তাবেঈদের জীবনী",
+                    books: [
+                        { title: "হাসান বসরি (রহ.)", pdf: "link" },
+                        { title: "সাঈদ ইবনে মুসাইয়্যিব (রহ.)", pdf: "link" },
+                        { title: "ইবনে সিরিন (রহ.)", pdf: "link" },
+                        { title: "আতা ইবনে আবি রাবাহ (রহ.)", pdf: "link" },
+                        { title: "তাউস ইবনে কাইসান (রহ.)", pdf: "link" },
+                        { title: "মুজাহিদ ইবনে জাবর (রহ.)", pdf: "link" },
+                        { title: "কাতাদা ইবনে দিয়ামা (রহ.)", pdf: "link" },
+                        { title: "ইকরিমা (রহ.)", pdf: "link" },
+                        { title: "শাবি (রহ.)", pdf: "link" },
+                        { title: "মাকহুল শামী (রহ.)", pdf: "link" },
+                        { title: "আলকামা ইবনে কাইস (রহ.)", pdf: "link" },
+                        { title: "আসওয়াদ ইবনে ইয়াযিদ (রহ.)", pdf: "link" },
+                        { title: "মাসরুক ইবনে আজদা (রহ.)", pdf: "link" },
+                        { title: "উরওয়া ইবনে যুবাইর (রহ.)", pdf: "link" },
+                        { title: "সালিম ইবনে আবদুল্লাহ (রহ.)", pdf: "link" },
+                        { title: "নাফে (রহ.)", pdf: "link" },
+                        { title: "রাবিয়া আর-রায় (রহ.)", pdf: "link" },
+                        { title: "সুলাইমান আত-তাইমি (রহ.)", pdf: "link" },
+                        { title: "হাম্মাদ ইবনে সালামা (রহ.)", pdf: "link" },
+                        { title: "হাম্মাদ ইবনে যায়েদ (রহ.)", pdf: "link" }
+                    ]
+                },
+
+                tabetabei: {
+                    name: "তাবে তাবেঈদের জীবনী",
+                    books: [
+                        { title: "ইমাম আবু হানিফা (রহ.)", pdf: "link" },
+                        { title: "ইমাম মালিক (রহ.)", pdf: "link" },
+                        { title: "ইমাম শাফেয়ী (রহ.)", pdf: "link" },
+                        { title: "ইমাম আহমদ ইবনে হাম্বল (রহ.)", pdf: "link" },
+                        { title: "ইমাম আওযাঈ (রহ.)", pdf: "link" },
+                        { title: "ইমাম সুফিয়ান সাওরি (রহ.)", pdf: "link" },
+                        { title: "ইমাম লায়স ইবনে সাদ (রহ.)", pdf: "link" },
+                        { title: "ইমাম আবদুল্লাহ ইবনে মুবারক (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইসহাক ইবনে রাহাওয়াইহ (রহ.)", pdf: "link" },
+                        { title: "ইমাম ওয়াকী ইবনে জাররাহ (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইয়াহইয়া ইবনে মাঈন (রহ.)", pdf: "link" },
+                        { title: "ইমাম আবু ইউসুফ (রহ.)", pdf: "link" },
+                        { title: "ইমাম মুহাম্মদ শায়বানি (রহ.)", pdf: "link" },
+                        { title: "ইমাম আবু দাউদ (রহ.)", pdf: "link" },
+                        { title: "ইমাম তিরমিজি (রহ.)", pdf: "link" },
+                        { title: "ইমাম নাসাঈ (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইবনে মাজাহ (রহ.)", pdf: "link" },
+                        { title: "ইমাম দারিমি (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইবনে খুজাইমা (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইবনে হিব্বান (রহ.)", pdf: "link" }
+                    ]
+                },
+
+                alem: {
+                    name: "আলেমদের জীবনী",
+                    books: [
+                        { title: "ইমাম বুখারি (রহ.)", pdf: "link" },
+                        { title: "ইমাম মুসলিম (রহ.)", pdf: "link" },
+                        { title: "ইমাম নববী (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইবনে তাইমিয়া (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইবনে কাইয়্যিম (রহ.)", pdf: "link" },
+                        { title: "ইমাম গাজ্জালি (রহ.)", pdf: "link" },
+                        { title: "ইমাম কুরতুবি (রহ.)", pdf: "link" },
+                        { title: "ইমাম তাবারি (রহ.)", pdf: "link" },
+                        { title: "ইমাম ইবনে কাসির (রহ.)", pdf: "link" },
+                        { title: "ইমাম সুয়ূতি (রহ.)", pdf: "link" },
+                        { title: "ইমাম যাহাবি (রহ.)", pdf: "link" },
+                        { title: "ইমাম শাওকানি (রহ.)", pdf: "link" },
+                        { title: "ইমাম সানআনি (রহ.)", pdf: "link" },
+                        { title: "শাহ ওয়ালীউল্লাহ দেহলভী (রহ.)", pdf: "link" },
+                        { title: "ইমাম আহমদ রেজা (রহ.)", pdf: "link" },
+                        { title: "আশরাফ আলী থানভী (রহ.)", pdf: "link" },
+                        { title: "মুফতি তাকি উসমানি", pdf: "link" },
+                        { title: "ড. ইউসুফ আল-কারযাভি (রহ.)", pdf: "link" },
+                        { title: "শাইখ আলবানী (রহ.)", pdf: "link" },
+                        { title: "শাইখ ইবনে উসাইমিন (রহ.)", pdf: "link" }
+                    ]
+                },
+
+                others: {
+                    name: "অন্যান্য জীবনী",
+                    books: [
+                        { title: "মিজানুর রহমান আজহারী", pdf: "link" },
+                        { title: "ড. জাকির নায়েক", pdf: "link" },
+                        { title: "মুফতি মেনক", pdf: "link" },
+                        { title: "নোমান আলী খান", pdf: "link" },
+                        { title: "ওমর সুলাইমান", pdf: "link" },
+                        { title: "ইয়াসির কাদি", pdf: "link" },
+                        { title: "আব্দুর রাজ্জাক বিন ইউসুফ", pdf: "link" },
+                        { title: "আব্দুল্লাহ জাহাঙ্গীর (রহ.)", pdf: "link" },
+                        { title: "মাওলানা তারিক জামিল", pdf: "link" },
+                        { title: "সাঈদী (রহ.)", pdf: "link" },
+                        { title: "আবু ত্বহা মুহাম্মদ আদনান", pdf: "link" },
+                        { title: "শাইখ আহমাদুল্লাহ", pdf: "link" },
+                        { title: "মাওলানা মামুনুল হক", pdf: "link" },
+                        { title: "মাওলানা মঞ্জুরুল ইসলাম আফেন্দি", pdf: "link" },
+                        { title: "মুফতি কাজী ইব্রাহিম", pdf: "link" },
+                        { title: "শাইখ সালেহ আল-মুনাজ্জিদ", pdf: "link" },
+                        { title: "শাইখ সালেহ আল-ফাওজান", pdf: "link" },
+                        { title: "শাইখ আব্দুল্লাহ মতলাক", pdf: "link" },
+                        { title: "শাইখ আসিম আল হাকিম", pdf: "link" },
+                        { title: "শাইখ বিলাল আসাদ", pdf: "link" }
+                    ]
+                }
+
+            }
+        };
+
+        /* TITLE SET */
+        document.getElementById("pageTitle").innerText = CONFIG.name;
+        document.getElementById("bookName").innerText = CONFIG.name;
+        document.getElementById("headerTitle").innerText = CONFIG.name;
+
+        /* LIST CREATE */
+        const params = new URLSearchParams(location.search);
+        const type = params.get("type") || "nobi";
+
+        const current = CONFIG.sections[type];
+
+        /* TITLE CHANGE */
+        document.getElementById("pageTitle").innerText = current.name;
+        document.getElementById("bookName").innerText = current.name;
+        document.getElementById("headerTitle").innerText = current.name;
+
+        /* LIST CREATE */
+        current.books.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.innerText = item.title;
+
+            div.onclick = () => openPDF(item.title, item.pdf);
+
+            list.appendChild(div);
+        });
+
+        /* VIEWER */
+        const viewer = document.getElementById("viewer");
+        const frame = document.getElementById("frame");
+        const loader = document.getElementById("loader");
+        const viewerTitle = document.getElementById("viewerTitle");
+
+        function openPDF(title, link) {
+            viewer.classList.add("active");
+            loader.style.display = "flex";
+            frame.style.display = "none";
+            viewerTitle.innerText = title;
+
+            frame.src = link;
+
+            frame.onload = () => {
+                loader.style.display = "none";
+                frame.style.display = "block";
+            };
+        }
+
+        function closeViewer() {
+            viewer.classList.remove("active");
+            frame.src = "";
+        }
+
+        /* BACK */
+        function goBack() {
+            location.href = "index.html#jiboni";
+        }
+
+        /* ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add("show");
+            });
+        });
+
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach(el => observer.observe(el));
+        }, 100);
+
+    </script>
+
+</body>
+
+</html>
