@@ -837,6 +837,30 @@
                             transform: translateY(0);
                         }
                     }
+
+                    /* 🔥 QURAN LIST SCROLL ANIMATION */
+                    #quranList .item {
+                        opacity: 0;
+                        transform: translateY(40px);
+                    }
+
+                    #quranList .item.show {
+                        opacity: 1;
+                        transform: translateY(0);
+                        transition: 0.6s ease;
+                    }
+
+                    /* 🔥 DUA LIST ANIMATION */
+                    #duaList .item {
+                        opacity: 0;
+                        transform: translateY(40px);
+                    }
+
+                    #duaList .item.show {
+                        opacity: 1;
+                        transform: translateY(0);
+                        transition: 0.6s ease;
+                    }
                 </style>
             </section>
 
@@ -1518,7 +1542,31 @@
 
 
     </script>
+    <script>
+        /* 🔥 PERFECT SCROLL ANIMATION (DOWN ONLY, NO BREAK) */
 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting && !entry.target.classList.contains("show")) {
+                    // 👉 শুধু প্রথমবার নিচে আসলে animation হবে
+                    entry.target.classList.add("show");
+                }
+
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        document.querySelectorAll('#quranList .item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 🔥 DUA ANIMATION ADD
+        document.querySelectorAll('#duaList .item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
     <div id="loader">
         <div class="dots">
             <span class="dot"></span>
