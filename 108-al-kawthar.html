@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা কাওসার</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা কাওসার</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা কাওসার</div>
+                <div>মাক্কী • ৩ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">إِنَّآ أَعْطَيْنَـٰكَ ٱلْكَوْثَرَ</div>
+                <div class="pronounce">ইন্না আ’তইনা কাল কাওসার</div>
+                <div class="meaning">নিশ্চয়ই আমি আপনাকে কাওসার দান করেছি।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">فَصَلِّ لِرَبِّكَ وَٱنْحَرْ</div>
+                <div class="pronounce">ফাসল্লি লিরাব্বিকা ওয়ানহার</div>
+                <div class="meaning">অতএব আপনি আপনার রবের উদ্দেশ্যে সালাত আদায় করুন এবং কুরবানি করুন।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ</div>
+                <div class="pronounce">ইন্না শানিয়াকা হুয়াল আবতার</div>
+                <div class="meaning">নিশ্চয়ই আপনার শত্রুই নির্বংশ হবে।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা কাওসার নাযিল হওয়ার ঘটনা (শানে নুযুল)<br><br>​কাফেরদের উপহাস<br>নবীজির (সা.) ছেলে সন্তানের
+                    ইন্তেকালের (মৃত্যুর) পর মক্কার কাফেররা তাঁকে নিয়ে চরম উপহাস শুরু করে। বিশেষ করে 'আস ইবনে ওয়ায়েল'
+                    নামের এক কাফের নেতা নবীজিকে (সা.) 'আবতার' বা 'নির্বংশ' বলে কটূক্তি করে। আবতার বলতে এমন ব্যক্তিকে
+                    বোঝানো হতো, যার বংশ রক্ষা করার মতো কোনো ছেলে সন্তান বেঁচে নেই।<br><br>​নবীজির (সা.) কষ্ট<br>তৎকালীন
+                    আরব সমাজে ছেলে সন্তান না থাকাকে অনেক বড় অপমান হিসেবে দেখা হতো। কাফেররা প্রচার করতে শুরু করে যে,
+                    নবীজির (সা.) মৃত্যুর পর তাঁর নাম নেওয়ার মতো আর কেউ থাকবে না। কাফেরদের এমন কথায় নবীজি (সা.)
+                    স্বাভাবিকভাবেই মানসিকভাবে অনেক কষ্ট পান।<br><br>​সূরা নাযিল ও আল্লাহর সান্ত্বনা<br>নবীজিকে (সা.)
+                    সান্ত্বনা দেওয়ার জন্য এবং কাফেরদের কথার কড়া জবাব দেওয়ার জন্য মহান আল্লাহ সাথে সাথে সূরা কাওসার নাযিল
+                    করেন। আল্লাহ এই সূরায় নবীজিকে (সা.) 'কাওসার' বা প্রচুর কল্যাণ দান করার সুসংবাদ দেন। কাওসার বলতে
+                    জান্নাতের একটি বিশেষ নদী বা হাউজকেও বোঝানো হয়।<br><br>​শত্রুদের আসল পরিণতি<br>এই সূরার শেষে আল্লাহ
+                    স্পষ্টভাবে জানিয়ে দেন যে, নবীজি (সা.) নির্বংশ নন। বরং যারা তাঁকে নিয়ে উপহাস করছে, সেই শত্রুরাই মূলত
+                    নির্বংশ। দুনিয়া ও আখিরাতে তাদের কোনো নাম-নিশানা থাকবে না এবং তারা সব ধরনের কল্যাণ থেকে চিরতরে বঞ্চিত
+                    হবে। আজ আমরা দেখতে পাই, সারাবিশ্বে কোটি কোটি মানুষ প্রতিদিন নবীজির (সা.) নাম সম্মানের সাথে স্মরণ
+                    করছে, কিন্তু সেই উপহাসকারী কাফেরদের নাম কেউ জানেও না।<br><br>​রেফারেন্স (দলিল):<br>​তাফসীর ইবনে
+                    কাসীর: সূরা কাওসারের তাফসীর অংশে 'আস ইবনে ওয়ায়েল এবং অন্যান্য কাফেরদের এই উপহাসের ঘটনার বিস্তারিত
+                    উল্লেখ রয়েছে।<br>​সহীহ বুখারী: হাদিস নম্বর ৪৯৬৪ (এখানে কাওসার নদীর বিস্তারিত বর্ণনা
+                    রয়েছে)।<br>​সুনানে নাসায়ী: হাদিস নম্বর ৩০৫৭।</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
