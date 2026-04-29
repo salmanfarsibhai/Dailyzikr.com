@@ -60,6 +60,10 @@
             overflow-y: auto;
             opacity: 0;
             transition: opacity 0.35s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         body.ready {
@@ -1565,6 +1569,30 @@
         // 🔥 DUA ANIMATION ADD
         document.querySelectorAll('#duaList .item').forEach(el => {
             observer.observe(el);
+        });
+    </script>
+    <script>
+        // 🔥 RIGHT CLICK OFF
+        document.addEventListener("contextmenu", e => e.preventDefault());
+
+        // 🔥 SELECT OFF
+        document.addEventListener("selectstart", e => e.preventDefault());
+
+        // 🔥 COPY OFF
+        document.addEventListener("copy", e => e.preventDefault());
+
+        // 🔥 CTRL SHORTCUT OFF
+        document.addEventListener("keydown", e => {
+            if (e.ctrlKey && ['c', 'a', 'u', 's'].includes(e.key.toLowerCase())) {
+                e.preventDefault();
+            }
+        });
+
+        // 🔥 DEVTOOLS (F12) BLOCK
+        document.addEventListener("keydown", e => {
+            if (e.key === "F12") {
+                e.preventDefault();
+            }
         });
     </script>
     <div id="loader">
