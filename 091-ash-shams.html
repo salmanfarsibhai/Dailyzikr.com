@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা শামস</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা শামস</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা শামস</div>
+                <div>মাক্কী • ১৫ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">وَٱلشَّمْسِ وَضُحَىٰهَا</div>
+                <div class="pronounce">ওয়াশ্-শামসি ওয়া দুহাহা</div>
+                <div class="meaning">শপথ সূর্যের এবং তার প্রভাতের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">وَٱلْقَمَرِ إِذَا تَلَىٰهَا</div>
+                <div class="pronounce">ওয়াল কামারি ইযা তালাহা</div>
+                <div class="meaning">এবং চাঁদের, যখন তা তার অনুসরণ করে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">وَٱلنَّهَارِ إِذَا جَلَّىٰهَا</div>
+                <div class="pronounce">ওয়ান্-নাহারি ইযা জাল্লাহা</div>
+                <div class="meaning">এবং দিনের, যখন তা তাকে উজ্জ্বল করে তোলে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">وَٱلَّيْلِ إِذَا يَغْشَىٰهَا</div>
+                <div class="pronounce">ওয়াল্লাইলি ইযা ইয়াগশাহা</div>
+                <div class="meaning">এবং রাতের, যখন তা তাকে ঢেকে ফেলে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">وَٱلسَّمَآءِ وَمَا بَنَىٰهَا</div>
+                <div class="pronounce">ওয়াস্-সামা-ই ওয়া মা বানাহা</div>
+                <div class="meaning">এবং আকাশের এবং যিনি তা নির্মাণ করেছেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">وَٱلْأَرْضِ وَمَا طَحَىٰهَا</div>
+                <div class="pronounce">ওয়াল আরদি ওয়া মা তাহাহা</div>
+                <div class="meaning">এবং পৃথিবীর এবং যিনি তা বিস্তৃত করেছেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">وَنَفْسٍۢ وَمَا سَوَّىٰهَا</div>
+                <div class="pronounce">ওয়া নাফসিওঁ ওয়া মা সাওয়াহা</div>
+                <div class="meaning">এবং প্রাণের এবং যিনি তাকে সুষম করেছেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَىٰهَا</div>
+                <div class="pronounce">ফা আলহামাহা ফুজুরাহা ওয়া তাকওয়াহা</div>
+                <div class="meaning">অতঃপর তাকে তার পাপ ও তাকওয়া উভয়ই অনুপ্রাণিত করেছেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯</div>
+                <div class="arabic">قَدْ أَفْلَحَ مَن زَكَّىٰهَا</div>
+                <div class="pronounce">কাদ আফলাহা মান যাক্কাহা</div>
+                <div class="meaning">নিশ্চয়ই সফল হয়েছে সে, যে তাকে পরিশুদ্ধ করেছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০</div>
+                <div class="arabic">وَقَدْ خَابَ مَن دَسَّىٰهَا</div>
+                <div class="pronounce">ওয়া কাদ খাবা মান দাস্সাহা</div>
+                <div class="meaning">এবং ব্যর্থ হয়েছে সে, যে তাকে কলুষিত করেছে।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১</div>
+                <div class="arabic">كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ</div>
+                <div class="pronounce">কাদ্দাবাত সামূদু বিতাগওয়াহা</div>
+                <div class="meaning">সামূদ তাদের অবাধ্যতার কারণে অস্বীকার করেছিল,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২</div>
+                <div class="arabic">إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا</div>
+                <div class="pronounce">ইযিন্ বাআসা আশকাহা</div>
+                <div class="meaning">যখন তাদের মধ্যে সবচেয়ে দুর্ভাগা ব্যক্তি উঠল,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩</div>
+                <div class="arabic">فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَـٰهَا</div>
+                <div class="pronounce">ফাকালা লাহুম রাসূলুল্লাহি নাকাতাল্লাহি ওয়া সুকইয়াহা</div>
+                <div class="meaning">তখন আল্লাহর রাসূল তাদের বললেন, “আল্লাহর উটনী ও তার পানির অধিকার থেকে বিরত থাকো।”
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৪</div>
+                <div class="arabic">فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا
+                </div>
+                <div class="pronounce">ফাকাদ্দাবূহু ফা‘আকারূহা ফাদামদামা ‘আলাইহিম রব্বুহুম বিযানবিহিম ফাসাওয়াহা</div>
+                <div class="meaning">অতঃপর তারা তাকে মিথ্যা বলল এবং উটনীকে হত্যা করল; ফলে তাদের রব তাদের পাপের কারণে
+                    তাদের উপর ধ্বংস নাযিল করলেন এবং সবাইকে সমান করে দিলেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৫</div>
+                <div class="arabic">وَلَا يَخَافُ عُقْبَـٰهَا</div>
+                <div class="pronounce">ওয়া লা ইয়াখাফু ‘উকবাহা</div>
+                <div class="meaning">এবং তিনি এর পরিণামকে ভয় করেন না।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আশ-শামস নাযিল হওয়ার প্রেক্ষাপট (শানে নুযুল)<br><br>এই সূরাটি মক্কায় অবতীর্ণ হয়। অন্যান্য অনেক
+                    মক্কী সূরার মতো এরও নির্দিষ্ট কোনো একক শানে নুযুল বা নাযিল হওয়ার ঘটনা নেই। মূলত মানুষের আত্মার
+                    পরিশুদ্ধি এবং অবাধ্যতার পরিণতি সম্পর্কে মক্কার কাফেরদের সতর্ক করার জন্যই এই সূরাটি নাযিল হয়। এর মূল
+                    প্রেক্ষাপট নিচে দেওয়া হলো:<br><br>স্রষ্টার বিশাল নিদর্শনের শপথ ও আত্মার পরিশুদ্ধি<br>মক্কার কাফেররা
+                    যখন নিজেদের পাপ ও অবাধ্যতার ভেতরে ডুবে ছিল, তখন আল্লাহ তায়ালা এই সূরায় পরপর ১১টি বিশাল নিদর্শনের
+                    (যেমন— সূর্য, চাঁদ, দিন, রাত, আকাশ, জমিন এবং মানুষের আত্মা) শপথ করেন। পুরো কুরআনে অন্য কোনো সূরায়
+                    একসাথে এতগুলো শপথ করা হয়নি। এতগুলো শপথের পর আল্লাহ একটি চরম সত্য ঘোষণা করেন যে, যে ব্যক্তি তার
+                    আত্মাকে পবিত্র করবে, সে-ই সফল হবে; আর যে তার আত্মাকে পাপের মাধ্যমে কলুষিত করবে, সে ধ্বংস
+                    হবে।<br><br>সামুদ জাতির দৃষ্টান্ত ও মক্কাবাসীদের সতর্ককরণ<br>মক্কার কুরাইশরা নিজেদের অনেক শক্তিশালী
+                    মনে করত এবং নবীজিকে (সা.) অস্বীকার করত। তাদের সতর্ক করার জন্য আল্লাহ এই সূরায় প্রাচীনকালের অত্যন্ত
+                    শক্তিশালী ও অবাধ্য 'সামুদ' জাতির উদাহরণ টেনে আনেন। সামুদ জাতি অহংকার করে তাদের নবী হযরত সালিহ
+                    (আ.)-কে অস্বীকার করেছিল এবং আল্লাহর নিদর্শনস্বরূপ পাঠানো একটি বিশেষ উটনীকে নিষ্ঠুরভাবে হত্যা করেছিল।
+                    ফলে আল্লাহ তাদের ওপর এমন ভয়াবহ আজাব পাঠান যে, পুরো জাতি সমূলে ধ্বংস হয়ে যায়। এই ঘটনার মাধ্যমে মক্কার
+                    কাফেরদের স্পষ্টভাবে সতর্ক করা হয়েছে যে, নবীজির (সা.) অবাধ্য হলে তাদের পরিণতিও সামুদ জাতির মতোই ভয়াবহ
+                    হতে পারে।<br><br>রেফারেন্স (দলিল):<br>* তাফসীর ইবনে কাসীর: সূরা আশ-শামসের তাফসীরে পরপর শপথগুলোর
+                    গুরুত্ব, আত্মার পরিশুদ্ধি এবং সামুদ জাতির অবাধ্যতার বিস্তারিত ও নির্ভরযোগ্য আলোচনা।<br>* তাফসীর
+                    আল-কুরতুবী: সামুদ জাতির উটনী হত্যা এবং তাদের ওপর আল্লাহর ভয়াবহ আজাব নাযিল হওয়ার ঐতিহাসিক
+                    ব্যাখ্যা।<br>* সহীহ মুসলিম: হাদিস নম্বর ৪৬৫ (এই হাদিসে উল্লেখ আছে, নবীজি সা. সাহাবী মুয়ায ইবনে জাবাল
+                    রা.-কে এশার নামাজে সাধারণ মানুষের সুবিধার্থে লম্বা সূরার বদলে সূরা আশ-শামস, সূরা আল-আ'লা ইত্যাদি
+                    পড়ার নির্দেশ দিয়েছিলেন)।</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

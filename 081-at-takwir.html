@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা তাকভীর</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা তাকভীর</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা তাকভীর</div>
+                <div>মাক্কী • ২৯ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">إِذَا ٱلشَّمْسُ كُوِّرَتْ</div>
+                <div class="pronounce">ইযাশ্-শামসু কুউইরাত</div>
+                <div class="meaning">যখন সূর্যকে গুটিয়ে ফেলা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">وَإِذَا ٱلنُّجُومُ ٱنكَدَرَتْ</div>
+                <div class="pronounce">ওয়া ইযান্-নুজূমুনকাদারাত</div>
+                <div class="meaning">এবং যখন নক্ষত্রগুলো ম্লান হয়ে যাবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">وَإِذَا ٱلْجِبَالُ سُيِّرَتْ</div>
+                <div class="pronounce">ওয়া ইযাল জিবালু সুইয়িরাত</div>
+                <div class="meaning">এবং যখন পর্বতমালা চলমান করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">وَإِذَا ٱلْعِشَارُ عُطِّلَتْ</div>
+                <div class="pronounce">ওয়া ইযাল ‘ইশারু ‘উত্তিলাত</div>
+                <div class="meaning">এবং যখন গর্ভবতী উটগুলো অবহেলিত হয়ে যাবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">وَإِذَا ٱلْوُحُوشُ حُشِرَتْ</div>
+                <div class="pronounce">ওয়া ইযাল উহূশু হুশিরাত</div>
+                <div class="meaning">এবং যখন বন্য পশুগুলো সমবেত করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">وَإِذَا ٱلْبِحَارُ سُجِّرَتْ</div>
+                <div class="pronounce">ওয়া ইযাল বিহারু সুজ্জিরাত</div>
+                <div class="meaning">এবং যখন সমুদ্রগুলো প্রজ্বলিত করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">وَإِذَا ٱلنُّفُوسُ زُوِّجَتْ</div>
+                <div class="pronounce">ওয়া ইযান্-নুফূসু জুউইজাত</div>
+                <div class="meaning">এবং যখন প্রাণসমূহ জোড়ায় জোড়ায় মিলিত করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">وَإِذَا ٱلْمَوْءُۥدَةُ سُئِلَتْ</div>
+                <div class="pronounce">ওয়া ইযাল মাওউদাতু সুউইলাত</div>
+                <div class="meaning">এবং যখন জীবন্ত কবর দেওয়া কন্যাশিশুকে জিজ্ঞেস করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯</div>
+                <div class="arabic">بِأَىِّ ذَنبٍۢ قُتِلَتْ</div>
+                <div class="pronounce">বিআইয়ি যাম্বিন কুতিলাত</div>
+                <div class="meaning">কোন অপরাধে তাকে হত্যা করা হয়েছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০</div>
+                <div class="arabic">وَإِذَا ٱلصُّحُفُ نُشِرَتْ</div>
+                <div class="pronounce">ওয়া ইযাস্-সুহুফু নুশিরাত</div>
+                <div class="meaning">এবং যখন আমলনামাগুলো উন্মুক্ত করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১</div>
+                <div class="arabic">وَإِذَا ٱلسَّمَآءُ كُشِطَتْ</div>
+                <div class="pronounce">ওয়া ইযাস্-সামা-উ কুশিতাত</div>
+                <div class="meaning">এবং যখন আকাশ অপসারিত করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২</div>
+                <div class="arabic">وَإِذَا ٱلْجَحِيمُ سُعِّرَتْ</div>
+                <div class="pronounce">ওয়া ইযাল জাহীমু সু‘ইরাত</div>
+                <div class="meaning">এবং যখন জাহান্নাম প্রজ্বলিত করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩</div>
+                <div class="arabic">وَإِذَا ٱلْجَنَّةُ أُزْلِفَتْ</div>
+                <div class="pronounce">ওয়া ইযাল জান্নাতু উজলিফাত</div>
+                <div class="meaning">এবং যখন জান্নাত নিকটবর্তী করা হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৪</div>
+                <div class="arabic">عَلِمَتْ نَفْسٌۭ مَّآ أَحْضَرَتْ</div>
+                <div class="pronounce">আলিমাত নাফসুম মা আহদারাত</div>
+                <div class="meaning">তখন প্রত্যেক প্রাণ জানবে সে কী উপস্থিত করেছে।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৫</div>
+                <div class="arabic">فَلَآ أُقْسِمُ بِٱلْخُنَّسِ</div>
+                <div class="pronounce">ফালা উকসিমু বিল খুন্নাস</div>
+                <div class="meaning">অতএব আমি শপথ করছি পশ্চাদপসরণকারী নক্ষত্রদের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৬</div>
+                <div class="arabic">ٱلْجَوَارِ ٱلْكُنَّسِ</div>
+                <div class="pronounce">আল জাওয়ারিল কুন্নাস</div>
+                <div class="meaning">যারা চলমান এবং গোপনে অদৃশ্য হয়,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৭</div>
+                <div class="arabic">وَٱلَّيْلِ إِذَا عَسْعَسَ</div>
+                <div class="pronounce">ওয়াল্লাইলি ইযা ‘আস‘আসা</div>
+                <div class="meaning">এবং রাতের, যখন তা প্রস্থান করে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৮</div>
+                <div class="arabic">وَٱلصُّبْحِ إِذَا تَنَفَّسَ</div>
+                <div class="pronounce">ওয়াস্-সুবহি ইযা তানাফ্ফাসা</div>
+                <div class="meaning">এবং প্রভাতের, যখন তা নিঃশ্বাস নেয়,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৯</div>
+                <div class="arabic">إِنَّهُۥ لَقَوْلُ رَسُولٍۢ كَرِيمٍۢ</div>
+                <div class="pronounce">ইন্নাহু লাকাওলু রাসূলিন কারীম</div>
+                <div class="meaning">নিশ্চয়ই এটি এক সম্মানিত রাসূলের বাণী,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২০</div>
+                <div class="arabic">ذِى قُوَّةٍ عِندَ ذِى ٱلْعَرْشِ مَكِينٍۢ</div>
+                <div class="pronounce">যি কুওয়াতিন ‘ইন্দা যিল ‘আরশি মাকীন</div>
+                <div class="meaning">যিনি শক্তিশালী, আরশের অধিপতির কাছে সম্মানিত,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২১</div>
+                <div class="arabic">مُّطَاعٍ ثَمَّ أَمِينٍۢ</div>
+                <div class="pronounce">মুতা‘ইন সাম্মা আমীন</div>
+                <div class="meaning">সেখানে আনুগত্যপ্রাপ্ত এবং বিশ্বস্ত,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২২</div>
+                <div class="arabic">وَمَا صَاحِبُكُم بِمَجْنُونٍۢ</div>
+                <div class="pronounce">ওয়া মা সাহিবুকুম বিমাজনূন</div>
+                <div class="meaning">এবং তোমাদের সাথী (মুহাম্মাদ) উন্মাদ নন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৩</div>
+                <div class="arabic">وَلَقَدْ رَءَاهُ بِٱلْأُفُقِ ٱلْمُبِينِ</div>
+                <div class="pronounce">ওয়ালাকদ রা’আহু বিল উফুকিল মুবীন</div>
+                <div class="meaning">এবং তিনি তাকে স্পষ্ট দিগন্তে দেখেছেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৪</div>
+                <div class="arabic">وَمَا هُوَ عَلَى ٱلْغَيْبِ بِضَنِينٍۢ</div>
+                <div class="pronounce">ওয়া মা হুয়া ‘আলাল গাইবি বিদানীন</div>
+                <div class="meaning">এবং তিনি অদৃশ্য বিষয়ের ব্যাপারে কৃপণ নন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৫</div>
+                <div class="arabic">وَمَا هُوَ بِقَوْلِ شَيْطَـٰنٍۢ رَّجِيمٍۢ</div>
+                <div class="pronounce">ওয়া মা হুয়া বিকাওলি শাইতানির রাজীম</div>
+                <div class="meaning">এবং এটি কোন অভিশপ্ত শয়তানের কথা নয়,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৬</div>
+                <div class="arabic">فَأَيْنَ تَذْهَبُونَ</div>
+                <div class="pronounce">ফা আইনা তাযহাবুন</div>
+                <div class="meaning">তাহলে তোমরা কোথায় যাচ্ছ?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৭</div>
+                <div class="arabic">إِنْ هُوَ إِلَّا ذِكْرٌۭ لِّلْعَـٰلَمِينَ</div>
+                <div class="pronounce">ইন হুয়া ইল্লা যিকরুল লিল ‘আলামীন</div>
+                <div class="meaning">এটি তো কেবল সৃষ্টিকুলের জন্য উপদেশ,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৮</div>
+                <div class="arabic">لِمَن شَآءَ مِنكُمْ أَن يَسْتَقِيمَ</div>
+                <div class="pronounce">লিমান শা’আ মিনকুম আন ইয়াস্তাকীম</div>
+                <div class="meaning">তোমাদের মধ্যে যে সোজা পথে চলতে চায় তার জন্য,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৯</div>
+                <div class="arabic">وَمَا تَشَآءُونَ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّ ٱلْعَـٰلَمِينَ</div>
+                <div class="pronounce">ওয়া মা তাশাউনা ইল্লা আন ইয়াশা’আল্লাহু রব্বুল ‘আলামীন</div>
+                <div class="meaning">আর তোমরা ইচ্ছা করতে পার না, যদি না আল্লাহ—সৃষ্টিকুলের রব—ইচ্ছা করেন।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আত-তাকভীর নাযিল হওয়ার প্রেক্ষাপট (শানে নুযুল)<br><br>​এই সূরাটির নাযিল হওয়ার পেছনে নির্দিষ্ট
+                    কোনো একক ঘটনা নেই। বরং মক্কার কাফেরদের দুটি প্রধান অভিযোগ ও অবিশ্বাসের জবাব হিসেবে মক্কী জীবনের
+                    শুরুর দিকে এই সূরাটি নাযিল হয়:<br><br>​১. কিয়ামত ও আখিরাত অস্বীকার<br>মক্কার কাফেররা কিয়ামত বা বিচার
+                    দিবসকে সম্পূর্ণ অসম্ভব মনে করত। তারা ভাবত, এত বিশাল আকাশ, সূর্য এবং পাহাড় ধ্বংস হয়ে কীভাবে কিয়ামত
+                    হবে! তাদের এই অবিশ্বাসের জবাবে আল্লাহ তায়ালা এই সূরায় কিয়ামতের ভয়াবহ দৃশ্যগুলোর নিখুঁত বর্ণনা
+                    দিয়েছেন। সূর্য কীভাবে আলোহীন হবে, নক্ষত্র কীভাবে খসে পড়বে এবং পাহাড় কীভাবে তুলোর মতো উড়তে থাকবে—তার
+                    জীবন্ত চিত্র এখানে তুলে ধরা হয়েছে।<br><br>​২. নবীজির (সা.) প্রতি মিথ্যা অপবাদ<br>কাফেররা নবীজিকে
+                    (সা.) 'মাজনুন' বা পাগল বলে অপবাদ দিত এবং বলত যে পবিত্র কুরআন শয়তানের শেখানো কথা। তাদের এই জঘন্য
+                    অপবাদের কড়া জবাবে আল্লাহ এই সূরায় স্পষ্টভাবে জানিয়ে দেন যে, নবীজি (সা.) পাগল নন এবং এই কুরআন কোনো
+                    বিতারিত শয়তানের কথা নয়। বরং এটি অত্যন্ত সম্মানিত, বিশ্বস্ত ও শক্তিশালী ফেরেশতা জিবরাইলের (আ.)
+                    মাধ্যমে নিয়ে আসা মহান আল্লাহর পবিত্র বাণী।<br><br>​কিয়ামতকে চোখের সামনে দেখার অনুভূতি<br>এই সূরার
+                    চিত্রায়ন এতই নিখুঁত যে, নবীজি (সা.) এর গুরুত্ব বোঝাতে গিয়ে বলেছেন, "যে ব্যক্তি কিয়ামতের দিনকে
+                    এমনভাবে দেখতে চায় যেন সে নিজের চোখে তা দেখছে, সে যেন 'ইযাশ শামসু কুউয়িরাত' (সূরা আত-তাকভীর), সূরা
+                    আল-ইনফিতার এবং সূরা আল-ইনশিকাক তিলাওয়াত করে।"<br><br>​রেফারেন্স (দলিল):<br>​সুনানে তিরমিজি: হাদিস
+                    নম্বর ৩৩৩৩ (কিয়ামতকে নিজের চোখে দেখার মতো অনুভূতির হাদিস, সাহাবী আব্দুল্লাহ ইবনে উমর রা. থেকে
+                    বর্ণিত)।<br>​মুসনাদে আহমাদ: হাদিস নম্বর ৪৮০৬।<br>​তাফসীর ইবনে কাসীর: সূরা আত-তাকভীরের তাফসীরে মক্কার
+                    কাফেরদের অপবাদ খণ্ডন এবং কিয়ামতের ভয়াবহ দৃশ্যের বিস্তারিত আলোচনা।</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
