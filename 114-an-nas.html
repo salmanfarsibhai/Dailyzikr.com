@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সুরা নাস</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সুরা নাস</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সুরা নাস</div>
+                <div>মাক্কী • ৬ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ</div>
+                <div class="pronounce">কুল আউযু বিরাব্বিন নাস</div>
+                <div class="meaning">বলুন, আমি আশ্রয় চাচ্ছি মানুষের রবের কাছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">مَلِكِ النَّاسِ</div>
+                <div class="pronounce">মালিকিন নাস</div>
+                <div class="meaning">মানুষের অধিপতির কাছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">إِلَٰهِ النَّاسِ</div>
+                <div class="pronounce">ইলাহিন নাস</div>
+                <div class="meaning">মানুষের ইলাহ-র কাছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ</div>
+                <div class="pronounce">মিন শাররিল ওয়াসওয়াসিল খান্নাস</div>
+                <div class="meaning">সেই কুমন্ত্রণাদাতার অনিষ্ট থেকে, যে কুমন্ত্রণা দিয়ে আত্মগোপন করে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ</div>
+                <div class="pronounce">আল্লাযি ইউওয়াসউইসু ফী সুদূরিন নাস</div>
+                <div class="meaning">যে মানুষের অন্তরে কুমন্ত্রণা দেয়,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">مِنَ الْجِنَّةِ وَالنَّاسِ</div>
+                <div class="pronounce">মিনাল জিন্নাতি ওয়ান নাস</div>
+                <div class="meaning">জিনের মধ্য থেকে অথবা মানুষের মধ্য থেকে।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আন-নাস নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আন-নাস কুরআনের ১১৪তম সূরা এবং এতে মোট ৬টি আয়াত রয়েছে। এটি একটি মাদানী সূরা (কিছু আলেমের মতে
+                    মাক্কীও বলা হয়)। ‘নাস’ অর্থ মানুষ। এই সূরার মূল বিষয়বস্তু হলো মানুষের অন্তরের কুমন্ত্রণা (ওয়াসওয়াসা)
+                    থেকে আল্লাহর কাছে আশ্রয় প্রার্থনা।<br><br>
+
+                    আয়াত ১-৬ (ওয়াসওয়াসা থেকে আশ্রয়) নাযিলের ঘটনা<br>
+                    একটি প্রসিদ্ধ বর্ণনা অনুযায়ী, ইহুদি ব্যক্তি লাবীদ ইবনে আ‘সাম নবী (সা.)-এর উপর যাদু করেছিল। এর ফলে
+                    নবী (সা.) কিছু কষ্ট অনুভব করতেন। এই প্রেক্ষিতে সূরা আল-ফালাকের সাথে সূরা আন-নাস নাযিল হয়। নবী (সা.)
+                    এই সূরাগুলো পাঠ করে আল্লাহর কাছে আশ্রয় প্রার্থনা করেন এবং আল্লাহ তাঁকে আরোগ্য দান করেন।<br><br>
+
+                    এই সূরায় আল্লাহকে ‘মানুষের প্রতিপালক, মানুষের অধিপতি এবং মানুষের উপাস্য’ হিসেবে উল্লেখ করে শয়তানের
+                    কুমন্ত্রণা থেকে আশ্রয় চাওয়ার শিক্ষা দেওয়া হয়েছে—যে শয়তান মানুষের অন্তরে কুমন্ত্রণা দেয় এবং মানুষ ও
+                    জিন উভয় শ্রেণির মধ্যেই থাকতে পারে।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার প্রধান শানে নুযুল হলো নবী (সা.)-এর উপর যাদুর ঘটনা। তবে এটি সাধারণভাবে সকল মানুষের জন্য একটি
+                    গুরুত্বপূর্ণ শিক্ষা—যাতে তারা শয়তানের কুমন্ত্রণা ও অশুভ প্রভাব থেকে আল্লাহর কাছে আশ্রয় প্রার্থনা
+                    করে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আন-নাস মূলত মানুষের অন্তরের শয়তানি কুমন্ত্রণা থেকে সুরক্ষার জন্য একটি দোয়া। এটি শেখায়—আল্লাহই
+                    একমাত্র আশ্রয়দাতা, যিনি সকল অশুভ প্রভাব থেকে রক্ষা করতে পারেন।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. যাদুর ঘটনা: সহীহ বুখারী, হাদিস নম্বর ৫৭৬৫]<br>
+                    [২. সহীহ মুসলিম: হাদিস নম্বর ২১৮৯]<br>
+                    [৩. তাফসীর ইবনে কাসীর: সূরা আন-নাস, খণ্ড ৪]<br>
+                    [৪. তাফসীর তাবারী: সূরা আন-নাস]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

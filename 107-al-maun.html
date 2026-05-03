@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা মাউন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা মাউন</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা মাউন</div>
+                <div>মাক্কী • ৭ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">أَرَءَيْتَ ٱلَّذِى يُكَذِّبُ بِٱلدِّينِ</div>
+                <div class="pronounce">আরাআইতা আল্লাযী ইউকায্যিবু বিদ্দীন</div>
+                <div class="meaning">আপনি কি তাকে দেখেছেন যে দ্বীনকে মিথ্যা প্রতিপন্ন করে?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">فَذَٰلِكَ ٱلَّذِى يَدُعُّ ٱلْيَتِيمَ</div>
+                <div class="pronounce">ফাযালিকাল্লাযী ইয়াদুউউল ইয়াতীম</div>
+                <div class="meaning">সে তো সেই ব্যক্তি, যে ইয়াতীমকে ধাক্কা দেয়।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">وَلَا يَحُضُّ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ</div>
+                <div class="pronounce">ওয়া লা ইয়াহুদ্দু ‘আলা তা‘আমিল মিসকীন</div>
+                <div class="meaning">এবং সে মিসকীনকে খাদ্য দানে উৎসাহিত করে না।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">فَوَيْلٌۭ لِّلْمُصَلِّينَ</div>
+                <div class="pronounce">ফাওয়াইলুল লিল মুসাল্লীন</div>
+                <div class="meaning">অতএব দুর্ভোগ সেই সকল সালাত আদায়কারীদের জন্য,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">ٱلَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ</div>
+                <div class="pronounce">আল্লাযীনা হুম ‘আন সালাতিহিম সাহূন</div>
+                <div class="meaning">যারা তাদের সালাত সম্পর্কে উদাসীন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">ٱلَّذِينَ هُمْ يُرَآءُونَ</div>
+                <div class="pronounce">আল্লাযীনা হুম ইউরাআউন</div>
+                <div class="meaning">যারা লোক দেখানোর জন্য কাজ করে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">وَيَمْنَعُونَ ٱلْمَاعُونَ</div>
+                <div class="pronounce">ওয়া ইয়ামনা‘উনাল মা‘ঊন</div>
+                <div class="meaning">এবং তারা নিত্যপ্রয়োজনীয় সাহায্য প্রদান থেকে বিরত থাকে।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আল-মাউন নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আল-মাউন কুরআনের ১০৭তম সূরা এবং এতে মোট ৭টি আয়াত রয়েছে। এটি একটি মাক্কী সূরা (কিছু আলেমের মতে
+                    আংশিক মাদানী)। ‘মাউন’ অর্থ সাধারণ ব্যবহার্য জিনিস বা সামান্য সাহায্য। এই সূরার মূল বিষয়বস্তু হলো
+                    দ্বীনের প্রতি উদাসীনতা, এতিমদের প্রতি কঠোরতা, নামাজে অবহেলা এবং রিয়াকারের নিন্দা।<br><br>
+
+                    আয়াত ১-৩ (এতিমদের প্রতি আচরণ) নাযিলের ঘটনা<br>
+                    মক্কার কিছু প্রভাবশালী ব্যক্তি (তাফসীর মতে আবু জাহলসহ অন্যরা) এতিমদের প্রতি কঠোর আচরণ করত এবং তাদের
+                    অধিকার নষ্ট করত। এই প্রেক্ষিতে এই আয়াতগুলো নাযিল হয়, যেখানে বলা হয়েছে—যে ব্যক্তি দ্বীনকে অস্বীকার
+                    করে, সে-ই এতিমকে ধাক্কা দেয় এবং মিসকিনদেরকে আহার দিতে উৎসাহিত করে না।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার নির্দিষ্ট কোনো একক শানে নুযুল নেই; বরং এটি সমাজে প্রচলিত কপটতা, রিয়াকারের নামাজ এবং সামাজিক
+                    দায়িত্ব উপেক্ষার বিরুদ্ধে সতর্কতা হিসেবে নাযিল হয়েছে।<br><br>
+
+                    আয়াত ৪-৫ (নামাজে অবহেলা) নাযিলের ঘটনা<br>
+                    যারা নামাজ পড়ে কিন্তু তাতে গাফেল থাকে—তাদের সমালোচনা করতে এই আয়াতগুলো নাযিল হয়।<br><br>
+
+                    আয়াত ৬-৭ (রিয়াকারের নিন্দা) নাযিলের ঘটনা<br>
+                    যারা লোক দেখানোর জন্য আমল করে এবং সামান্য সাহায্যও দিতে চায় না—এই ধরনের মানুষের নিন্দা করে সূরার
+                    সমাপ্তি করা হয়েছে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আল-মাউন মূলত দ্বীনের প্রতি আন্তরিকতা, সামাজিক দায়িত্ব এবং নামাজের গুরুত্ব তুলে ধরে। এটি মানুষকে
+                    রিয়াকারের আমল থেকে সতর্ক করে এবং মানবিক দায়িত্ব পালনের আহ্বান জানায়।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. এতিমদের প্রতি আচরণ: তাফসীর ইবনে কাসীর, খণ্ড ৪, পৃষ্ঠা ১২৬০]<br>
+                    [২. সহীহ বুখারী: কিতাবুত তাফসীর, সূরা মাউন অধ্যায়]<br>
+                    [৩. তাফসীর তাবারী: সূরা আল-মাউন]<br>
+                    [৪. তাফসীর ইবনে কাসীর: সূরা আল-মাউন]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

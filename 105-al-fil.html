@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা ফীল</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা ফীল</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা ফীল</div>
+                <div>মাক্কী • ৫ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَـٰبِ ٱلْفِيلِ</div>
+                <div class="pronounce">আলাম তারা কাইফা ফা‘আলা রব্বুকা বিআসহাবিল ফীল</div>
+                <div class="meaning">তুমি কি দেখনি তোমার রব হাতিওয়ালাদের সাথে কী করেছিলেন?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">أَلَمْ يَجْعَلْ كَيْدَهُمْ فِى تَضْلِيلٍۢ</div>
+                <div class="pronounce">আলাম ইয়াজ‘আল কাইদাহুম ফি তাদলীল</div>
+                <div class="meaning">তিনি কি তাদের চক্রান্তকে ব্যর্থ করে দেননি?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ</div>
+                <div class="pronounce">ওয়া আরসালা ‘আলাইহিম তাইরান আবাবীল</div>
+                <div class="meaning">এবং তাদের ওপর ঝাঁকে ঝাঁকে পাখি প্রেরণ করেছিলেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">تَرْمِيهِم بِحِجَارَةٍۢ مِّن سِجِّيلٍۢ</div>
+                <div class="pronounce">তারমিহিম বিহিজারাতিম মিন সিজ্জীল</div>
+                <div class="meaning">যারা তাদেরকে পোড়ামাটির পাথর নিক্ষেপ করছিল,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">فَجَعَلَهُمْ كَعَصْفٍۢ مَّأْكُولٍۭ</div>
+                <div class="pronounce">ফাজা‘আলাহুম কা‘আসফিম মা‘কূল</div>
+                <div class="meaning">অতঃপর তিনি তাদেরকে খাওয়া-হওয়া খড়ের মতো করে দিলেন।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আল-ফীল নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আল-ফীল কুরআনের ১০৫তম সূরা এবং এতে মোট ৫টি আয়াত রয়েছে। এটি একটি মাক্কী সূরা। ‘ফীল’ অর্থ হাতি। এই
+                    সূরার মূল বিষয়বস্তু হলো ‘আসহাবুল ফীল’ (হাতিওয়ালা বাহিনী)-এর ঘটনা এবং আল্লাহর অসীম ক্ষমতার
+                    প্রকাশ।<br><br>
+
+                    আয়াত ১-৫ (আসহাবুল ফীলের ঘটনা) নাযিলের ঘটনা<br>
+                    ইয়েমেনের শাসক আবরাহা একটি বিশাল সেনাবাহিনী নিয়ে কাবা ঘর ধ্বংস করার উদ্দেশ্যে মক্কার দিকে অগ্রসর হয়।
+                    তার বাহিনীতে হাতি ছিল, তাই তারা ‘আসহাবুল ফীল’ নামে পরিচিত। যখন তারা কাবার কাছে পৌঁছায়, তখন আল্লাহ
+                    তাদের উপর ছোট ছোট পাখি (আবাবীল) প্রেরণ করেন, যারা তাদের উপর পোড়া মাটির পাথর নিক্ষেপ করে। ফলে পুরো
+                    বাহিনী ধ্বংস হয়ে যায়। এই ঘটনাটি আরবদের মধ্যে সুপরিচিত ছিল এবং নবী (সা.)-এর জন্মের বছরেই এটি ঘটে
+                    (আমুল ফীল)। এই ঘটনার প্রেক্ষিতে এই সূরা নাযিল হয়, যা আল্লাহর কুদরত এবং কাবা ঘরের সুরক্ষা প্রদর্শন
+                    করে।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার প্রধান শানে নুযুল হলো আসহাবুল ফীলের ঐতিহাসিক ঘটনা, যা মক্কার মানুষের জন্য একটি বড় নিদর্শন
+                    ছিল। এটি মুশরিকদেরকে স্মরণ করিয়ে দেয়—যে আল্লাহ কাবাকে রক্ষা করেছেন, তিনি তাঁর রাসূলকেও রক্ষা
+                    করবেন।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আল-ফীল মূলত আল্লাহর অসীম ক্ষমতা এবং তাঁর ঘরের সুরক্ষার নিদর্শন তুলে ধরে। এটি মানুষকে আল্লাহর
+                    শক্তি ও প্রতিশোধের বাস্তবতা উপলব্ধি করতে সাহায্য করে।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. আসহাবুল ফীলের ঘটনা: তাফসীর ইবনে কাসীর, খণ্ড ৪, পৃষ্ঠা ১২২০]<br>
+                    [২. সহীহ বুখারী: কিতাবুত তাফসীর, সূরা ফীল অধ্যায়]<br>
+                    [৩. তাফসীর তাবারী: সূরা আল-ফীল]<br>
+                    [৪. তাফসীর ইবনে কাসীর: সূরা আল-ফীল]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

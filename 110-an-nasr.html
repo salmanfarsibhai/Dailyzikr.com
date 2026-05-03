@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা নাসর</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা নাসর</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা নাসর</div>
+                <div>মাদানী • ৩ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ</div>
+                <div class="pronounce">ইযা জা-আ নাসরুল্লাহি ওয়াল ফাতহ্</div>
+                <div class="meaning">যখন আল্লাহর সাহায্য ও বিজয় আসবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًۭا</div>
+                <div class="pronounce">ওয়া রাআইতান না-সা ইয়াদখুলূনা ফী দ্বীনিল্লাহি আফওয়া-জা</div>
+                <div class="meaning">এবং আপনি মানুষকে দলে দলে আল্লাহর দ্বীনে প্রবেশ করতে দেখবেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ ۚ إِنَّهُۥ كَانَ تَوَّابًۢا</div>
+                <div class="pronounce">ফাসাব্বিহ বিহামদি রব্বিকা ওয়াস্তাগফিরহ্, ইন্নাহূ কা-না তাওয়া-বা</div>
+                <div class="meaning">তখন আপনি আপনার পালনকর্তার প্রশংসাসহ পবিত্রতা ঘোষণা করুন এবং তাঁর কাছে ক্ষমা
+                    প্রার্থনা করুন। নিশ্চয় তিনি তওবা কবুলকারী।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আন-নাসর নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আন-নাসর কুরআনের ১১০তম সূরা এবং এতে মোট ৩টি আয়াত রয়েছে। এটি একটি মাদানী সূরা এবং কুরআনের শেষ
+                    দিকের নাযিল হওয়া সূরাগুলোর একটি। ‘নাসর’ অর্থ সাহায্য বা বিজয়। এই সূরার মূল বিষয়বস্তু হলো আল্লাহর
+                    সাহায্যে ইসলামের বিজয়, মানুষের দলে দলে ইসলামে প্রবেশ এবং নবী (সা.)-এর জন্য ইঙ্গিতপূর্ণ
+                    নির্দেশনা।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরাটি মক্কা বিজয়ের (ফাতহে মক্কা) পর নাযিল হয়, যখন মানুষ দলে দলে ইসলামে প্রবেশ করতে শুরু করে। এটি
+                    ইসলামের বিজয়ের ঘোষণা এবং একই সাথে নবী (সা.)-এর জীবনের সমাপ্তির ইঙ্গিত বহন করে।<br><br>
+
+                    আয়াত ১-২ (বিজয় ও মানুষের প্রবেশ) নাযিলের ঘটনা<br>
+                    আল্লাহর সাহায্য এবং বিজয় আসার পর মানুষ দলে দলে ইসলামে প্রবেশ করবে—এই বাস্তবতা তুলে ধরতে এই আয়াতগুলো
+                    নাযিল হয়।<br><br>
+
+                    আয়াত ৩ (তাসবীহ ও ইস্তিগফার) নাযিলের ঘটনা<br>
+                    নবী (সা.)-কে নির্দেশ দেওয়া হয়—তিনি যেন আল্লাহর প্রশংসা করেন এবং ক্ষমা প্রার্থনা করেন। সাহাবীগণ বুঝতে
+                    পারেন—এটি নবী (সা.)-এর বিদায়ের ইঙ্গিত।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আন-নাসর মূলত ইসলামের বিজয়, আল্লাহর সাহায্য এবং নবী (সা.)-এর জীবনের সমাপ্তির ইঙ্গিত তুলে ধরে।
+                    এটি মুমিনদেরকে কৃতজ্ঞতা, তাসবীহ এবং ইস্তিগফারের শিক্ষা দেয়।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. ফাতহে মক্কা: সহীহ বুখারী, হাদিস নম্বর ৪৩০২]<br>
+                    [২. সহীহ মুসলিম: হাদিস নম্বর ১৭৮০]<br>
+                    [৩. তাফসীর ইবনে কাসীর: সূরা আন-নাসর, খণ্ড ৪]<br>
+                    [৪. তাফসীর তাবারী: সূরা আন-নাসর]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
