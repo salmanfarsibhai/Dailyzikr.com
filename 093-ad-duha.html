@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা আদ-দুহা</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা আদ-দুহা</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা আদ-দুহা</div>
+                <div>মাক্কী • ১১ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">وَٱلضُّحَىٰ</div>
+                <div class="pronounce">ওয়াদ্-দুহা</div>
+                <div class="meaning">শপথ প্রভাতের আলোয়ের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">وَٱلَّيْلِ إِذَا سَجَىٰ</div>
+                <div class="pronounce">ওয়াল্লাইলি ইযা সাজা</div>
+                <div class="meaning">এবং রাতের, যখন তা শান্ত হয়ে যায়,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ</div>
+                <div class="pronounce">মা ওয়াদ্দা‘আকা রাব্বুকা ওয়া মা কালা</div>
+                <div class="meaning">তোমার রব তোমাকে ত্যাগ করেননি এবং অসন্তুষ্টও হননি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">وَلَلْـَٔاخِرَةُ خَيْرٌۭ لَّكَ مِنَ ٱلْأُولَىٰ</div>
+                <div class="pronounce">ওয়ালাল আখিরাতু খাইরুল্লাকা মিনাল উলা</div>
+                <div class="meaning">এবং অবশ্যই পরকাল তোমার জন্য দুনিয়ার চেয়ে উত্তম,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰٓ</div>
+                <div class="pronounce">ওয়ালাসাওফা ইউ‘তিকা রাব্বুকা ফাতারদা</div>
+                <div class="meaning">এবং শীঘ্রই তোমার রব তোমাকে দান করবেন, ফলে তুমি সন্তুষ্ট হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">أَلَمْ يَجِدْكَ يَتِيمًۭا فَـَٔاوَىٰ</div>
+                <div class="pronounce">আলাম ইয়াজিদকা ইয়াতীমান ফা’আওয়া</div>
+                <div class="meaning">তিনি কি তোমাকে এতিম অবস্থায় পাননি, তারপর আশ্রয় দিয়েছেন?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">وَوَجَدَكَ ضَآلًّۭا فَهَدَىٰ</div>
+                <div class="pronounce">ওয়া ওয়াজাদাকা দাল্লান ফাহাদা</div>
+                <div class="meaning">এবং তোমাকে পথভ্রষ্ট অবস্থায় পেয়ে পথনির্দেশ করেছেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">وَوَجَدَكَ عَآئِلًۭا فَأَغْنَىٰ</div>
+                <div class="pronounce">ওয়া ওয়াজাদাকা ‘আইলান ফা-আগনা</div>
+                <div class="meaning">এবং তোমাকে অভাবগ্রস্ত পেয়ে সমৃদ্ধ করেছেন।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯</div>
+                <div class="arabic">فَأَمَّا ٱلْيَتِيمَ فَلَا تَقْهَرْ</div>
+                <div class="pronounce">ফা আম্মাল ইয়াতীমা ফালা তাকহার</div>
+                <div class="meaning">অতএব এতিমের প্রতি কঠোর হয়ো না,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০</div>
+                <div class="arabic">وَأَمَّا ٱلسَّآئِلَ فَلَا تَنْهَرْ</div>
+                <div class="pronounce">ওয়া আম্মাস সা’ইলা ফালা তানহার</div>
+                <div class="meaning">এবং ভিক্ষুককে ধমক দিও না,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১</div>
+                <div class="arabic">وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ</div>
+                <div class="pronounce">ওয়া আম্মা বিনি‘মাতি রাব্বিকা ফাহাদ্দিস</div>
+                <div class="meaning">আর তোমার রবের নেয়ামত সম্পর্কে বর্ণনা কর।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আদ-দুহা নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আদ-দুহা কুরআনের ৯৩তম সূরা এবং এতে মোট ১১টি আয়াত রয়েছে। এটি একটি মাক্কী সূরা। ‘দুহা’ অর্থ সকাল
+                    বা প্রভাতের আলো। এই সূরার মূল বিষয়বস্তু হলো নবী (সা.)-কে সান্ত্বনা দেওয়া, আল্লাহর অনুগ্রহ স্মরণ
+                    করানো এবং মানবিক দায়িত্বের নির্দেশনা।<br><br>
+
+                    আয়াত ১-৩ (ওহী বন্ধ থাকার সময়) নাযিলের ঘটনা<br>
+                    কিছু সময়ের জন্য নবী (সা.)-এর কাছে ওহী আসা বন্ধ হয়ে যায় (যাকে ‘ফাতরাতুল ওহী’ বলা হয়)। এই সময় মক্কার
+                    মুশরিকরা বলতে থাকে—“তোমার প্রতিপালক তোমাকে ত্যাগ করেছেন।” এই প্রেক্ষিতে এই আয়াতগুলো নাযিল হয়, যেখানে
+                    আল্লাহ শপথ করে বলেন—তিনি নবী (সা.)-কে ত্যাগ করেননি এবং তাঁর উপর অসন্তুষ্টও নন।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার প্রধান শানে নুযুল হলো ওহী বন্ধ থাকার সময় নবী (সা.)-কে সান্ত্বনা দেওয়া। এতে আল্লাহ তাঁর
+                    পূর্বের অনুগ্রহসমূহ স্মরণ করিয়ে দেন এবং ভবিষ্যতের সুসংবাদ দেন।<br><br>
+
+                    আয়াত ৪-৫ (ভবিষ্যতের সুসংবাদ) নাযিলের ঘটনা<br>
+                    আল্লাহ নবী (সা.)-কে আশ্বস্ত করেন—আখিরাত দুনিয়ার চেয়ে উত্তম এবং তিনি শীঘ্রই সন্তুষ্ট হবেন।<br><br>
+
+                    আয়াত ৬-৮ (পূর্বের অনুগ্রহ) নাযিলের ঘটনা<br>
+                    আল্লাহ স্মরণ করিয়ে দেন—তিনি নবী (সা.)-কে এতিম অবস্থায় আশ্রয় দিয়েছেন, পথ দেখিয়েছেন এবং অভাবমুক্ত
+                    করেছেন।<br><br>
+
+                    আয়াত ৯-১১ (মানবিক দায়িত্ব) নাযিলের ঘটনা<br>
+                    এতিমদের প্রতি সদাচরণ, অভাবগ্রস্তদের সাহায্য এবং আল্লাহর নেয়ামত প্রকাশ করার নির্দেশ দিয়ে সূরার
+                    সমাপ্তি করা হয়েছে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আদ-দুহা মূলত নবী (সা.)-কে সান্ত্বনা দেওয়া, আল্লাহর অনুগ্রহ স্মরণ এবং মানবিক দায়িত্ব পালনের
+                    শিক্ষা দেয়। এটি আশা ও ইতিবাচকতার একটি শক্তিশালী বার্তা প্রদান করে।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. ওহী বন্ধ থাকার ঘটনা: সহীহ বুখারী, হাদিস নম্বর ৪৯৫৬]<br>
+                    [২. সহীহ মুসলিম: হাদিস নম্বর ১৬০]<br>
+                    [৩. তাফসীর ইবনে কাসীর: সূরা আদ-দুহা, খণ্ড ৪]<br>
+                    [৪. তাফসীর তাবারী: সূরা আদ-দুহা]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

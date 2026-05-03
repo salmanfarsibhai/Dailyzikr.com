@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা নাবা</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা নাবা</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা নাবা</div>
+                <div>মাক্কী • ৪০ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">عَمَّ يَتَسَآءَلُونَ</div>
+                <div class="pronounce">আম্মা ইয়াতাসা-আলূন</div>
+                <div class="meaning">তারা কী সম্পর্কে প্রশ্ন করছে?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">عَنِ ٱلنَّبَإِ ٱلْعَظِيمِ</div>
+                <div class="pronounce">‘আনিন্-নাবাঈল ‘আজীম</div>
+                <div class="meaning">মহা সংবাদ সম্পর্কে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">ٱلَّذِى هُمْ فِيهِ مُخْتَلِفُونَ</div>
+                <div class="pronounce">আল্লাযী হুম ফিহি মুখতালিফূন</div>
+                <div class="meaning">যা নিয়ে তারা মতভেদ করছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">كَلَّا سَيَعْلَمُونَ</div>
+                <div class="pronounce">কাল্লা সাইয়ালামূন</div>
+                <div class="meaning">কখনো নয়! তারা শীঘ্রই জানতে পারবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">ثُمَّ كَلَّا سَيَعْلَمُونَ</div>
+                <div class="pronounce">সুম্মা কাল্লা সাইয়ালামূন</div>
+                <div class="meaning">আবারও কখনো নয়! তারা শীঘ্রই জানতে পারবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">أَلَمْ نَجْعَلِ ٱلْأَرْضَ مِهَـٰدًۭا</div>
+                <div class="pronounce">আলাম নাজ‘আলিল আরদা মিহাদা</div>
+                <div class="meaning">আমি কি পৃথিবীকে শয্যা বানাইনি?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">وَٱلْجِبَالَ أَوْتَادًۭا</div>
+                <div class="pronounce">ওয়াল জিবালা আওতাদা</div>
+                <div class="meaning">এবং পর্বতমালাকে খুঁটি বানাইনি?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">وَخَلَقْنَـٰكُمْ أَزْوَٰجًۭا</div>
+                <div class="pronounce">ওয়া খালাকনাকুম আজওয়াজা</div>
+                <div class="meaning">এবং আমি তোমাদেরকে জোড়ায় জোড়ায় সৃষ্টি করেছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯</div>
+                <div class="arabic">وَجَعَلْنَا نَوْمَكُمْ سُبَاتًۭا</div>
+                <div class="pronounce">ওয়া জা‘আলনা নাওমাকুম সুবাতা</div>
+                <div class="meaning">এবং তোমাদের নিদ্রাকে বিশ্রাম বানিয়েছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০</div>
+                <div class="arabic">وَجَعَلْنَا ٱلَّيْلَ لِبَاسًۭا</div>
+                <div class="pronounce">ওয়া জা‘আলনাল লাইলাল লিবাসা</div>
+                <div class="meaning">এবং রাতকে আবরণ বানিয়েছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১</div>
+                <div class="arabic">وَجَعَلْنَا ٱلنَّهَارَ مَعَاشًۭا</div>
+                <div class="pronounce">ওয়া জা‘আলনান নাহারা মা‘আশা</div>
+                <div class="meaning">এবং দিনকে জীবিকার সময় বানিয়েছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২</div>
+                <div class="arabic">وَبَنَيْنَا فَوْقَكُمْ سَبْعًۭا شِدَادًۭا</div>
+                <div class="pronounce">ওয়া বানাইনা ফাওকাকুম সাব‘আন শিদাদা</div>
+                <div class="meaning">এবং তোমাদের উপর সাতটি দৃঢ় আকাশ নির্মাণ করেছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩</div>
+                <div class="arabic">وَجَعَلْنَا سِرَاجًۭا وَهَّاجًۭا</div>
+                <div class="pronounce">ওয়া জা‘আলনা সিরাজান ওয়াহ্হাজা</div>
+                <div class="meaning">এবং আমি প্রজ্জ্বলিত প্রদীপ (সূর্য) বানিয়েছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৪</div>
+                <div class="arabic">وَأَنزَلْنَا مِنَ ٱلْمُعْصِرَٰتِ مَآءًۭ ثَجَّاجًۭا</div>
+                <div class="pronounce">ওয়া আনযালনা মিনাল মু‘সিরাতি মা-আন সজ্জাজা</div>
+                <div class="meaning">এবং মেঘমালা থেকে প্রবল বর্ষণধারা নামিয়েছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৫</div>
+                <div class="arabic">لِّنُخْرِجَ بِهِۦ حَبًّۭا وَنَبَاتًۭا</div>
+                <div class="pronounce">লিনুখরিজা বিহি হাব্বান ওয়া নাবাতা</div>
+                <div class="meaning">যাতে তা দিয়ে উৎপন্ন করি শস্য ও উদ্ভিদ,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৬</div>
+                <div class="arabic">وَجَنَّـٰتٍ أَلْفَافًا</div>
+                <div class="pronounce">ওয়া জান্নাতিন আলফাফা</div>
+                <div class="meaning">এবং ঘন বাগানসমূহ।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৭</div>
+                <div class="arabic">إِنَّ يَوْمَ ٱلْفَصْلِ كَانَ مِيقَـٰتًۭا</div>
+                <div class="pronounce">ইন্না ইয়াওমাল ফাসলি কানা মীকাতা</div>
+                <div class="meaning">নিশ্চয়ই ফয়সালার দিন নির্ধারিত সময়,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৮</div>
+                <div class="arabic">يَوْمَ يُنفَخُ فِى ٱلصُّورِ فَتَأْتُونَ أَفْوَاجًۭا</div>
+                <div class="pronounce">ইয়াওমা ইউন্ফাখু ফিস্-সূরি ফাতাতূনা আফওয়াজা</div>
+                <div class="meaning">যেদিন শিঙ্গায় ফুঁ দেওয়া হবে, তখন তোমরা দলে দলে উপস্থিত হবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৯</div>
+                <div class="arabic">وَفُتِحَتِ ٱلسَّمَآءُ فَكَانَتْ أَبْوَٰبًۭا</div>
+                <div class="pronounce">ওয়া ফুতিহাতিস্-সামা-উ ফাকানাত আবওয়াবা</div>
+                <div class="meaning">এবং আকাশ খুলে দেওয়া হবে, ফলে তা হয়ে যাবে দরজা,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২০</div>
+                <div class="arabic">وَسُيِّرَتِ ٱلْجِبَالُ فَكَانَتْ سَرَابًا</div>
+                <div class="pronounce">ওয়া সুইয়িরাতিল জিবালু ফাকানাত সারাবা</div>
+                <div class="meaning">এবং পর্বতমালা সরিয়ে নেওয়া হবে, ফলে তা মরীচিকা হয়ে যাবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২১</div>
+                <div class="arabic">إِنَّ جَهَنَّمَ كَانَتْ مِرْصَادًۭا</div>
+                <div class="pronounce">ইন্না জাহান্নামা কানাত মিরসাদা</div>
+                <div class="meaning">নিশ্চয়ই জাহান্নাম ওত পেতে আছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২২</div>
+                <div class="arabic">لِّلطَّـٰغِينَ مَـَٔابًۭا</div>
+                <div class="pronounce">লিত্তাগীনা মা’আবা</div>
+                <div class="meaning">সীমালঙ্ঘনকারীদের প্রত্যাবর্তনস্থল,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৩</div>
+                <div class="arabic">لَّـٰبِثِينَ فِيهَآ أَحْقَابًۭا</div>
+                <div class="pronounce">লাবিসীনা ফিহা আহকাবা</div>
+                <div class="meaning">তারা সেখানে যুগের পর যুগ অবস্থান করবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৪</div>
+                <div class="arabic">لَّا يَذُوقُونَ فِيهَا بَرْدًۭا وَلَا شَرَابًا</div>
+                <div class="pronounce">লা ইয়াযুকুনা ফিহা বারদান ওয়ালা শারাবা</div>
+                <div class="meaning">সেখানে তারা কোন শীতলতা বা পানীয় আস্বাদন করবে না,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৫</div>
+                <div class="arabic">إِلَّا حَمِيمًۭا وَغَسَّاقًۭا</div>
+                <div class="pronounce">ইল্লা হামীমাওঁ ওয়া গাস্সাকা</div>
+                <div class="meaning">তবে ফুটন্ত পানি ও পুঁজ,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৬</div>
+                <div class="arabic">جَزَآءًۭ وِفَاقًا</div>
+                <div class="pronounce">জাযা-আওঁ উইফাকা</div>
+                <div class="meaning">যথাযথ প্রতিফল হিসেবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৭</div>
+                <div class="arabic">إِنَّهُمْ كَانُوا۟ لَا يَرْجُونَ حِسَابًۭا</div>
+                <div class="pronounce">ইন্নাহুম কানু লা ইয়ারজূনা হিসাবা</div>
+                <div class="meaning">নিশ্চয়ই তারা হিসাবের আশা করত না,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৮</div>
+                <div class="arabic">وَكَذَّبُوا۟ بِـَٔايَـٰتِنَا كِذَّابًۭا</div>
+                <div class="pronounce">ওয়া কাযযাবু বি-আয়াতিনা কিযযাবা</div>
+                <div class="meaning">এবং তারা আমার আয়াতসমূহকে মিথ্যা প্রতিপন্ন করেছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৯</div>
+                <div class="arabic">وَكُلَّ شَىْءٍ أَحْصَيْنَـٰهُ كِتَـٰبًۭا</div>
+                <div class="pronounce">ওয়া কুল্লা শাইইন আহসাইনাহু কিতাবা</div>
+                <div class="meaning">আর আমি সবকিছু লিপিবদ্ধ করেছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩০</div>
+                <div class="arabic">فَذُوقُوا۟ فَلَن نَّزِيدَكُمْ إِلَّا عَذَابًا</div>
+                <div class="pronounce">ফাযুকু ফালান নাযীদাকুম ইল্লা ‘আযাবা</div>
+                <div class="meaning">অতএব আস্বাদন কর—আমি তোমাদেরকে শাস্তি ছাড়া কিছুই বাড়াব না,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩১</div>
+                <div class="arabic">إِنَّ لِلْمُتَّقِينَ مَفَازًا</div>
+                <div class="pronounce">ইন্না লিল মুত্তাকীনা মাফাজা</div>
+                <div class="meaning">নিশ্চয়ই মুত্তাকীদের জন্য রয়েছে সফলতা,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩২</div>
+                <div class="arabic">حَدَآئِقَ وَأَعْنَـٰبًۭا</div>
+                <div class="pronounce">হাদাইকা ওয়া আ‘নাবা</div>
+                <div class="meaning">বাগানসমূহ ও আঙ্গুর,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৩</div>
+                <div class="arabic">وَكَوَاعِبَ أَتْرَابًۭا</div>
+                <div class="pronounce">ওয়া কাওয়া‘ইবা আতরাবা</div>
+                <div class="meaning">এবং সমবয়সী তরুণী,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৪</div>
+                <div class="arabic">وَكَأْسًۭا دِهَاقًۭا</div>
+                <div class="pronounce">ওয়া কা’সান দিহাকা</div>
+                <div class="meaning">এবং পরিপূর্ণ পেয়ালা,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৫</div>
+                <div class="arabic">لَّا يَسْمَعُونَ فِيهَا لَغْوًۭا وَلَا كِذَّابًۭا</div>
+                <div class="pronounce">লা ইয়াসমাউনা ফিহা লাগওয়ান ওয়ালা কিযযাবা</div>
+                <div class="meaning">সেখানে তারা কোন অসার কথা বা মিথ্যা শুনবে না,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৬</div>
+                <div class="arabic">جَزَآءًۭ مِّن رَّبِّكَ عَطَآءً حِسَابًۭا</div>
+                <div class="pronounce">জাযা-আম মিন রব্বিকা আতা-আন হিসাবা</div>
+                <div class="meaning">তোমার রবের পক্ষ থেকে প্রতিদান—পর্যাপ্ত দান,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৭</div>
+                <div class="arabic">رَّبِّ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ وَمَا بَيْنَهُمَا ٱلرَّحْمَـٰنِ ۖ لَا يَمْلِكُونَ
+                    مِنْهُ خِطَابًۭا</div>
+                <div class="pronounce">রব্বিস্-সামাওয়াতি ওয়াল আরদি ওয়া মা বাইনাহুমার রাহমান; লা ইয়ামলিকূনা মিনহু
+                    খিতাবা</div>
+                <div class="meaning">যিনি আকাশমণ্ডলী, পৃথিবী ও তাদের মধ্যবর্তী সবকিছুর রব—পরম করুণাময়; তারা তাঁর কাছ
+                    থেকে কথা বলার অধিকার পাবে না,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৮</div>
+                <div class="arabic">يَوْمَ يَقُومُ ٱلرُّوحُ وَٱلْمَلَـٰٓئِكَةُ صَفًّۭا ۖ لَّا يَتَكَلَّمُونَ إِلَّا مَنْ
+                    أَذِنَ لَهُ ٱلرَّحْمَـٰنُ وَقَالَ صَوَابًۭا</div>
+                <div class="pronounce">ইয়াওমা ইয়াকুমুর রূহু ওয়াল মালাইকাতু সাফফা; লা ইয়াতাকাল্লামূনা ইল্লা মান আযিনা
+                    লাহুর রাহমানু ওয়া ক্বালা সাওয়াবা</div>
+                <div class="meaning">সেদিন রূহ ও ফেরেশতারা সারিবদ্ধভাবে দাঁড়াবে; তারা কথা বলবে না, তবে যাকে পরম
+                    করুণাময় অনুমতি দেবেন এবং সে সঠিক কথা বলবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৯</div>
+                <div class="arabic">ذَٰلِكَ ٱلْيَوْمُ ٱلْحَقُّ ۖ فَمَن شَآءَ ٱتَّخَذَ إِلَىٰ رَبِّهِۦ مَـَٔابًا</div>
+                <div class="pronounce">যালিকাল ইয়াওমুল হাক্ক; ফামান শা’আত্তাখাযা ইলা রব্বিহি মা’আবা</div>
+                <div class="meaning">এটাই সত্য দিন; অতএব যে ইচ্ছা করে সে তার রবের দিকে প্রত্যাবর্তনের পথ গ্রহণ করুক,
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪০</div>
+                <div class="arabic">إِنَّآ أَنذَرْنَـٰكُمْ عَذَابًۭا قَرِيبًۭا ۖ يَوْمَ يَنظُرُ ٱلْمَرْءُ مَا قَدَّمَتْ
+                    يَدَاهُ وَيَقُولُ ٱلْكَافِرُ يَـٰلَيْتَنِى كُنتُ تُرَٰبًۭا</div>
+                <div class="pronounce">ইন্না আঞ্জারনাকুম ‘আযাবান কারীবা; ইয়াওমা ইয়ানযুরুল মারউ মা কাদ্দামাত ইয়াদাহু
+                    ওয়া ইয়াকুলুল কাফিরু ইয়ালাইতানি কুনতু তুরাবা</div>
+                <div class="meaning">নিশ্চয়ই আমি তোমাদেরকে নিকটবর্তী শাস্তি সম্পর্কে সতর্ক করেছি; সেদিন মানুষ দেখবে তার
+                    দুই হাত যা অগ্রে পাঠিয়েছে, এবং কাফির বলবে, “হায়! যদি আমি মাটি হয়ে যেতাম!”</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আন-নাবা নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আন-নাবা কুরআনের ৭৮তম সূরা এবং এতে মোট ৪০টি আয়াত রয়েছে। এটি একটি মাক্কী সূরা। ‘নাবা’ অর্থ
+                    মহাসংবাদ—এখানে কিয়ামতের সংবাদকে বোঝানো হয়েছে। এই সূরার মূল বিষয়বস্তু হলো কিয়ামতের বাস্তবতা,
+                    পুনরুত্থান, এবং আল্লাহর সৃষ্টি জগতের নিদর্শন।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার নির্দিষ্ট কোনো একক শানে নুযুল নেই; বরং এটি মক্কার মুশরিকদের মধ্যে কিয়ামত সম্পর্কে প্রশ্ন ও
+                    বিতর্কের প্রেক্ষিতে নাযিল হয়েছে। তারা কিয়ামতকে অস্বীকার করত এবং তা নিয়ে হাসি-ঠাট্টা করত। এই সূরা
+                    তাদের সেই সন্দেহ ও উপহাসের জবাব হিসেবে নাযিল হয়।<br><br>
+
+                    আয়াত ১-৫ (মহাসংবাদ সম্পর্কে প্রশ্ন) নাযিলের ঘটনা<br>
+                    মুশরিকরা একে অপরকে জিজ্ঞাসা করত—এই “মহাসংবাদ” (কিয়ামত) কী? তারা এ বিষয়ে মতভেদ করত। এই প্রেক্ষিতে এই
+                    আয়াতগুলো নাযিল হয়ে জানিয়ে দেয়—তারা শীঘ্রই এর বাস্তবতা জানতে পারবে।<br><br>
+
+                    আয়াত ৬-১৬ (সৃষ্টির নিদর্শন) নাযিলের ঘটনা<br>
+                    পৃথিবী, পাহাড়, মানুষ, রাত-দিন, আকাশ এবং বৃষ্টির মাধ্যমে আল্লাহর কুদরত তুলে ধরে পুনরুত্থানের প্রমাণ
+                    দেওয়া হয়েছে।<br><br>
+
+                    আয়াত ১৭-২০ (কিয়ামতের সূচনা) নাযিলের ঘটনা<br>
+                    শিংগা ফুঁকা, আকাশ খোলা এবং পাহাড় সরিয়ে নেওয়ার দৃশ্য তুলে ধরতে এই আয়াতগুলো নাযিল হয়।<br><br>
+
+                    আয়াত ২১-৩০ (জাহান্নামের শাস্তি) নাযিলের ঘটনা<br>
+                    অবিশ্বাসীদের জন্য জাহান্নামের শাস্তির বিস্তারিত বর্ণনা করা হয়েছে।<br><br>
+
+                    আয়াত ৩১-৩৬ (জান্নাতের নেয়ামত) নাযিলের ঘটনা<br>
+                    মুমিনদের জন্য জান্নাতের শান্তি ও নেয়ামতের বর্ণনা দেওয়া হয়েছে।<br><br>
+
+                    আয়াত ৩৭-৪০ (উপসংহার ও সতর্কবার্তা) নাযিলের ঘটনা<br>
+                    কিয়ামতের দিন কেউ আল্লাহর অনুমতি ছাড়া কথা বলতে পারবে না এবং মানুষ তার কাজের ফল দেখবে—এই সতর্কবার্তা
+                    দিয়ে সূরার সমাপ্তি করা হয়েছে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আন-নাবা মূলত কিয়ামতের বাস্তবতা, পুনরুত্থানের প্রমাণ এবং মানুষের চূড়ান্ত পরিণতি তুলে ধরে। এটি
+                    মক্কার মুশরিকদের সন্দেহের জবাব এবং মুমিনদের জন্য শক্তিশালী ঈমানী শিক্ষা প্রদান করে।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. কিয়ামত সম্পর্কে প্রশ্ন: তাফসীর ইবনে কাসীর, খণ্ড ৪, পৃষ্ঠা ৮২০]<br>
+                    [২. সহীহ বুখারী: কিতাবুত তাফসীর, সূরা নাবা অধ্যায়]<br>
+                    [৩. তাফসীর তাবারী: সূরা আন-নাবা]<br>
+                    [৪. তাফসীর ইবনে কাসীর: সূরা আন-নাবা]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

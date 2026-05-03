@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা তীন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা তীন</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা তীন</div>
+                <div>মাক্কী • ৮ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">وَٱلتِّينِ وَٱلزَّيْتُونِ</div>
+                <div class="pronounce">ওয়াত্-তীনী ওয়াজ্-যাইতূন</div>
+                <div class="meaning">শপথ তীন (ডুমুর) ও যাইতূনের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">وَطُورِ سِينِينَ</div>
+                <div class="pronounce">ওয়া তূরি সীনীন</div>
+                <div class="meaning">এবং সিনাই পর্বতের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">وَهَـٰذَا ٱلْبَلَدِ ٱلْأَمِينِ</div>
+                <div class="pronounce">ওয়া হাযাল বালাদিল আমীন</div>
+                <div class="meaning">এবং এই নিরাপদ নগরের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">لَقَدْ خَلَقْنَا ٱلْإِنسَـٰنَ فِىٓ أَحْسَنِ تَقْوِيمٍ</div>
+                <div class="pronounce">লাকাদ খালাকনাল ইনসানা ফি আহসানি তাকউইম</div>
+                <div class="meaning">নিশ্চয়ই আমরা মানুষকে সর্বোত্তম আকৃতিতে সৃষ্টি করেছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">ثُمَّ رَدَدْنَـٰهُ أَسْفَلَ سَـٰفِلِينَ</div>
+                <div class="pronounce">সুম্মা রাদাদনাহু আসফালা সাফিলীন</div>
+                <div class="meaning">অতঃপর আমরা তাকে নিচের স্তরে নামিয়ে দেই,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ فَلَهُمْ أَجْرٌ غَيْرُ
+                    مَمْنُونٍ</div>
+                <div class="pronounce">ইল্লাল্লাযীনা আমানু ওয়া ‘আমিলুস সালিহাতি ফালাহুম আজরুন গাইরু মামনূন</div>
+                <div class="meaning">তবে যারা ঈমান এনেছে ও সৎকর্ম করেছে, তাদের জন্য রয়েছে অফুরন্ত প্রতিদান,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">فَمَا يُكَذِّبُكَ بَعْدُ بِٱلدِّينِ</div>
+                <div class="pronounce">ফামা ইউকাযযিবুকা বা‘দু বিদ্দীন</div>
+                <div class="meaning">অতঃপর কী তোমাকে প্রতিদান সম্পর্কে মিথ্যা প্রতিপন্ন করে?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">أَلَيْسَ ٱللَّهُ بِأَحْكَمِ ٱلْحَـٰكِمِينَ</div>
+                <div class="pronounce">আলাইসাল্লাহু বিআহকামিল হাকিমীন</div>
+                <div class="meaning">আল্লাহ কি সর্বশ্রেষ্ঠ বিচারক নন?</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আত-তীন নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আত-তীন কুরআনের ৯৫তম সূরা এবং এতে মোট ৮টি আয়াত রয়েছে। এটি একটি মাক্কী সূরা। ‘তীন’ অর্থ ডুমুর ফল।
+                    এই সূরার মূল বিষয়বস্তু হলো মানুষের শ্রেষ্ঠ সৃষ্টি, তার পতন এবং আখিরাতের বিচার।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার নির্দিষ্ট কোনো একক শানে নুযুল নেই; বরং এটি মক্কার মুশরিকদের আখিরাত অস্বীকার, মানুষের
+                    মর্যাদা সম্পর্কে অজ্ঞতা এবং আল্লাহর বিচার ব্যবস্থার প্রতি সন্দেহের প্রেক্ষিতে নাযিল হয়েছে। এতে
+                    মানুষের সৃষ্টির মর্যাদা এবং তার দায়িত্ব তুলে ধরা হয়েছে।<br><br>
+
+                    আয়াত ১-৩ (শপথ) নাযিলের ঘটনা<br>
+                    ডুমুর, জলপাই, তূর সিনা এবং নিরাপদ নগর (মক্কা)-এর শপথ করে সূরার সূচনা করা হয়েছে, যা আল্লাহর নিদর্শন ও
+                    নবীদের ইতিহাসের সাথে সম্পর্কিত।<br><br>
+
+                    আয়াত ৪ (মানুষের শ্রেষ্ঠ সৃষ্টি) নাযিলের ঘটনা<br>
+                    মানুষকে সর্বোত্তম গঠনে সৃষ্টি করা হয়েছে—এই সত্য তুলে ধরতে এই আয়াত নাযিল হয়।<br><br>
+
+                    আয়াত ৫ (পতন) নাযিলের ঘটনা<br>
+                    মানুষ যদি ঈমান ও সৎকর্ম থেকে বিচ্যুত হয়, তবে সে নিকৃষ্ট অবস্থায় পতিত হয়—এই বিষয়টি তুলে ধরতে এই আয়াত
+                    নাযিল হয়।<br><br>
+
+                    আয়াত ৬ (মুমিনদের ব্যতিক্রম) নাযিলের ঘটনা<br>
+                    যারা ঈমান আনে ও সৎকর্ম করে তারা চিরস্থায়ী পুরস্কার পাবে—এই ঘোষণা দিতে এই আয়াত নাযিল হয়।<br><br>
+
+                    আয়াত ৭-৮ (আখিরাতের বিচার) নাযিলের ঘটনা<br>
+                    মানুষ কেন বিচার দিবস অস্বীকার করে—এই প্রশ্ন তুলে ধরে আল্লাহর ন্যায়বিচারের ঘোষণা দিয়ে সূরার সমাপ্তি
+                    করা হয়েছে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আত-তীন মূলত মানুষের মর্যাদা, তার দায়িত্ব এবং আখিরাতের বিচার তুলে ধরে। এটি মানুষকে ঈমান ও
+                    সৎকর্মের মাধ্যমে নিজের মর্যাদা রক্ষা করতে আহ্বান জানায়।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. মানুষের সৃষ্টি: তাফসীর ইবনে কাসীর, খণ্ড ৪, পৃষ্ঠা ১০৮০]<br>
+                    [২. সহীহ বুখারী: কিতাবুত তাফসীর, সূরা তীন অধ্যায়]<br>
+                    [৩. তাফসীর তাবারী: সূরা আত-তীন]<br>
+                    [৪. তাফসীর ইবনে কাসীর: সূরা আত-তীন]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

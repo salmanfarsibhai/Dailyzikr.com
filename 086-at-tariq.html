@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা তারিক</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা তারিক</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা তারিক</div>
+                <div>মাক্কী • ১৭ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">وَٱلسَّمَآءِ وَٱلطَّارِقِ</div>
+                <div class="pronounce">ওয়াস্-সামা-ই ওয়াত্-তারিক</div>
+                <div class="meaning">শপথ আকাশের এবং রাতের আগন্তুকের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">وَمَآ أَدْرَىٰكَ مَا ٱلطَّارِقُ</div>
+                <div class="pronounce">ওয়া মা আদরাকা মাত্-তারিক</div>
+                <div class="meaning">আর তুমি কি জানো রাতের আগন্তুক কী?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">ٱلنَّجْمُ ٱلثَّاقِبُ</div>
+                <div class="pronounce">আন্-নাজমুস্-সাকিব</div>
+                <div class="meaning">তা হলো উজ্জ্বল নক্ষত্র,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">إِن كُلُّ نَفْسٍۢ لَّمَّا عَلَيْهَا حَافِظٌۭ</div>
+                <div class="pronounce">ইন্ কুল্লু নাফসিল্লাম্মা ‘আলাইহা হাফিয</div>
+                <div class="meaning">প্রত্যেক প্রাণের উপরই একজন তত্ত্বাবধায়ক রয়েছে।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">فَلْيَنظُرِ ٱلْإِنسَـٰنُ مِمَّ خُلِقَ</div>
+                <div class="pronounce">ফালইয়ানযুরিল ইনসানু মিম্মা খুলিক</div>
+                <div class="meaning">অতএব মানুষ দেখুক সে কী থেকে সৃষ্টি হয়েছে।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">خُلِقَ مِن مَّآءٍۢ دَافِقٍۢ</div>
+                <div class="pronounce">খুলিকা মিন মা-ইন দাফিক</div>
+                <div class="meaning">সে সৃষ্টি হয়েছে স্ফুরিত পানি থেকে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">يَخْرُجُ مِنۢ بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ</div>
+                <div class="pronounce">ইয়াখরুজু মিন বাইনিস্-সুলবি ওয়াত্-তারাঈব</div>
+                <div class="meaning">যা নির্গত হয় পৃষ্ঠদেশ ও বক্ষাস্থির মধ্য থেকে।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">إِنَّهُۥ عَلَىٰ رَجْعِهِۦ لَقَادِرٌۭ</div>
+                <div class="pronounce">ইন্নাহু ‘আলা রাজ‘ইহি লাকাদির</div>
+                <div class="meaning">নিশ্চয়ই তিনি তাকে পুনরায় ফিরিয়ে আনতে সক্ষম।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯</div>
+                <div class="arabic">يَوْمَ تُبْلَى ٱلسَّرَآئِرُ</div>
+                <div class="pronounce">ইয়াওমা তুবলাস্-সারাঈর</div>
+                <div class="meaning">যেদিন অন্তরের গোপন বিষয়গুলো প্রকাশ পাবে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০</div>
+                <div class="arabic">فَمَا لَهُۥ مِن قُوَّةٍۢ وَلَا نَاصِرٍۢ</div>
+                <div class="pronounce">ফামা লাহু মিন কুওয়াতিন ওয়ালা নাসির</div>
+                <div class="meaning">তখন তার কোন শক্তি থাকবে না এবং কোন সাহায্যকারীও থাকবে না।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১</div>
+                <div class="arabic">وَٱلسَّمَآءِ ذَاتِ ٱلرَّجْعِ</div>
+                <div class="pronounce">ওয়াস্-সামা-ই যাতির্-রাজ‘</div>
+                <div class="meaning">শপথ সেই আকাশের, যা বারবার বৃষ্টি ফিরিয়ে আনে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২</div>
+                <div class="arabic">وَٱلْأَرْضِ ذَاتِ ٱلصَّدْعِ</div>
+                <div class="pronounce">ওয়াল আরদি যাতিস্-সাদ‘</div>
+                <div class="meaning">এবং জমিনের, যা বিদীর্ণ হয়,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩</div>
+                <div class="arabic">إِنَّهُۥ لَقَوْلٌۭ فَصْلٌۭ</div>
+                <div class="pronounce">ইন্নাহু লাকাওলুন ফাসল</div>
+                <div class="meaning">নিশ্চয়ই এটি এক সিদ্ধান্তমূলক বাণী,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৪</div>
+                <div class="arabic">وَمَا هُوَ بِٱلْهَزْلِ</div>
+                <div class="pronounce">ওয়া মা হুয়া বিল্-হাজল</div>
+                <div class="meaning">এটি কোন তামাশা নয়।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৫</div>
+                <div class="arabic">إِنَّهُمْ يَكِيدُونَ كَيْدًۭا</div>
+                <div class="pronounce">ইন্নাহুম ইয়াকিদূনা কাইদা</div>
+                <div class="meaning">নিশ্চয়ই তারা চক্রান্ত করছে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৬</div>
+                <div class="arabic">وَأَكِيدُ كَيْدًۭا</div>
+                <div class="pronounce">ওয়া আকিদু কাইদা</div>
+                <div class="meaning">আর আমিও কৌশল অবলম্বন করছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৭</div>
+                <div class="arabic">فَمَهِّلِ ٱلْكَـٰفِرِينَ أَمْهِلْهُمْ رُوَيْدًۢا</div>
+                <div class="pronounce">ফামাহহিলিল কাফিরীনা আমহিলহুম রুওয়াইদা</div>
+                <div class="meaning">অতএব আপনি কাফিরদেরকে অবকাশ দিন, তাদেরকে সামান্য সময় অবকাশ দিন।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আত-তারিক নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আত-তারিক কুরআনের ৮৬তম সূরা এবং এতে মোট ১৭টি আয়াত রয়েছে। এটি একটি মাক্কী সূরা। ‘তারিক’ অর্থ
+                    রাতের আগন্তুক—এটি নক্ষত্রকে বোঝায়, যা রাতে প্রকাশিত হয়। এই সূরার মূল বিষয়বস্তু হলো মানুষের সৃষ্টি,
+                    আল্লাহর তত্ত্বাবধান এবং কিয়ামতের বাস্তবতা।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার নির্দিষ্ট কোনো একক শানে নুযুল নেই; বরং এটি মক্কার মুশরিকদের পুনরুত্থান অস্বীকার, আল্লাহর
+                    ক্ষমতা সম্পর্কে সন্দেহ এবং কুরআনের প্রতি অবিশ্বাসের প্রেক্ষিতে নাযিল হয়েছে। এতে মানুষের সৃষ্টি এবং
+                    কিয়ামতের বাস্তবতা স্পষ্টভাবে তুলে ধরা হয়েছে।<br><br>
+
+                    আয়াত ১-৪ (তারিকের শপথ) নাযিলের ঘটনা<br>
+                    রাতের আগন্তুক (নক্ষত্র)-এর শপথ করে বলা হয়েছে—প্রত্যেক মানুষের উপর একজন তত্ত্বাবধায়ক রয়েছে। এই সত্য
+                    তুলে ধরতে এই আয়াতগুলো নাযিল হয়।<br><br>
+
+                    আয়াত ৫-৭ (মানুষের সৃষ্টি) নাযিলের ঘটনা<br>
+                    মানুষকে একটি তুচ্ছ পানি (বীর্য) থেকে সৃষ্টি করা হয়েছে—এই বিষয়টি তুলে ধরে আল্লাহর কুদরত প্রদর্শন করা
+                    হয়েছে।<br><br>
+
+                    আয়াত ৮-১০ (পুনরুত্থান) নাযিলের ঘটনা<br>
+                    আল্লাহ মানুষকে পুনরায় জীবিত করতে সক্ষম—এই সত্য তুলে ধরতে এই আয়াতগুলো নাযিল হয়।<br><br>
+
+                    আয়াত ১১-১৪ (শপথ ও কুরআনের সত্যতা) নাযিলের ঘটনা<br>
+                    আকাশ ও পৃথিবীর শপথ করে কুরআনের সত্যতা এবং এর সিদ্ধান্তমূলক বাণী তুলে ধরা হয়েছে।<br><br>
+
+                    আয়াত ১৫-১৭ (অবিশ্বাসীদের ষড়যন্ত্র) নাযিলের ঘটনা<br>
+                    মুশরিকরা ইসলামের বিরুদ্ধে ষড়যন্ত্র করত। এই আয়াতগুলো নাযিল হয়ে জানিয়ে দেয়—আল্লাহ তাদের ষড়যন্ত্রের
+                    জবাব দেবেন এবং নবী (সা.)-কে ধৈর্য ধরার নির্দেশ দেওয়া হয়েছে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আত-তারিক মূলত মানুষের সৃষ্টি, আল্লাহর সর্বজ্ঞতা এবং কিয়ামতের বাস্তবতা তুলে ধরে। এটি মানুষকে
+                    নিজের কাজের প্রতি সচেতন হতে এবং আল্লাহর উপর বিশ্বাস স্থাপন করতে আহ্বান জানায়।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. মানুষের সৃষ্টি: তাফসীর ইবনে কাসীর, খণ্ড ৪, পৃষ্ঠা ৯৫০]<br>
+                    [২. সহীহ বুখারী: কিতাবুত তাফসীর, সূরা তারিক অধ্যায়]<br>
+                    [৩. তাফসীর তাবারী: সূরা আত-তারিক]<br>
+                    [৪. তাফসীর ইবনে কাসীর: সূরা আত-তারিক]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

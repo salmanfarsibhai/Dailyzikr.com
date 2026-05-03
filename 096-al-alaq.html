@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা আলাক</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* =========================
+SAJDAH SIMPLE & PERFECT
+========================= */
+
+        /* আরবি আগের মতোই থাকবে */
+        .sajdah .arabic {
+            color: #d90429 !important;
+            font-weight: normal !important;
+
+            direction: rtl;
+            text-align: right;
+
+            /* 🔥 এক লাইনে রাখা জরুরি */
+            white-space: nowrap;
+
+            /* 🔥 underline = text width (exact) */
+            text-decoration: underline;
+            text-decoration-color: #d90429;
+            text-decoration-thickness: 2px;
+            /* পাতলা লাইন */
+            text-underline-offset: 6px;
+            /* নিচে একটু গ্যাপ */
+        }
+
+        /* note */
+        .sajdah-note {
+            font-size: 12px;
+            color: #d90429;
+            margin-top: 6px;
+            text-align: right;
+            direction: rtl;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা আলাক</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা আলাক</div>
+                <div>মাক্কী • ১৯ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">ٱقْرَأْ بِٱسْمِ رَبِّكَ ٱلَّذِى خَلَقَ</div>
+                <div class="pronounce">ইকরা বিসমি রাব্বিকাল্লাযী খালাক</div>
+                <div class="meaning">পড়ো তোমার রবের নামে, যিনি সৃষ্টি করেছেন—</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">خَلَقَ ٱلْإِنسَـٰنَ مِنْ عَلَقٍ</div>
+                <div class="pronounce">খালাকাল ইনসানা মিন ‘আলাক</div>
+                <div class="meaning">তিনি মানুষকে সৃষ্টি করেছেন জমাট বাঁধা রক্ত থেকে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">ٱقْرَأْ وَرَبُّكَ ٱلْأَكْرَمُ</div>
+                <div class="pronounce">ইকরা ওয়া রাব্বুকাল আকরাম</div>
+                <div class="meaning">পড়ো, আর তোমার রব মহা সম্মানিত,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">ٱلَّذِى عَلَّمَ بِٱلْقَلَمِ</div>
+                <div class="pronounce">আল্লাযী ‘আল্লামা বিল কলম</div>
+                <div class="meaning">যিনি কলমের মাধ্যমে শিক্ষা দিয়েছেন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">عَلَّمَ ٱلْإِنسَـٰنَ مَا لَمْ يَعْلَمْ</div>
+                <div class="pronounce">‘আল্লামাল ইনসানা মা লাম ইয়ালাম</div>
+                <div class="meaning">মানুষকে শিক্ষা দিয়েছেন যা সে জানত না।</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">كَلَّآ إِنَّ ٱلْإِنسَـٰنَ لَيَطْغَىٰٓ</div>
+                <div class="pronounce">কাল্লা ইন্নাল ইনসানা লায়াতগা</div>
+                <div class="meaning">কখনো নয়! নিশ্চয়ই মানুষ সীমালঙ্ঘন করে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">أَن رَّءَاهُ ٱسْتَغْنَىٰٓ</div>
+                <div class="pronounce">আন রা’আহুস্তাগনা</div>
+                <div class="meaning">কারণ সে নিজেকে স্বয়ংসম্পূর্ণ মনে করে,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">إِنَّ إِلَىٰ رَبِّكَ ٱلرُّجْعَىٰٓ</div>
+                <div class="pronounce">ইন্না ইলা রাব্বিকার রুজ‘আ</div>
+                <div class="meaning">নিশ্চয়ই তোমার রবের কাছেই প্রত্যাবর্তন,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯</div>
+                <div class="arabic">أَرَءَيْتَ ٱلَّذِى يَنْهَىٰ</div>
+                <div class="pronounce">আরা’আইতাল্লাযী ইয়ানহা</div>
+                <div class="meaning">তুমি কি দেখেছ তাকে, যে বাধা দেয়—</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০</div>
+                <div class="arabic">عَبْدًا إِذَا صَلَّىٰٓ</div>
+                <div class="pronounce">‘আবদান ইযা সাল্লা</div>
+                <div class="meaning">এক বান্দাকে, যখন সে সালাত আদায় করে?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১</div>
+                <div class="arabic">أَرَءَيْتَ إِن كَانَ عَلَى ٱلْهُدَىٰٓ</div>
+                <div class="pronounce">আরা’আইতা ইন কান ‘আলাল হুদা</div>
+                <div class="meaning">তুমি কি ভেবেছ, যদি সে সঠিক পথে থাকে—</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২</div>
+                <div class="arabic">أَوْ أَمَرَ بِٱلتَّقْوَىٰٓ</div>
+                <div class="pronounce">আউ আমারা বিত তাকওয়া</div>
+                <div class="meaning">অথবা তাকওয়ার নির্দেশ দেয়?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩</div>
+                <div class="arabic">أَرَءَيْتَ إِن كَذَّبَ وَتَوَلَّىٰٓ</div>
+                <div class="pronounce">আরা’আইতা ইন কাদ্দাবা ওয়া তাওয়াল্লা</div>
+                <div class="meaning">তুমি কি দেখেছ, যদি সে অস্বীকার করে ও মুখ ফিরিয়ে নেয়—</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৪</div>
+                <div class="arabic">أَلَمْ يَعْلَم بِأَنَّ ٱللَّهَ يَرَىٰ</div>
+                <div class="pronounce">আলাম ইয়ালাম বিআন্নাল্লাহা ইয়ারা</div>
+                <div class="meaning">সে কি জানে না যে, আল্লাহ দেখছেন?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৫</div>
+                <div class="arabic">كَلَّا لَئِن لَّمْ يَنتَهِ لَنَسْفَعًۢا بِٱلنَّاصِيَةِ</div>
+                <div class="pronounce">কাল্লা লা-ইল্লাম ইয়ান্তাহি লানাসফা‘আন বিন নাসিয়াহ</div>
+                <div class="meaning">কখনো নয়! যদি সে বিরত না হয়, তবে আমি অবশ্যই তার কপালের চুল ধরে টেনে নেব—</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৬</div>
+                <div class="arabic">نَاصِيَةٍۢ كَـٰذِبَةٍۢ خَاطِئَةٍۢ</div>
+                <div class="pronounce">নাসিয়াতিন কাজিবাতিন খাতিয়াহ</div>
+                <div class="meaning">এক মিথ্যাবাদী, পাপিষ্ঠ কপাল,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৭</div>
+                <div class="arabic">فَلْيَدْعُ نَادِيَهُۥ</div>
+                <div class="pronounce">ফালইয়াদ‘উ নাদিয়াহু</div>
+                <div class="meaning">অতএব সে তার সভাসদদের ডাকুক,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৮</div>
+                <div class="arabic">سَنَدْعُ ٱلزَّبَانِيَةَ</div>
+                <div class="pronounce">সানাদ‘উয যাবানিয়াহ</div>
+                <div class="meaning">আমরাও ডাকব জাহান্নামের প্রহরীদের,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৯</div>
+                <div class="arabic">كَلَّا لَا تُطِعْهُ وَٱسْجُدْ وَٱقْتَرِب</div>
+                <div class="pronounce">কাল্লা লা তুতিয়াহু ওয়াসজুদ ওয়াক্তরিব</div>
+                <div class="meaning">কখনো নয়! তুমি তার আনুগত্য করো না; বরং সিজদা কর এবং (আল্লাহর) নিকটবর্তী হও।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আল-আলাক নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আল-আলাক কুরআনের ৯৬তম সূরা এবং এতে মোট ১৯টি আয়াত রয়েছে। এর প্রথম ৫টি আয়াতই কুরআনের সর্বপ্রথম
+                    নাযিল হওয়া আয়াত। এটি একটি মাক্কী সূরা। ‘আলাক’ অর্থ জমাট বাঁধা রক্ত। এই সূরার মূল বিষয়বস্তু হলো ওহীর
+                    সূচনা, জ্ঞানার্জনের গুরুত্ব, মানুষের অবাধ্যতা এবং আল্লাহর প্রতি আনুগত্য।<br><br>
+
+                    আয়াত ১-৫ (প্রথম ওহী) নাযিলের ঘটনা<br>
+                    নবী মুহাম্মদ (সা.) হেরা গুহায় ধ্যানরত অবস্থায় ছিলেন। তখন ফেরেশতা জিবরাইল (আ.) এসে তাঁকে বলেন—“পড়ুন!”
+                    নবী (সা.) বলেন—“আমি পড়তে জানি না।” এরপর জিবরাইল (আ.) তাঁকে শক্তভাবে জড়িয়ে ধরে এই আয়াতগুলো শিক্ষা
+                    দেন: “পড়ুন আপনার প্রতিপালকের নামে, যিনি সৃষ্টি করেছেন…”। এই ঘটনাই কুরআনের প্রথম ওহী এবং নবুওয়াতের
+                    সূচনা।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার প্রথম অংশ নবুওয়াতের সূচনার সাথে সম্পর্কিত। পরবর্তী আয়াতগুলো মক্কার মুশরিকদের অবাধ্যতা এবং
+                    বিশেষভাবে এক ব্যক্তির (আবু জাহল) বিরোধিতার প্রেক্ষিতে নাযিল হয়েছে।<br><br>
+
+                    আয়াত ৬-৮ (মানুষের অবাধ্যতা) নাযিলের ঘটনা<br>
+                    মানুষ যখন নিজেকে স্বয়ংসম্পূর্ণ মনে করে তখন সে অবাধ্য হয়ে ওঠে—এই বাস্তবতা তুলে ধরতে এই আয়াতগুলো নাযিল
+                    হয়।<br><br>
+
+                    আয়াত ৯-১৪ (নামাজে বাধা দেওয়া) নাযিলের ঘটনা<br>
+                    আবু জাহল নবী (সা.)-কে কাবার পাশে নামাজ পড়তে বাধা দেওয়ার চেষ্টা করত। এই প্রেক্ষিতে এই আয়াতগুলো নাযিল
+                    হয়, যেখানে তাকে সতর্ক করা হয়েছে।<br><br>
+
+                    আয়াত ১৫-১৮ (শাস্তির হুমকি) নাযিলের ঘটনা<br>
+                    আবু জাহল যদি বিরত না হয়, তবে তাকে কঠোরভাবে পাকড়াও করা হবে—এই সতর্কতা দিতে এই আয়াতগুলো নাযিল
+                    হয়।<br><br>
+
+                    আয়াত ১৯ (সিজদার নির্দেশ) নাযিলের ঘটনা<br>
+                    নবী (সা.)-কে নির্দেশ দেওয়া হয়—তিনি যেন আল্লাহর কাছে সিজদা করেন এবং তাঁর নৈকট্য লাভ করেন।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আল-আলাক মূলত ওহীর সূচনা, জ্ঞানার্জনের গুরুত্ব এবং মানুষের অবাধ্যতার পরিণতি তুলে ধরে। এটি
+                    ইসলামের প্রথম বার্তা হিসেবে অত্যন্ত গুরুত্বপূর্ণ।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. প্রথম ওহীর ঘটনা: সহীহ বুখারী, হাদিস নম্বর ৩]<br>
+                    [২. সহীহ মুসলিম: হাদিস নম্বর ১৬০]<br>
+                    [৩. তাফসীর ইবনে কাসীর: সূরা আল-আলাক, খণ্ড ৪]<br>
+                    [৪. তাফসীর তাবারী: সূরা আল-আলাক]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // =========================
+        // SAJDAH FINAL SIMPLE ENGINE
+        // =========================
+
+        // Bangla → English number
+        function toEnglishNumber(str) {
+            return str.replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
+        }
+
+        const sajdahMap = {
+            7: [206],
+            13: [15],
+            16: [50],
+            17: [109],
+            19: [58],
+            22: [18, 77],
+            25: [60],
+            27: [26],
+            32: [15],
+            38: [24],
+            41: [38],
+            53: [62],
+            84: [21],
+            96: [19]
+        };
+
+        const currentSurah = 96;
+
+        document.querySelectorAll('.ayah').forEach(ayah => {
+            const numberEl = ayah.querySelector('.number');
+            if (!numberEl) return;
+
+            const raw = numberEl.innerText.trim();
+            const ayahNumber = parseInt(toEnglishNumber(raw));
+
+            if (sajdahMap[currentSurah]?.includes(ayahNumber)) {
+
+                ayah.classList.add('sajdah');
+
+                const arabic = ayah.querySelector('.arabic');
+                if (!arabic) return;
+
+                // note add
+                const note = document.createElement('div');
+                note.className = 'sajdah-note';
+                note.innerText = '(এই আয়াতটি সিজদার আয়াত — সিজদা করুন)';
+
+                arabic.insertAdjacentElement('afterend', note);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

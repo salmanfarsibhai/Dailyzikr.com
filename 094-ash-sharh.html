@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা শারহ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা শারহ</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা শারহ</div>
+                <div>মাক্কী • ৮ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ</div>
+                <div class="pronounce">আলাম নাশরাহ লাকা সাদরাক</div>
+                <div class="meaning">আমি কি তোমার বক্ষ প্রশস্ত করে দিইনি?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">وَوَضَعْنَا عَنكَ وِزْرَكَ</div>
+                <div class="pronounce">ওয়া ওয়াদাআনা ‘আনকা উইযরাক</div>
+                <div class="meaning">এবং তোমার বোঝা তোমার থেকে নামিয়ে দিয়েছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">ٱلَّذِىٓ أَنقَضَ ظَهْرَكَ</div>
+                <div class="pronounce">আল্লাযী আনকাদা যাহরাক</div>
+                <div class="meaning">যা তোমার পিঠ ভারী করে দিয়েছিল,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">وَرَفَعْنَا لَكَ ذِكْرَكَ</div>
+                <div class="pronounce">ওয়া রাফা‘না লাকা যিকরাক</div>
+                <div class="meaning">এবং তোমার জন্য তোমার স্মরণকে উচ্চ মর্যাদা দিয়েছি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا</div>
+                <div class="pronounce">ফা ইন্না মা‘আল ‘উসরি ইউসরা</div>
+                <div class="meaning">নিশ্চয়ই কষ্টের সাথে আছে স্বস্তি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">إِنَّ مَعَ ٱلْعُسْرِ يُسْرًۭا</div>
+                <div class="pronounce">ইন্না মা‘আল ‘উসরি ইউসরা</div>
+                <div class="meaning">নিশ্চয়ই কষ্টের সাথে আছে স্বস্তি,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">فَإِذَا فَرَغْتَ فَٱنصَبْ</div>
+                <div class="pronounce">ফা ইযা ফারাগতা ফানসাব</div>
+                <div class="meaning">অতএব যখন তুমি অবসর পাও, তখন ইবাদতে মনোনিবেশ কর,</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">وَإِلَىٰ رَبِّكَ فَٱرْغَب</div>
+                <div class="pronounce">ওয়া ইলা রাব্বিকা ফারগাব</div>
+                <div class="meaning">এবং তোমার রবের দিকেই আকাঙ্ক্ষা কর।</div>
+            </div>
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা আশ-শারহ (আল-ইনশিরাহ) নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা আশ-শারহ (যাকে ‘আল-ইনশিরাহ’ও বলা হয়) কুরআনের ৯৪তম সূরা এবং এতে মোট ৮টি আয়াত রয়েছে। এটি একটি
+                    মাক্কী সূরা। ‘শারহ’ অর্থ প্রশস্ত করা বা উন্মুক্ত করা। এই সূরার মূল বিষয়বস্তু হলো নবী (সা.)-এর অন্তর
+                    প্রশস্ত করা, তাঁর দায়িত্ব হালকা করা এবং কষ্টের সাথে সহজতার সুসংবাদ দেওয়া।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার নির্দিষ্ট কোনো একক শানে নুযুল নেই; বরং এটি মক্কার কঠিন পরিস্থিতিতে নবী (সা.)-কে সান্ত্বনা
+                    দেওয়ার জন্য নাযিল হয়েছে। মুশরিকদের বিরোধিতা, কষ্ট এবং মানসিক চাপের মধ্যে এই সূরা নবী (সা.)-এর জন্য
+                    এক বড় সান্ত্বনার বার্তা হিসেবে আসে।<br><br>
+
+                    আয়াত ১-৪ (নবী (সা.)-এর অনুগ্রহ) নাযিলের ঘটনা<br>
+                    আল্লাহ নবী (সা.)-এর বক্ষ প্রশস্ত করেছেন, তাঁর বোঝা হালকা করেছেন এবং তাঁর মর্যাদা বৃদ্ধি করেছেন—এই
+                    বিষয়গুলো তুলে ধরতে এই আয়াতগুলো নাযিল হয়।<br><br>
+
+                    আয়াত ৫-৬ (কষ্টের সাথে সহজতা) নাযিলের ঘটনা<br>
+                    “নিশ্চয়ই কষ্টের সাথে সহজতা রয়েছে”—এই মহান বার্তা নবী (সা.)-কে আশ্বস্ত করতে নাযিল হয়, যাতে তিনি কঠিন
+                    পরিস্থিতিতে ধৈর্য ধারণ করতে পারেন।<br><br>
+
+                    আয়াত ৭-৮ (ইবাদতের নির্দেশ) নাযিলের ঘটনা<br>
+                    নবী (সা.)-কে নির্দেশ দেওয়া হয়—এক কাজ শেষ হলে অন্য কাজে মনোনিবেশ করতে এবং সর্বদা আল্লাহর দিকে মনোযোগী
+                    থাকতে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা আশ-শারহ (আল-ইনশিরাহ) মূলত নবী (সা.)-এর জন্য সান্ত্বনা, ধৈর্য এবং আল্লাহর প্রতি ভরসার শিক্ষা
+                    প্রদান করে। এটি সকল মুমিনের জন্যও একটি শক্তিশালী বার্তা—কষ্টের পর সহজতা অবশ্যই আসে।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. নবী (সা.)-এর সান্ত্বনা: তাফসীর ইবনে কাসীর, খণ্ড ৪, পৃষ্ঠা ১০৬০]<br>
+                    [২. সহীহ বুখারী: কিতাবুত তাফসীর, সূরা শারহ অধ্যায়]<br>
+                    [৩. তাফসীর তাবারী: সূরা আশ-শারহ]<br>
+                    [৪. তাফসীর ইবনে কাসীর: সূরা আল-ইনশিরাহ]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

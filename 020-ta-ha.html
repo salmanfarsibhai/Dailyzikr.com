@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title>সূরা ত্ব-হা</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ❌ REMOVE BLUE TAP LIGHT */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus,
+        *:active {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 👇 ADD THIS EXACTLY BELOW */
+        a,
+        button,
+        div,
+        span {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none;
+        }
+
+        /* =========================
+A4 PAGE (PERFECT FIXED LAYOUT)
+========================= */
+        .page {
+            width: 794px;
+            min-height: 1123px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MOBILE */
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+        }
+
+        /* =========================
+TOP BAR (FIXED + STABLE)
+========================= */
+        .topbar {
+            position: fixed;
+            /* 🔥 এখন সবসময় স্থির থাকবে */
+            top: 0;
+            width: 794px;
+            /* A4 অনুযায়ী */
+            height: 60px;
+            background: #2B9E75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 9999;
+        }
+
+        /* MOBILE FIX */
+        @media(max-width:800px) {
+            .topbar {
+                width: 100%;
+            }
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px);
+        }
+
+        /* =========================
+CONTENT AREA
+========================= */
+        .content {
+            padding-top: 70px;
+            /* 🔥 topbar overlap fix */
+        }
+
+        /* =========================
+HEADER
+========================= */
+        .surah-header {
+            text-align: center;
+            padding: 20px 10px;
+            background: #f7f1e8;
+        }
+
+        .surah-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+AYAH CARD (PERFECT ALIGN FIX)
+========================= */
+        .ayah {
+            background: #fff;
+            margin: 12px 15px;
+            padding: 15px 18px;
+            /* 🔥 ভিতরে এনে দেয়া হয়েছে */
+            border-radius: 12px;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        /* HOVER */
+        .ayah:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================
+NUMBER (INSIDE FIX)
+========================= */
+        .number {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+ARABIC (RIGHT PERFECT)
+========================= */
+        .arabic {
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+BANGLA (LEFT PERFECT FIX)
+👉 আগে বের হয়ে যাচ্ছিল → এখন ঠিক
+========================= */
+        .pronounce {
+            text-align: left;
+            color: #2d7c6f;
+            font-size: 15px;
+            margin-bottom: 3px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        .meaning {
+            text-align: left;
+            color: #444;
+            font-size: 14px;
+            padding-left: 2px;
+            /* 🔥 হালকা ভিতরে */
+        }
+
+        /* =========================
+SCROLL ANIMATION
+========================= */
+        .ayah {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .ayah.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 0.6s ease;
+        }
+
+        /* =========================
+SHANE NUZUL
+========================= */
+        .shane {
+            margin: 20px;
+            padding: 18px;
+            background: linear-gradient(rgba(43, 158, 117, 0.15),
+                    rgba(43, 158, 117, 0.15));
+            border-radius: 12px;
+        }
+
+        .shane h3 {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+SMOOTH TRANSITION PAGE FEEL
+========================= */
+        body {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <div>সূরা ত্ব-হা</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="surah-header">
+                <div class="surah-title">সূরা ত্ব-হা</div>
+                <div>মাক্কী • ১৩৫ আয়াত</div>
+            </div>
+
+            <!-- AYAH -->
+            <div class="ayah">
+                <div class="number">১</div>
+                <div class="arabic">طه</div>
+                <div class="pronounce">ত্বা-হা</div>
+                <div class="meaning">ত্বা-হা</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২</div>
+                <div class="arabic">مَآ أَنزَلْنَا عَلَيْكَ ٱلْقُرْءَانَ لِتَشْقَىٰٓ</div>
+                <div class="pronounce">মা আনযালনা ‘আলাইকাল কুরআনা লিতাশকা</div>
+                <div class="meaning">আমি আপনার উপর কুরআন নাযিল করিনি—যাতে আপনি কষ্টে পড়েন</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩</div>
+                <div class="arabic">إِلَّا تَذْكِرَةًۭ لِّمَن يَخْشَىٰ</div>
+                <div class="pronounce">ইল্লা তাযকিরাতাল্লিমান ইয়াখশা</div>
+                <div class="meaning">বরং এটি একটি উপদেশ—তার জন্য—যে ভয় করে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪</div>
+                <div class="arabic">تَنزِيلًۭا مِّمَّنْ خَلَقَ ٱلْأَرْضَ وَٱلسَّمَـٰوَٰتِ ٱلْعُلَى</div>
+                <div class="pronounce">তানযীলাম মিম্মান খালাকাল আরদা ওয়াস সামাওয়াতিল ‘উলা</div>
+                <div class="meaning">এটি নাযিল করা হয়েছে—তার পক্ষ থেকে—যিনি জমিন ও ঊর্ধ্ব আকাশসমূহ সৃষ্টি করেছেন</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫</div>
+                <div class="arabic">ٱلرَّحْمَـٰنُ عَلَى ٱلْعَرْشِ ٱسْتَوَىٰ</div>
+                <div class="pronounce">আররাহমানু ‘আলাল ‘আরশিস্তাওয়া</div>
+                <div class="meaning">পরম দয়ালু—আরশের উপর প্রতিষ্ঠিত</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬</div>
+                <div class="arabic">لَهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ وَمَا بَيْنَهُمَا وَمَا تَحْتَ
+                    ٱلثَّرَىٰ</div>
+                <div class="pronounce">লাহু মা ফিস সামাওয়াতি ওয়া মা ফিল আরদ ওয়া মা বাইনাহুমা ওয়া মা তাহতাস সারা
+                </div>
+                <div class="meaning">আসমানসমূহে যা আছে—এবং জমিনে যা আছে—এবং তাদের মধ্যবর্তী যা আছে—এবং মাটির নিচে যা
+                    আছে—সবই তাঁর</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭</div>
+                <div class="arabic">وَإِن تَجْهَرْ بِٱلْقَوْلِ فَإِنَّهُۥ يَعْلَمُ ٱلسِّرَّ وَأَخْفَى</div>
+                <div class="pronounce">ওয়া ইন তাজহার বিল কাওলি ফাইন্নাহু ইয়ালামুস সির্রা ওয়া আখফা</div>
+                <div class="meaning">আর আপনি যদি উচ্চস্বরে কথা বলেন—তবুও তিনি গোপন ও আরও গোপন বিষয় জানেন</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮</div>
+                <div class="arabic">ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ۖ لَهُ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ</div>
+                <div class="pronounce">আল্লাহু লা ইলাহা ইল্লা হুয়া লাহুল আসমাউল হুসনা</div>
+                <div class="meaning">আল্লাহ—তিনি ছাড়া কোনো উপাস্য নেই—তাঁরই রয়েছে সর্বোত্তম নামসমূহ</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯</div>
+                <div class="arabic">وَهَلْ أَتَىٰكَ حَدِيثُ مُوسَىٰٓ</div>
+                <div class="pronounce">ওয়া হাল আতাকা হাদীসু মূসা</div>
+                <div class="meaning">আর আপনার কাছে কি মূসার ঘটনা পৌঁছেছে?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০</div>
+                <div class="arabic">إِذْ رَءَا نَارًۭا فَقَالَ لِأَهْلِهِ ٱمْكُثُوٓا۟ إِنِّىٓ ءَانَسْتُ نَارًۭا
+                    لَّعَلِّىٓ ءَاتِيكُم مِّنْهَا بِقَبَسٍ أَوْ أَجِدُ عَلَى ٱلنَّارِ هُدًۭى</div>
+                <div class="pronounce">ইয্ রা’আ নারান ফাক্বালা লিআহলিহি উমকুসূ ইন্নী আনাস্তু নারাল্লা‘আল্লী আতিকুম মিনহা
+                    বিকাবাসিন আও আজিদু ‘আলান্নারি হুদা</div>
+                <div class="meaning">যখন সে আগুন দেখেছিল—তখন সে তার পরিবারকে বলল, “তোমরা অপেক্ষা কর—আমি একটি আগুন দেখতে
+                    পেয়েছি—সম্ভবত আমি তোমাদের জন্য তা থেকে একটি জ্বলন্ত কাঠ আনব—অথবা আগুনের কাছে কোনো পথনির্দেশ পাব”
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১</div>
+                <div class="arabic">فَلَمَّآ أَتَىٰهَا نُودِىَ يَـٰمُوسَىٰٓ</div>
+                <div class="pronounce">ফালাম্মা আতাহা নূদিয়া ইয়া মূসা</div>
+                <div class="meaning">অতঃপর যখন সে সেখানে পৌঁছল—তাকে ডাকা হলো—“হে মূসা!”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২</div>
+                <div class="arabic">إِنِّىٓ أَنَا۠ رَبُّكَ فَٱخْلَعْ نَعْلَيْكَ ۖ إِنَّكَ بِٱلْوَادِ ٱلْمُقَدَّسِ طُوًۭى
+                </div>
+                <div class="pronounce">ইন্নী আনা রব্বুকা ফাখলা‘ নালাইক ইন্নাকা বিল ওয়াদিল মুকাদ্দাসি তুয়া</div>
+                <div class="meaning">“নিশ্চয়ই আমিই তোমার রব—অতএব তুমি তোমার জুতা খুলে ফেল—নিশ্চয়ই তুমি পবিত্র উপত্যকা
+                    ‘তুয়া’-তে আছ”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩</div>
+                <div class="arabic">وَأَنَا ٱخْتَرْتُكَ فَٱسْتَمِعْ لِمَا يُوحَىٰٓ</div>
+                <div class="pronounce">ওয়া আনা ইখতারতুকা ফাস্তামি‘ লিমা ইউহা</div>
+                <div class="meaning">“আর আমি তোমাকে নির্বাচিত করেছি—অতএব যা ওহি করা হয়—তা মনোযোগ দিয়ে শোন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৪</div>
+                <div class="arabic">إِنَّنِىٓ أَنَا ٱللَّهُ لَآ إِلَـٰهَ إِلَّآ أَنَا۠ فَٱعْبُدْنِى وَأَقِمِ
+                    ٱلصَّلَوٰةَ لِذِكْرِىٓ</div>
+                <div class="pronounce">ইন্নানী আনা আল্লাহু লা ইলাহা ইল্লা আনা ফা‘বুদনী ওয়া আকিমিস সালাতা লিযিক্রী</div>
+                <div class="meaning">“নিশ্চয়ই আমিই আল্লাহ—আমি ছাড়া কোনো উপাস্য নেই—অতএব আমারই ইবাদত কর—এবং আমার
+                    স্মরণের জন্য সালাত কায়েম কর”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৫</div>
+                <div class="arabic">إِنَّ ٱلسَّاعَةَ ءَاتِيَةٌ أَكَادُ أُخْفِيهَا لِتُجْزَىٰ كُلُّ نَفْسٍۢ بِمَا
+                    تَسْعَىٰ</div>
+                <div class="pronounce">ইন্নাস সা‘আতা আ’তিয়াতুন আকাদু উখফীহা লিতুজযা কুল্লু নাফসিম বিমা তাস‘আ</div>
+                <div class="meaning">“নিশ্চয়ই কিয়ামত আসবেই—আমি প্রায় তা গোপন রাখি—যাতে প্রত্যেক প্রাণ তার প্রচেষ্টার
+                    প্রতিফল পায়”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৬</div>
+                <div class="arabic">فَلَا يَصُدَّنَّكَ عَنْهَا مَن لَّا يُؤْمِنُ بِهَا وَٱتَّبَعَ هَوَىٰهُ فَتَرْدَىٰ
+                </div>
+                <div class="pronounce">ফালা ইয়াসুদ্দান্নাকা ‘আনহা মান লা ইউ’মিনু বিহা ওয়াত্তাবা‘ হাওয়াহু ফাতারদা
+                </div>
+                <div class="meaning">“অতএব যে এতে বিশ্বাস করে না—এবং নিজের প্রবৃত্তির অনুসরণ করে—সে যেন আপনাকে তা থেকে
+                    বিরত না করে—তাহলে আপনি ধ্বংস হয়ে যাবেন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৭</div>
+                <div class="arabic">وَمَا تِلْكَ بِيَمِينِكَ يَـٰمُوسَىٰ</div>
+                <div class="pronounce">ওয়া মা তিলকা বিয়ামিনিকা ইয়া মূসা</div>
+                <div class="meaning">“আর আপনার ডান হাতে কী আছে—হে মূসা?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৮</div>
+                <div class="arabic">قَالَ هِىَ عَصَاىَ أَتَوَكَّؤُا۟ عَلَيْهَا وَأَهُشُّ بِهَا عَلَىٰ غَنَمِى وَلِىَ
+                    فِيهَا مَـَٔارِبُ أُخْرَىٰ</div>
+                <div class="pronounce">ক্বালা হিয়া ‘আসাইয়া আতাওয়াক্কাউ ‘আলাইহা ওয়া আহুশ্শু বিহা ‘আলা গনামী ওয়া
+                    লিয়া ফীহা মা’আরিবু উখরা</div>
+                <div class="meaning">সে বলল, “এটি আমার লাঠি—আমি এর উপর ভর দিই—এবং এর দ্বারা আমার ছাগলের জন্য পাতা
+                    ঝাড়ি—এবং এতে আমার আরও প্রয়োজন রয়েছে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৯</div>
+                <div class="arabic">قَالَ أَلْقِهَا يَـٰمُوسَىٰ</div>
+                <div class="pronounce">ক্বালা আলকিহা ইয়া মূসা</div>
+                <div class="meaning">তিনি বললেন, “এটি নিক্ষেপ কর—হে মূসা”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২০</div>
+                <div class="arabic">فَأَلْقَىٰهَا فَإِذَا هِىَ حَيَّةٌۭ تَسْعَىٰ</div>
+                <div class="pronounce">ফাআলকাহা ফাইযা হিয়া হাইয়্যাতুন তাস‘আ</div>
+                <div class="meaning">অতঃপর সে তা নিক্ষেপ করল—হঠাৎ তা একটি সাপ হয়ে গেল—যা চলতে লাগল</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২১</div>
+                <div class="arabic">قَالَ خُذْهَا وَلَا تَخَفْ ۖ سَنُعِيدُهَا سِيرَتَهَا ٱلْأُولَىٰ</div>
+                <div class="pronounce">ক্বালা খুযহা ওয়া লা তাখাফ সানু‘ঈদুহা সীরাতাহাল উলা</div>
+                <div class="meaning">তিনি বললেন, “এটি ধর—এবং ভয় করো না—আমি এটিকে পূর্বের অবস্থায় ফিরিয়ে দেব”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২২</div>
+                <div class="arabic">وَٱضْمُمْ يَدَكَ إِلَىٰ جَنَاحِكَ تَخْرُجْ بَيْضَآءَ مِنْ غَيْرِ سُوٓءٍ ءَايَةً
+                    أُخْرَىٰ</div>
+                <div class="pronounce">ওয়াদমুম ইয়াদাকা ইলা জানাহিকা তাখরুজ বাইদা’আ মিন গাইরি সুঁইন আয়াতান উখরা</div>
+                <div class="meaning">“আর আপনার হাতকে আপনার বগলে সংযুক্ত করুন—তা কোনো দোষ ছাড়াই উজ্জ্বল সাদা হয়ে বের
+                    হবে—আরেকটি নিদর্শন হিসেবে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৩</div>
+                <div class="arabic">لِنُرِيَكَ مِنْ ءَايَـٰتِنَا ٱلْكُبْرَى</div>
+                <div class="pronounce">লিনুরিয়াকা মিন আয়াতিনাল কুবরা</div>
+                <div class="meaning">“যাতে আমি আপনাকে আমার মহান নিদর্শনসমূহ দেখাতে পারি”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৪</div>
+                <div class="arabic">ٱذْهَبْ إِلَىٰ فِرْعَوْنَ إِنَّهُۥ طَغَىٰ</div>
+                <div class="pronounce">ইযহাব ইলা ফির‘আউনা ইন্নাহু তাগা</div>
+                <div class="meaning">“ফিরআউনের কাছে যাও—নিশ্চয়ই সে সীমালঙ্ঘন করেছে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৫</div>
+                <div class="arabic">قَالَ رَبِّ ٱشْرَحْ لِى صَدْرِى</div>
+                <div class="pronounce">ক্বালা রব্বিশরাহ লী সদরী</div>
+                <div class="meaning">সে বলল, “হে আমার রব! আমার বক্ষ প্রসারিত করে দিন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৬</div>
+                <div class="arabic">وَيَسِّرْ لِىٓ أَمْرِى</div>
+                <div class="pronounce">ওয়া ইয়াসসির লী আমরী</div>
+                <div class="meaning">“এবং আমার কাজ সহজ করে দিন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৭</div>
+                <div class="arabic">وَٱحْلُلْ عُقْدَةًۭ مِّن لِّسَانِى</div>
+                <div class="pronounce">ওয়াহলুল ‘উকদাতাম মিন লিসানী</div>
+                <div class="meaning">“এবং আমার জিহ্বার গিঁট খুলে দিন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৮</div>
+                <div class="arabic">يَفْقَهُوا۟ قَوْلِى</div>
+                <div class="pronounce">ইয়াফকাহূ ক্বাওলী</div>
+                <div class="meaning">“যাতে তারা আমার কথা বুঝতে পারে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">২৯</div>
+                <div class="arabic">وَٱجْعَل لِّى وَزِيرًۭا مِّنْ أَهْلِى</div>
+                <div class="pronounce">ওয়াজ‘আল লী ওয়াজীরাম মিন আহলী</div>
+                <div class="meaning">“এবং আমার পরিবার থেকে একজন সহায়ক নির্ধারণ করুন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩০</div>
+                <div class="arabic">هَـٰرُونَ أَخِى</div>
+                <div class="pronounce">হারূনা আখী</div>
+                <div class="meaning">“হারূন—আমার ভাই”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩১</div>
+                <div class="arabic">ٱشْدُدْ بِهِۦٓ أَزْرِى</div>
+                <div class="pronounce">ইশদুদ বিহি আজরী</div>
+                <div class="meaning">“তার মাধ্যমে আমার শক্তি বৃদ্ধি করুন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩২</div>
+                <div class="arabic">وَأَشْرِكْهُ فِىٓ أَمْرِى</div>
+                <div class="pronounce">ওয়া আশরিকহু ফি আমরী</div>
+                <div class="meaning">“এবং তাকে আমার কাজে অংশীদার করুন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৩</div>
+                <div class="arabic">كَىْ نُسَبِّحَكَ كَثِيرًۭا</div>
+                <div class="pronounce">কাই নুসাব্বিহাকা কাছীরা</div>
+                <div class="meaning">“যাতে আমরা আপনাকে অধিক পরিমাণে পবিত্রতা ঘোষণা করতে পারি”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৪</div>
+                <div class="arabic">وَنَذْكُرَكَ كَثِيرًا</div>
+                <div class="pronounce">ওয়া নাযকুরাকা কাছীরা</div>
+                <div class="meaning">“এবং আপনাকে অধিক পরিমাণে স্মরণ করতে পারি”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৫</div>
+                <div class="arabic">إِنَّكَ كُنتَ بِنَا بَصِيرًۭا</div>
+                <div class="pronounce">ইন্নাকা কুনতা বিনা বাসীরা</div>
+                <div class="meaning">“নিশ্চয়ই আপনি আমাদের সম্পর্কে সর্বদ্রষ্টা”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৬</div>
+                <div class="arabic">قَالَ قَدْ أُوتِيتَ سُؤْلَكَ يَـٰمُوسَىٰ</div>
+                <div class="pronounce">ক্বালা ক্বাদ উতীতা সুউলাকা ইয়া মূসা</div>
+                <div class="meaning">তিনি বললেন, “হে মূসা! তোমার প্রার্থনা মঞ্জুর করা হয়েছে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৭</div>
+                <div class="arabic">وَلَقَدْ مَنَنَّا عَلَيْكَ مَرَّةً أُخْرَىٰ</div>
+                <div class="pronounce">ওয়ালাক্বাদ মানান্না ‘আলাইকা মাররাতান উখরা</div>
+                <div class="meaning">আর আমি অবশ্যই তোমার প্রতি আরেকবার অনুগ্রহ করেছি</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৮</div>
+                <div class="arabic">إِذْ أَوْحَيْنَآ إِلَىٰٓ أُمِّكَ مَا يُوحَىٰٓ</div>
+                <div class="pronounce">ইয্ আওহাইনা ইলা উম্মিকা মা ইউহা</div>
+                <div class="meaning">যখন আমি তোমার মায়ের কাছে ওহি করেছিলাম—যা ওহি করা হয়েছিল</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৩৯</div>
+                <div class="arabic">أَنِ ٱقْذِفِيهِ فِى ٱلتَّابُوتِ فَٱقْذِفِيهِ فِى ٱلْيَمِّ فَلْيُلْقِهِ ٱلْيَمُّ
+                    بِٱلسَّاحِلِ يَأْخُذْهُ عَدُوٌّ لِّى وَعَدُوٌّ لَّهُۥ ۚ وَأَلْقَيْتُ عَلَيْكَ مَحَبَّةًۭ مِّنِّى
+                    وَلِتُصْنَعَ عَلَىٰ عَيْنِىٓ</div>
+                <div class="pronounce">আনিলক্বযিফীহি ফিত্তাবূতি ফালক্বযিফীহি ফিল ইয়াম্মি ফালইয়ুলকিহিল ইয়াম্মু
+                    বিস্সাহিলি ইয়াখুযহু ‘আদুউল্লী ওয়া ‘আদুউল্লাহু; ওয়া আলক্বাইতু ‘আলাইকা মাহাব্বাতাম মিননী
+                    ওয়ালিতুসনা‘আ ‘আলা ‘আইনী</div>
+                <div class="meaning">“তাকে সিন্দুকে রাখো—তারপর তাকে নদীতে নিক্ষেপ কর—অতঃপর নদী তাকে তীরে এনে ফেলবে—তাকে
+                    এমন একজন শত্রু গ্রহণ করবে—যে আমারও শত্রু—এবং তারও শত্রু”; আর আমি তোমার উপর আমার পক্ষ থেকে ভালোবাসা
+                    নিক্ষেপ করেছি—এবং যাতে তুমি আমার তত্ত্বাবধানে গড়ে ওঠো</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪০</div>
+                <div class="arabic">إِذْ تَمْشِىٓ أُخْتُكَ فَتَقُولُ هَلْ أَدُلُّكُمْ عَلَىٰ مَن يَكْفُلُهُۥ ۖ
+                    فَرَجَعْنَـٰكَ إِلَىٰٓ أُمِّكَ كَىْ تَقَرَّ عَيْنُهَا وَلَا تَحْزَنَ ۚ وَقَتَلْتَ نَفْسًۭا
+                    فَنَجَّيْنَـٰكَ مِنَ ٱلْغَمِّ وَفَتَنَّـٰكَ فُتُونًۭا ۚ فَلَبِثْتَ سِنِينَ فِىٓ أَهْلِ مَدْيَنَ
+                    ثُمَّ جِئْتَ عَلَىٰ قَدَرٍۢ يَـٰمُوسَىٰ</div>
+                <div class="pronounce">ইয্ তামশী উখতুকা ফাতাক্বুলু হাল আদুল্লুকুম ‘আলা মান ইয়াকফুলুহু; ফারাজা‘নাকা ইলা
+                    উম্মিকা কাই তাক্বাররা ‘আইনুহা ওয়ালা তাহযান; ওয়া কাতালতা নাফসান ফানাজ্জাইনাকা মিনাল গাম্মি ওয়া
+                    ফাতান্নাকা ফুটূনা; ফালাবিস্তা সিনীনা ফি আহলি মাদইয়ান সুম্মা জি’তা ‘আলা ক্বাদারিন ইয়া মূসা</div>
+                <div class="meaning">যখন তোমার বোন চলছিল—এবং বলছিল, “আমি কি তোমাদেরকে এমন একজনের কথা বলব—যে তাকে
+                    লালন-পালন করবে?”—অতঃপর আমি তোমাকে তোমার মায়ের কাছে ফিরিয়ে দিয়েছিলাম—যাতে তার চোখ শীতল হয়—এবং সে
+                    দুঃখিত না হয়; আর তুমি একজনকে হত্যা করেছিলে—অতঃপর আমি তোমাকে দুঃখ থেকে উদ্ধার করেছি—এবং তোমাকে
+                    বিভিন্নভাবে পরীক্ষা করেছি; তারপর তুমি মাদইয়ানের লোকদের মধ্যে কয়েক বছর অবস্থান করেছিলে—অতঃপর
+                    নির্ধারিত সময়ে তুমি এসেছ—হে মূসা</div>
+            </div>
+            <div class="ayah">
+                <div class="number">৪১</div>
+                <div class="arabic">وَٱصْطَنَعْتُكَ لِنَفْسِى</div>
+                <div class="pronounce">ওয়াস্‌তানাআতুকা লিনাফসী</div>
+                <div class="meaning">আর আমি তোমাকে নিজের জন্যই প্রস্তুত করেছি</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪২</div>
+                <div class="arabic">ٱذْهَبْ أَنتَ وَأَخُوكَ بِـَٔايَـٰتِى وَلَا تَنِيَا فِى ذِكْرِى</div>
+                <div class="pronounce">ইযহাব আন্তা ওয়া আখূকা বিআয়াতী ওয়ালা তানিয়া ফি যিক্রী</div>
+                <div class="meaning">তুমি ও তোমার ভাই আমার নিদর্শনসহ যাও—এবং আমার স্মরণে শৈথিল্য করো না</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪৩</div>
+                <div class="arabic">ٱذْهَبَآ إِلَىٰ فِرْعَوْنَ إِنَّهُۥ طَغَىٰ</div>
+                <div class="pronounce">ইযহাবা ইলা ফির‘আউনা ইন্নাহু তাগা</div>
+                <div class="meaning">তোমরা উভয়ে ফিরআউনের কাছে যাও—নিশ্চয়ই সে সীমালঙ্ঘন করেছে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪৪</div>
+                <div class="arabic">فَقُولَا لَهُۥ قَوْلًۭا لَّيِّنًۭا لَّعَلَّهُۥ يَتَذَكَّرُ أَوْ يَخْشَىٰ</div>
+                <div class="pronounce">ফাক্বুলা লাহু কাওলাল লায়্যিনাল্লা‘আল্লাহু ইয়াতাযাক্কারু আও ইয়াখশা</div>
+                <div class="meaning">অতঃপর তোমরা তার সাথে নম্র কথা বলো—সম্ভবত সে উপদেশ গ্রহণ করবে—অথবা ভয় করবে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪৫</div>
+                <div class="arabic">قَالَا رَبَّنَآ إِنَّنَا نَخَافُ أَن يَفْرُطَ عَلَيْنَآ أَوْ أَن يَطْغَىٰ</div>
+                <div class="pronounce">ক্বালা রাব্বানা ইন্নানা নাখাফু আন ইয়াফরুতা ‘আলাইনা আও আন ইয়াতগা</div>
+                <div class="meaning">তারা বলল, “হে আমাদের রব! আমরা ভয় করি—সে আমাদের প্রতি বাড়াবাড়ি করবে—অথবা
+                    সীমালঙ্ঘন করবে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪৬</div>
+                <div class="arabic">قَالَ لَا تَخَافَآ ۖ إِنَّنِى مَعَكُمَآ أَسْمَعُ وَأَرَىٰ</div>
+                <div class="pronounce">ক্বালা লা তাখাফা ইন্নানী মা‘আকুমা আসমা‘উ ওয়া আরা</div>
+                <div class="meaning">তিনি বললেন, “তোমরা ভয় করো না—নিশ্চয়ই আমি তোমাদের সঙ্গে আছি—আমি শুনি—এবং দেখি”
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪৭</div>
+                <div class="arabic">فَأْتِيَاهُ فَقُولَآ إِنَّا رَسُولَا رَبِّكَ فَأَرْسِلْ مَعَنَا بَنِىٓ
+                    إِسْرَٰٓءِيلَ وَلَا تُعَذِّبْهُمْ ۖ قَدْ جِئْنَـٰكَ بِـَٔايَةٍۢ مِّن رَّبِّكَ ۖ وَٱلسَّلَـٰمُ عَلَىٰ
+                    مَنِ ٱتَّبَعَ ٱلْهُدَىٰٓ</div>
+                <div class="pronounce">ফা’তিয়াহু ফাক্বুলা ইন্না রাসূলা রব্বিকা ফাআরসিল মা‘আনা বানী ইস্রাঈলা ওয়ালা
+                    তু‘আযযিবহুম; ক্বাদ জি’নাকা বিআয়াতিম মিন রব্বিকা; ওয়াস সালামু ‘আলা মানিত্তাবা‘আল হুদা</div>
+                <div class="meaning">অতঃপর তোমরা তার কাছে যাও—এবং বলো, “নিশ্চয়ই আমরা তোমার রবের রাসূল—অতএব বনী ইসরাঈলকে
+                    আমাদের সঙ্গে পাঠাও—এবং তাদেরকে নির্যাতন করো না; আমরা তোমার রবের পক্ষ থেকে নিদর্শন নিয়ে এসেছি; আর
+                    শান্তি তাদের উপর—যারা হিদায়াত অনুসরণ করে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪৮</div>
+                <div class="arabic">إِنَّا قَدْ أُوحِىَ إِلَيْنَآ أَنَّ ٱلْعَذَابَ عَلَىٰ مَن كَذَّبَ وَتَوَلَّىٰ</div>
+                <div class="pronounce">ইন্না ক্বাদ উহিয়া ইলাইনা আন্নাল ‘আযাবা ‘আলা মান কজ্জাবা ওয়া তাওয়াল্লা</div>
+                <div class="meaning">নিশ্চয়ই আমাদের কাছে ওহি করা হয়েছে—যে শাস্তি তাদের উপর—যারা মিথ্যা বলে—এবং মুখ
+                    ফিরিয়ে নেয়</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৪৯</div>
+                <div class="arabic">قَالَ فَمَن رَّبُّكُمَا يَـٰمُوسَىٰ</div>
+                <div class="pronounce">ক্বালা ফামান রব্বুকুমা ইয়া মূসা</div>
+                <div class="meaning">সে বলল, “হে মূসা! তোমাদের রব কে?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫০</div>
+                <div class="arabic">قَالَ رَبُّنَا ٱلَّذِىٓ أَعْطَىٰ كُلَّ شَىْءٍ خَلْقَهُۥ ثُمَّ هَدَىٰ</div>
+                <div class="pronounce">ক্বালা রব্বুনাল্লাযী আ‘তা কুল্লা শাইইন খালকাহু সুম্মা হাদা</div>
+                <div class="meaning">সে বলল, “আমাদের রব—তিনি—যিনি প্রত্যেক বস্তুকে তার সৃষ্টি দিয়েছেন—অতঃপর পথ প্রদর্শন
+                    করেছেন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫১</div>
+                <div class="arabic">قَالَ فَمَا بَالُ ٱلْقُرُونِ ٱلْأُولَىٰ</div>
+                <div class="pronounce">ক্বালা ফামা বালুল কুরূনিল উলা</div>
+                <div class="meaning">সে বলল, “তবে পূর্ববর্তী প্রজন্মগুলোর অবস্থা কী?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫২</div>
+                <div class="arabic">قَالَ عِلْمُهَا عِندَ رَبِّى فِى كِتَـٰبٍۢ ۖ لَّا يَضِلُّ رَبِّى وَلَا يَنسَى</div>
+                <div class="pronounce">ক্বালা ‘ইলমুহা ‘ইন্দা রব্বী ফি কিতাব; লা ইয়াদিল্লু রব্বী ওয়ালা ইয়ানসা</div>
+                <div class="meaning">সে বলল, “এর জ্ঞান আমার রবের কাছে—এক কিতাবে; আমার রব ভুল করেন না—এবং ভুলে যান না”
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫৩</div>
+                <div class="arabic">ٱلَّذِى جَعَلَ لَكُمُ ٱلْأَرْضَ مَهْدًۭا وَسَلَكَ لَكُمْ فِيهَا سُبُلًۭا وَأَنزَلَ
+                    مِنَ ٱلسَّمَآءِ مَآءًۭ فَأَخْرَجْنَا بِهِۦٓ أَزْوَٰجًۭا مِّن نَّبَاتٍۢ شَتَّىٰ</div>
+                <div class="pronounce">আল্লাযী জা‘আলা লাকুমুল আরদা মাহদান ওয়া সালাকা লাকুম ফীহা সুবুলান ওয়া আনযালা
+                    মিনাস সামাআই মা’আন ফাআখরাজনা বিহি আযওয়াজাম মিন নাবাতিন শাত্তা</div>
+                <div class="meaning">তিনি—যিনি তোমাদের জন্য জমিনকে শয্যা বানিয়েছেন—এবং তাতে তোমাদের জন্য পথ সৃষ্টি
+                    করেছেন—এবং আকাশ থেকে পানি নাযিল করেছেন—অতঃপর আমি তা দ্বারা বিভিন্ন প্রকার উদ্ভিদ উৎপন্ন করেছি</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫৪</div>
+                <div class="arabic">كُلُوا۟ وَٱرْعَوْا۟ أَنْعَـٰمَكُمْ ۗ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍۢ لِّأُو۟لِى
+                    ٱلنُّهَىٰ</div>
+                <div class="pronounce">কুলূ ওয়ার‘আউ আন‘আমাকুম; ইন্না ফি যালিকা লা’আয়াতিল্লি উলিন নুহা</div>
+                <div class="meaning">তোমরা খাও—এবং তোমাদের গবাদি পশুকে চরাও; নিশ্চয়ই এতে বুদ্ধিমানদের জন্য নিদর্শন
+                    রয়েছে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫৫</div>
+                <div class="arabic">مِنْهَا خَلَقْنَـٰكُمْ وَفِيهَا نُعِيدُكُمْ وَمِنْهَا نُخْرِجُكُمْ تَارَةً أُخْرَىٰ
+                </div>
+                <div class="pronounce">মিনহা খালাকনাকুম ওয়া ফীহা নু‘ঈদুকুম ওয়া মিনহা নুখরিজুকুম তারাতান উখরা</div>
+                <div class="meaning">এ থেকেই আমি তোমাদের সৃষ্টি করেছি—এবং তাতেই তোমাদের ফিরিয়ে দেব—এবং তা থেকেই তোমাদের
+                    আবার বের করব</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫৬</div>
+                <div class="arabic">وَلَقَدْ أَرَيْنَـٰهُ ءَايَـٰتِنَا كُلَّهَا فَكَذَّبَ وَأَبَىٰ</div>
+                <div class="pronounce">ওয়ালাক্বাদ আরাইনাহু আয়াতিনা কুল্লাহা ফাকজ্জাবা ওয়া আবা</div>
+                <div class="meaning">আর আমি অবশ্যই তাকে আমার সব নিদর্শন দেখিয়েছি—কিন্তু সে অস্বীকার করেছে—এবং
+                    প্রত্যাখ্যান করেছে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫৭</div>
+                <div class="arabic">قَالَ أَجِئْتَنَا لِتُخْرِجَنَا مِنْ أَرْضِنَا بِسِحْرِكَ يَـٰمُوسَىٰ</div>
+                <div class="pronounce">ক্বালা আজি’তানা লিতুখরিজানা মিন আরদিনা বিসিহরিকা ইয়া মূসা</div>
+                <div class="meaning">সে বলল, “হে মূসা! তুমি কি তোমার জাদু দিয়ে আমাদেরকে আমাদের দেশ থেকে বের করে দিতে
+                    এসেছ?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫৮</div>
+                <div class="arabic">فَلَنَأْتِيَنَّكَ بِسِحْرٍۢ مِّثْلِهِۦ فَٱجْعَلْ بَيْنَنَا وَبَيْنَكَ مَوْعِدًۭا
+                    لَّا نُخْلِفُهُۥ نَحْنُ وَلَآ أَنتَ مَكَانًۭا سُوًۭى</div>
+                <div class="pronounce">ফালানা’তিয়ান্নাকা বিসিহরিম মিছলিহি ফাজ‘আল বাইনানা ওয়া বাইনাকা মাও‘ইদান লা
+                    নুখলিফুহু নাহনু ওয়ালা আন্তা মাকানান সুয়া</div>
+                <div class="meaning">“তবে আমরা অবশ্যই তোমার মতো জাদু নিয়ে আসব; অতএব আমাদের ও তোমার মধ্যে একটি নির্দিষ্ট
+                    সময় নির্ধারণ কর—যা আমরা এবং তুমি কেউই ভঙ্গ করব না—একটি সমান স্থানে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৫৯</div>
+                <div class="arabic">قَالَ مَوْعِدُكُمْ يَوْمُ ٱلزِّينَةِ وَأَن يُحْشَرَ ٱلنَّاسُ ضُحًۭى</div>
+                <div class="pronounce">ক্বালা মাও‘ইদুকুম ইয়াওমুয্‌যীনাতি ওয়া আন ইউহশারান নাসু দুহা</div>
+                <div class="meaning">সে বলল, “তোমাদের নির্ধারিত সময়—উৎসবের দিন—এবং যখন মানুষ সকালবেলায় সমবেত হবে”
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬০</div>
+                <div class="arabic">فَتَوَلَّىٰ فِرْعَوْنُ فَجَمَعَ كَيْدَهُۥ ثُمَّ أَتَىٰ</div>
+                <div class="pronounce">ফাতাওয়াল্লা ফির‘আউনু ফাজামা‘আ কাইদাহু সুম্মা আতা</div>
+                <div class="meaning">অতঃপর ফিরআউন ফিরে গেল—এবং তার কৌশল সংগ্রহ করল—তারপর এসে উপস্থিত হলো</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬১</div>
+                <div class="arabic">قَالَ لَهُم مُّوسَىٰ وَيْلَكُمْ لَا تَفْتَرُوا۟ عَلَى ٱللَّهِ كَذِبًۭا فَيُسْحِتَكُم
+                    بِعَذَابٍۢ ۖ وَقَدْ خَابَ مَنِ ٱفْتَرَىٰ</div>
+                <div class="pronounce">ক্বালা লাহুম মূসা ওয়াইলাকুম লা তাফতারূ ‘আলাল্লাহি কাজিবান ফাইউসহিতাকুম বিআযাবিন;
+                    ওয়া ক্বাদ খাবা মানিফতারা</div>
+                <div class="meaning">মূসা তাদেরকে বলল, “ধ্বংস তোমাদের জন্য! আল্লাহর উপর মিথ্যা আরোপ করো না—তাহলে তিনি
+                    তোমাদেরকে শাস্তি দিয়ে ধ্বংস করবেন; আর যে মিথ্যা আরোপ করে—সে ব্যর্থ হয়”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬২</div>
+                <div class="arabic">فَتَنَـٰزَعُوٓا۟ أَمْرَهُم بَيْنَهُمْ وَأَسَرُّوا۟ ٱلنَّجْوَىٰ</div>
+                <div class="pronounce">ফাতানাযা‘উ আমরাহুম বাইনাহুম ওয়া আসাররুন নাজওয়া</div>
+                <div class="meaning">অতঃপর তারা নিজেদের বিষয় নিয়ে নিজেদের মধ্যে বিতর্ক করল—এবং গোপনে পরামর্শ করল</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬৩</div>
+                <div class="arabic">قَالُوٓا۟ إِنْ هَـٰذَٰنِ لَسَـٰحِرَٰنِ يُرِيدَانِ أَن يُخْرِجَاكُم مِّنْ أَرْضِكُم
+                    بِسِحْرِهِمَا وَيَذْهَبَا بِطَرِيقَتِكُمُ ٱلْمُثْلَىٰ</div>
+                <div class="pronounce">ক্বালূ ইন হাজানি লাসাহিরানি ইউরীদানি আন ইউখরিজাকুম মিন আরদিকুম বিসিহরিহিমা ওয়া
+                    ইয়াজহাবা বিত্বরিকাতিকুমুল মুছলা</div>
+                <div class="meaning">তারা বলল, “নিশ্চয়ই এ দু’জন জাদুকর—তারা চায় তাদের জাদুর মাধ্যমে তোমাদেরকে তোমাদের
+                    দেশ থেকে বের করে দিতে—এবং তোমাদের উত্তম পদ্ধতি বিলুপ্ত করতে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬৪</div>
+                <div class="arabic">فَأَجْمِعُوا۟ كَيْدَكُمْ ثُمَّ ٱئْتُوا۟ صَفًّۭا ۚ وَقَدْ أَفْلَحَ ٱلْيَوْمَ مَنِ
+                    ٱسْتَعْلَىٰ</div>
+                <div class="pronounce">ফা’আজমি‘উ কাইদাকুম সুম্মা ই’তূ সাফ্ফা; ওয়া ক্বাদ আফলাহাল ইয়াওমা মানিস্ত‘আলা
+                </div>
+                <div class="meaning">“অতএব তোমরা তোমাদের কৌশল একত্র কর—তারপর সারিবদ্ধ হয়ে আসো; আর আজ সফল হবে—যে
+                    প্রাধান্য পাবে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬৫</div>
+                <div class="arabic">قَالُوا۟ يَـٰمُوسَىٰٓ إِمَّآ أَن تُلْقِىَ وَإِمَّآ أَن نَّكُونَ أَوَّلَ مَنْ
+                    أَلْقَىٰ</div>
+                <div class="pronounce">ক্বালূ ইয়া মূসা ইম্মা আন তুলকিয়া ওয়া ইম্মা আন নাকূনা আউয়ালা মান আলকা</div>
+                <div class="meaning">তারা বলল, “হে মূসা! হয় তুমি নিক্ষেপ কর—অথবা আমরা প্রথমে নিক্ষেপ করি”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬৬</div>
+                <div class="arabic">قَالَ بَلْ أَلْقُوا۟ ۖ فَإِذَا حِبَالُهُمْ وَعِصِيُّهُمْ يُخَيَّلُ إِلَيْهِ مِن
+                    سِحْرِهِمْ أَنَّهَا تَسْعَىٰ</div>
+                <div class="pronounce">ক্বালা বাল আলকূ; ফাইযা হিবালুহুম ওয়া ‘ইসিয়্যুহুম ইউখাইয়ালু ইলাইহি মিন সিহরিহিম
+                    আন্নাহা তাস‘আ</div>
+                <div class="meaning">সে বলল, “বরং তোমরাই নিক্ষেপ কর”; অতঃপর তাদের দড়ি ও লাঠিগুলো তাকে এমন মনে হতে
+                    লাগল—যেন তাদের জাদুর কারণে সেগুলো চলতে শুরু করেছে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬৭</div>
+                <div class="arabic">فَأَوْجَسَ فِى نَفْسِهِۦ خِيفَةًۭ مُّوسَىٰ</div>
+                <div class="pronounce">ফা’আওজাসা ফি নাফসিহি খিফাতাম মূসা</div>
+                <div class="meaning">অতঃপর মূসা তার মনে কিছু ভয় অনুভব করল</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬৮</div>
+                <div class="arabic">قُلْنَا لَا تَخَفْ إِنَّكَ أَنتَ ٱلْأَعْلَىٰ</div>
+                <div class="pronounce">ক্বুলনা লা তাখাফ ইন্নাকা আনতাল আ‘লা</div>
+                <div class="meaning">আমি বললাম, “ভয় করো না—নিশ্চয়ই তুমিই হবে বিজয়ী”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৬৯</div>
+                <div class="arabic">وَأَلْقِ مَا فِى يَمِينِكَ تَلْقَفْ مَا صَنَعُوٓا۟ ۖ إِنَّمَا صَنَعُوا۟ كَيْدُ
+                    سَـٰحِرٍۢ ۖ وَلَا يُفْلِحُ ٱلسَّـٰحِرُ حَيْثُ أَتَىٰ</div>
+                <div class="pronounce">ওয়া আলকি মা ফি ইয়ামিনিকা তালকাফ মা সানা‘উ; ইন্নামা সানা‘উ কাইদু সাহির; ওয়ালা
+                    ইউফলিহুস সাহিরু হাইসু আতা</div>
+                <div class="meaning">“এবং তোমার ডান হাতে যা আছে—তা নিক্ষেপ কর—তা তারা যা বানিয়েছে—তা গ্রাস করবে;
+                    নিশ্চয়ই তারা যা বানিয়েছে—তা জাদুকরের কৌশল; আর জাদুকর সফল হয় না—যেখানেই সে আসুক”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭০</div>
+                <div class="arabic">فَأُلْقِىَ ٱلسَّحَرَةُ سُجَّدًۭا قَالُوٓا۟ ءَامَنَّا بِرَبِّ هَـٰرُونَ وَمُوسَىٰ
+                </div>
+                <div class="pronounce">ফাউলকিয়াস সাহারাতু সুজ্জাদান ক্বালূ আ’মান্না বিরাব্বি হারূনা ওয়া মূসা</div>
+                <div class="meaning">অতঃপর জাদুকররা সেজদায় লুটিয়ে পড়ল—তারা বলল, “আমরা হারূন ও মূসার রবের প্রতি ঈমান
+                    এনেছি”</div>
+            </div>
+            <div class="ayah">
+                <div class="number">৭১</div>
+                <div class="arabic">قَالَ ءَامَنتُمْ لَهُۥ قَبْلَ أَنْ ءَاذَنَ لَكُمْ ۖ إِنَّهُۥ لَكَبِيرُكُمُ ٱلَّذِى
+                    عَلَّمَكُمُ ٱلسِّحْرَ ۖ فَلَأُقَطِّعَنَّ أَيْدِيَكُمْ وَأَرْجُلَكُم مِّنْ خِلَـٰفٍ
+                    وَلَأُصَلِّبَنَّكُمْ فِى جُذُوعِ ٱلنَّخْلِ وَلَتَعْلَمُنَّ أَيُّنَآ أَشَدُّ عَذَابًۭا وَأَبْقَىٰ
+                </div>
+                <div class="pronounce">ক্বালা আ’মানতুম লাহু ক্বাবলা আন আ’যানা লাকুম ইন্নাহু লাকাবীরুকুমুল্লাযী
+                    ‘আল্লামাকুমুস সিহর ফালা’উকাত্তি‘আন্না আইদিয়াকুম ওয়া আরজুলাকুম মিন খিলাফিন ওয়ালা’উসাল্লিবান্নাকুম
+                    ফি জুযূ‘ইন নাখল ওয়ালাতালামুন্না আইয়্যুনা আশাদ্দু ‘আযাবান ওয়া আবকা</div>
+                <div class="meaning">সে বলল, “তোমরা কি তাকে ঈমান এনেছ—আমার অনুমতি দেওয়ার আগে? নিশ্চয়ই সে তোমাদের
+                    বড়—যে তোমাদেরকে জাদু শিখিয়েছে; অতএব আমি অবশ্যই তোমাদের হাত ও পা বিপরীত দিক থেকে কেটে ফেলব—এবং
+                    তোমাদেরকে খেজুর গাছের কাণ্ডে ঝুলিয়ে দেব—আর অবশ্যই তোমরা জানতে পারবে—আমাদের মধ্যে কে শাস্তিতে
+                    কঠোর—এবং অধিক স্থায়ী”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭২</div>
+                <div class="arabic">قَالُوا۟ لَن نُّؤْثِرَكَ عَلَىٰ مَا جَآءَنَا مِنَ ٱلْبَيِّنَـٰتِ وَٱلَّذِى
+                    فَطَرَنَا ۖ فَٱقْضِ مَآ أَنتَ قَاضٍ ۖ إِنَّمَا تَقْضِى هَـٰذِهِ ٱلْحَيَوٰةَ ٱلدُّنْيَآ</div>
+                <div class="pronounce">ক্বালূ লান নুউসিরাকা ‘আলা মা জা’আনা মিনাল বাইয়িনাতি ওয়াল্লাযী ফাতারানা ফাক্বদি
+                    মা আন্তা ক্বাদী ইন্নামা তাক্বদী হাজিহিল হায়াতাদ দুনইয়া</div>
+                <div class="meaning">তারা বলল, “আমরা তোমাকে প্রাধান্য দেব না—যে সুস্পষ্ট নিদর্শন আমাদের কাছে এসেছে—এবং
+                    যিনি আমাদের সৃষ্টি করেছেন—তার উপর; অতএব তুমি যা সিদ্ধান্ত নাও—তা নাও; তুমি তো কেবল এ দুনিয়ার জীবন
+                    সম্পর্কেই সিদ্ধান্ত নিতে পার”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭৩</div>
+                <div class="arabic">إِنَّآ ءَامَنَّا بِرَبِّنَا لِيَغْفِرَ لَنَا خَطَـٰيَـٰنَا وَمَآ أَكْرَهْتَنَا
+                    عَلَيْهِ مِنَ ٱلسِّحْرِ ۗ وَٱللَّهُ خَيْرٌۭ وَأَبْقَىٰ</div>
+                <div class="pronounce">ইন্না আ’মান্না বিরাব্বিনা লিয়াগফিরা লানা খাতায়ানা ওয়া মা আক্রাহতানা ‘আলাইহি
+                    মিনাস সিহর ওয়াল্লাহু খাইরুন ওয়া আবকা</div>
+                <div class="meaning">“নিশ্চয়ই আমরা আমাদের রবের প্রতি ঈমান এনেছি—যাতে তিনি আমাদের গুনাহসমূহ ক্ষমা
+                    করেন—এবং সেই জাদু থেকেও—যাতে তুমি আমাদের বাধ্য করেছিলে; আর আল্লাহ উত্তম—এবং অধিক স্থায়ী”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭৪</div>
+                <div class="arabic">إِنَّهُۥ مَن يَأْتِ رَبَّهُۥ مُجْرِمًۭا فَإِنَّ لَهُۥ جَهَنَّمَ لَا يَمُوتُ فِيهَا
+                    وَلَا يَحْيَىٰ</div>
+                <div class="pronounce">ইন্নাহু মান ইয়াতি রব্বাহু মুজরিমান ফাইন্না লাহু জাহান্নামা লা ইয়ামূতু ফীহা
+                    ওয়ালা ইয়াহইয়া</div>
+                <div class="meaning">নিশ্চয়ই যে তার রবের কাছে অপরাধী হয়ে আসবে—তার জন্য জাহান্নাম—সে সেখানে না মরবে—না
+                    বাঁচবে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭৫</div>
+                <div class="arabic">وَمَن يَأْتِهِۦ مُؤْمِنًۭا قَدْ عَمِلَ ٱلصَّـٰلِحَـٰتِ فَأُو۟لَـٰٓئِكَ لَهُمُ
+                    ٱلدَّرَجَـٰتُ ٱلْعُلَىٰ</div>
+                <div class="pronounce">ওয়া মান ইয়াতিহি মুমিনান ক্বাদ ‘আমিলাস সালিহাতি ফাউলাইকা লাহুমুদ দারাজাতুল ‘উলা
+                </div>
+                <div class="meaning">আর যে তার কাছে মুমিন হয়ে আসবে—এবং সৎকর্ম করেছে—তাদের জন্য রয়েছে উচ্চ মর্যাদা
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭৬</div>
+                <div class="arabic">جَنَّـٰتُ عَدْنٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَـٰرُ خَـٰلِدِينَ فِيهَا ۚ وَذَٰلِكَ
+                    جَزَآءُ مَن تَزَكَّىٰ</div>
+                <div class="pronounce">জান্নাতু ‘আদনিন তাজরী মিন তাহতিহাল আনহারু খালিদীনা ফীহা ওয়া যালিকা জাযা’উ মান
+                    তাযাক্কা</div>
+                <div class="meaning">স্থায়ী জান্নাত—যার নিচ দিয়ে নদী প্রবাহিত—তারা তাতে চিরস্থায়ী থাকবে; আর এটি সেই
+                    ব্যক্তির প্রতিদান—যে নিজেকে পরিশুদ্ধ করেছে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭৭</div>
+                <div class="arabic">وَلَقَدْ أَوْحَيْنَآ إِلَىٰ مُوسَىٰٓ أَنْ أَسْرِ بِعِبَادِى فَٱضْرِبْ لَهُمْ
+                    طَرِيقًۭا فِى ٱلْبَحْرِ يَبَسًۭا لَّا تَخَـٰفُ دَرَكًۭا وَلَا تَخْشَىٰ</div>
+                <div class="pronounce">ওয়ালাক্বাদ আওহাইনা ইলা মূসা আন আসরি বি‘ইবাদী ফাদরিব লাহুম তারীকান ফিল বাহরি
+                    ইয়াবাসান লা তাখাফু দারাকান ওয়ালা তাখশা</div>
+                <div class="meaning">আর আমি অবশ্যই মূসার প্রতি ওহি করেছিলাম—“আমার বান্দাদের নিয়ে রাতে যাত্রা কর—এবং
+                    তাদের জন্য সাগরে একটি শুকনো পথ তৈরি কর—তুমি ধরা পড়ার ভয় করবে না—এবং ভীতও হবে না”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭৮</div>
+                <div class="arabic">فَأَتْبَعَهُمْ فِرْعَوْنُ بِجُنُودِهِۦ فَغَشِيَهُم مِّنَ ٱلْيَمِّ مَا غَشِيَهُمْ
+                </div>
+                <div class="pronounce">ফা’আতবা‘আহুম ফির‘আউনু বিজুনূদিহি ফাগাশিয়াহুম মিনাল ইয়াম্মি মা গাশিয়াহুম</div>
+                <div class="meaning">অতঃপর ফিরআউন তার সৈন্যবাহিনীসহ তাদের অনুসরণ করল—অতঃপর সাগর তাদেরকে আচ্ছন্ন করল—যা
+                    তাদেরকে আচ্ছন্ন করেছিল</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৭৯</div>
+                <div class="arabic">وَأَضَلَّ فِرْعَوْنُ قَوْمَهُۥ وَمَا هَدَىٰ</div>
+                <div class="pronounce">ওয়া আদাল্লা ফির‘আউনু কওমাহু ওয়া মা হাদা</div>
+                <div class="meaning">আর ফিরআউন তার জাতিকে বিভ্রান্ত করেছিল—এবং সে পথপ্রদর্শন করেনি</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮০</div>
+                <div class="arabic">يَـٰبَنِىٓ إِسْرَٰٓءِيلَ قَدْ أَنجَيْنَـٰكُم مِّنْ عَدُوِّكُمْ وَوَٰعَدْنَـٰكُمْ
+                    جَانِبَ ٱلطُّورِ ٱلْأَيْمَنَ وَنَزَّلْنَا عَلَيْكُمُ ٱلْمَنَّ وَٱلسَّلْوَىٰ</div>
+                <div class="pronounce">ইয়া বানী ইস্রাঈলা ক্বাদ আনজাইনাকুম মিন ‘আদুউইকুম ওয়া ওয়া‘আদনাকুম জানিবাত্তূরিল
+                    আইমানা ওয়া নাযযালনা ‘আলাইকমুল মান্না ওয়াস সালওয়া</div>
+                <div class="meaning">হে বনী ইসরাঈল! আমি অবশ্যই তোমাদেরকে তোমাদের শত্রু থেকে উদ্ধার করেছি—এবং তোমাদেরকে
+                    তূর পর্বতের ডান পাশে প্রতিশ্রুতি দিয়েছি—এবং তোমাদের উপর মান্না ও সালওয়া নাযিল করেছি</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮১</div>
+                <div class="arabic">كُلُوا۟ مِن طَيِّبَـٰتِ مَا رَزَقْنَـٰكُمْ وَلَا تَطْغَوْا۟ فِيهِ فَيَحِلَّ
+                    عَلَيْكُمْ غَضَبِى ۖ وَمَن يَحْلِلْ عَلَيْهِ غَضَبِى فَقَدْ هَوَىٰ</div>
+                <div class="pronounce">কুলূ মিন তায়্যিবাতি মা রাযাকনাকুম ওয়ালা তাতগাও ফীহি ফায়াহিল্লা ‘আলাইকম গাদাবী
+                    ওয়া মান ইয়াহলিল ‘আলাইহি গাদাবী ফাক্বাদ হাওয়া</div>
+                <div class="meaning">তোমরা সেই পবিত্র বস্তু থেকে খাও—যা আমি তোমাদেরকে রিযিক দিয়েছি—এবং এতে সীমালঙ্ঘন
+                    করো না—নয়তো আমার ক্রোধ তোমাদের উপর নেমে আসবে; আর যার উপর আমার ক্রোধ নেমে আসে—সে ধ্বংস হয়ে যায়
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮২</div>
+                <div class="arabic">وَإِنِّى لَغَفَّارٌۭ لِّمَن تَابَ وَءَامَنَ وَعَمِلَ صَـٰلِحًۭا ثُمَّ ٱهْتَدَىٰ
+                </div>
+                <div class="pronounce">ওয়া ইন্নী লাগাফফারুল্লিমান তাবা ওয়া আ’মানা ওয়া ‘আমিলা সালিহান সুম্মাহতাদা
+                </div>
+                <div class="meaning">আর নিশ্চয়ই আমি অবশ্যই ক্ষমাশীল—তার জন্য—যে তাওবা করে—ঈমান আনে—সৎকর্ম করে—অতঃপর
+                    সঠিক পথে থাকে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮৩</div>
+                <div class="arabic">وَمَآ أَعْجَلَكَ عَن قَوْمِكَ يَـٰمُوسَىٰ</div>
+                <div class="pronounce">ওয়া মা আ‘জালাকা ‘আন কওমিকা ইয়া মূসা</div>
+                <div class="meaning">আর কী তোমাকে তোমার জাতির আগে তাড়াহুড়া করতে বাধ্য করেছে—হে মূসা?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮৪</div>
+                <div class="arabic">قَالَ هُمْ أُو۟لَآءِ عَلَىٰٓ أَثَرِى وَعَجِلْتُ إِلَيْكَ رَبِّ لِتَرْضَىٰ</div>
+                <div class="pronounce">ক্বালা হুম উলা’ই ‘আলা আসারী ওয়া ‘আজিলতু ইলাইকা রব্বি লিতারদা</div>
+                <div class="meaning">সে বলল, “তারা তো আমার পেছনেই আসছে—আর আমি আপনার সন্তুষ্টির জন্য দ্রুত আপনার কাছে
+                    এসেছি—হে আমার রব”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮৫</div>
+                <div class="arabic">قَالَ فَإِنَّا قَدْ فَتَنَّا قَوْمَكَ مِنۢ بَعْدِكَ وَأَضَلَّهُمُ ٱلسَّامِرِىُّ
+                </div>
+                <div class="pronounce">ক্বালা ফাইন্না ক্বাদ ফাতান্না কওমাকা মিন বা‘দিকা ওয়া আদাল্লাহুমুস সামিরী</div>
+                <div class="meaning">তিনি বললেন, “অতঃপর আমরা তোমার জাতিকে তোমার পরে পরীক্ষায় ফেলেছি—এবং সামিরী তাদেরকে
+                    বিভ্রান্ত করেছে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮৬</div>
+                <div class="arabic">فَرَجَعَ مُوسَىٰٓ إِلَىٰ قَوْمِهِۦ غَضْبَـٰنَ أَسِفًۭا ۚ قَالَ يَـٰقَوْمِ أَلَمْ
+                    يَعِدْكُمْ رَبُّكُمْ وَعْدًا حَسَنًا ۚ أَفَطَالَ عَلَيْكُمُ ٱلْعَهْدُ أَمْ أَرَدتُّمْ أَن يَحِلَّ
+                    عَلَيْكُمْ غَضَبٌۭ مِّن رَّبِّكُمْ فَأَخْلَفْتُم مَّوْعِدِى</div>
+                <div class="pronounce">ফারাজা‘আ মূসা ইলা কওমিহি গাদবান আসিফা ক্বালা ইয়া কওমি আলাম ইয়াঈদকুম রব্বুকুম
+                    ওয়াদান হাসানা আফাতালা ‘আলাইকমুল ‘আহদু আম আরাদতুম আন ইয়াহিল্লা ‘আলাইকম গাদাবুম মিন রব্বিকুম
+                    ফা’আখলাফতুম মাও‘ইদী</div>
+                <div class="meaning">অতঃপর মূসা তার জাতির কাছে ক্রুদ্ধ ও দুঃখিত হয়ে ফিরে এল; সে বলল, “হে আমার জাতি!
+                    তোমাদের রব কি তোমাদেরকে উত্তম প্রতিশ্রুতি দেননি? তবে কি সময় তোমাদের কাছে দীর্ঘ হয়ে গেছে—নাকি তোমরা
+                    চেয়েছ—তোমাদের উপর তোমাদের রবের ক্রোধ নেমে আসুক—যে কারণে তোমরা আমার প্রতিশ্রুতি ভঙ্গ করেছ?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮৭</div>
+                <div class="arabic">قَالُوا۟ مَآ أَخْلَفْنَا مَوْعِدَكَ بِمَلْكِنَا وَلَـٰكِنَّا حُمِّلْنَآ
+                    أَوْزَارًۭا مِّن زِينَةِ ٱلْقَوْمِ فَقَذَفْنَـٰهَا فَكَذَٰلِكَ أَلْقَى ٱلسَّامِرِىُّ</div>
+                <div class="pronounce">ক্বালূ মা আখলাফনা মাও‘ইদাকা বিমালকিনা ওয়ালাকিন্না হুম্মিলনা আওযারাম মিন যীনাতিল
+                    কওমি ফাক্বাযাফনাহা ফাকাযালিকা আলকাস সামিরী</div>
+                <div class="meaning">তারা বলল, “আমরা আমাদের ইচ্ছায় আপনার প্রতিশ্রুতি ভঙ্গ করিনি—বরং আমরা সেই জাতির
+                    অলংকারের ভার বহন করেছিলাম—অতঃপর আমরা তা নিক্ষেপ করেছিলাম—এবং এভাবেই সামিরীও নিক্ষেপ করেছিল”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮৮</div>
+                <div class="arabic">فَأَخْرَجَ لَهُمْ عِجْلًۭا جَسَدًۭا لَّهُۥ خُوَارٌۭ فَقَالُوا۟ هَـٰذَآ إِلَـٰهُكُمْ
+                    وَإِلَـٰهُ مُوسَىٰ فَنَسِىَ</div>
+                <div class="pronounce">ফাআখরাজা লাহুম ‘ইজলান জাসাদাল্লাহু খুয়ারুন ফাক্বালূ হাজা ইলাহুকুম ওয়া ইলাহু
+                    মূসা ফানাসিয়া</div>
+                <div class="meaning">অতঃপর সে তাদের জন্য একটি বাছুর বের করল—যার দেহ ছিল—এবং তা থেকে শব্দ হচ্ছিল; তখন
+                    তারা বলল, “এটাই তোমাদের উপাস্য—এবং মূসার উপাস্য”—অতঃপর সে ভুলে গেছে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৮৯</div>
+                <div class="arabic">أَفَلَا يَرَوْنَ أَلَّا يَرْجِعُ إِلَيْهِمْ قَوْلًۭا وَلَا يَمْلِكُ لَهُمْ ضَرًّۭا
+                    وَلَا نَفْعًۭا</div>
+                <div class="pronounce">আফালা ইয়ারা’উনা আল্লা ইয়র্জি‘উ ইলাইহিম কওলান ওয়ালা ইয়ামলিকু লাহুম দররান
+                    ওয়ালা নাফ‘আ</div>
+                <div class="meaning">তারা কি দেখে না—যে এটি তাদের কোনো কথার জবাব দেয় না—এবং তাদের কোনো ক্ষতি বা উপকার
+                    করতে পারে না?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯০</div>
+                <div class="arabic">وَلَقَدْ قَالَ لَهُمْ هَـٰرُونُ مِن قَبْلُ يَـٰقَوْمِ إِنَّمَا فُتِنتُم بِهِۦ ۖ
+                    وَإِنَّ رَبَّكُمُ ٱلرَّحْمَـٰنُ فَٱتَّبِعُونِى وَأَطِيعُوٓا۟ أَمْرِى</div>
+                <div class="pronounce">ওয়ালাক্বাদ ক্বালা লাহুম হারূনু মিন ক্বাবলু ইয়া কওমি ইন্নামা ফুটিনতুম বিহি ওয়া
+                    ইন্না রব্বুকুমুর রাহমান ফাত্তাবি‘ঊনী ওয়া আতী‘উ আমরী</div>
+                <div class="meaning">আর অবশ্যই হারূন তাদেরকে পূর্বেই বলেছিল, “হে আমার জাতি! তোমরা তো এর দ্বারা পরীক্ষায়
+                    পড়েছ—এবং তোমাদের রব—পরম দয়ালু—অতএব আমার অনুসরণ কর—এবং আমার নির্দেশ মানো”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯১</div>
+                <div class="arabic">قَالُوا۟ لَن نَّبْرَحَ عَلَيْهِ عَـٰكِفِينَ حَتَّىٰ يَرْجِعَ إِلَيْنَا مُوسَىٰ</div>
+                <div class="pronounce">ক্বালূ লান নাবরাহা ‘আলাইহি ‘আকিফীন হত্তা ইয়র্জি‘আ ইলাইনা মূসা</div>
+                <div class="meaning">তারা বলল, “আমরা এর উপরেই নিবেদিত থাকব—যতক্ষণ না মূসা আমাদের কাছে ফিরে আসে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯২</div>
+                <div class="arabic">قَالَ يَـٰهَـٰرُونُ مَا مَنَعَكَ إِذْ رَأَيْتَهُمْ ضَلُّوٓا۟</div>
+                <div class="pronounce">ক্বালা ইয়া হারূনু মা মানা‘আকা ইয্ রা’আইতাহুম দাল্লূ</div>
+                <div class="meaning">সে বলল, “হে হারূন! যখন তুমি দেখেছিলে—তারা পথভ্রষ্ট হয়েছে—তখন কী তোমাকে বাধা
+                    দিয়েছিল?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯৩</div>
+                <div class="arabic">أَلَّا تَتَّبِعَنِ ۖ أَفَعَصَيْتَ أَمْرِى</div>
+                <div class="pronounce">আল্লা তাত্তাবি‘আনি আফা‘আসাইতা আমরী</div>
+                <div class="meaning">“তুমি কি আমার অনুসরণ করোনি? তবে কি তুমি আমার আদেশ অমান্য করেছ?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯৪</div>
+                <div class="arabic">قَالَ يَـٰبْنَؤُمَّ لَا تَأْخُذْ بِلِحْيَتِى وَلَا بِرَأْسِىٓ ۖ إِنِّى خَشِيتُ أَن
+                    تَقُولَ فَرَّقْتَ بَيْنَ بَنِىٓ إِسْرَٰٓءِيلَ وَلَمْ تَرْقُبْ قَوْلِى</div>
+                <div class="pronounce">ক্বালা ইয়া ব্নাউম্মা লা তা’খুয বিলিহইয়াতী ওয়ালা বিরা’সী ইন্নী খাশিতু আন
+                    তাক্বুলা ফাররাক্তা বাইনা বানী ইস্রাঈলা ওয়ালাম তারকুব কওলী</div>
+                <div class="meaning">সে বলল, “হে আমার মায়ের পুত্র! আমার দাড়ি ও মাথা ধরো না—নিশ্চয়ই আমি আশঙ্কা
+                    করেছিলাম—তুমি বলবে, ‘তুমি বনী ইসরাঈলের মধ্যে বিভেদ সৃষ্টি করেছ—এবং আমার কথা লক্ষ্য করোনি’”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯৫</div>
+                <div class="arabic">قَالَ فَمَا خَطْبُكَ يَـٰسَـٰمِرِىُّ</div>
+                <div class="pronounce">ক্বালা ফামা খাত্ববুকা ইয়া সামিরী</div>
+                <div class="meaning">সে বলল, “হে সামিরী! তোমার ব্যাপার কী?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯৬</div>
+                <div class="arabic">قَالَ بَصُرْتُ بِمَا لَمْ يَبْصُرُوا۟ بِهِۦ فَقَبَضْتُ قَبْضَةًۭ مِّنْ أَثَرِ
+                    ٱلرَّسُولِ فَنَبَذْتُهَا ۖ وَكَذَٰلِكَ سَوَّلَتْ لِى نَفْسِى</div>
+                <div class="pronounce">ক্বালা বাসুরতু বিমা লাম ইয়াবসুরূ বিহি ফাক্বাবাদতু ক্বাবদাতাম মিন আসারির রাসূলি
+                    ফানাবাজতুহা ওয়া কাযালিকা সাওয়ালাত লী নাফসী</div>
+                <div class="meaning">সে বলল, “আমি এমন কিছু দেখেছিলাম—যা তারা দেখেনি—অতঃপর আমি রাসূলের পদচিহ্ন থেকে এক
+                    মুঠো তুলে নিয়েছিলাম—এবং তা নিক্ষেপ করেছিলাম; আর এভাবেই আমার মন আমাকে প্রলুব্ধ করেছিল”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯৭</div>
+                <div class="arabic">قَالَ فَٱذْهَبْ فَإِنَّ لَكَ فِى ٱلْحَيَوٰةِ أَن تَقُولَ لَا مِسَاسَ ۖ وَإِنَّ لَكَ
+                    مَوْعِدًۭا لَّن تُخْلَفَهُۥ ۖ وَٱنظُرْ إِلَىٰٓ إِلَـٰهِكَ ٱلَّذِى ظَلْتَ عَلَيْهِ عَـٰكِفًۭا
+                    لَّنُحَرِّقَنَّهُۥ ثُمَّ لَنَنسِفَنَّهُۥ فِى ٱلْيَمِّ نَسْفًا</div>
+                <div class="pronounce">ক্বালা ফাযহাব ফাইন্না লাকা ফিল হায়াতি আন তাক্বুলা লা মিসাসা ওয়া ইন্না লাকা
+                    মাও‘ইদান লান তুখলাফাহু ওয়ানযুর ইলা ইলাহিকাল্লাযী যালতা ‘আলাইহি ‘আকিফান লানুহাররিকান্নাহু সুম্মা
+                    লানানসিফান্নাহু ফিল ইয়াম্মি নাসফা</div>
+                <div class="meaning">সে বলল, “তুমি চলে যাও—নিশ্চয়ই তোমার জন্য জীবনে থাকবে—তুমি বলবে ‘স্পর্শ করো না’;
+                    এবং তোমার জন্য একটি নির্ধারিত সময় আছে—যা তুমি এড়াতে পারবে না; আর তোমার সেই উপাস্যের দিকে তাকাও—যার
+                    উপর তুমি নিবেদিত ছিলে—আমরা অবশ্যই তাকে পুড়িয়ে ফেলব—তারপর অবশ্যই তাকে সাগরে ছড়িয়ে দেব”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯৮</div>
+                <div class="arabic">إِنَّمَآ إِلَـٰهُكُمُ ٱللَّهُ ٱلَّذِى لَآ إِلَـٰهَ إِلَّا هُوَ ۚ وَسِعَ كُلَّ
+                    شَىْءٍ عِلْمًۭا</div>
+                <div class="pronounce">ইন্নামা ইলাহুকুমুল্লাহুল্লাযী লা ইলাহা ইল্লা হুয়া ওয়া সি‘আ কুল্লা শাইইন ‘ইলমা
+                </div>
+                <div class="meaning">নিশ্চয়ই তোমাদের উপাস্য আল্লাহ—তিনি ছাড়া কোনো উপাস্য নেই—তিনি জ্ঞানে সবকিছুকে
+                    পরিব্যাপ্ত করেছেন</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">৯৯</div>
+                <div class="arabic">كَذَٰلِكَ نَقُصُّ عَلَيْكَ مِنْ أَنۢبَآءِ مَا قَدْ سَبَقَ ۚ وَقَدْ ءَاتَيْنَـٰكَ
+                    مِن لَّدُنَّا ذِكْرًۭا</div>
+                <div class="pronounce">কাযালিকা নাকুস্সু ‘আলাইকা মিন আম্বা’ই মা ক্বাদ সাবাক ওয়া ক্বাদ আ’তাইনাকা
+                    মিল্লাদুন্না যিকরা</div>
+                <div class="meaning">এভাবেই আমি তোমাকে পূর্ববর্তী ঘটনাসমূহ থেকে বর্ণনা করি—এবং আমি অবশ্যই তোমাকে আমার
+                    পক্ষ থেকে এক উপদেশ দিয়েছি</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০০</div>
+                <div class="arabic">مَّنْ أَعْرَضَ عَنْهُ فَإِنَّهُۥ يَحْمِلُ يَوْمَ ٱلْقِيَـٰمَةِ وِزْرًۭا</div>
+                <div class="pronounce">মান আ‘রাদা ‘আনহু ফাইন্নাহু ইয়াহমিলু ইয়াওমাল কিয়ামাতি উইযরা</div>
+                <div class="meaning">যে এটি থেকে মুখ ফিরিয়ে নেয়—নিশ্চয়ই সে কিয়ামতের দিন এক ভার বহন করবে</div>
+            </div>
+            <div class="ayah">
+                <div class="number">১০১</div>
+                <div class="arabic">خَـٰلِدِينَ فِيهِ ۖ وَسَآءَ لَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ حِمْلًا</div>
+                <div class="pronounce">খালিদীনা ফীহি ওয়া সা’আ লাহুম ইয়াওমাল কিয়ামাতি হিমলা</div>
+                <div class="meaning">তারা তাতে চিরস্থায়ী থাকবে; আর কিয়ামতের দিনে তাদের জন্য কতই না নিকৃষ্ট বোঝা!</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০২</div>
+                <div class="arabic">يَوْمَ يُنفَخُ فِى ٱلصُّورِ ۚ وَنَحْشُرُ ٱلْمُجْرِمِينَ يَوْمَئِذٍۢ زُرْقًۭا</div>
+                <div class="pronounce">ইয়াওমা ইউনফাখু ফিস সূর ওয়া নাহশুরুল মুজরিমীনা ইয়াওমাঈযিন জুরকা</div>
+                <div class="meaning">যেদিন শিঙ্গায় ফুঁক দেওয়া হবে; আর আমি সেদিন অপরাধীদের নীলচে চোখে সমবেত করব</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০৩</div>
+                <div class="arabic">يَتَخَـٰفَتُونَ بَيْنَهُمْ إِن لَّبِثْتُمْ إِلَّا عَشْرًۭا</div>
+                <div class="pronounce">ইয়াতাখাফাতূনা বাইনাহুম ইন লাবিসতুম ইল্লা ‘আশরা</div>
+                <div class="meaning">তারা নিজেদের মধ্যে ধীরস্বরে বলাবলি করবে—“তোমরা তো মাত্র দশ দিন অবস্থান করেছিলে”
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০৪</div>
+                <div class="arabic">نَّحْنُ أَعْلَمُ بِمَا يَقُولُونَ إِذْ يَقُولُ أَمْثَلُهُمْ طَرِيقَةً إِن
+                    لَّبِثْتُمْ إِلَّا يَوْمًۭا</div>
+                <div class="pronounce">নাহনু আ‘লামু বিমা ইয়াকূলূনা ইয্ ইয়াকূলু আমসালুহুম ত্বরীকাতান ইন লাবিসতুম ইল্লা
+                    ইয়াওমা</div>
+                <div class="meaning">আমি ভালো জানি—তারা কী বলে; যখন তাদের মধ্যে সবচেয়ে উত্তম ব্যক্তি বলবে—“তোমরা তো
+                    মাত্র একদিন অবস্থান করেছিলে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০৫</div>
+                <div class="arabic">وَيَسْـَٔلُونَكَ عَنِ ٱلْجِبَالِ فَقُلْ يَنسِفُهَا رَبِّى نَسْفًۭا</div>
+                <div class="pronounce">ওয়া ইয়াসআলূনাকা ‘আনিল জিবাল ফাক্বুল ইয়ানসিফুহা রব্বী নাসফা</div>
+                <div class="meaning">আর তারা আপনাকে পাহাড় সম্পর্কে জিজ্ঞাসা করে; বলুন, “আমার রব সেগুলোকে সম্পূর্ণ
+                    উড়িয়ে দেবেন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০৬</div>
+                <div class="arabic">فَيَذَرُهَا قَاعًۭا صَفْصَفًۭا</div>
+                <div class="pronounce">ফাইয়াযারুহা ক্বা‘আন সাফসাফা</div>
+                <div class="meaning">অতঃপর তিনি সেগুলোকে সমতল ময়দানে পরিণত করবেন</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০৭</div>
+                <div class="arabic">لَّا تَرَىٰ فِيهَا عِوَجًۭا وَلَآ أَمْتًۭا</div>
+                <div class="pronounce">লা তারা ফীহা ‘ইওয়াজান ওয়ালা আমতা</div>
+                <div class="meaning">তুমি তাতে কোনো বক্রতা বা উঁচু-নিচু দেখবে না</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০৮</div>
+                <div class="arabic">يَوْمَئِذٍۢ يَتَّبِعُونَ ٱلدَّاعِىَ لَا عِوَجَ لَهُۥ ۖ وَخَشَعَتِ ٱلْأَصْوَٰتُ
+                    لِلرَّحْمَـٰنِ فَلَا تَسْمَعُ إِلَّا هَمْسًۭا</div>
+                <div class="pronounce">ইয়াওমাঈযিন ইয়াত্তাবি‘উনাদ দা‘ঈ লা ‘ইওয়াজা লাহু ওয়া খাশা‘আতিল আসওয়াতু লির
+                    রাহমান ফালা তাসমা‘উ ইল্লা হামসা</div>
+                <div class="meaning">সেদিন তারা আহ্বানকারীর অনুসরণ করবে—যার কোনো বক্রতা নেই; আর পরম দয়ালুর সামনে সব
+                    কণ্ঠস্বর নত হবে—তুমি শুধু মৃদু শব্দই শুনতে পাবে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১০৯</div>
+                <div class="arabic">يَوْمَئِذٍۢ لَّا تَنفَعُ ٱلشَّفَـٰعَةُ إِلَّا مَنْ أَذِنَ لَهُ ٱلرَّحْمَـٰنُ
+                    وَرَضِىَ لَهُۥ قَوْلًۭا</div>
+                <div class="pronounce">ইয়াওমাঈযিন লা তানফা‘উশ শাফা‘আতু ইল্লা মান আজিনা লাহুর রাহমানু ওয়া রাদিয়া লাহু
+                    কওলা</div>
+                <div class="meaning">সেদিন কোনো সুপারিশ উপকার করবে না—শুধু সেই ব্যক্তি ছাড়া—যাকে পরম দয়ালু অনুমতি
+                    দেবেন—এবং যার কথায় তিনি সন্তুষ্ট</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১০</div>
+                <div class="arabic">يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِهِۦ عِلْمًۭا
+                </div>
+                <div class="pronounce">ইয়ালামু মা বাইনা আইদিহিম ওয়া মা খালফাহুম ওয়ালা ইউহীতূনা বিহি ‘ইলমা</div>
+                <div class="meaning">তিনি জানেন—তাদের সামনে যা আছে—এবং তাদের পেছনে যা আছে; আর তারা তাঁকে জ্ঞানে
+                    পরিব্যাপ্ত করতে পারে না</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১১</div>
+                <div class="arabic">وَعَنَتِ ٱلْوُجُوهُ لِلْحَىِّ ٱلْقَيُّومِ ۖ وَقَدْ خَابَ مَنْ حَمَلَ ظُلْمًۭا</div>
+                <div class="pronounce">ওয়া ‘আনতিল ওুজূহু লিল হাইয়িল কাইয়্যূম ওয়া ক্বাদ খাবা মান হামালা যুলমা</div>
+                <div class="meaning">আর মুখমণ্ডলগুলো নত হবে—চিরঞ্জীব—সর্বধারকের সামনে; আর যে জুলুম বহন করবে—সে ব্যর্থ
+                    হবে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১২</div>
+                <div class="arabic">وَمَن يَعْمَلْ مِنَ ٱلصَّـٰلِحَـٰتِ وَهُوَ مُؤْمِنٌۭ فَلَا يَخَافُ ظُلْمًۭا وَلَا
+                    هَضْمًۭا</div>
+                <div class="pronounce">ওয়া মান ইয়ামাল মিনাস সালিহাতি ওয়া হুয়া মুমিনুন ফালা ইয়াখাফু যুলমান ওয়ালা
+                    হাদমা</div>
+                <div class="meaning">আর যে সৎকর্ম করে—এবং সে মুমিন—সে কোনো জুলুম বা বঞ্চনার ভয় করবে না</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১৩</div>
+                <div class="arabic">وَكَذَٰلِكَ أَنزَلْنَـٰهُ قُرْءَانًا عَرَبِيًّۭا وَصَرَّفْنَا فِيهِ مِنَ ٱلْوَعِيدِ
+                    لَعَلَّهُمْ يَتَّقُونَ أَوْ يُحْدِثُ لَهُمْ ذِكْرًۭا</div>
+                <div class="pronounce">ওয়া কাযালিকা আনযালনাহু কুরআনান ‘আরাবিয়্যান ওয়া সাররাফনা ফীহি মিনাল ওয়াঈদি
+                    লা‘আল্লাহুম ইয়াত্তাকূন আও ইউহদিসু লাহুম যিকরা</div>
+                <div class="meaning">আর এভাবেই আমি এটিকে আরবি কুরআন হিসেবে নাযিল করেছি—এবং এতে বিভিন্নভাবে সতর্কবার্তা
+                    বর্ণনা করেছি—যাতে তারা তাকওয়া অবলম্বন করে—অথবা এটি তাদের জন্য স্মরণ সৃষ্টি করে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১৪</div>
+                <div class="arabic">فَتَعَـٰلَى ٱللَّهُ ٱلْمَلِكُ ٱلْحَقُّ ۗ وَلَا تَعْجَلْ بِٱلْقُرْءَانِ مِن قَبْلِ
+                    أَن يُقْضَىٰٓ إِلَيْكَ وَحْيُهُۥ ۖ وَقُل رَّبِّ زِدْنِى عِلْمًۭا</div>
+                <div class="pronounce">ফাতা‘আলা আল্লাহুল মালিকুল হাক্কু ওয়ালা তা‘জাল বিল কুরআনি মিন ক্বাবলি আন ইউক্বদা
+                    ইলাইকা ওহইউহু ওয়াক্বুল রব্বি জিদনী ‘ইলমা</div>
+                <div class="meaning">অতএব মহান আল্লাহ—সত্যিকারের রাজাধিরাজ; আর আপনার প্রতি ওহি সম্পূর্ণ হওয়ার আগে কুরআন
+                    নিয়ে তাড়াহুড়া করবেন না; এবং বলুন, “হে আমার রব! আমার জ্ঞান বৃদ্ধি করুন”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১৫</div>
+                <div class="arabic">وَلَقَدْ عَهِدْنَآ إِلَىٰٓ ءَادَمَ مِن قَبْلُ فَنَسِىَ وَلَمْ نَجِدْ لَهُۥ عَزْمًۭا
+                </div>
+                <div class="pronounce">ওয়ালাক্বাদ ‘আহিদনা ইলা আদামা মিন ক্বাবলু ফানাসিয়া ওয়ালাম নাজিদ লাহু ‘আজমা
+                </div>
+                <div class="meaning">আর আমি পূর্বে আদমের সাথে অঙ্গীকার করেছিলাম—কিন্তু সে ভুলে গিয়েছিল—আর আমি তার মধ্যে
+                    দৃঢ়তা পাইনি</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১৬</div>
+                <div class="arabic">وَإِذْ قُلْنَا لِلْمَلَـٰٓئِكَةِ ٱسْجُدُوا۟ لِـَٔادَمَ فَسَجَدُوٓا۟ إِلَّآ
+                    إِبْلِيسَ أَبَىٰ</div>
+                <div class="pronounce">ওয়া ইয্ ক্বুলনা লিল মালাইকাতিস জুদূ লিআদামা ফাসাজাদূ ইল্লা ইবলিসা আবা</div>
+                <div class="meaning">আর যখন আমি ফেরেশতাদের বলেছিলাম—“আদমকে সেজদা কর”—তারা সেজদা করেছিল—ইবলিস ছাড়া—সে
+                    অস্বীকার করেছিল</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১৭</div>
+                <div class="arabic">فَقُلْنَا يَـٰٓـَٔادَمُ إِنَّ هَـٰذَا عَدُوٌّۭ لَّكَ وَلِزَوْجِكَ فَلَا
+                    يُخْرِجَنَّكُمَا مِنَ ٱلْجَنَّةِ فَتَشْقَىٰ</div>
+                <div class="pronounce">ফাক্বুলনা ইয়া আদামু ইন্না হাজা ‘আদুউল্লাকা ওয়া লিজাওজিকা ফালা ইউখরিজান্নাকুমা
+                    মিনাল জান্নাতি ফাতাশকা</div>
+                <div class="meaning">অতঃপর আমি বললাম, “হে আদম! নিশ্চয়ই এটি তোমার এবং তোমার স্ত্রীর শত্রু—অতএব সে যেন
+                    তোমাদেরকে জান্নাত থেকে বের করে না দেয়—তাহলে তুমি কষ্টে পড়বে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১৮</div>
+                <div class="arabic">إِنَّ لَكَ أَلَّا تَجُوعَ فِيهَا وَلَا تَعْرَىٰ</div>
+                <div class="pronounce">ইন্না লাকা আল্লা তাজূ‘আ ফীহা ওয়ালা তা‘রা</div>
+                <div class="meaning">“নিশ্চয়ই তোমার জন্য এতে (জান্নাতে)—তুমি ক্ষুধার্ত হবে না—এবং নগ্ন হবে না”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১১৯</div>
+                <div class="arabic">وَأَنَّكَ لَا تَظْمَؤُا۟ فِيهَا وَلَا تَضْحَىٰ</div>
+                <div class="pronounce">ওয়া আন্নাকা লা তাজমাউ ফীহা ওয়ালা তাদহা</div>
+                <div class="meaning">“এবং তুমি এতে তৃষ্ণার্ত হবে না—এবং রৌদ্রে কষ্ট পাবে না”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২০</div>
+                <div class="arabic">فَوَسْوَسَ إِلَيْهِ ٱلشَّيْطَـٰنُ قَالَ يَـٰٓـَٔادَمُ هَلْ أَدُلُّكَ عَلَىٰ شَجَرَةِ
+                    ٱلْخُلْدِ وَمُلْكٍۢ لَّا يَبْلَىٰ</div>
+                <div class="pronounce">ফাওয়াসওয়াসা ইলাইহিশ শাইতানু ক্বালা ইয়া আদামু হাল আদুল্লুকা ‘আলা শাজারাতিল
+                    খুলদি ওয়া মুলকিল্লা ইয়াবলা</div>
+                <div class="meaning">অতঃপর শয়তান তাকে কুমন্ত্রণা দিল; সে বলল, “হে আদম! আমি কি তোমাকে এমন একটি গাছের কথা
+                    বলব—যা অমরত্ব দেয়—এবং এমন রাজত্ব—যা ক্ষয় হয় না?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২১</div>
+                <div class="arabic">فَأَكَلَا مِنْهَا فَبَدَتْ لَهُمَا سَوْءَٰتُهُمَا وَطَفِقَا يَخْصِفَانِ عَلَيْهِمَا
+                    مِن وَرَقِ ٱلْجَنَّةِ ۚ وَعَصَىٰٓ ءَادَمُ رَبَّهُۥ فَغَوَىٰ</div>
+                <div class="pronounce">ফাআকালা মিনহা ফাবাদাত লাহুমা সাও’আতুহুমা ওয়া ত্বাফিকা ইয়াখসিফানি ‘আলাইহিমা মিন
+                    ওয়ারাকিল জান্নাহ; ওয়া ‘আসা আদামু রব্বাহু ফাগাওয়া</div>
+                <div class="meaning">অতঃপর তারা উভয়ে তা থেকে খেয়েছিল—ফলে তাদের লজ্জাস্থান তাদের কাছে প্রকাশ পেল—এবং
+                    তারা জান্নাতের পাতা দিয়ে নিজেদের ঢাকতে লাগল; আর আদম তার রবের অবাধ্য হয়েছিল—ফলে সে বিপথগামী হয়েছিল
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২২</div>
+                <div class="arabic">ثُمَّ ٱجْتَبَىٰهُ رَبُّهُۥ فَتَابَ عَلَيْهِ وَهَدَىٰ</div>
+                <div class="pronounce">সুম্মাজতাবাহু রব্বুহু ফাতাবা ‘আলাইহি ওয়া হাদা</div>
+                <div class="meaning">অতঃপর তার রব তাকে নির্বাচন করলেন—তার তাওবা কবুল করলেন—এবং তাকে পথ প্রদর্শন করলেন
+                </div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২৩</div>
+                <div class="arabic">قَالَ ٱهْبِطَا مِنْهَا جَمِيعًۭا بَعْضُكُمْ لِبَعْضٍ عَدُوٌّۭ ۖ فَإِمَّا
+                    يَأْتِيَنَّكُم مِّنِّى هُدًۭى فَمَنِ ٱتَّبَعَ هُدَاىَ فَلَا يَضِلُّ وَلَا يَشْقَىٰ</div>
+                <div class="pronounce">ক্বালা ইহবিতা মিনহা জামি‘আন বা‘দুকুম লিবা‘দিন ‘আদুউন ফাইম্মা ইয়াতিয়ান্নাকুম
+                    মিননী হুদান ফামানিত্তাবা‘আ হুদায়া ফালা ইয়াদিল্লু ওয়ালা ইয়াশকা</div>
+                <div class="meaning">তিনি বললেন, “তোমরা সবাই এখান থেকে নেমে যাও—তোমরা একে অপরের শত্রু; অতঃপর যখন আমার
+                    পক্ষ থেকে তোমাদের কাছে হিদায়াত আসবে—যে আমার হিদায়াত অনুসরণ করবে—সে পথভ্রষ্ট হবে না—এবং কষ্টেও
+                    পড়বে না”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২৪</div>
+                <div class="arabic">وَمَنْ أَعْرَضَ عَن ذِكْرِى فَإِنَّ لَهُۥ مَعِيشَةًۭ ضَنكًۭا وَنَحْشُرُهُۥ يَوْمَ
+                    ٱلْقِيَـٰمَةِ أَعْمَىٰ</div>
+                <div class="pronounce">ওয়া মান আ‘রাদা ‘আন যিক্রী ফাইন্না লাহু মা‘ইশাতান দাঙ্কা ওয়া নাহশুরুহু ইয়াওমাল
+                    কিয়ামাতি আ‘মা</div>
+                <div class="meaning">আর যে আমার স্মরণ থেকে মুখ ফিরিয়ে নেয়—নিশ্চয়ই তার জন্য রয়েছে সংকীর্ণ জীবন—এবং
+                    আমি তাকে কিয়ামতের দিন অন্ধ অবস্থায় সমবেত করব</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২৫</div>
+                <div class="arabic">قَالَ رَبِّ لِمَ حَشَرْتَنِىٓ أَعْمَىٰ وَقَدْ كُنتُ بَصِيرًۭا</div>
+                <div class="pronounce">ক্বালা রব্বি লিমা হাশারতানী আ‘মা ওয়া ক্বাদ কুনতু বাসীরা</div>
+                <div class="meaning">সে বলবে, “হে আমার রব! আপনি আমাকে কেন অন্ধ অবস্থায় সমবেত করলেন—যখন আমি
+                    দৃষ্টিশক্তিসম্পন্ন ছিলাম?”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২৬</div>
+                <div class="arabic">قَالَ كَذَٰلِكَ أَتَتْكَ ءَايَـٰتُنَا فَنَسِيتَهَا ۖ وَكَذَٰلِكَ ٱلْيَوْمَ تُنسَىٰ
+                </div>
+                <div class="pronounce">ক্বালা কাযালিকা আতাতকা আয়াতুনা ফানাসীতাহা ওয়া কাযালিকাল ইয়াওমা তুনসা</div>
+                <div class="meaning">তিনি বলবেন, “এভাবেই আমার নিদর্শনসমূহ তোমার কাছে এসেছিল—কিন্তু তুমি তা ভুলে
+                    গিয়েছিলে; আর আজ তোমাকেও তেমনই ভুলে যাওয়া হবে”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২৭</div>
+                <div class="arabic">وَكَذَٰلِكَ نَجْزِى مَنْ أَسْرَفَ وَلَمْ يُؤْمِنۢ بِـَٔايَـٰتِ رَبِّهِۦ ۚ
+                    وَلَعَذَابُ ٱلْـَٔاخِرَةِ أَشَدُّ وَأَبْقَىٰ</div>
+                <div class="pronounce">ওয়া কাযালিকা নাজযী মান আসরাফা ওয়ালাম ইউ’মিন বিআয়াতি রব্বিহি ওয়ালাআযাবুল
+                    আখিরাতি আশাদ্দু ওয়া আবকা</div>
+                <div class="meaning">আর এভাবেই আমি প্রতিফল দিই—যে সীমালঙ্ঘন করে—এবং তার রবের নিদর্শনে ঈমান আনে না; আর
+                    আখিরাতের শাস্তি অধিক কঠোর—এবং অধিক স্থায়ী</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২৮</div>
+                <div class="arabic">أَفَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا قَبْلَهُم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى
+                    مَسَـٰكِنِهِمْ ۗ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍۢ لِّأُو۟لِى ٱلنُّهَىٰ</div>
+                <div class="pronounce">আফালাম ইয়াহদি লাহুম কাম আহলাকনা ক্বাবলাহুম মিনাল কুরূনি ইয়ামশূনা ফি মাসাকিনিহিম
+                    ইন্না ফি যালিকা লা’আয়াতিল্লি উলিন নুহা</div>
+                <div class="meaning">তাদের জন্য কি পথপ্রদর্শন হয়নি—যে আমি তাদের আগে কত জাতিকে ধ্বংস করেছি—যাদের
+                    বাসস্থানে তারা চলাফেরা করে? নিশ্চয়ই এতে বুদ্ধিমানদের জন্য নিদর্শন রয়েছে</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১২৯</div>
+                <div class="arabic">وَلَوْلَا كَلِمَةٌۭ سَبَقَتْ مِن رَّبِّكَ لَكَانَ لِزَامًۭا وَأَجَلٌۭ مُّسَمًّۭى
+                </div>
+                <div class="pronounce">ওয়ালাওলা কালিমাতুন সাবাকাত মিন রব্বিকা লাকানা লিযামান ওয়া আজালুম মুসাম্মা</div>
+                <div class="meaning">আর যদি তোমার রবের পক্ষ থেকে একটি পূর্বনির্ধারিত কথা না থাকত—এবং একটি নির্দিষ্ট সময়
+                    না থাকত—তবে তা অবশ্যই অবশ্যম্ভাবী হতো</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩০</div>
+                <div class="arabic">فَٱصْبِرْ عَلَىٰ مَا يَقُولُونَ وَسَبِّحْ بِحَمْدِ رَبِّكَ قَبْلَ طُلُوعِ ٱلشَّمْسِ
+                    وَقَبْلَ غُرُوبِهَا ۖ وَمِنْ ءَانَآىِ ٱلَّيْلِ فَسَبِّحْ وَأَطْرَافَ ٱلنَّهَارِ لَعَلَّكَ تَرْضَىٰ
+                </div>
+                <div class="pronounce">ফাসবির ‘আলা মা ইয়াকূলূনা ওয়া সাব্বিহ বিহামদি রব্বিকা ক্বাবলা তুলূ‘ইশ শামসি ওয়া
+                    ক্বাবলা গুরূবিহা ওয়া মিন আনা’ইল লাইলি ফাসাব্বিহ ওয়া আতরাফান নাহারি লা‘আল্লাকা তারদা</div>
+                <div class="meaning">অতএব তারা যা বলে—তার উপর ধৈর্য ধারণ করুন—এবং আপনার রবের প্রশংসাসহ পবিত্রতা ঘোষণা
+                    করুন—সূর্যোদয়ের আগে—এবং সূর্যাস্তের আগে—এবং রাতের কিছু সময়ে—এবং দিনের প্রান্তে—যাতে আপনি সন্তুষ্ট
+                    হন</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩১</div>
+                <div class="arabic">وَلَا تَمُدَّنَّ عَيْنَيْكَ إِلَىٰ مَا مَتَّعْنَا بِهِۦٓ أَزْوَٰجًۭا مِّنْهُمْ
+                    زَهْرَةَ ٱلْحَيَوٰةِ ٱلدُّنْيَا لِنَفْتِنَهُمْ فِيهِ ۚ وَرِزْقُ رَبِّكَ خَيْرٌۭ وَأَبْقَىٰ</div>
+                <div class="pronounce">ওয়ালা তামুদ্দান্না ‘আইনাইকা ইলা মা মাত্তা‘না বিহি আজওয়াজাম মিনহুম জাহরাতাল
+                    হায়াতিদ দুনইয়া লিনাফতিনাহুম ফীহি ওয়া রিযকু রব্বিকা খাইরুন ওয়া আবকা</div>
+                <div class="meaning">আর আপনি আপনার দৃষ্টি প্রসারিত করবেন না—সে সব কিছুর দিকে—যা আমি তাদের বিভিন্ন
+                    শ্রেণিকে দুনিয়ার জীবনের শোভা হিসেবে ভোগ করতে দিয়েছি—যাতে আমি তাদেরকে এতে পরীক্ষা করি; আর আপনার
+                    রবের রিযিক উত্তম—এবং অধিক স্থায়ী</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩২</div>
+                <div class="arabic">وَأْمُرْ أَهْلَكَ بِٱلصَّلَوٰةِ وَٱصْطَبِرْ عَلَيْهَا ۖ لَا نَسْـَٔلُكَ رِزْقًۭا ۖ
+                    نَّحْنُ نَرْزُقُكَ ۗ وَٱلْعَـٰقِبَةُ لِلتَّقْوَىٰ</div>
+                <div class="pronounce">ওয়া মুর আহলাকা বিস সালাতি ওয়াস্তাবির ‘আলাইহা লা নাসআলুকা রিযকান নাহনু নারযুকুকা
+                    ওয়াল ‘আক্বিবাতু লিত্তাকওয়া</div>
+                <div class="meaning">আর আপনার পরিবারকে সালাতের নির্দেশ দিন—এবং এতে দৃঢ় থাকুন; আমি আপনার কাছে রিযিক চাই
+                    না—আমিই আপনাকে রিযিক দিই; আর পরিণাম তাকওয়ার জন্য</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩৩</div>
+                <div class="arabic">وَقَالُوا۟ لَوْلَا يَأْتِينَا بِـَٔايَةٍۢ مِّن رَّبِّهِۦٓ ۚ أَوَلَمْ تَأْتِهِم
+                    بَيِّنَةُ مَا فِى ٱلصُّحُفِ ٱلْأُولَىٰ</div>
+                <div class="pronounce">ওয়া ক্বালূ লাওলা ইয়াতীনা বিআয়াতিম মিন রব্বিহি আওয়ালাম তা’তিহিম বাইয়িনাতু মা
+                    ফিস সুফুহিল উলা</div>
+                <div class="meaning">আর তারা বলে, “তার রবের পক্ষ থেকে আমাদের কাছে কোনো নিদর্শন কেন আসে না?”—তাদের কাছে
+                    কি পূর্ববর্তী কিতাবসমূহের সুস্পষ্ট প্রমাণ আসেনি?</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩৪</div>
+                <div class="arabic">وَلَوْ أَنَّآ أَهْلَكْنَـٰهُم بِعَذَابٍۢ مِّن قَبْلِهِۦ لَقَالُوا۟ رَبَّنَا
+                    لَوْلَآ أَرْسَلْتَ إِلَيْنَا رَسُولًۭا فَنَتَّبِعَ ءَايَـٰتِكَ مِن قَبْلِ أَن نَّذِلَّ وَنَخْزَىٰ
+                </div>
+                <div class="pronounce">ওয়ালাও আন্না আহলাকনাহুম বিআযাবিম মিন ক্বাবলিহি লাক্বালূ রব্বানা লাওলা আরসালতা
+                    ইলাইনা রাসূলান ফানাত্তাবি‘আ আয়াতিকাম মিন ক্বাবলি আন নাযিল্লা ওয়া নাখযা</div>
+                <div class="meaning">আর যদি আমি তাদেরকে এর আগে শাস্তি দিয়ে ধ্বংস করতাম—তবে তারা অবশ্যই বলত, “হে আমাদের
+                    রব! আপনি কেন আমাদের কাছে একজন রাসূল পাঠালেন না—যাতে আমরা আপনার নিদর্শন অনুসরণ করতাম—এর আগে যে আমরা
+                    লাঞ্ছিত ও অপমানিত হই”</div>
+            </div>
+
+            <div class="ayah">
+                <div class="number">১৩৫</div>
+                <div class="arabic">قُلْ كُلٌّۭ مُّتَرَبِّصٌۭ فَتَرَبَّصُوا۟ ۖ فَسَتَعْلَمُونَ مَنْ أَصْحَـٰبُ
+                    ٱلصِّرَٰطِ ٱلسَّوِىِّ وَمَنِ ٱهْتَدَىٰ</div>
+                <div class="pronounce">ক্বুল কুল্লুম মুতারাব্বিসুন ফাতারাব্বাসূ ফাসাতালামূনা মান আসহাবুস সিরাতিস
+                    সাওয়িয়ি ওয়া মানিহতাদা</div>
+                <div class="meaning">বলুন, “প্রত্যেকেই অপেক্ষায় রয়েছে—অতএব তোমরাও অপেক্ষা কর; শীঘ্রই তোমরা জানতে
+                    পারবে—কে সঠিক পথের অনুসারী—এবং কে হিদায়াতপ্রাপ্ত”</div>
+            </div>
+
+
+
+
+            <!-- SHANE NUZUL -->
+            <div class="shane">
+                <h3>শানে নুযুল</h3>
+                <p>সূরা ত্বাহা নাযিল হওয়ার বিস্তারিত প্রেক্ষাপট (শানে নুযুল)<br><br>
+                    সূরা ত্বাহা কুরআনের ২০তম সূরা এবং এতে মোট ১৩৫টি আয়াত রয়েছে। এটি একটি মাক্কী সূরা। এই সূরার মূল
+                    বিষয়বস্তু হলো তাওহীদ, নবুওয়াত, আখিরাত, এবং বিশেষভাবে হযরত মূসা (আ.)-এর জীবনের গুরুত্বপূর্ণ ঘটনাবলী।
+                    এই সূরাটি নবী (সা.)-কে সান্ত্বনা দেওয়া এবং মক্কার কঠিন পরিস্থিতিতে ধৈর্য ও দৃঢ়তা অর্জনের জন্য নাযিল
+                    হয়েছে।<br><br>
+
+                    সামগ্রিক শানে নুযুল<br>
+                    এই সূরার নির্দিষ্ট কোনো একক শানে নুযুল নেই; বরং এটি মক্কার মুশরিকদের বিরোধিতা, কুরআনের প্রতি আপত্তি
+                    এবং নবী (সা.)-এর প্রতি মানসিক চাপের প্রেক্ষিতে নাযিল হয়েছে। এতে কুরআনের উদ্দেশ্য, আল্লাহর একত্ববাদ
+                    এবং পূর্ববর্তী নবীদের কাহিনীর মাধ্যমে শিক্ষা দেওয়া হয়েছে।<br><br>
+
+                    আয়াত ১-৮ (কুরআনের উদ্দেশ্য) নাযিলের ঘটনা<br>
+                    কুরআন কষ্ট দেওয়ার জন্য নয়, বরং উপদেশ দেওয়ার জন্য নাযিল হয়েছে—এই ঘোষণা দিয়ে এই আয়াতগুলো নাযিল হয়। এটি
+                    নবী (সা.)-কে সান্ত্বনা দেয়।<br><br>
+
+                    আয়াত ৯-৯৮ (মূসা (আ.)-এর বিস্তারিত ঘটনা) নাযিলের ঘটনা<br>
+                    এই অংশে মূসা (আ.)-এর জীবনের বিভিন্ন পর্যায়—তাঁর নবুওয়াত প্রাপ্তি, ফিরআউনের সাথে মোকাবিলা, জাদুকরদের
+                    সাথে প্রতিযোগিতা, বনী ইসরাঈলকে মুক্ত করা এবং তাদের অবাধ্যতা—বিশদভাবে বর্ণনা করা হয়েছে। এটি মক্কার
+                    মুশরিকদের জন্য সতর্কবার্তা এবং নবী (সা.)-এর জন্য সান্ত্বনা হিসেবে নাযিল হয়।<br><br>
+
+                    আয়াত ৯৯-১০৪ (পূর্ববর্তী জাতির শিক্ষা) নাযিলের ঘটনা<br>
+                    পূর্ববর্তী জাতিগুলোর ধ্বংসের ঘটনা তুলে ধরে মানুষকে আখিরাত সম্পর্কে সতর্ক করতে এই আয়াতগুলো নাযিল
+                    হয়।<br><br>
+
+                    আয়াত ১০৫-১১২ (কিয়ামতের বর্ণনা) নাযিলের ঘটনা<br>
+                    পাহাড় ধ্বংস হওয়া, হিসাব-নিকাশ এবং বিচার দিবসের ভয়াবহতা বর্ণনা করা হয়েছে। এটি সাধারণ সতর্কতা হিসেবে
+                    নাযিল হয়।<br><br>
+
+                    আয়াত ১১৩-১২০ (আদম (আ.)-এর ঘটনা) নাযিলের ঘটনা<br>
+                    আদম (আ.)-এর সৃষ্টি এবং শয়তানের প্রলোভনের ঘটনা বর্ণনা করে মানুষকে সতর্ক করা হয়েছে।<br><br>
+
+                    আয়াত ১২১-১২৮ (অবাধ্যতার পরিণতি) নাযিলের ঘটনা<br>
+                    আল্লাহর নির্দেশ অমান্য করার পরিণতি তুলে ধরতে এই আয়াতগুলো নাযিল হয়।<br><br>
+
+                    আয়াত ১২৯-১৩৫ (শেষ নির্দেশনা) নাযিলের ঘটনা<br>
+                    নবী (সা.)-কে ধৈর্য ধরতে, নামাজ কায়েম করতে এবং আল্লাহর উপর ভরসা রাখতে নির্দেশ দিয়ে সূরার সমাপ্তি করা
+                    হয়েছে।<br><br>
+
+                    উপসংহার<br>
+                    সূরা ত্বাহা মূলত নবী (সা.)-কে সান্ত্বনা, মুশরিকদের সতর্কতা এবং তাওহীদের শিক্ষা দেওয়ার জন্য নাযিল
+                    হয়েছে। এতে মূসা (আ.)-এর কাহিনী দ্বারা ধৈর্য ও আল্লাহর সাহায্যের গুরুত্ব তুলে ধরা হয়েছে।<br><br>
+
+                    রেফারেন্স (দলিল):<br>
+                    [১. মূসা (আ.)-এর ঘটনা: তাফসীর ইবনে কাসীর, খণ্ড ৩, পৃষ্ঠা ১৫৫]<br>
+                    [২. সহীহ বুখারী: কিতাবুত তাফসীর, সূরা ত্বাহা অধ্যায়]<br>
+                    [৩. তাফসীর তাবারী: সূরা ত্বাহা]<br>
+                    [৪. তাফসীর ইবনে কাসীর: সূরা ত্বাহা]</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* BACK BUTTON */
+
+
+        /* SCROLL ANIMATION */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        });
+
+        document.querySelectorAll('.ayah').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+    <script>
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
