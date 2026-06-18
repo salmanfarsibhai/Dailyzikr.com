@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2B9E75">
+    <title id="pageTitle">Hadith Book</title>
+    <link rel="icon" type="image/png"
+href="https://lh3.googleusercontent.com/d/1coh2aYgd82hX-5g_sX96V9JQ_EaLeBjN">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Noto+Naskh+Arabic&display=swap"
+        rel="stylesheet">
+
+    <!-- =========================
+🔒 SECURITY (safe but usable)
+========================= -->
+    <meta http-equiv="Content-Security-Policy" content="
+default-src 'self';
+img-src 'self' data:;
+style-src 'self' 'unsafe-inline';
+script-src 'self' 'unsafe-inline';
+frame-src 'self' https://drive.google.com;
+object-src 'none';
+base-uri 'self';
+form-action 'self';
+frame-ancestors 'none';
+">
+
+    <style>
+        /* =========================
+RESET
+========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #eef2f5;
+            display: flex;
+            justify-content: center
+        }
+
+        /* =========================
+PAGE
+========================= */
+        .page {
+            width: 794px;
+            min-height: 100vh;
+            background: #fff;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                box-shadow: none
+            }
+        }
+
+        /* =========================
+TOPBAR
+========================= */
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #2b9e75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .back-btn {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-6px)
+        }
+
+        /* =========================
+CONTENT
+========================= */
+        .content {
+            padding-top: 70px
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: #f7f1e8;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* =========================
+CARD (PDF LIST)
+========================= */
+        .card {
+            margin: 9px 15px;
+padding: 13px 16px;
+border-radius: 12px;
+            background: rgba(43, 158, 117, 0.08);
+            cursor: pointer;
+            transition: .3s;
+            opacity: 0;
+            transform: translateY(40px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            background: #2b9e75;
+            color: #fff;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: .6s ease;
+        }
+
+        /* =========================
+VIEWER
+========================= */
+        .viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+        }
+
+        .viewer.active {
+            display: flex
+        }
+
+        .viewer-header {
+            height: 60px;
+            background: #2b9e75;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .viewer iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        /* LOADER */
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 18px;
+        }
+
+        /* ANIMATION */
+        body {
+            animation: fadeIn .5s ease
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #2b9e75;
+            border-radius: 50%;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            to {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- =========================
+TOPBAR
+========================= -->
+        <div class="topbar">
+            <div class="back-btn" onclick="goBack()" style="display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;">
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+            </div>
+            <div id="bookName">Hadith Book</div>
+        </div>
+
+        <div class="content">
+
+            <!-- HEADER -->
+            <div class="header">
+                <div class="title" id="headerTitle">Hadith Book</div>
+                <div id="headerSub">অধ্যায় তালিকা</div>
+            </div>
+
+            <!-- =========================
+📌 LIST AUTO GENERATE হবে
+========================= -->
+            <div id="list"></div>
+
+        </div>
+    </div>
+
+    <!-- =========================
+PDF VIEWER
+========================= -->
+    <div class="viewer" id="viewer">
+        <div class="viewer-header">
+            <div class="back-btn" onclick="closeViewer()" style="display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;">
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+            </div>
+            <div id="viewerTitle">PDF</div>
+        </div>
+
+        <div id="loader" class="loader">
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        <iframe id="frame"></iframe>
+    </div>
+
+    <script>
+
+        /* =========================
+        ⚙️ CONFIG (এই অংশটাই শুধু বদলাবে)
+        ========================= */
+
+        const CONFIG = {
+            name: "জামে আত-তিরমিযি",
+
+            // 👉 এখানে তোমার chapter + pdf link বসাও
+            chapters: [
+                { title: "১. জামে আত-তিরমিযি — খণ্ড ১", pdf: "https://drive.google.com/file/d/1wsGXY8kFTj_uSOBOgAw0iy202fCLJxnR/preview" },
+                { title: "২. জামে আত-তিরমিযি — খণ্ড ২", pdf: "https://drive.google.com/file/d/16FHyKlIgFDHJ1WDTa2H0M4EV0Pbyc4vi/preview" },
+                { title: "৩. জামে আত-তিরমিযি — খণ্ড ৩", pdf: "https://drive.google.com/file/d/1jW4AN1Ei_P4zQ_nG-2AgNKPMa2_zogRg/preview" },
+                { title: "৪. জামে আত-তিরমিযি — খণ্ড ৪", pdf: "https://drive.google.com/file/d/1sZv7Fmx0jhA8uehsKziMphoVg_xehg5Q/preview" },
+                { title: "৫. জামে আত-তিরমিযি — খণ্ড ৫", pdf: "https://drive.google.com/file/d/1sZv7Fmx0jhA8uehsKziMphoVg_xehg5Q/preview" },
+                { title: "৬. জামে আত-তিরমিযি — খণ্ড ৬", pdf: "https://drive.google.com/file/d/1sZv7Fmx0jhA8uehsKziMphoVg_xehg5Q/preview" }
+            ]
+        };
+
+        /* =========================
+        AUTO SET TITLE
+        ========================= */
+        document.getElementById("pageTitle").innerText = CONFIG.name;
+        document.getElementById("bookName").innerText = CONFIG.name;
+        document.getElementById("headerTitle").innerText = CONFIG.name;
+
+        /* =========================
+        CREATE LIST
+        ========================= */
+        const list = document.getElementById("list");
+
+        CONFIG.chapters.forEach(ch => {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.innerText = ch.title;
+
+            div.onclick = () => openPDF(ch.title, ch.pdf);
+
+            list.appendChild(div);
+        });
+
+        /* =========================
+        PDF VIEW
+        ========================= */
+        const viewer = document.getElementById("viewer");
+        const frame = document.getElementById("frame");
+        const loader = document.getElementById("loader");
+        const viewerTitle = document.getElementById("viewerTitle");
+
+        function openPDF(title, link) {
+            viewer.classList.add("active");
+            loader.style.display = "flex";
+
+            // 🔥 FIXED: Google Drive Preview Bug (Opacity method)
+            frame.style.display = "block";
+            frame.style.opacity = "0";
+
+            viewerTitle.innerText = title;
+            frame.src = link;
+
+            frame.onload = () => {
+                loader.style.display = "none";
+                frame.style.opacity = "1";
+            };
+        }
+
+        function closeViewer() {
+            viewer.classList.remove("active");
+            frame.src = "";
+        }
+
+        /* =========================
+        BACK SYSTEM
+        ========================= */
+        function goBack() {
+            const from = new URLSearchParams(window.location.search).get("from");
+
+            if (from === "quran") location.href = "index.html#quran";
+            else if (from === "hadith") location.href = "index.html#hadith";
+            else if (from === "dua") location.href = "index.html#dua";
+            else location.href = "index.html";
+        }
+
+        /* =========================
+        ANIMATION
+        ========================= */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add("show");
+                }
+            });
+        });
+
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach(el => {
+                observer.observe(el);
+            });
+        }, 100);
+
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("selectstart", e => e.preventDefault());
+        document.addEventListener("copy", e => e.preventDefault());
+
+        document.addEventListener("keydown", e => {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && ['c', 'a', 'u', 's', 'i', 'j'].includes(e.key.toLowerCase()))
+            ) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+<script type="module">
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // আপনার ফায়ারবেস কনফিগ
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYR2NjGNApNWf7lofGhEw_04-LOHeqKK0",
+            authDomain: "dailyzikr-com.firebaseapp.com",
+            projectId: "dailyzikr-com",
+            storageBucket: "dailyzikr-com.firebasestorage.app",
+            messagingSenderId: "154877756406",
+            appId: "1:154877756406:web:b588aea5badf7284563dd7"
+        };
+
+        // 🔥 Magic Trick: ফায়ারবেস আগে থেকে থাকলে এরর দিবে না, নতুন হলে চালু করবে
+        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        const db = getFirestore(app);
+
+        // ইউজারের ফিক্সড সেশন আইডি
+        let sessionID = sessionStorage.getItem("dz_user_session");
+        if (!sessionID) {
+            sessionID = "USER_" + Math.random().toString(36).substring(2, 15);
+            sessionStorage.setItem("dz_user_session", sessionID);
+        }
+
+        let trackerInterval;
+
+        async function sendLiveSignal() {
+            if (document.visibilityState === 'visible') {
+                try {
+                    const now = Date.now();
+                    await setDoc(doc(db, "live_users", sessionID), { lastActive: now }, { merge: true });
+                    await setDoc(doc(db, "analytics", "global_stats"), { totalWatchTime: increment(10) }, { merge: true });
+                } catch (e) {} // ইউজারকে ডিস্টার্ব না করার জন্য সাইলেন্ট রাখা হয়েছে
+            }
+        }
+
+        function startLiveTracker() {
+            sendLiveSignal(); // ঢোকার সাথে সাথেই সিগন্যাল
+            trackerInterval = setInterval(sendLiveSignal, 10000); // এরপর প্রতি ১০ সেকেন্ড পরপর
+        }
+
+        function stopLiveTracker() {
+            clearInterval(trackerInterval);
+        }
+
+        startLiveTracker();
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === 'visible') {
+                startLiveTracker();
+            } else {
+                stopLiveTracker();
+            }
+        });
+    </script>
+</body>
+
+</html>
